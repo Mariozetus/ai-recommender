@@ -34,30 +34,58 @@ const AIModelSchema = z.object({
   tags: z.array(z.string()),
   url: z.string(),
   benchmark: z.object({
-    mmlu: z.number().optional(),
-    humaneval: z.number().optional(),
-    math: z.number().optional(),
+    mmlu: z.number().optional().nullable(),
+    humaneval: z.number().optional().nullable(),
+    math: z.number().optional().nullable(),
+    intelligence_index: z.number().optional().nullable(),
+    coding_index: z.number().optional().nullable(),
+    agentic_index: z.number().optional().nullable(),
   }).optional().nullable(),
   fetched_at: z.string(),
   modalities: z.object({
     text: z.boolean().optional(),
-    image: z.boolean().optional(),
-    audio: z.boolean().optional(),
+    image_input: z.boolean().optional(),
+    image_output: z.boolean().optional(),
+    audio_input: z.boolean().optional(),
+    audio_output: z.boolean().optional(),
+    file_input: z.boolean().optional(),
   }).optional(),
   pricing: z.object({
     free: z.boolean().optional(),
     batch: z.boolean().optional(),
   }).optional(),
+  supported_parameters: z.array(z.string()).optional(),
+  max_completion_tokens: z.number().optional().nullable(),
+  tokenizer: z.string().optional(),
 });
 
-function inferCategory(id, name, description) {
+function inferCategory(id, name, description, modalities) {
   const text = `${id} ${name} ${description}`.toLowerCase();
+
+  if (modalities?.image_output || text.includes('image-generation') || text.includes('stable-diffusion') || text.includes('dall-e')) {
+    return 'image';
+  }
+  if (text.includes('embedding') || text.includes('embed') || text.includes('text-embedding')) {
+    return 'embedding';
+  }
   if (text.includes('coder') || text.includes('code')) return 'coding';
-  if (text.includes('embedding') || text.includes('embed')) return 'embedding';
-  if (text.includes('reason') || text.includes('math') || text.includes('think')) return 'reasoning';
-  if (text.includes('vision') || text.includes('multimodal') || text.includes('gemini') || text.includes('image-generation') || text.includes('sdxl') || text.includes('diffusion')) return 'multimodal';
-  if (text.includes('image') || text.includes('stable-diffusion') || text.includes('dall-e')) return 'image';
+  if (text.includes('reason') || text.includes('math') || text.includes('think') || text.includes('deepseek-r1')) return 'reasoning';
+  if (modalities?.image_input || text.includes('vision') || text.includes('gemini') || text.includes('multimodal') || text.includes('sdxl')) return 'multimodal';
   return 'chat';
+}
+
+function parseModalities(arch) {
+  if (!arch) return undefined;
+  const input = arch.input_modalities || [];
+  const output = arch.output_modalities || [];
+  return {
+    text: input.includes('text') || output.includes('text'),
+    image_input: input.includes('image'),
+    image_output: output.includes('image'),
+    audio_input: input.includes('audio'),
+    audio_output: output.includes('audio'),
+    file_input: input.includes('file'),
+  };
 }
 
 async function fetchOpenRouterModels() {
@@ -78,21 +106,45 @@ async function fetchOpenRouterModels() {
     }
 
     const data = await response.json();
-    return data.data.map(model => ({
-      id: model.id,
-      name: model.name,
-      provider: model.id.split('/')[0],
-      description: model.description || `AI model by ${model.id.split('/')[0]}`,
-      source: 'openrouter',
-      category: inferCategory(model.id, model.name, model.description),
-      context_window: model.context_length || 4096,
-      input_price: model.pricing?.input ? parseFloat(model.pricing.input) * 1e6 : 0,
-      output_price: model.pricing?.output ? parseFloat(model.pricing.output) * 1e6 : 0,
-      tags: model.tags || [],
-      url: model.openrouter_schema?.agent?.url || `https://openrouter.ai/models/${model.id}`,
-      benchmark: null,
-      fetched_at: new Date().toISOString(),
-    }));
+    return data.data.map(model => {
+      const modalities = parseModalities(model.architecture);
+      const isFree = parseFloat(model.pricing?.prompt || '0') === 0 && parseFloat(model.pricing?.completion || '0') === 0;
+      const aaBench = model.benchmarks?.artificial_analysis || {};
+      const benchmark = {
+        mmlu: model.benchmark?.mmlu ?? null,
+        humaneval: model.benchmark?.humaneval ?? null,
+        math: model.benchmark?.math ?? null,
+        intelligence_index: aaBench.intelligence_index ?? null,
+        coding_index: aaBench.coding_index ?? null,
+        agentic_index: aaBench.agentic_index ?? null,
+      };
+      const hasBench = Object.values(benchmark).some(v => v !== null);
+      const cleanBench = hasBench ? benchmark : null;
+
+      return {
+        id: model.id,
+        name: model.name,
+        provider: model.id.split('/')[0],
+        description: model.description || `AI model by ${model.id.split('/')[0]}`,
+        source: 'openrouter',
+        category: inferCategory(model.id, model.name, model.description || '', modalities),
+        context_window: model.context_length || model.top_provider?.context_length || 4096,
+        input_price: model.pricing?.prompt ? parseFloat(model.pricing.prompt) * 1e6 : 0,
+        output_price: model.pricing?.completion ? parseFloat(model.pricing.completion) * 1e6 : 0,
+        tags: model.tags || [],
+        url: `https://openrouter.ai/models/${model.id}`,
+        benchmark: cleanBench,
+        fetched_at: new Date().toISOString(),
+        modalities,
+        pricing: {
+          free: isFree,
+          batch: model.id.endsWith(':batch'),
+        },
+        supported_parameters: model.supported_parameters || [],
+        max_completion_tokens: model.top_provider?.max_completion_tokens,
+        tokenizer: model.architecture?.tokenizer,
+      };
+    });
   } catch (error) {
     console.error('Error fetching OpenRouter models:', error);
     return [];
@@ -214,9 +266,11 @@ function validateModels(models) {
       const result = AIModelSchema.parse(model);
       validated.push(result);
     } catch (error) {
-      if (error instanceof z.ZodError) {
-        errors.push(`Model ${model.id}: ${error.errors.map(e => `${e.path.join('.')}: ${e.message}`).join(', ')}`);
-      }
+      const issues = (error && (error.issues || error.errors)) || [];
+      const detail = Array.isArray(issues)
+        ? issues.map(e => `${(e.path || []).join('.')}: ${e.message}`).join(', ')
+        : String(error?.message || error);
+      errors.push(`Model ${model.id}: ${detail}`);
     }
   }
 

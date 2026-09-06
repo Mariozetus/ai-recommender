@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Toast from '../components/Toast.astro';
 
 interface Props {
   title: string;
@@ -39,5 +40,6 @@ const { title, description = 'Discover and compare AI models. Get personalized r
     <footer class="border-t border-gray-800 mt-16 py-8 text-center text-gray-500 text-sm">
       <p>AI Recommender - Data from OpenRouter</p>
     </footer>
+    <Toast />
   </body>
 </html>

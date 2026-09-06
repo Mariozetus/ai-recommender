@@ -6,8 +6,14 @@ import Recommender from '../components/Recommender.astro';
 import ResultsList from '../components/ResultsList.astro';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
-import type { UserPreferences } from '../lib/types';
-import { sortByScore } from '../lib/scorer';
+import type { UserPreferences, ScoreWeights } from '../lib/types';
+import {
+  topRecommendations,
+  DEFAULT_WEIGHTS,
+  QUALITY_FIRST_WEIGHTS,
+  BUDGET_FIRST_WEIGHTS,
+  BALANCED_WEIGHTS,
+} from '../lib/scorer';
 
 const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
 const { models } = JSON.parse(rawData);
@@ -16,6 +22,7 @@ const url = new URL(Astro.request.url);
 const useCase = url.searchParams.get('use_case') || 'chat';
 const maxContext = parseInt(url.searchParams.get('max_context') || '131072');
 const maxBudget = parseFloat(url.searchParams.get('max_budget') || '50');
+const strategy = url.searchParams.get('strategy') || 'balanced';
 const featuresParam = url.searchParams.get('features') || '';
 const preferredFeatures = featuresParam.split(',').map(f => f.trim()).filter(Boolean);
 
@@ -26,14 +33,23 @@ const prefs: UserPreferences = {
   preferred_features: preferredFeatures,
 };
 
-const recommended = sortByScore(models, prefs).slice(0, 12);
+const weightsMap: Record<string, ScoreWeights> = {
+  balanced: BALANCED_WEIGHTS,
+  quality: QUALITY_FIRST_WEIGHTS,
+  budget: BUDGET_FIRST_WEIGHTS,
+};
+
+const weights = weightsMap[strategy] || DEFAULT_WEIGHTS;
+const hasQuery = url.searchParams.has('use_case');
+
+const recommended = hasQuery ? topRecommendations(models, prefs, 12, weights) : [];
 ---
 
 <Layout title="AI Recommendations">
   <div class="max-w-6xl mx-auto px-4 py-8">
     <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold mb-4">AI Model Recommendations</h1>
-      <p class="text-gray-400 text-lg">Personalized recommendations based on your needs</p>
+      <h1 class="text-4xl font-bold mb-4">Recomendador de Modelos IA</h1>
+      <p class="text-gray-400 text-lg">Recomendaciones personalizadas según tus necesidades</p>
     </div>
 
     <div class="grid md:grid-cols-3 gap-8">
@@ -42,11 +58,16 @@ const recommended = sortByScore(models, prefs).slice(0, 12);
       </div>
 
       <div class="md:col-span-2">
-        {Astro.request.url.includes('use_case') ? (
-          <ResultsList models={recommended} title={`Top ${recommended.length} Recommendations for ${useCase}`} />
+        {hasQuery ? (
+          <ResultsList
+            models={recommended.map(r => r.model)}
+            scores={recommended.map(r => ({ id: r.model.id, score: r.score, breakdown: r.breakdown }))}
+            title={`Top ${recommended.length} para ${useCase}`}
+            strategy={strategy}
+          />
         ) : (
           <div class="bg-gray-800 rounded-lg p-8 text-center border border-gray-700">
-            <p class="text-gray-400">Fill out the form to get personalized recommendations.</p>
+            <p class="text-gray-400">Completa el formulario para obtener recomendaciones personalizadas.</p>
           </div>
         )}
       </div>

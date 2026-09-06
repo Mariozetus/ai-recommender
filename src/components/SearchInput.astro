@@ -1,0 +1,175 @@
+---
+import type { AIModel } from '../lib/types';
+
+interface Props {
+  models: Pick<AIModel, 'id' | 'name' | 'provider' | 'category'>[];
+  initialQuery?: string;
+}
+
+const { models, initialQuery = '' } = Astro.props;
+
+const searchable = models.slice(0, 200).map(m => ({
+  id: m.id,
+  name: m.name,
+  provider: m.provider,
+  category: m.category,
+}));
+---
+
+<div class="relative" data-search-root>
+  <div class="relative">
+    <input
+      type="search"
+      name="q"
+      value={initialQuery}
+      placeholder="Buscar modelos... (ej: gpt, claude, vision)"
+      autocomplete="off"
+      aria-label="Buscar modelos"
+      aria-autocomplete="list"
+      aria-expanded="false"
+      aria-controls="search-suggestions"
+      data-search-input
+      class="w-full bg-gray-800 border border-gray-700 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+    />
+    <svg
+      class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+    </svg>
+  </div>
+
+  <div
+    id="search-suggestions"
+    role="listbox"
+    aria-label="Sugerencias de búsqueda"
+    data-search-suggestions
+    class="hidden absolute z-30 mt-1 w-full bg-gray-800 border border-gray-700 rounded-lg shadow-xl max-h-80 overflow-y-auto"
+  >
+  </div>
+</div>
+
+<script define:vars={{ models: searchable }}>
+  const root = document.querySelector('[data-search-root]');
+  const input = document.querySelector('[data-search-input]');
+  const suggestions = document.querySelector('[data-search-suggestions]');
+
+  if (root && input && suggestions) {
+    let activeIndex = -1;
+
+    function score(query, target) {
+      const q = query.toLowerCase();
+      const t = target.toLowerCase();
+      if (t === q) return 1000;
+      if (t.startsWith(q)) return 500;
+      if (t.includes(q)) return 100;
+      return -1;
+    }
+
+    function bestMatch(query) {
+      if (!query || query.length < 2) return [];
+      const results = [];
+      for (const m of models) {
+        const s = Math.max(
+          score(query, m.name),
+          score(query, m.id),
+          score(query, m.provider) * 0.5
+        );
+        if (s > 0) results.push({ ...m, _score: s });
+      }
+      results.sort((a, b) => b._score - a._score);
+      return results.slice(0, 8);
+    }
+
+    function render(matches, query) {
+      if (matches.length === 0) {
+        suggestions.innerHTML = '<div class="px-4 py-3 text-gray-500 text-sm">Sin resultados</div>';
+        return;
+      }
+
+      const escape = (s) => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+      suggestions.innerHTML = matches.map((m, i) => `
+        <a
+          href="/models/${encodeURIComponent(m.id)}"
+          role="option"
+          data-index="${i}"
+          class="flex items-center justify-between px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-0 transition cursor-pointer"
+        >
+          <div class="flex-1 min-w-0">
+            <div class="font-medium text-white truncate">${escape(m.name)}</div>
+            <div class="text-xs text-gray-500 truncate">${escape(m.id)}</div>
+          </div>
+          <span class="ml-3 text-xs text-gray-400 bg-gray-900 px-2 py-1 rounded">${escape(m.category)}</span>
+        </a>
+      `).join('');
+
+      const links = suggestions.querySelectorAll('[data-index]');
+      links.forEach((link) => {
+        link.addEventListener('mouseenter', () => {
+          activeIndex = parseInt(link.dataset.index);
+          updateActive();
+        });
+      });
+    }
+
+    function updateActive() {
+      const links = suggestions.querySelectorAll('[data-index]');
+      links.forEach((link, i) => {
+        if (i === activeIndex) {
+          link.classList.add('bg-gray-700');
+        } else {
+          link.classList.remove('bg-gray-700');
+        }
+      });
+    }
+
+    let lastQuery = '';
+
+    input.addEventListener('input', (e) => {
+      const q = e.target.value.trim();
+      lastQuery = q;
+      activeIndex = -1;
+
+      if (q.length < 2) {
+        suggestions.classList.add('hidden');
+        input.setAttribute('aria-expanded', 'false');
+        return;
+      }
+
+      const matches = bestMatch(q);
+      render(matches, q);
+      suggestions.classList.remove('hidden');
+      input.setAttribute('aria-expanded', 'true');
+    });
+
+    input.addEventListener('keydown', (e) => {
+      const links = suggestions.querySelectorAll('[data-index]');
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        activeIndex = Math.min(links.length - 1, activeIndex + 1);
+        updateActive();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        activeIndex = Math.max(0, activeIndex - 1);
+        updateActive();
+      } else if (e.key === 'Enter' && activeIndex >= 0 && links[activeIndex]) {
+        e.preventDefault();
+        window.location.href = links[activeIndex].href;
+      } else if (e.key === 'Escape') {
+        suggestions.classList.add('hidden');
+        input.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!root.contains(e.target)) {
+        suggestions.classList.add('hidden');
+        input.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+</script>

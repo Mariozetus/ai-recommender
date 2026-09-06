@@ -40,3 +40,19 @@ export interface UserPreferences {
   max_budget: number;
   preferred_features: string[];
 }
+
+export interface ScoreWeights {
+  category_match: number;
+  context: number;
+  cost: number;
+  quality: number;
+  features: number;
+}
+
+export interface ScoreBreakdown {
+  category_match: number;
+  context: number;
+  cost: number;
+  quality: number;
+  features: number;
+}

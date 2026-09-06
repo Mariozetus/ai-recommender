@@ -3,6 +3,7 @@ export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
 import FilterBar from '../components/FilterBar.astro';
+import SearchInput from '../components/SearchInput.astro';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
 import { detectLocale, setLocale, t } from '../i18n/index';
@@ -103,14 +104,10 @@ function buildPageUrl(p: number) {
 
     <div class="mb-6">
       <form method="get" action="/catalog">
-        <div class="flex gap-4">
-          <input
-            type="text"
-            name="q"
-            value={searchQuery}
-            placeholder="Search models..."
-            class="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-teal-500"
-          />
+        <div class="flex gap-4 items-start">
+          <div class="flex-1">
+            <SearchInput models={models} initialQuery={searchQuery} />
+          </div>
           <button
             type="submit"
             class="bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded-lg font-medium transition"
@@ -234,13 +231,16 @@ function buildPageUrl(p: number) {
               <div class="flex gap-2">
                 <a
                   href={`/models/${encodeURIComponent(model.id)}`}
-                  class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition"
+                  class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  aria-label={`Ver detalles de ${model.name}`}
                 >
                   Details
                 </a>
                 <button
-                  class="compare-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition"
+                  type="button"
+                  class="compare-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-teal-500"
                   data-model-id={model.id}
+                  aria-label={`Añadir ${model.name} a comparación`}
                 >
                   Compare
                 </button>
@@ -303,6 +303,12 @@ function buildPageUrl(p: number) {
 
 <script>
   let compareIds: string[] = JSON.parse(localStorage.getItem('compareIds') || '[]');
+  const MAX_COMPARE = 4;
+
+  function showToast(message: string, kind: 'success' | 'error' | 'info' | 'warning' = 'info') {
+    const fn = (window as any).showToast;
+    if (typeof fn === 'function') fn(message, kind);
+  }
 
   function updateCompareBar() {
     const bar = document.getElementById('compare-bar');
@@ -334,10 +340,16 @@ function buildPageUrl(p: number) {
     const modelId = btn.dataset.modelId;
     if (!modelId || compareIds.includes(modelId)) return;
 
+    if (compareIds.length >= MAX_COMPARE) {
+      showToast(`Máximo ${MAX_COMPARE} modelos para comparar`, 'warning');
+      return;
+    }
+
     compareIds.push(modelId);
     localStorage.setItem('compareIds', JSON.stringify(compareIds));
     btn.textContent = 'Added';
     btn.disabled = true;
+    showToast('Modelo añadido a comparación', 'success');
     updateCompareBar();
   }
 
@@ -348,6 +360,7 @@ function buildPageUrl(p: number) {
       btn.textContent = 'Compare';
       (btn as HTMLButtonElement).disabled = false;
     });
+    showToast('Comparación limpiada', 'info');
     updateCompareBar();
   });
 

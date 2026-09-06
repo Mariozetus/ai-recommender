@@ -1,0 +1,110 @@
+---
+interface Props {
+  id?: string;
+}
+
+const { id = 'toast-container' } = Astro.props;
+---
+
+<div
+  id={id}
+  class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"
+  aria-live="polite"
+  aria-atomic="true"
+>
+</div>
+
+<div id="toast-template" class="hidden">
+  <div
+    data-toast
+    class="pointer-events-auto bg-gray-800 border border-gray-700 rounded-lg shadow-lg px-4 py-3 min-w-[260px] flex items-center gap-3 transition-all transform translate-x-full opacity-0"
+    role="status"
+  >
+    <span data-toast-icon class="flex-shrink-0 w-5 h-5"></span>
+    <span data-toast-message class="text-sm text-white flex-1"></span>
+    <button
+      type="button"
+      data-toast-close
+      aria-label="Cerrar notificación"
+      class="text-gray-400 hover:text-white"
+    >
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  type ToastKind = 'success' | 'error' | 'info' | 'warning';
+
+  const ICONS: Record<ToastKind, string> = {
+    success: '<svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>',
+    error: '<svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>',
+    info: '<svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+    warning: '<svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>',
+  };
+
+  const TOAST_DURATION = 3500;
+
+  function getContainer(): HTMLElement | null {
+    return document.getElementById('toast-container');
+  }
+
+  function getTemplate(): HTMLElement | null {
+    return document.querySelector('[data-toast]')?.parentElement || null;
+  }
+
+  export {};
+
+  function showToast(message: string, kind: ToastKind = 'info') {
+    const container = getContainer();
+    if (!container) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'pointer-events-auto bg-gray-800 border border-gray-700 rounded-lg shadow-lg px-4 py-3 min-w-[260px] flex items-center gap-3 transition-all transform translate-x-full opacity-0';
+    wrapper.setAttribute('role', 'status');
+
+    const icon = document.createElement('span');
+    icon.className = 'flex-shrink-0 w-5 h-5';
+    icon.innerHTML = ICONS[kind];
+
+    const msg = document.createElement('span');
+    msg.className = 'text-sm text-white flex-1';
+    msg.textContent = message;
+
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.setAttribute('aria-label', 'Cerrar notificación');
+    close.className = 'text-gray-400 hover:text-white';
+    close.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>';
+
+    const dismiss = () => {
+      wrapper.classList.add('translate-x-full', 'opacity-0');
+      setTimeout(() => wrapper.remove(), 300);
+    };
+
+    close.addEventListener('click', dismiss);
+    wrapper.addEventListener('click', (e) => {
+      if (e.target === wrapper) dismiss();
+    });
+
+    wrapper.appendChild(icon);
+    wrapper.appendChild(msg);
+    wrapper.appendChild(close);
+    container.appendChild(wrapper);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        wrapper.classList.remove('translate-x-full', 'opacity-0');
+      });
+    });
+
+    setTimeout(dismiss, TOAST_DURATION);
+  }
+
+  (window as any).showToast = showToast;
+
+  document.addEventListener('astro:page-load', () => {
+  });
+</script>

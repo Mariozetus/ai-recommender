@@ -4,13 +4,19 @@ interface Props {
 }
 
 const { categories } = Astro.props;
+
+const strategies = [
+  { value: 'balanced', label: 'Equilibrado', desc: 'Balance entre costo y calidad' },
+  { value: 'quality', label: 'Máxima Calidad', desc: 'Prioriza rendimiento' },
+  { value: 'budget', label: 'Mejor Precio', desc: 'Prioriza bajo costo' },
+];
 ---
 
 <form id="recommender-form" class="bg-gray-800 rounded-lg p-6 border border-gray-700">
   <h2 class="text-xl font-semibold mb-6">Find Your AI Model</h2>
 
   <div class="mb-6">
-    <label class="block text-sm text-gray-400 mb-2">What will you use it for?</label>
+    <label class="block text-sm text-gray-400 mb-2">¿Para qué lo usarás?</label>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
       {categories.map(cat => (
         <label class="cursor-pointer">
@@ -30,7 +36,28 @@ const { categories } = Astro.props;
   </div>
 
   <div class="mb-6">
-    <label class="block text-sm text-gray-400 mb-2">Maximum Context Window</label>
+    <label class="block text-sm text-gray-400 mb-2">Estrategia de recomendación</label>
+    <div class="grid grid-cols-1 gap-2">
+      {strategies.map(s => (
+        <label class="cursor-pointer">
+          <input
+            type="radio"
+            name="strategy"
+            value={s.value}
+            class="peer hidden"
+            checked={s.value === 'balanced'}
+          />
+          <div class="bg-gray-700 border border-gray-600 rounded px-4 py-3 peer-checked:border-teal-500 peer-checked:bg-teal-900/30 hover:bg-gray-650 transition">
+            <div class="text-sm font-medium text-white">{s.label}</div>
+            <div class="text-xs text-gray-400 mt-1">{s.desc}</div>
+          </div>
+        </label>
+      ))}
+    </div>
+  </div>
+
+  <div class="mb-6">
+    <label class="block text-sm text-gray-400 mb-2">Contexto Máximo</label>
     <select
       name="max_context"
       class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-teal-500"
@@ -43,7 +70,7 @@ const { categories } = Astro.props;
   </div>
 
   <div class="mb-6">
-    <label class="block text-sm text-gray-400 mb-2">Monthly Budget ($)</label>
+    <label class="block text-sm text-gray-400 mb-2">Presupuesto Mensual ($)</label>
     <input
       type="number"
       name="max_budget"
@@ -55,7 +82,7 @@ const { categories } = Astro.props;
   </div>
 
   <div class="mb-6">
-    <label class="block text-sm text-gray-400 mb-2">Preferred Features (comma separated)</label>
+    <label class="block text-sm text-gray-400 mb-2">Características Preferidas (separadas por coma)</label>
     <input
       type="text"
       name="preferred_features"
@@ -68,7 +95,7 @@ const { categories } = Astro.props;
     type="submit"
     class="w-full bg-teal-600 hover:bg-teal-500 text-white font-semibold py-3 rounded transition"
   >
-    Get Recommendations
+    Obtener Recomendaciones
   </button>
 </form>
 
@@ -81,6 +108,8 @@ const { categories } = Astro.props;
     params.set('use_case', formData.get('use_case') as string);
     params.set('max_context', formData.get('max_context') as string);
     params.set('max_budget', formData.get('max_budget') as string);
+    const strategy = formData.get('strategy') as string;
+    if (strategy) params.set('strategy', strategy);
     const features = formData.get('preferred_features') as string;
     if (features) {
       params.set('features', features);

@@ -9,16 +9,16 @@ interface Props {
 const { categories, providers, selectedCategory, selectedProvider } = Astro.props;
 ---
 
-<aside class="hidden md:block bg-gray-800 rounded-lg p-6 border border-gray-700 sticky top-24">
-  <h2 class="text-lg font-semibold mb-4">Filters</h2>
+<aside class="hidden md:block bg-gray-800 rounded-lg p-6 border border-gray-700 sticky top-24" aria-label="Filtros del catálogo">
+  <h2 class="text-lg font-semibold mb-4">Filtros</h2>
 
   <div class="mb-6">
-    <label class="block text-sm text-gray-400 mb-2">Category</label>
+    <label for="category-filter" class="block text-sm text-gray-400 mb-2">Categoría</label>
     <select
       id="category-filter"
       class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
     >
-      <option value="">All Categories</option>
+      <option value="">Todas las categorías</option>
       {categories.map(cat => (
         <option value={cat} selected={selectedCategory === cat}>
           {cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -28,12 +28,12 @@ const { categories, providers, selectedCategory, selectedProvider } = Astro.prop
   </div>
 
   <div class="mb-6">
-    <label class="block text-sm text-gray-400 mb-2">Provider</label>
+    <label for="provider-filter" class="block text-sm text-gray-400 mb-2">Proveedor</label>
     <select
       id="provider-filter"
       class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
     >
-      <option value="">All Providers</option>
+      <option value="">Todos los proveedores</option>
       {providers.map(prov => (
         <option value={prov} selected={selectedProvider === prov}>
           {prov}
@@ -43,12 +43,12 @@ const { categories, providers, selectedCategory, selectedProvider } = Astro.prop
   </div>
 
   <div class="mb-6">
-    <label class="block text-sm text-gray-400 mb-2">Max Context (tokens)</label>
+    <label for="context-filter" class="block text-sm text-gray-400 mb-2">Contexto máximo (tokens)</label>
     <select
       id="context-filter"
       class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
     >
-      <option value="0">Any</option>
+      <option value="0">Cualquiera</option>
       <option value="32768">32K</option>
       <option value="65536">64K</option>
       <option value="131072">128K</option>
@@ -57,18 +57,26 @@ const { categories, providers, selectedCategory, selectedProvider } = Astro.prop
   </div>
 
   <div>
-    <label class="block text-sm text-gray-400 mb-2">Max Price ($/1M tokens)</label>
+    <label for="price-filter" class="block text-sm text-gray-400 mb-2">Precio máximo ($/1M tokens)</label>
     <select
       id="price-filter"
       class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
     >
-      <option value="0">Any</option>
+      <option value="0">Cualquiera</option>
       <option value="1">$1</option>
       <option value="5">$5</option>
       <option value="10">$10</option>
       <option value="50">$50</option>
     </select>
   </div>
+
+  <button
+    type="button"
+    id="clear-all-filters"
+    class="mt-6 w-full bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-teal-500"
+  >
+    Limpiar filtros
+  </button>
 </aside>
 
 <div id="filter-drawer" class="fixed inset-0 z-50 hidden">
@@ -165,7 +173,9 @@ const { categories, providers, selectedCategory, selectedProvider } = Astro.prop
 
 <button
   id="open-filter-drawer"
-  class="md:hidden fixed bottom-24 left-4 z-40 bg-teal-600 hover:bg-teal-500 text-white p-4 rounded-full shadow-lg transition"
+  type="button"
+  aria-label="Abrir filtros"
+  class="md:hidden fixed bottom-24 left-4 z-40 bg-teal-600 hover:bg-teal-500 text-white p-4 rounded-full shadow-lg transition focus:outline-none focus:ring-2 focus:ring-teal-500"
 >
   <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -248,15 +258,19 @@ const { categories, providers, selectedCategory, selectedProvider } = Astro.prop
     if (price && price !== '0') params.set('price', price); else params.delete('price');
     params.delete('page');
 
-    const newUrl = params.toString() ? `/?${params.toString()}` : '/';
+    const newUrl = params.toString() ? `/catalog?${params.toString()}` : '/catalog';
     window.location.href = newUrl;
   }
+
+  document.getElementById('clear-all-filters')?.addEventListener('click', () => {
+    window.location.href = '/catalog';
+  });
 
   openBtn?.addEventListener('click', openDrawer);
   closeBtn?.addEventListener('click', closeDrawer);
   overlay?.addEventListener('click', closeDrawer);
   applyBtn?.addEventListener('click', applyFilters);
   clearBtn?.addEventListener('click', () => {
-    window.location.href = '/';
+    window.location.href = '/catalog';
   });
 </script>

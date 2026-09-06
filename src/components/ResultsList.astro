@@ -1,27 +1,84 @@
 ---
-import type { AIModel } from '../lib/types';
+import type { AIModel, ScoreBreakdown } from '../lib/types';
 import AICard from './AICard.astro';
+
+interface ScoreInfo {
+  id: string;
+  score: number;
+  breakdown: ScoreBreakdown;
+}
 
 interface Props {
   models: AIModel[];
+  scores?: ScoreInfo[];
   title?: string;
+  strategy?: string;
 }
 
-const { models, title = 'Results' } = Astro.props;
+const { models, scores = [], title = 'Results', strategy = 'balanced' } = Astro.props;
+
+const scoreMap = new Map(scores.map(s => [s.id, s]));
+
+const strategyLabels: Record<string, string> = {
+  balanced: 'Equilibrado',
+  quality: 'Máxima Calidad',
+  budget: 'Mejor Precio',
+};
+
+const dimensionLabels: Record<keyof ScoreBreakdown, string> = {
+  category_match: 'Categoría',
+  context: 'Contexto',
+  cost: 'Costo',
+  quality: 'Calidad',
+  features: 'Características',
+};
 ---
 
 <section>
-  <h2 class="text-xl font-semibold mb-4">{title}</h2>
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-xl font-semibold">{title}</h2>
+    <span class="text-xs px-3 py-1 rounded-full bg-teal-900/30 border border-teal-700 text-teal-300">
+      Estrategia: {strategyLabels[strategy] || strategy}
+    </span>
+  </div>
 
   {models.length === 0 ? (
     <div class="bg-gray-800 rounded-lg p-8 text-center border border-gray-700">
-      <p class="text-gray-400">No models match your criteria. Try adjusting your filters.</p>
+      <p class="text-gray-400">No hay modelos que coincidan. Ajusta los filtros.</p>
     </div>
   ) : (
     <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {models.map(model => (
-        <AICard model={model} />
-      ))}
+      {models.map(model => {
+        const scoreInfo = scoreMap.get(model.id);
+        return (
+          <div class="relative">
+            {scoreInfo && (
+              <div class="absolute top-2 right-2 z-10 bg-gray-900/90 border border-teal-600 rounded-full px-3 py-1 text-xs font-semibold text-teal-300" title={Object.entries(scoreInfo.breakdown).map(([k, v]) => `${dimensionLabels[k as keyof ScoreBreakdown]}: ${Math.round(v)}/100`).join('\n')}>
+                {Math.round(scoreInfo.score)}/100
+              </div>
+            )}
+            <AICard model={model} />
+            {scoreInfo && (
+              <details class="mt-2 bg-gray-800/50 rounded px-3 py-2 text-xs">
+                <summary class="cursor-pointer text-gray-400 hover:text-teal-400">Ver desglose</summary>
+                <div class="mt-2 space-y-1">
+                  {Object.entries(scoreInfo.breakdown).map(([key, value]) => (
+                    <div class="flex justify-between items-center">
+                      <span class="text-gray-400">{dimensionLabels[key as keyof ScoreBreakdown]}</span>
+                      <div class="flex items-center gap-2">
+                        <div class="w-24 bg-gray-700 rounded h-1.5">
+                          <div class="bg-teal-500 h-1.5 rounded" style={`width: ${value}%`}></div>
+                        </div>
+                        <span class="text-gray-300 w-8 text-right">{Math.round(value)}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </details>
+            )}
+          </div>
+        );
+      })}
     </div>
   )}
 </section>
