@@ -1,103 +1,145 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import FilterBar from '../components/FilterBar.astro';
-import ResultsList from '../components/ResultsList.astro';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
 
 const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
 const { models } = JSON.parse(rawData);
 
+const url = new URL(Astro.request.url);
+const selectedCategory = url.searchParams.get('category') || '';
+const selectedProvider = url.searchParams.get('provider') || '';
+const maxContext = parseInt(url.searchParams.get('context') || '0');
+const maxPrice = parseFloat(url.searchParams.get('price') || '0');
+
+let filtered = models;
+
+if (selectedCategory) {
+  filtered = filtered.filter((m: any) => m.category === selectedCategory);
+}
+if (selectedProvider) {
+  filtered = filtered.filter((m: any) => m.provider === selectedProvider);
+}
+if (maxContext > 0) {
+  filtered = filtered.filter((m: any) => m.context_window <= maxContext);
+}
+if (maxPrice > 0) {
+  filtered = filtered.filter((m: any) => m.input_price <= maxPrice && m.output_price <= maxPrice);
+}
+
 const categories = [...new Set(models.map((m: any) => m.category))];
 const providers = [...new Set(models.map((m: any) => m.provider))];
+
+const categoryColors: Record<string, string> = {
+  chat: '#1e3a5f',
+  coding: '#1a3d1a',
+  reasoning: '#3d1a5c',
+  image: '#3d1a3d',
+  embedding: '#5c3d1a',
+  multimodal: '#1a3d3d',
+};
 ---
 
 <Layout title="AI Model Catalog">
   <div class="max-w-6xl mx-auto px-4 py-8">
     <div class="text-center mb-12">
       <h1 class="text-4xl font-bold mb-4">AI Model Catalog</h1>
-      <p class="text-gray-400 text-lg">Discover and compare AI models from OpenRouter, LMSYS Arena & more</p>
+      <p class="text-gray-400 text-lg">Discover and compare AI models from OpenRouter</p>
     </div>
 
     <div class="grid md:grid-cols-4 gap-8">
       <div class="md:col-span-1">
-        <FilterBar categories={categories} providers={providers} />
+        <FilterBar
+          categories={categories}
+          providers={providers}
+          selectedCategory={selectedCategory}
+          selectedProvider={selectedProvider}
+        />
       </div>
 
       <div class="md:col-span-3">
-        <div id="results-container" data-models={JSON.stringify(models)}>
-          <ResultsList models={models} title={`All Models (${models.length})`} />
+        <div id="results-count" class="mb-4 text-gray-400">
+          Showing {filtered.length} of {models.length} models
         </div>
+        <div id="results-list" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((model: any) => (
+            <article class="bg-gray-800 rounded-lg p-6 border border-gray-700 transition hover:border-gray-600">
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-lg font-semibold text-white">{model.name}</h3>
+                <span
+                  class="px-2 py-1 rounded text-xs font-medium text-white"
+                  style={`background-color: ${categoryColors[model.category] || '#374151'}`}
+                >
+                  {model.category}
+                </span>
+              </div>
+              <p class="text-gray-400 text-sm mb-4 line-clamp-2">{model.description}</p>
+              <div class="grid grid-cols-2 gap-4 text-sm mb-4">
+                <div>
+                  <span class="text-gray-500">Provider</span>
+                  <p class="text-gray-300">{model.provider}</p>
+                </div>
+                <div>
+                  <span class="text-gray-500">Context</span>
+                  <p class="text-gray-300">{model.context_window.toLocaleString()} tokens</p>
+                </div>
+                <div>
+                  <span class="text-gray-500">Input</span>
+                  <p class="text-gray-300">${model.input_price}/1M</p>
+                </div>
+                <div>
+                  <span class="text-gray-500">Output</span>
+                  <p class="text-gray-300">${model.output_price}/1M</p>
+                </div>
+              </div>
+              {model.tags && model.tags.length > 0 && (
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {model.tags.slice(0, 5).map((tag: string) => (
+                    <span class="bg-gray-700 text-gray-400 px-2 py-1 rounded text-xs">{tag}</span>
+                  ))}
+                </div>
+              )}
+              <a
+                href={model.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition"
+              >
+                View
+              </a>
+            </article>
+          ))}
+        </div>
+        {filtered.length === 0 && (
+          <div class="bg-gray-800 rounded-lg p-8 text-center border border-gray-700">
+            <p class="text-gray-400">No models match your criteria.</p>
+          </div>
+        )}
       </div>
     </div>
   </div>
 </Layout>
 
 <script>
-  const container = document.getElementById('results-container');
-  const models = JSON.parse(container?.dataset.models || '[]');
-
-  function applyFilters() {
+  function updateFilters() {
     const category = (document.getElementById('category-filter') as HTMLSelectElement)?.value;
     const provider = (document.getElementById('provider-filter') as HTMLSelectElement)?.value;
-    const maxContext = parseInt((document.getElementById('context-filter') as HTMLSelectElement)?.value || '0');
-    const maxPrice = parseFloat((document.getElementById('price-filter') as HTMLSelectElement)?.value || '0');
+    const context = (document.getElementById('context-filter') as HTMLSelectElement)?.value;
+    const price = (document.getElementById('price-filter') as HTMLSelectElement)?.value;
 
-    let filtered = models;
+    const params = new URLSearchParams();
+    if (category) params.set('category', category);
+    if (provider) params.set('provider', provider);
+    if (context && context !== '0') params.set('context', context);
+    if (price && price !== '0') params.set('price', price);
 
-    if (category) {
-      filtered = filtered.filter((m: any) => m.category === category);
-    }
-    if (provider) {
-      filtered = filtered.filter((m: any) => m.provider === provider);
-    }
-    if (maxContext > 0) {
-      filtered = filtered.filter((m: any) => m.context_window <= maxContext);
-    }
-    if (maxPrice > 0) {
-      filtered = filtered.filter((m: any) => m.input_price <= maxPrice && m.output_price <= maxPrice);
-    }
-
-    const resultsDiv = document.getElementById('results-list');
-    if (resultsDiv) {
-      resultsDiv.innerHTML = filtered.length === 0
-        ? '<div class="bg-gray-800 rounded-lg p-8 text-center border border-gray-700"><p class="text-gray-400">No models match your criteria.</p></div>'
-        : filtered.map((m: any) => `
-          <article class="bg-gray-800 rounded-lg p-6 hover:bg-gray-750 transition border border-gray-700">
-            <div class="flex justify-between items-start mb-3">
-              <h3 class="text-lg font-semibold text-white">${m.name}</h3>
-              <span class="px-2 py-1 rounded text-xs font-medium bg-${getCategoryColor(m.category)}">${m.category}</span>
-            </div>
-            <p class="text-gray-400 text-sm mb-4 line-clamp-2">${m.description}</p>
-            <div class="grid grid-cols-2 gap-4 text-sm mb-4">
-              <div><span class="text-gray-500">Provider</span><p class="text-gray-300">${m.provider}</p></div>
-              <div><span class="text-gray-500">Context</span><p class="text-gray-300">${m.context_window.toLocaleString()} tokens</p></div>
-              <div><span class="text-gray-500">Input</span><p class="text-gray-300">$${m.input_price}/1M</p></div>
-              <div><span class="text-gray-500">Output</span><p class="text-gray-300">$${m.output_price}/1M</p></div>
-            </div>
-            <div class="flex gap-2 mb-4">
-              ${m.tags.slice(0, 5).map((tag: string) => `<span class="bg-gray-700 text-gray-400 px-2 py-1 rounded text-xs">${tag}</span>`).join('')}
-            </div>
-            <a href="${m.url}" target="_blank" rel="noopener noreferrer" class="inline-block bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition">View</a>
-          </article>
-        `).join('');
-    }
+    const newUrl = params.toString() ? `?${params.toString()}` : window.location.pathname;
+    window.location.href = newUrl;
   }
 
-  function getCategoryColor(category: string): string {
-    const colors: Record<string, string> = {
-      chat: 'blue-900 text-blue-300',
-      coding: 'green-900 text-green-300',
-      reasoning: 'purple-900 text-purple-300',
-      image: 'pink-900 text-pink-300',
-      embedding: 'orange-900 text-orange-300',
-      multimodal: 'cyan-900 text-cyan-300',
-    };
-    return colors[category] || 'gray-700';
-  }
-
-  document.getElementById('category-filter')?.addEventListener('change', applyFilters);
-  document.getElementById('provider-filter')?.addEventListener('change', applyFilters);
-  document.getElementById('context-filter')?.addEventListener('change', applyFilters);
-  document.getElementById('price-filter')?.addEventListener('change', applyFilters);
+  document.getElementById('category-filter')?.addEventListener('change', updateFilters);
+  document.getElementById('provider-filter')?.addEventListener('change', updateFilters);
+  document.getElementById('context-filter')?.addEventListener('change', updateFilters);
+  document.getElementById('price-filter')?.addEventListener('change', updateFilters);
 </script>
