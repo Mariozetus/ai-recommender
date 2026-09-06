@@ -1,43 +1,79 @@
-# Astro Starter Kit: Minimal
+# AI Model Recommender
 
-```sh
-npm create astro@latest -- --template minimal
+Discover and compare AI models from OpenRouter. Get personalized recommendations based on your use case, budget, and preferences.
+
+## Features
+
+- **Catalog**: Browse 400+ AI models with filtering by category, provider, context window, and price
+- **Recommendations**: Answer a few questions and get personalized AI model recommendations
+- **Compare**: Side-by-side comparison of multiple models
+- **Search**: Find models by name, provider, or description
+
+## Tech Stack
+
+- Astro with hybrid rendering (SSR + static)
+- Tailwind CSS v4
+- TypeScript
+- Vercel adapter
+
+## Setup
+
+```bash
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+
+# Update AI models data
+pnpm update-data
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Environment Variables
 
-## 🚀 Project Structure
+Create a `.env` file:
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```env
+OPENROUTER_API_KEY=your_api_key_here
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Get your API key from [OpenRouter](https://openrouter.ai/keys).
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Data
 
-Any static assets, like images, can be placed in the `public/` directory.
+Models are fetched from OpenRouter API and stored in `data/ais.json`. The update script runs automatically via GitHub Actions every Sunday at midnight.
 
-## 🧞 Commands
+To manually update:
 
-All commands are run from the root of the project, from a terminal:
+```bash
+pnpm update-data
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Deploy
 
-## 👀 Want to learn more?
+1. Connect your GitHub repo to Vercel
+2. Add the `OPENROUTER_API_KEY` environment variable
+3. Deploy
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Project Structure
+
+```
+src/
+├── components/    # Astro components
+├── layouts/       # Page layouts
+├── lib/           # Shared types and scoring logic
+├── pages/         # Routes (index, recommend, compare, models/[id])
+data/
+└── ais.json       # AI models data
+scripts/
+└── update-ais.mjs # Data fetching script
+```
+
+## Categories
+
+- **chat**: General conversation models
+- **coding**: Code generation and completion
+- **reasoning**: Logical reasoning and math
+- **image**: Image generation models
+- **embedding**: Text embedding models
+- **multimodal**: Models supporting multiple modalities
