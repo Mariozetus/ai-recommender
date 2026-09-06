@@ -1,0 +1,79 @@
+---
+interface Props {
+  modelId: string;
+  modelName: string;
+  inputPrice: number;
+  outputPrice: number;
+}
+
+const { modelId, modelName, inputPrice, outputPrice } = Astro.props;
+---
+
+<div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+  <h3 class="text-lg font-semibold text-white mb-4">Pricing Calculator</h3>
+
+  <div class="space-y-4">
+    <div>
+      <label class="block text-sm text-gray-400 mb-2">Input tokens</label>
+      <input
+        type="number"
+        id="calc-input-tokens"
+        value="100000"
+        min="0"
+        class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-teal-500"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm text-gray-400 mb-2">Output tokens</label>
+      <input
+        type="number"
+        id="calc-output-tokens"
+        value="50000"
+        min="0"
+        class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-teal-500"
+      />
+    </div>
+
+    <div class="pt-4 border-t border-gray-700">
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-gray-400">Input cost</span>
+        <span id="calc-input-cost" class="text-white font-mono">$0.30</span>
+      </div>
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-gray-400">Output cost</span>
+        <span id="calc-output-cost" class="text-white font-mono">$0.75</span>
+      </div>
+      <div class="flex justify-between items-center pt-2 border-t border-gray-600">
+        <span class="text-white font-semibold">Total</span>
+        <span id="calc-total" class="text-teal-400 font-bold text-xl">$1.05</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ inputPrice, outputPrice }}>
+  const inputTokens = document.getElementById('calc-input-tokens');
+  const outputTokens = document.getElementById('calc-output-tokens');
+  const inputCostEl = document.getElementById('calc-input-cost');
+  const outputCostEl = document.getElementById('calc-output-cost');
+  const totalEl = document.getElementById('calc-total');
+
+  function calculate() {
+    const inTokens = parseInt(inputTokens?.value || '0') || 0;
+    const outTokens = parseInt(outputTokens?.value || '0') || 0;
+
+    const inCost = (inTokens / 1e6) * inputPrice;
+    const outCost = (outTokens / 1e6) * outputPrice;
+    const total = inCost + outCost;
+
+    if (inputCostEl) inputCostEl.textContent = `$${inCost.toFixed(4)}`;
+    if (outputCostEl) outputCostEl.textContent = `$${outCost.toFixed(4)}`;
+    if (totalEl) totalEl.textContent = `$${total.toFixed(4)}`;
+  }
+
+  inputTokens?.addEventListener('input', calculate);
+  outputTokens?.addEventListener('input', calculate);
+
+  calculate();
+</script>
