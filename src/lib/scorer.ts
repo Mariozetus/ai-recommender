@@ -10,11 +10,9 @@ export function calculateScore(model: AIModel, prefs: UserPreferences): number {
   const contextPenalty = Math.max(0, model.context_window - prefs.max_context);
   score += Math.max(0, 20 - contextPenalty / 10000);
 
-  const inputCost = model.input_price * 1e6;
-  const outputCost = model.output_price * 1e6;
-  const totalCost = inputCost + outputCost;
+  const totalCost = model.input_price + model.output_price;
   const budgetPenalty = Math.max(0, totalCost - prefs.max_budget);
-  score += Math.max(0, 20 - budgetPenalty * 10);
+  score += Math.max(0, 20 - budgetPenalty * 2);
 
   if (model.benchmark?.mmlu) {
     score += model.benchmark.mmlu * 0.15;
