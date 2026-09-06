@@ -1,0 +1,123 @@
+---
+export const prerender = false;
+
+import Layout from '../../layouts/Layout.astro';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
+
+const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
+const { models } = JSON.parse(rawData);
+
+const providers = [...new Set(models.map((m: any) => m.provider))] as string[];
+
+const providerInfo: Record<string, { description: string; website: string }> = {
+  openai: { description: 'Creadores de GPT-4 y GPT-3.5. Pioneros en modelos de lenguaje comerciales.', website: 'https://openai.com' },
+  anthropic: { description: 'Compañía de seguridad en IA. Creadores de Claude, enfocado en alineación.', website: 'https://anthropic.com' },
+  google: { description: 'Gemini, Gemma y PaLM. Modelos multimodales de Google DeepMind.', website: 'https://deepmind.google' },
+  meta: { description: 'Llama: modelos open source de Meta. Disponibles para uso comercial.', website: 'https://llama.meta.com' },
+  'meta-llama': { description: 'Llama: modelos open source de Meta. Disponibles para uso comercial.', website: 'https://llama.meta.com' },
+  mistralai: { description: 'Mistral: empresa europea con modelos open source de alto rendimiento.', website: 'https://mistral.ai' },
+  deepseek: { description: 'DeepSeek: modelos chinos especializados en razonamiento y código.', website: 'https://deepseek.com' },
+  qwen: { description: 'Qwen: familia de modelos de Alibaba, multilingües y open source.', website: 'https://qwenlm.github.io' },
+  cohere: { description: 'Cohere: modelos empresariales con foco en RAG y search.', website: 'https://cohere.com' },
+  perplexity: { description: 'Modelos especializados en búsqueda web y respuestas con fuentes.', website: 'https://perplexity.ai' },
+  xai: { description: 'xAI: Grok, modelos de Elon Musk con acceso a X (Twitter).', website: 'https://x.ai' },
+  nvidia: { description: 'NVIDIA Nemotron: modelos optimizados para GPUs NVIDIA.', website: 'https://nvidia.com' },
+  microsoft: { description: 'Microsoft: modelos Phi, optimizados para eficiencia.', website: 'https://microsoft.com' },
+};
+
+const providerColors: Record<string, string> = {
+  openai: 'bg-green-900/30 border-green-700 text-green-300',
+  anthropic: 'bg-yellow-900/30 border-yellow-700 text-yellow-300',
+  google: 'bg-blue-900/30 border-blue-700 text-blue-300',
+  meta: 'bg-blue-900/30 border-blue-700 text-blue-300',
+  'meta-llama': 'bg-blue-900/30 border-blue-700 text-blue-300',
+  mistralai: 'bg-orange-900/30 border-orange-700 text-orange-300',
+  deepseek: 'bg-indigo-900/30 border-indigo-700 text-indigo-300',
+  qwen: 'bg-purple-900/30 border-purple-700 text-purple-300',
+  cohere: 'bg-pink-900/30 border-pink-700 text-pink-300',
+  perplexity: 'bg-cyan-900/30 border-cyan-700 text-cyan-300',
+  xai: 'bg-gray-900/30 border-gray-700 text-gray-300',
+  nvidia: 'bg-green-900/30 border-green-700 text-green-300',
+  microsoft: 'bg-blue-900/30 border-blue-700 text-blue-300',
+};
+
+const enriched = providers.map((prov: string) => {
+  const providerModels = models.filter((m: any) => m.provider === prov);
+  const avgPrice = (providerModels.reduce((s: number, m: any) => s + m.input_price + m.output_price, 0) / providerModels.length).toFixed(2);
+  const hasFree = providerModels.some((m: any) => m.pricing?.free);
+  const categories = [...new Set(providerModels.map((m: any) => m.category))];
+
+  return {
+    name: prov,
+    count: providerModels.length,
+    avgPrice,
+    hasFree,
+    categories,
+    info: providerInfo[prov] || null,
+    color: providerColors[prov] || 'bg-gray-800 border-gray-700 text-gray-300',
+  };
+}).sort((a, b) => b.count - a.count);
+---
+
+<Layout title="AI Model Providers" description="Lista completa de proveedores de modelos de IA">
+  <div class="bg-gradient-to-b from-gray-900 to-gray-800 py-16">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Proveedores</h1>
+      <p class="text-xl text-gray-300 mb-3">Todos los proveedores en un solo lugar</p>
+      <p class="text-gray-400">{providers.length} proveedores · {models.length} modelos totales</p>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {enriched.map(p => (
+        <a
+          href={`/provider/${p.name}`}
+          class="block bg-gray-800 rounded-lg border border-gray-700 p-6 hover:border-gray-600 transition"
+        >
+          <div class="flex items-start gap-4 mb-4">
+            <div class:list={['w-12 h-12 rounded-lg flex items-center justify-center font-bold text-lg border', p.color]}>
+              {p.name.charAt(0).toUpperCase()}
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="text-lg font-semibold text-white capitalize truncate">{p.name}</h3>
+              <p class="text-gray-500 text-sm">{p.count} modelos</p>
+            </div>
+            {p.hasFree && (
+              <span class="bg-green-900/50 border border-green-700 text-green-300 text-xs px-2 py-1 rounded whitespace-nowrap">
+                Free tier
+              </span>
+            )}
+          </div>
+
+          {p.info && (
+            <p class="text-gray-400 text-sm mb-4 line-clamp-3">{p.info.description}</p>
+          )}
+
+          <div class="grid grid-cols-2 gap-3 text-xs mb-3">
+            <div>
+              <span class="text-gray-500">Precio promedio</span>
+              <p class="text-gray-300 font-mono">${p.avgPrice}/1M</p>
+            </div>
+            <div>
+              <span class="text-gray-500">Categorías</span>
+              <p class="text-gray-300">{p.categories.length}</p>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap gap-1 pt-3 border-t border-gray-700">
+            {p.categories.slice(0, 4).map((cat: string) => (
+              <span class="text-xs px-2 py-0.5 bg-gray-900 border border-gray-700 rounded text-gray-400">
+                {cat}
+              </span>
+            ))}
+            {p.categories.length > 4 && (
+              <span class="text-xs text-gray-500">+{p.categories.length - 4}</span>
+            )}
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,134 @@
+---
+export const prerender = false;
+
+import Layout from '../../layouts/Layout.astro';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
+import { BEST_PICKS, getBestPick } from '../../data/content';
+import { calculateScore } from '../../lib/scorer';
+import type { AIModel } from '../../lib/types';
+
+const { slug } = Astro.params;
+const pick = slug ? getBestPick(slug) : undefined;
+
+if (!pick) {
+  return Astro.redirect('/best');
+}
+
+const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
+const { models } = JSON.parse(rawData);
+
+const matched = models.filter(pick.filter);
+
+const ranked = matched
+  .map((m: AIModel) => ({
+    model: m,
+    score: calculateScore(m, {
+      use_case: m.category as any,
+      max_context: Math.max(...matched.map((x: AIModel) => x.context_window)),
+      max_budget: 100,
+      preferred_features: [],
+    }),
+  }))
+  .sort((a, b) => b.score - a.score)
+  .slice(0, 12);
+
+const categoryColors: Record<string, string> = {
+  chat: 'bg-blue-900/30 border-blue-700 text-blue-300',
+  coding: 'bg-green-900/30 border-green-700 text-green-300',
+  reasoning: 'bg-purple-900/30 border-purple-700 text-purple-300',
+  image: 'bg-pink-900/30 border-pink-700 text-pink-300',
+  embedding: 'bg-orange-900/30 border-orange-700 text-orange-300',
+  multimodal: 'bg-cyan-900/30 border-cyan-700 text-cyan-300',
+};
+---
+
+<Layout title={`${pick.title}`} description={pick.description}>
+  <div class="bg-gradient-to-b from-gray-900 to-gray-800 py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <nav class="text-sm text-gray-500 mb-6">
+        <a href="/" class="hover:text-teal-400">Inicio</a>
+        <span class="mx-2">/</span>
+        <a href="/best" class="hover:text-teal-400">Best Picks</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-400">{pick.title}</span>
+      </nav>
+
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">{pick.title}</h1>
+      <p class="text-xl text-gray-300 mb-3">{pick.tagline}</p>
+      <p class="text-gray-400 max-w-3xl">{pick.description}</p>
+      <p class="text-teal-400 mt-4 text-sm">
+        {matched.length} modelos encontrados
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {ranked.map(({ model, score }, i) => (
+        <article class="bg-gray-800 rounded-lg border border-gray-700 p-6 hover:border-gray-600 transition relative">
+          {i < 3 && (
+            <div class="absolute top-2 right-2 bg-yellow-900/50 border border-yellow-600 text-yellow-300 text-xs px-2 py-1 rounded">
+              Top {i + 1}
+            </div>
+          )}
+
+          <div class="flex justify-between items-start mb-3">
+            <div class="flex-1 min-w-0">
+              <a href={`/models/${encodeURIComponent(model.id)}`} class="hover:text-teal-400">
+                <h3 class="text-lg font-semibold text-white truncate">{model.name}</h3>
+              </a>
+              <p class="text-gray-500 text-sm">{model.provider}</p>
+            </div>
+            <span class={`ml-2 px-2 py-1 rounded text-xs font-medium whitespace-nowrap ${categoryColors[model.category] || 'bg-gray-700 text-gray-300'}`}>
+              {model.category}
+            </span>
+          </div>
+
+          <p class="text-gray-400 text-sm mb-4 line-clamp-2">{model.description}</p>
+
+          <div class="grid grid-cols-2 gap-3 text-xs mb-4">
+            <div>
+              <span class="text-gray-500">Contexto</span>
+              <p class="text-gray-300 font-mono">{(model.context_window / 1000).toFixed(0)}K</p>
+            </div>
+            <div>
+              <span class="text-gray-500">Total /1M</span>
+              <p class="text-gray-300 font-mono">${(model.input_price + model.output_price).toFixed(2)}</p>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-3 border-t border-gray-700">
+            <div class="text-xs">
+              <span class="text-gray-500">Score</span>
+              <span class="ml-2 text-teal-400 font-mono font-semibold">{Math.round(score)}/100</span>
+            </div>
+            <div class="flex gap-2">
+              <a
+                href={`/models/${encodeURIComponent(model.id)}`}
+                class="text-teal-400 hover:text-teal-300 text-sm font-medium"
+              >
+                Detalles →
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <section class="mt-16 border-t border-gray-700 pt-12">
+      <h2 class="text-2xl font-bold text-white mb-6">Otras listas populares</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {BEST_PICKS.filter(b => b.slug !== pick.slug).map(b => (
+          <a
+            href={`/best/${b.slug}`}
+            class="block bg-gray-800 rounded-lg border border-gray-700 p-5 hover:border-teal-600 transition"
+          >
+            <h3 class="font-semibold text-white mb-1">{b.title}</h3>
+            <p class="text-gray-400 text-sm line-clamp-2">{b.tagline}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>

@@ -35,11 +35,42 @@ const categoryColors: Record<string, string> = {
 const relatedModels = models
   .filter((m: any) => m.category === model.category && m.id !== model.id)
   .slice(0, 4);
+
+const sameProvider = models
+  .filter((m: any) => m.provider === model.provider && m.id !== model.id)
+  .slice(0, 4);
+
+const useCaseMap: Record<string, { slug: string; title: string }[]> = {
+  chat: [
+    { slug: 'customer-support', title: 'AI for Customer Support' },
+    { slug: 'content-generation', title: 'AI for Content Generation' },
+    { slug: 'translation', title: 'AI for Translation' },
+  ],
+  coding: [
+    { slug: 'code-review', title: 'AI for Code Review' },
+    { slug: 'data-analysis', title: 'AI for Data Analysis' },
+  ],
+  reasoning: [
+    { slug: 'data-analysis', title: 'AI for Data Analysis' },
+    { slug: 'code-review', title: 'AI for Code Review' },
+  ],
+  multimodal: [
+    { slug: 'vision-analysis', title: 'AI for Vision & Image Analysis' },
+  ],
+  image: [
+    { slug: 'image-generation', title: 'AI for Image Generation' },
+  ],
+  embedding: [
+    { slug: 'embeddings', title: 'AI for Embeddings & Search' },
+  ],
+};
+
+const useCases = useCaseMap[model.category] || [];
 ---
 
 <Layout title={`${model.name} - AI Model`} description={model.description}>
   <div class="max-w-6xl mx-auto px-4 py-8">
-    <a href="/" class="text-teal-400 hover:text-teal-300 mb-6 inline-block">{t('model.back')}</a>
+    <a href="/catalog" class="text-teal-400 hover:text-teal-300 mb-6 inline-block">← Volver al catálogo</a>
 
     <article class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
       <div class="p-8">
@@ -60,6 +91,25 @@ const relatedModels = models
 
         <p class="text-gray-300 text-lg mb-8">{model.description}</p>
 
+        {useCases.length > 0 && (
+          <div class="mb-8 bg-gradient-to-r from-teal-900/20 to-purple-900/20 border border-teal-800/50 rounded-lg p-5">
+            <h3 class="text-sm font-semibold text-teal-300 mb-3">Casos de uso ideales para este modelo</h3>
+            <div class="flex flex-wrap gap-2">
+              {useCases.map(uc => (
+                <a
+                  href={`/use-cases/${uc.slug}`}
+                  class="inline-flex items-center gap-2 bg-gray-800/70 hover:bg-gray-700 border border-gray-700 hover:border-teal-600 px-4 py-2 rounded-lg text-sm text-white transition"
+                >
+                  <svg class="w-4 h-4 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                  {uc.title}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div class="grid md:grid-cols-2 gap-6 mb-8">
           <div class="bg-gray-700/50 rounded-lg p-6">
             <h2 class="text-lg font-semibold mb-4 text-white">{t('model.pricing')}</h2>
@@ -73,13 +123,25 @@ const relatedModels = models
                 <span class="text-white font-mono">${model.output_price}{t('common.per_1m')}</span>
               </div>
               <div class="flex justify-between">
-                <span class="text-gray-400">{t('model.pricing').split(' ')[0]} Window</span>
+                <span class="text-gray-400">Context Window</span>
                 <span class="text-white font-mono">{model.context_window.toLocaleString()} {t('common.tokens')}</span>
               </div>
+              {model.max_completion_tokens && (
+                <div class="flex justify-between">
+                  <span class="text-gray-400">Max output</span>
+                  <span class="text-white font-mono">{model.max_completion_tokens.toLocaleString()} tokens</span>
+                </div>
+              )}
               {model.pricing?.free && (
                 <div class="flex justify-between">
                   <span class="text-gray-400">Free Tier</span>
-                  <span class="text-green-400 font-mono">{t('compare.yes')}</span>
+                  <span class="text-green-400 font-mono">Sí</span>
+                </div>
+              )}
+              {model.pricing?.batch && (
+                <div class="flex justify-between">
+                  <span class="text-gray-400">Batch API</span>
+                  <span class="text-teal-400 font-mono">Sí (50% descuento)</span>
                 </div>
               )}
             </div>
@@ -129,6 +191,24 @@ const relatedModels = models
                     <span class="text-white font-mono">{model.benchmark.arena_elo}</span>
                   </div>
                 )}
+                {model.benchmark.intelligence_index && (
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">Intelligence Index</span>
+                    <span class="text-teal-400 font-mono">{model.benchmark.intelligence_index}</span>
+                  </div>
+                )}
+                {model.benchmark.coding_index && (
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">Coding Index</span>
+                    <span class="text-teal-400 font-mono">{model.benchmark.coding_index}</span>
+                  </div>
+                )}
+                {model.benchmark.agentic_index && (
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">Agentic Index</span>
+                    <span class="text-teal-400 font-mono">{model.benchmark.agentic_index}</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -139,7 +219,7 @@ const relatedModels = models
             <h2 class="text-lg font-semibold mb-4 text-white">{t('model.modalities')}</h2>
             <div class="flex flex-wrap gap-2">
               {model.modalities.text && (
-                <span class="bg-blue-900 text-blue-300 px-3 py-1 rounded text-sm">Text Input</span>
+                <span class="bg-blue-900 text-blue-300 px-3 py-1 rounded text-sm">Text Input/Output</span>
               )}
               {model.modalities.image_input && (
                 <span class="bg-pink-900 text-pink-300 px-3 py-1 rounded text-sm">Image Input</span>
@@ -153,6 +233,25 @@ const relatedModels = models
               {model.modalities.audio_output && (
                 <span class="bg-orange-900 text-orange-300 px-3 py-1 rounded text-sm">Audio Output</span>
               )}
+              {model.modalities.file_input && (
+                <span class="bg-yellow-900 text-yellow-300 px-3 py-1 rounded text-sm">File (PDF) Input</span>
+              )}
+            </div>
+          </div>
+        )}
+
+        {model.supported_parameters && model.supported_parameters.length > 0 && (
+          <div class="mb-8">
+            <h2 class="text-lg font-semibold mb-4 text-white">Capacidades</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+              {model.supported_parameters.map((param: string) => (
+                <span class="bg-gray-900/50 border border-gray-700 text-gray-300 px-3 py-2 rounded text-sm flex items-center gap-2">
+                  <svg class="w-4 h-4 text-teal-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {param.replace(/_/g, ' ')}
+                </span>
+              ))}
             </div>
           </div>
         )}
@@ -175,34 +274,49 @@ const relatedModels = models
             rel="noopener noreferrer"
             class="bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded font-medium transition"
           >
-            {t('model.view_on', { provider: model.provider })}
+            Ver en {model.provider} →
           </a>
           <button
             id="compare-btn"
             data-model-id={model.id}
             class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded font-medium transition"
           >
-            {t('model.add_compare')}
+            Añadir a comparación
           </button>
         </div>
       </div>
 
       <div class="bg-gray-900/50 px-8 py-4 border-t border-gray-700">
         <p class="text-gray-500 text-sm">
-          {t('model.source')}: {model.source} · {t('model.last_updated')}: {new Date(model.fetched_at).toLocaleDateString()}
+          Fuente: {model.source} · Actualizado: {new Date(model.fetched_at).toLocaleDateString()}
         </p>
       </div>
     </article>
 
     {relatedModels.length > 0 && (
       <section class="mt-12">
-        <h2 class="text-xl font-bold text-white mb-6">Related Models</h2>
+        <h2 class="text-xl font-bold text-white mb-6">Modelos similares</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {relatedModels.map((m: any) => (
             <a href={`/models/${encodeURIComponent(m.id)}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition">
               <h3 class="font-semibold text-white mb-1 truncate">{m.name}</h3>
               <p class="text-gray-500 text-sm mb-2">{m.provider}</p>
-              <p class="text-gray-400 text-xs">${m.input_price + m.output_price}/1M</p>
+              <p class="text-gray-400 text-xs">${(m.input_price + m.output_price).toFixed(2)}/1M</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {sameProvider.length > 0 && (
+      <section class="mt-12">
+        <h2 class="text-xl font-bold text-white mb-6">Otros modelos de {model.provider}</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {sameProvider.map((m: any) => (
+            <a href={`/models/${encodeURIComponent(m.id)}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition">
+              <h3 class="font-semibold text-white mb-1 truncate">{m.name}</h3>
+              <p class="text-gray-500 text-sm mb-2 capitalize">{m.category}</p>
+              <p class="text-gray-400 text-xs">${(m.input_price + m.output_price).toFixed(2)}/1M</p>
             </a>
           ))}
         </div>
@@ -215,6 +329,11 @@ const relatedModels = models
   const compareBtn = document.getElementById('compare-btn');
   const modelId = compareBtn?.dataset.modelId;
 
+  function showToast(message: string, kind: string = 'info') {
+    const fn = (window as any).showToast;
+    if (typeof fn === 'function') fn(message, kind);
+  }
+
   if (modelId) {
     const history = JSON.parse(localStorage.getItem('viewHistory') || '[]');
     const filtered = history.filter((h: string) => h !== modelId);
@@ -223,12 +342,20 @@ const relatedModels = models
   }
 
   compareBtn?.addEventListener('click', () => {
+    if (!modelId) return;
     const compareIds = JSON.parse(localStorage.getItem('compareIds') || '[]');
     if (!compareIds.includes(modelId)) {
+      if (compareIds.length >= 4) {
+        showToast('Máximo 4 modelos para comparar', 'warning');
+        return;
+      }
       compareIds.push(modelId);
       localStorage.setItem('compareIds', JSON.stringify(compareIds));
-      compareBtn.textContent = 'Added!';
-      compareBtn.disabled = true;
+      if (compareBtn) {
+        compareBtn.textContent = 'Añadido ✓';
+        compareBtn.disabled = true;
+      }
+      showToast('Modelo añadido a comparación', 'success');
     }
   });
 </script>

@@ -7,6 +7,14 @@ interface Props {
 }
 
 const { categories, providers, selectedCategory, selectedProvider } = Astro.props;
+
+const features = [
+  { value: 'tools', label: 'Function calling' },
+  { value: 'vision', label: 'Vision' },
+  { value: 'json_mode', label: 'JSON mode' },
+  { value: 'reasoning', label: 'Reasoning' },
+  { value: 'streaming', label: 'Streaming' },
+];
 ---
 
 <aside class="hidden md:block bg-gray-800 rounded-lg p-6 border border-gray-700 sticky top-24" aria-label="Filtros del catálogo">
@@ -68,6 +76,18 @@ const { categories, providers, selectedCategory, selectedProvider } = Astro.prop
       <option value="10">$10</option>
       <option value="50">$50</option>
     </select>
+  </div>
+
+  <div class="mt-6">
+    <label class="block text-sm text-gray-400 mb-2">Solo gratis</label>
+    <label class="flex items-center gap-2 cursor-pointer">
+      <input
+        type="checkbox"
+        id="free-filter"
+        class="w-4 h-4 bg-gray-700 border-gray-600 rounded text-teal-500 focus:ring-teal-500 focus:ring-offset-gray-800"
+      />
+      <span class="text-sm text-gray-300">Mostrar solo modelos gratuitos</span>
+    </label>
   </div>
 
   <button
@@ -153,6 +173,17 @@ const { categories, providers, selectedCategory, selectedProvider } = Astro.prop
         </select>
       </div>
 
+      <div class="mb-6">
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input
+            type="checkbox"
+            id="free-filter-mobile"
+            class="w-4 h-4 bg-gray-700 border-gray-600 rounded text-teal-500"
+          />
+          <span class="text-sm text-gray-300">Solo modelos gratuitos</span>
+        </label>
+      </div>
+
       <div class="flex gap-3">
         <button
           id="apply-filters"
@@ -196,16 +227,19 @@ const { categories, providers, selectedCategory, selectedProvider } = Astro.prop
     const provider = (document.getElementById('provider-filter') as HTMLSelectElement)?.value || '';
     const context = (document.getElementById('context-filter') as HTMLSelectElement)?.value || '0';
     const price = (document.getElementById('price-filter') as HTMLSelectElement)?.value || '0';
+    const free = (document.getElementById('free-filter') as HTMLInputElement)?.checked || false;
 
     const mobileCategory = document.getElementById('category-filter-mobile') as HTMLSelectElement;
     const mobileProvider = document.getElementById('provider-filter-mobile') as HTMLSelectElement;
     const mobileContext = document.getElementById('context-filter-mobile') as HTMLSelectElement;
     const mobilePrice = document.getElementById('price-filter-mobile') as HTMLSelectElement;
+    const mobileFree = document.getElementById('free-filter-mobile') as HTMLInputElement;
 
     if (mobileCategory) mobileCategory.value = category;
     if (mobileProvider) mobileProvider.value = provider;
     if (mobileContext) mobileContext.value = context;
     if (mobilePrice) mobilePrice.value = price;
+    if (mobileFree) mobileFree.checked = free;
   }
 
   function openDrawer() {
@@ -230,16 +264,19 @@ const { categories, providers, selectedCategory, selectedProvider } = Astro.prop
     const provider = (document.getElementById('provider-filter-mobile') as HTMLSelectElement)?.value || '';
     const context = (document.getElementById('context-filter-mobile') as HTMLSelectElement)?.value || '0';
     const price = (document.getElementById('price-filter-mobile') as HTMLSelectElement)?.value || '0';
+    const free = (document.getElementById('free-filter-mobile') as HTMLInputElement)?.checked || false;
 
     const desktopCategory = document.getElementById('category-filter') as HTMLSelectElement;
     const desktopProvider = document.getElementById('provider-filter') as HTMLSelectElement;
     const desktopContext = document.getElementById('context-filter') as HTMLSelectElement;
     const desktopPrice = document.getElementById('price-filter') as HTMLSelectElement;
+    const desktopFree = document.getElementById('free-filter') as HTMLInputElement;
 
     if (desktopCategory) desktopCategory.value = category;
     if (desktopProvider) desktopProvider.value = provider;
     if (desktopContext) desktopContext.value = context;
     if (desktopPrice) desktopPrice.value = price;
+    if (desktopFree) desktopFree.checked = free;
 
     closeDrawer();
     updateFilters();
@@ -250,12 +287,14 @@ const { categories, providers, selectedCategory, selectedProvider } = Astro.prop
     const provider = (document.getElementById('provider-filter') as HTMLSelectElement)?.value;
     const context = (document.getElementById('context-filter') as HTMLSelectElement)?.value;
     const price = (document.getElementById('price-filter') as HTMLSelectElement)?.value;
+    const free = (document.getElementById('free-filter') as HTMLInputElement)?.checked;
 
     const params = new URLSearchParams(window.location.search);
     if (category) params.set('category', category); else params.delete('category');
     if (provider) params.set('provider', provider); else params.delete('provider');
     if (context && context !== '0') params.set('context', context); else params.delete('context');
     if (price && price !== '0') params.set('price', price); else params.delete('price');
+    if (free) params.set('free', '1'); else params.delete('free');
     params.delete('page');
 
     const newUrl = params.toString() ? `/catalog?${params.toString()}` : '/catalog';

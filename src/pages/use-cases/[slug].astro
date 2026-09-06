@@ -1,0 +1,237 @@
+---
+export const prerender = false;
+
+import Layout from '../../layouts/Layout.astro';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
+import { USE_CASES, getUseCase } from '../../data/content';
+import { calculateScore } from '../../lib/scorer';
+import type { AIModel } from '../../lib/types';
+
+const { slug } = Astro.params;
+const useCase = slug ? getUseCase(slug) : undefined;
+
+if (!useCase) {
+  return Astro.redirect('/');
+}
+
+const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
+const { models } = JSON.parse(rawData);
+
+const matched = models.filter(useCase.filter);
+
+const ranked = matched
+  .map((m: AIModel) => ({
+    model: m,
+    score: calculateScore(m, {
+      use_case: m.category as any,
+      max_context: Math.max(...matched.map((x: AIModel) => x.context_window)),
+      max_budget: 100,
+      preferred_features: [],
+    }),
+  }))
+  .sort((a, b) => b.score - a.score)
+  .slice(0, 8);
+
+const categoryColors: Record<string, string> = {
+  chat: 'bg-blue-900/30 border-blue-700 text-blue-300',
+  coding: 'bg-green-900/30 border-green-700 text-green-300',
+  reasoning: 'bg-purple-900/30 border-purple-700 text-purple-300',
+  image: 'bg-pink-900/30 border-pink-700 text-pink-300',
+  embedding: 'bg-orange-900/30 border-orange-700 text-orange-300',
+  multimodal: 'bg-cyan-900/30 border-cyan-700 text-cyan-300',
+};
+---
+
+<Layout title={`${useCase.title} - AI Models`} description={useCase.description}>
+  <div class="bg-gradient-to-b from-gray-900 to-gray-800 py-16">
+    <div class="max-w-4xl mx-auto px-4">
+      <nav class="text-sm text-gray-500 mb-6">
+        <a href="/" class="hover:text-teal-400">Inicio</a>
+        <span class="mx-2">/</span>
+        <a href="/use-cases" class="hover:text-teal-400">Casos de uso</a>
+        <span class="mx-2">/</span>
+        <span class="text-gray-400">{useCase.title}</span>
+      </nav>
+
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">{useCase.title}</h1>
+      <p class="text-xl text-gray-300 mb-6">{useCase.tagline}</p>
+      <p class="text-gray-400 leading-relaxed max-w-3xl">{useCase.description}</p>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-3 gap-8 mb-12">
+      <div class="md:col-span-2">
+        <h2 class="text-2xl font-bold text-white mb-6">Modelos recomendados</h2>
+        <div class="space-y-4">
+          {ranked.map(({ model, score }, i) => (
+            <article class="bg-gray-800 rounded-lg border border-gray-700 p-6 hover:border-gray-600 transition">
+              <div class="flex items-start gap-4">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-teal-900/50 border border-teal-700 flex items-center justify-center text-teal-300 font-bold">
+                  #{i + 1}
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-start justify-between gap-3 mb-2">
+                    <div>
+                      <a href={`/models/${encodeURIComponent(model.id)}`} class="text-lg font-semibold text-white hover:text-teal-400">
+                        {model.name}
+                      </a>
+                      <p class="text-gray-500 text-sm">{model.provider}</p>
+                    </div>
+                    <span class={`px-2 py-1 rounded text-xs font-medium ${categoryColors[model.category] || 'bg-gray-700 text-gray-300'}`}>
+                      {model.category}
+                    </span>
+                  </div>
+
+                  <p class="text-gray-400 text-sm mb-3 line-clamp-2">{model.description}</p>
+
+                  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                    <div>
+                      <span class="text-gray-500">Contexto</span>
+                      <p class="text-gray-300 font-mono">{(model.context_window / 1000).toFixed(0)}K</p>
+                    </div>
+                    <div>
+                      <span class="text-gray-500">Input</span>
+                      <p class="text-gray-300 font-mono">${model.input_price}/1M</p>
+                    </div>
+                    <div>
+                      <span class="text-gray-500">Output</span>
+                      <p class="text-gray-300 font-mono">${model.output_price}/1M</p>
+                    </div>
+                    <div>
+                      <span class="text-gray-500">Score</span>
+                      <p class="text-teal-400 font-mono">{Math.round(score)}/100</p>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-2 mt-4">
+                    <a
+                      href={`/models/${encodeURIComponent(model.id)}`}
+                      class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition"
+                    >
+                      Ver detalles
+                    </a>
+                    <button
+                      type="button"
+                      class="compare-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition"
+                      data-model-id={model.id}
+                    >
+                      Comparar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="mt-8 text-center">
+          <a
+            href="/catalog"
+            class="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 transition"
+          >
+            Ver todos los {matched.length} modelos en el catálogo
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <aside class="md:col-span-1 space-y-6">
+        <div class="bg-gray-800 rounded-lg border border-gray-700 p-6 sticky top-24">
+          <h3 class="text-lg font-semibold text-white mb-4">Requisitos clave</h3>
+          <ul class="space-y-3">
+            {useCase.requirements.map(req => (
+              <li class="flex items-start gap-2 text-sm">
+                <svg class="w-5 h-5 text-teal-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-gray-300">{req}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="bg-gray-800 rounded-lg border border-gray-700 p-6">
+          <h3 class="text-lg font-semibold text-white mb-4">Tips prácticos</h3>
+          <ol class="space-y-3 text-sm">
+            {useCase.tips.map((tip, i) => (
+              <li class="flex items-start gap-3">
+                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-teal-900/50 border border-teal-700 text-teal-300 text-xs flex items-center justify-center">
+                  {i + 1}
+                </span>
+                <span class="text-gray-300">{tip}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div class="bg-gradient-to-br from-teal-900/30 to-purple-900/30 border border-teal-700 rounded-lg p-6">
+          <h3 class="text-lg font-semibold text-white mb-2">¿No encuentras el ideal?</h3>
+          <p class="text-gray-400 text-sm mb-4">Responde unas preguntas y obtén recomendaciones personalizadas</p>
+          <a
+            href="/recommend"
+            class="block text-center bg-teal-600 hover:bg-teal-500 text-white py-2 rounded font-medium transition"
+          >
+            Hacer el quiz
+          </a>
+        </div>
+      </aside>
+    </div>
+
+    <section class="border-t border-gray-700 pt-12 mt-12">
+      <h2 class="text-2xl font-bold text-white mb-6">Otros casos de uso</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {USE_CASES.filter(u => u.slug !== useCase.slug).slice(0, 4).map(u => (
+          <a
+            href={`/use-cases/${u.slug}`}
+            class="block bg-gray-800 rounded-lg border border-gray-700 p-5 hover:border-teal-600 transition"
+          >
+            <h3 class="font-semibold text-white mb-1">{u.title}</h3>
+            <p class="text-gray-400 text-sm line-clamp-2">{u.tagline}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script>
+  let compareIds: string[] = JSON.parse(localStorage.getItem('compareIds') || '[]');
+  const MAX_COMPARE = 4;
+
+  function showToast(message: string, kind: string = 'info') {
+    const fn = (window as any).showToast;
+    if (typeof fn === 'function') fn(message, kind);
+  }
+
+  document.querySelectorAll('.compare-btn').forEach(btn => {
+    const id = (btn as HTMLButtonElement).dataset.modelId;
+    if (compareIds.includes(id || '')) {
+      btn.textContent = 'Añadido';
+      (btn as HTMLButtonElement).disabled = true;
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const btn = target.closest('.compare-btn') as HTMLButtonElement;
+    if (!btn) return;
+
+    const modelId = btn.dataset.modelId;
+    if (!modelId || compareIds.includes(modelId)) return;
+
+    if (compareIds.length >= MAX_COMPARE) {
+      showToast(`Máximo ${MAX_COMPARE} modelos para comparar`, 'warning');
+      return;
+    }
+
+    compareIds.push(modelId);
+    localStorage.setItem('compareIds', JSON.stringify(compareIds));
+    btn.textContent = 'Añadido';
+    btn.disabled = true;
+    showToast('Modelo añadido a comparación', 'success');
+  });
+</script>

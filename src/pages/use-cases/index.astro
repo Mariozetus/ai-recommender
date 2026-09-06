@@ -1,0 +1,89 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { USE_CASES } from '../../data/content';
+
+const categoryIcons: Record<string, string> = {
+  'code-review': '💻',
+  'customer-support': '💬',
+  'content-generation': '✍️',
+  'data-analysis': '📊',
+  'translation': '🌐',
+  'image-generation': '🎨',
+  'vision-analysis': '👁️',
+  'embeddings': '🔍',
+};
+
+const categoryColors: Record<string, string> = {
+  'code-review': 'from-green-900/30 to-green-900/5 border-green-700 hover:border-green-500',
+  'customer-support': 'from-blue-900/30 to-blue-900/5 border-blue-700 hover:border-blue-500',
+  'content-generation': 'from-pink-900/30 to-pink-900/5 border-pink-700 hover:border-pink-500',
+  'data-analysis': 'from-purple-900/30 to-purple-900/5 border-purple-700 hover:border-purple-500',
+  'translation': 'from-cyan-900/30 to-cyan-900/5 border-cyan-700 hover:border-cyan-500',
+  'image-generation': 'from-orange-900/30 to-orange-900/5 border-orange-700 hover:border-orange-500',
+  'vision-analysis': 'from-indigo-900/30 to-indigo-900/5 border-indigo-700 hover:border-indigo-500',
+  'embeddings': 'from-yellow-900/30 to-yellow-900/5 border-yellow-700 hover:border-yellow-500',
+};
+---
+
+<Layout title="Casos de Uso - AI Models" description="Encuentra el modelo perfecto para tu caso de uso específico">
+  <div class="bg-gradient-to-b from-gray-900 to-gray-800 py-16">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Casos de Uso</h1>
+      <p class="text-xl text-gray-300 mb-3">Modelos curados para tareas específicas</p>
+      <p class="text-gray-400 max-w-2xl mx-auto">Cada caso de uso tiene requisitos únicos. Aquí encontrarás los modelos mejor evaluados para tu tarea, con tips prácticos para aprovecharlos al máximo.</p>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {USE_CASES.map(useCase => (
+        <a
+          href={`/use-cases/${useCase.slug}`}
+          class:list={[
+            'block p-6 rounded-xl border bg-gradient-to-br transition-all hover:scale-105 hover:shadow-2xl',
+            categoryColors[useCase.slug] || 'from-gray-700/30 to-gray-700/5 border-gray-700 hover:border-gray-500'
+          ]}
+        >
+          <div class="flex items-start gap-4">
+            <div class="text-4xl flex-shrink-0">
+              {categoryIcons[useCase.slug] || '🤖'}
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-semibold text-white mb-2">{useCase.title}</h3>
+              <p class="text-sm text-gray-300 mb-3">{useCase.tagline}</p>
+              <div class="flex items-center text-xs text-teal-400 mt-3">
+                <span>Ver recomendaciones</span>
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <section class="mt-16 bg-gray-800 rounded-xl border border-gray-700 p-8">
+      <div class="md:flex items-center justify-between gap-8">
+        <div>
+          <h2 class="text-2xl font-bold text-white mb-2">¿Necesitas algo más específico?</h2>
+          <p class="text-gray-400">Usa nuestro recomendador inteligente o explora el catálogo completo</p>
+        </div>
+        <div class="flex gap-3 mt-4 md:mt-0">
+          <a
+            href="/recommend"
+            class="bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded-lg font-medium transition"
+          >
+            Hacer el quiz
+          </a>
+          <a
+            href="/catalog"
+            class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition"
+          >
+            Ver catálogo
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

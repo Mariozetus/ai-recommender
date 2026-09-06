@@ -25,14 +25,38 @@ const { title, description = 'Discover and compare AI models. Get personalized r
     <meta name="twitter:card" content="summary" />
   </head>
   <body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col">
-    <header class="border-b border-gray-800">
+    <header class="border-b border-gray-800 sticky top-0 z-40 bg-gray-900/95 backdrop-blur-sm">
       <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         <a href="/" class="text-xl font-bold text-teal-400">AI Recommender</a>
-        <div class="flex gap-6">
-          <a href="/" class="hover:text-teal-400 transition">Catalog</a>
-          <a href="/recommend" class="hover:text-teal-400 transition">Get Recommendations</a>
+        <div class="hidden md:flex gap-6 text-sm">
+          <a href="/catalog" class="hover:text-teal-400 transition">Catálogo</a>
+          <a href="/use-cases" class="hover:text-teal-400 transition">Casos de uso</a>
+          <a href="/best" class="hover:text-teal-400 transition">Best Picks</a>
+          <a href="/providers" class="hover:text-teal-400 transition">Proveedores</a>
+          <a href="/insights" class="hover:text-teal-400 transition">Insights</a>
+          <a href="/recommend" class="hover:text-teal-400 transition">Quiz</a>
         </div>
+        <button
+          id="mobile-menu-btn"
+          type="button"
+          aria-label="Abrir menú"
+          class="md:hidden p-2 text-gray-400 hover:text-white"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
       </nav>
+      <div id="mobile-menu" class="hidden md:hidden border-t border-gray-800">
+        <nav class="px-4 py-3 space-y-2 text-sm">
+          <a href="/catalog" class="block py-2 text-gray-300 hover:text-teal-400">Catálogo</a>
+          <a href="/use-cases" class="block py-2 text-gray-300 hover:text-teal-400">Casos de uso</a>
+          <a href="/best" class="block py-2 text-gray-300 hover:text-teal-400">Best Picks</a>
+          <a href="/providers" class="block py-2 text-gray-300 hover:text-teal-400">Proveedores</a>
+          <a href="/insights" class="block py-2 text-gray-300 hover:text-teal-400">Insights</a>
+          <a href="/recommend" class="block py-2 text-gray-300 hover:text-teal-400">Quiz</a>
+        </nav>
+      </div>
     </header>
     <main class="flex-1">
       <slot />
@@ -42,4 +66,12 @@ const { title, description = 'Discover and compare AI models. Get personalized r
     </footer>
     <Toast />
   </body>
+
+  <script>
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn?.addEventListener('click', () => {
+      menu?.classList.toggle('hidden');
+    });
+  </script>
 </html>
