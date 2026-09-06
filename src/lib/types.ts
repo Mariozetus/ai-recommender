@@ -12,8 +12,23 @@ export interface AIModel {
   url: string;
   benchmark?: {
     mmlu?: number;
+    mmlu_pro?: number;
     humaneval?: number;
     math?: number;
+    gpqa?: number;
+    livecodebench?: number;
+    arena_elo?: number;
+  };
+  modalities?: {
+    text?: boolean;
+    image_input?: boolean;
+    image_output?: boolean;
+    audio_input?: boolean;
+    audio_output?: boolean;
+  };
+  pricing?: {
+    free?: boolean;
+    batch?: boolean;
   };
   fetched_at: string;
   last_updated?: string;

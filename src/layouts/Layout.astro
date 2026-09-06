@@ -1,9 +1,10 @@
 ---
 interface Props {
   title: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description = 'Discover and compare AI models. Get personalized recommendations based on your use case, budget, and preferences.' } = Astro.props;
 ---
 
 <!doctype html>
@@ -14,8 +15,13 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
   </head>
-  <body class="bg-gray-900 text-gray-100 min-h-screen">
+  <body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col">
     <header class="border-b border-gray-800">
       <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         <a href="/" class="text-xl font-bold text-teal-400">AI Recommender</a>
@@ -25,11 +31,11 @@ const { title } = Astro.props;
         </div>
       </nav>
     </header>
-    <main>
+    <main class="flex-1">
       <slot />
     </main>
     <footer class="border-t border-gray-800 mt-16 py-8 text-center text-gray-500 text-sm">
-      <p>AI Recommender - Data updated weekly from OpenRouter, LMSYS Arena & Artificial Analysis</p>
+      <p>AI Recommender - Data from OpenRouter</p>
     </footer>
   </body>
 </html>

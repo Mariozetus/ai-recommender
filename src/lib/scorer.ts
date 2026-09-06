@@ -15,10 +15,17 @@ export function calculateScore(model: AIModel, prefs: UserPreferences): number {
   score += Math.max(0, 20 - budgetPenalty * 2);
 
   if (model.benchmark?.mmlu) {
-    score += model.benchmark.mmlu * 0.15;
+    score += model.benchmark.mmlu * 0.1;
   }
   if (model.benchmark?.humaneval) {
-    score += model.benchmark.humaneval * 0.15;
+    score += model.benchmark.humaneval * 0.1;
+  }
+  if (model.benchmark?.arena_elo) {
+    score += model.benchmark.arena_elo * 0.01;
+  }
+
+  if (model.pricing?.free) {
+    score += 10;
   }
 
   const tagMatches = model.tags.filter(tag =>
