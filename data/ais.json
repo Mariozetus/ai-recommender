@@ -13,7 +13,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-6-astra",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.940Z"
     },
     {
       "id": "openai/gpt-6-astra:batch",
@@ -28,7 +28,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-6-astra:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-6-astra-pro",
@@ -43,7 +43,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-6-astra-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-6-astra-pro:batch",
@@ -58,7 +58,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-6-astra-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "inclusionai/ling-3.0-flash-sante:free",
@@ -73,7 +73,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/inclusionai/ling-3.0-flash-sante:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.8-max-0902",
@@ -88,7 +88,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.8-max-0902",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "meta/muse-spark-1.3-contributor",
@@ -103,7 +103,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta/muse-spark-1.3-contributor",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "meta/muse-spark-1.3",
@@ -118,7 +118,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta/muse-spark-1.3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.8-flash",
@@ -133,7 +133,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.8-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.8-flash:batch",
@@ -148,7 +148,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.8-flash:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-fable-5.1",
@@ -163,7 +163,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-fable-5.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-fable-5.1:batch",
@@ -178,7 +178,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-fable-5.1:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "inception/mercury-2.5-preview",
@@ -193,7 +193,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/inception/mercury-2.5-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "ibm-granite/granite-4.2-8b",
@@ -208,7 +208,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/ibm-granite/granite-4.2-8b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "tencent/hy4-preview",
@@ -223,7 +223,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/tencent/hy4-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "inclusionai/ling-3.0-flash-fin",
@@ -238,7 +238,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/inclusionai/ling-3.0-flash-fin",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "inclusionai/ling-3.0-flash-fin:free",
@@ -253,7 +253,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/inclusionai/ling-3.0-flash-fin:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "~z-ai/glm-flash-latest",
@@ -268,7 +268,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~z-ai/glm-flash-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.8-flash",
@@ -283,7 +283,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.8-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "z-ai/glm-5.3-flash",
@@ -298,7 +298,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5.3-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "z-ai/glm-5.3-flash:batch",
@@ -313,7 +313,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5.3-flash:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "meta/muse-spark-1.2-contributor",
@@ -328,7 +328,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta/muse-spark-1.2-contributor",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "deepseek/deepseek-v4-flash-vision-exp",
@@ -343,7 +343,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v4-flash-vision-exp",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "tencent/hy-mt2-1.8b",
@@ -358,7 +358,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/tencent/hy-mt2-1.8b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "tencent/hy-mt2-30b-a3b",
@@ -373,7 +373,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/tencent/hy-mt2-30b-a3b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "~z-ai/glm-latest",
@@ -388,7 +388,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~z-ai/glm-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "tencent/hy-mt2-7b",
@@ -403,7 +403,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/tencent/hy-mt2-7b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "z-ai/glm-5.3",
@@ -418,7 +418,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5.3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.8-27b",
@@ -433,7 +433,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.8-27b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "dots-studio/dots-3-note-preview:free",
@@ -448,7 +448,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/dots-studio/dots-3-note-preview:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.7-flash",
@@ -463,7 +463,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.7-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.7-flash:batch",
@@ -478,7 +478,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.7-flash:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "bytedance-seed/seed-2-1-turbo",
@@ -493,7 +493,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/bytedance-seed/seed-2-1-turbo",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.8-2.4t-a95b",
@@ -508,7 +508,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.8-2.4t-a95b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.8-2.4t-a95b:batch",
@@ -523,7 +523,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.8-2.4t-a95b:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "bytedance-seed/seed-2.0-code",
@@ -538,7 +538,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/bytedance-seed/seed-2.0-code",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "deepseek/deepseek-v4-pro-0813",
@@ -553,7 +553,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v4-pro-0813",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "deepseek/deepseek-v4-pro-0813:batch",
@@ -568,7 +568,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v4-pro-0813:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "x-ai/grok-4.6",
@@ -583,7 +583,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/x-ai/grok-4.6",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "liquid/lfm-2.5-2.6b:free",
@@ -598,7 +598,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/liquid/lfm-2.5-2.6b:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "nvidia/nemotron-3.5-lightning",
@@ -613,7 +613,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3.5-lightning",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "nvidia/nemotron-3.5-lightning:free",
@@ -628,7 +628,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3.5-lightning:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "sakana/sakana-namazu",
@@ -643,7 +643,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/sakana/sakana-namazu",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "upstage/solar-pro4",
@@ -658,7 +658,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/upstage/solar-pro4",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "meta/muse-glimmer-30b",
@@ -673,7 +673,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta/muse-glimmer-30b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "meta/muse-glimmer-30b:batch",
@@ -688,7 +688,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta/muse-glimmer-30b:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "meta/muse-spark-1.2",
@@ -703,7 +703,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta/muse-spark-1.2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "~deepseek/deepseek-v4-flash-latest",
@@ -718,7 +718,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~deepseek/deepseek-v4-flash-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "deepseek/deepseek-v4-flash-0731",
@@ -733,7 +733,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v4-flash-0731",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "deepseek/deepseek-v4-flash-0731:batch",
@@ -748,7 +748,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v4-flash-0731:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "thinkingmachines/inkling-small",
@@ -763,7 +763,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thinkingmachines/inkling-small",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "thinkingmachines/inkling-small:batch",
@@ -778,7 +778,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thinkingmachines/inkling-small:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "thinkingmachines/inkling-small:free",
@@ -793,7 +793,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thinkingmachines/inkling-small:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.7-flash",
@@ -808,7 +808,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.7-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-opus-5",
@@ -823,7 +823,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-opus-5:batch",
@@ -838,7 +838,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "inclusionai/ling-3.0-flash",
@@ -853,7 +853,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/inclusionai/ling-3.0-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "poolside/laguna-s-2.1",
@@ -868,7 +868,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/poolside/laguna-s-2.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "poolside/laguna-s-2.1:free",
@@ -883,7 +883,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/poolside/laguna-s-2.1:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.6-flash",
@@ -898,7 +898,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.6-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.6-flash:batch",
@@ -913,7 +913,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.6-flash:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.5-flash-lite",
@@ -928,7 +928,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.5-flash-lite",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.5-flash-lite:batch",
@@ -943,7 +943,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.5-flash-lite:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "meituan/longcat-2.0",
@@ -958,7 +958,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meituan/longcat-2.0",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "thinkingmachines/inkling",
@@ -973,7 +973,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thinkingmachines/inkling",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "thinkingmachines/inkling:batch",
@@ -988,7 +988,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thinkingmachines/inkling:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "thinkingmachines/inkling:free",
@@ -1003,7 +1003,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thinkingmachines/inkling:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openrouter/auto-beta",
@@ -1018,7 +1018,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openrouter/auto-beta",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "moonshotai/kimi-k3",
@@ -1033,7 +1033,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "moonshotai/kimi-k3:batch",
@@ -1048,7 +1048,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k3:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "meta/muse-spark-1.1",
@@ -1063,7 +1063,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta/muse-spark-1.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "kwaipilot/kat-coder-pro-v2.5",
@@ -1078,7 +1078,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/kwaipilot/kat-coder-pro-v2.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.6-luna-pro",
@@ -1093,7 +1093,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-luna-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.6-luna-pro:batch",
@@ -1108,7 +1108,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-luna-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.6-luna",
@@ -1123,7 +1123,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-luna",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.6-luna:batch",
@@ -1138,7 +1138,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-luna:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.6-terra-pro",
@@ -1153,7 +1153,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-terra-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.6-terra-pro:batch",
@@ -1168,7 +1168,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-terra-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.434Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.6-terra",
@@ -1183,7 +1183,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-terra",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.6-terra:batch",
@@ -1198,7 +1198,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-terra:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.6-sol-pro",
@@ -1213,7 +1213,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-sol-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.6-sol-pro:batch",
@@ -1228,7 +1228,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-sol-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.6-sol",
@@ -1243,7 +1243,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-sol",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.6-sol:batch",
@@ -1258,7 +1258,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-sol:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "x-ai/grok-4.5",
@@ -1273,7 +1273,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/x-ai/grok-4.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "~x-ai/grok-latest",
@@ -1288,7 +1288,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~x-ai/grok-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "aion-labs/aion-3.0-mini",
@@ -1303,7 +1303,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/aion-labs/aion-3.0-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "aion-labs/aion-3.0",
@@ -1318,7 +1318,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/aion-labs/aion-3.0",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "tencent/hy3",
@@ -1333,7 +1333,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/tencent/hy3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "poolside/laguna-xs-2.1",
@@ -1348,7 +1348,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/poolside/laguna-xs-2.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "poolside/laguna-xs-2.1:free",
@@ -1363,7 +1363,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/poolside/laguna-xs-2.1:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-sonnet-5",
@@ -1378,7 +1378,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-sonnet-5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-sonnet-5:batch",
@@ -1393,7 +1393,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-sonnet-5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.1-flash-lite-image",
@@ -1408,7 +1408,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-flash-lite-image",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "nex-agi/nex-n2-mini",
@@ -1423,7 +1423,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nex-agi/nex-n2-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "sakana/fugu-ultra",
@@ -1438,7 +1438,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/sakana/fugu-ultra",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.1-flash-image",
@@ -1453,7 +1453,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-flash-image",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3-pro-image",
@@ -1468,7 +1468,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3-pro-image",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "cohere/north-mini-code:free",
@@ -1483,7 +1483,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/cohere/north-mini-code:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "z-ai/glm-5.2",
@@ -1498,7 +1498,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5.2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openrouter/fusion",
@@ -1513,7 +1513,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openrouter/fusion",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "moonshotai/kimi-k2.7-code",
@@ -1528,7 +1528,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k2.7-code",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "~anthropic/claude-fable-latest",
@@ -1543,7 +1543,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~anthropic/claude-fable-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-fable-5",
@@ -1558,7 +1558,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-fable-5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-fable-5:batch",
@@ -1573,7 +1573,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-fable-5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "nex-agi/nex-n2-pro",
@@ -1588,7 +1588,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nex-agi/nex-n2-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "nvidia/nemotron-3.5-content-safety",
@@ -1603,7 +1603,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3.5-content-safety",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "nvidia/nemotron-3.5-content-safety:free",
@@ -1618,7 +1618,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3.5-content-safety:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "nvidia/nemotron-3-ultra-550b-a55b",
@@ -1633,7 +1633,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3-ultra-550b-a55b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
@@ -1648,7 +1648,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3-ultra-550b-a55b:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.7-plus",
@@ -1663,7 +1663,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.7-plus",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "minimax/minimax-m3",
@@ -1678,7 +1678,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "minimax/minimax-m3:batch",
@@ -1693,7 +1693,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m3:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "minimax/minimax-m3:free",
@@ -1708,7 +1708,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m3:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "stepfun/step-3.7-flash",
@@ -1723,7 +1723,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/stepfun/step-3.7-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-opus-4.8",
@@ -1738,7 +1738,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.8",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-opus-4.8:batch",
@@ -1753,7 +1753,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.8:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.7-max",
@@ -1768,7 +1768,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.7-max",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "x-ai/grok-build-0.1",
@@ -1783,7 +1783,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/x-ai/grok-build-0.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.5-flash",
@@ -1798,7 +1798,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.5-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.5-flash:batch",
@@ -1813,7 +1813,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.5-flash:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "perceptron/perceptron-mk1",
@@ -1828,7 +1828,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/perceptron/perceptron-mk1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.1-flash-lite",
@@ -1843,7 +1843,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-flash-lite",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.1-flash-lite:batch",
@@ -1858,7 +1858,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-flash-lite:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-chat-latest",
@@ -1873,7 +1873,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-chat-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "x-ai/grok-4.3",
@@ -1888,7 +1888,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/x-ai/grok-4.3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "x-ai/grok-4.3:batch",
@@ -1903,7 +1903,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/x-ai/grok-4.3:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "mistralai/mistral-medium-3-5",
@@ -1918,7 +1918,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-medium-3-5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "mistralai/mistral-medium-3-5:batch",
@@ -1933,7 +1933,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-medium-3-5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
@@ -1948,7 +1948,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "~anthropic/claude-haiku-latest",
@@ -1963,7 +1963,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~anthropic/claude-haiku-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "~openai/gpt-mini-latest",
@@ -1978,7 +1978,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~openai/gpt-mini-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "~google/gemini-pro-latest",
@@ -1993,7 +1993,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~google/gemini-pro-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "~moonshotai/kimi-latest",
@@ -2008,7 +2008,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~moonshotai/kimi-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "~google/gemini-flash-latest",
@@ -2023,7 +2023,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~google/gemini-flash-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "~anthropic/claude-sonnet-latest",
@@ -2038,7 +2038,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~anthropic/claude-sonnet-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "~openai/gpt-latest",
@@ -2053,7 +2053,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~openai/gpt-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.5-plus-20260420",
@@ -2068,7 +2068,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-plus-20260420",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.6-flash",
@@ -2083,7 +2083,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.6-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.6-35b-a3b",
@@ -2098,7 +2098,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.6-35b-a3b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.6-max-preview",
@@ -2113,7 +2113,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.6-max-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.6-27b",
@@ -2128,7 +2128,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.6-27b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.5-pro",
@@ -2143,7 +2143,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.5-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.5-pro:batch",
@@ -2158,7 +2158,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.5-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.5",
@@ -2173,7 +2173,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.5:batch",
@@ -2188,7 +2188,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "deepseek/deepseek-v4-pro",
@@ -2203,7 +2203,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v4-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "deepseek/deepseek-v4-flash",
@@ -2218,7 +2218,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v4-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "tencent/hy3-preview",
@@ -2233,7 +2233,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/tencent/hy3-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "xiaomi/mimo-v2.5-pro",
@@ -2248,7 +2248,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/xiaomi/mimo-v2.5-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "xiaomi/mimo-v2.5",
@@ -2263,7 +2263,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/xiaomi/mimo-v2.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.4-image-2",
@@ -2278,7 +2278,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4-image-2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "~anthropic/claude-opus-latest",
@@ -2293,7 +2293,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~anthropic/claude-opus-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openrouter/pareto-code",
@@ -2308,7 +2308,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openrouter/pareto-code",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "moonshotai/kimi-k2.6",
@@ -2323,7 +2323,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k2.6",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-opus-4.7",
@@ -2338,7 +2338,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.7",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-opus-4.7:batch",
@@ -2353,7 +2353,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.7:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "z-ai/glm-5.1",
@@ -2368,7 +2368,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemma-4-26b-a4b-it",
@@ -2383,7 +2383,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-4-26b-a4b-it",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemma-4-26b-a4b-it:free",
@@ -2398,7 +2398,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-4-26b-a4b-it:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemma-4-31b-it",
@@ -2413,7 +2413,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-4-31b-it",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemma-4-31b-it:batch",
@@ -2428,7 +2428,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-4-31b-it:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemma-4-31b-it:free",
@@ -2443,7 +2443,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-4-31b-it:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.6-plus",
@@ -2458,7 +2458,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.6-plus",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "z-ai/glm-5v-turbo",
@@ -2473,7 +2473,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5v-turbo",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "arcee-ai/trinity-large-thinking",
@@ -2488,7 +2488,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/arcee-ai/trinity-large-thinking",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "x-ai/grok-4.20-multi-agent",
@@ -2503,7 +2503,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/x-ai/grok-4.20-multi-agent",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "x-ai/grok-4.20",
@@ -2518,7 +2518,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/x-ai/grok-4.20",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/lyria-3-pro-preview",
@@ -2533,7 +2533,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/lyria-3-pro-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/lyria-3-clip-preview",
@@ -2548,7 +2548,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/lyria-3-clip-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "kwaipilot/kat-coder-pro-v2",
@@ -2563,7 +2563,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/kwaipilot/kat-coder-pro-v2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "rekaai/reka-edge",
@@ -2578,7 +2578,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/rekaai/reka-edge",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "minimax/minimax-m2.7",
@@ -2593,7 +2593,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m2.7",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "minimax/minimax-m2.7:free",
@@ -2608,7 +2608,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m2.7:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.4-nano",
@@ -2623,7 +2623,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4-nano",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.4-nano:batch",
@@ -2638,7 +2638,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4-nano:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.4-mini",
@@ -2653,7 +2653,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.4-mini:batch",
@@ -2668,7 +2668,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4-mini:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "mistralai/mistral-small-2603",
@@ -2683,7 +2683,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-small-2603",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "z-ai/glm-5-turbo",
@@ -2698,7 +2698,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5-turbo",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "nvidia/nemotron-3-super-120b-a12b",
@@ -2713,7 +2713,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3-super-120b-a12b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "nvidia/nemotron-3-super-120b-a12b:free",
@@ -2728,7 +2728,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3-super-120b-a12b:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "bytedance-seed/seed-2.0-lite",
@@ -2743,7 +2743,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/bytedance-seed/seed-2.0-lite",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.5-9b",
@@ -2758,7 +2758,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-9b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.435Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.5-9b:batch",
@@ -2773,7 +2773,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-9b:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.4-pro",
@@ -2788,7 +2788,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.4-pro:batch",
@@ -2803,7 +2803,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.4",
@@ -2818,7 +2818,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.4:batch",
@@ -2833,7 +2833,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "inception/mercury-2",
@@ -2848,7 +2848,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/inception/mercury-2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.1-flash-lite-preview",
@@ -2863,7 +2863,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-flash-lite-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "bytedance-seed/seed-2.0-mini",
@@ -2878,7 +2878,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/bytedance-seed/seed-2.0-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.1-flash-image-preview",
@@ -2893,7 +2893,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-flash-image-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.5-35b-a3b",
@@ -2908,7 +2908,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-35b-a3b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.5-27b",
@@ -2923,7 +2923,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-27b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.5-122b-a10b",
@@ -2938,7 +2938,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-122b-a10b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.5-flash-02-23",
@@ -2953,7 +2953,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-flash-02-23",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.1-pro-preview-customtools",
@@ -2968,7 +2968,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-pro-preview-customtools",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "openai/gpt-5.3-codex",
@@ -2983,7 +2983,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.3-codex",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "aion-labs/aion-2.0",
@@ -2998,7 +2998,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/aion-labs/aion-2.0",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.1-pro-preview",
@@ -3013,7 +3013,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-pro-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "google/gemini-3.1-pro-preview:batch",
@@ -3028,7 +3028,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-pro-preview:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-sonnet-4.6",
@@ -3043,7 +3043,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-sonnet-4.6",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-sonnet-4.6:batch",
@@ -3058,7 +3058,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-sonnet-4.6:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.5-plus-02-15",
@@ -3073,7 +3073,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-plus-02-15",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3.5-397b-a17b",
@@ -3088,7 +3088,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-397b-a17b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "minimax/minimax-m2.5",
@@ -3103,7 +3103,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m2.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "z-ai/glm-5",
@@ -3118,7 +3118,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "qwen/qwen3-max-thinking",
@@ -3133,7 +3133,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-max-thinking",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-opus-4.6",
@@ -3148,7 +3148,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.6",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.941Z"
     },
     {
       "id": "anthropic/claude-opus-4.6:batch",
@@ -3163,7 +3163,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.6:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-coder-next",
@@ -3178,7 +3178,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-coder-next",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openrouter/free",
@@ -3193,7 +3193,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openrouter/free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "stepfun/step-3.5-flash",
@@ -3208,7 +3208,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/stepfun/step-3.5-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "moonshotai/kimi-k2.5",
@@ -3223,7 +3223,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k2.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "upstage/solar-pro-3",
@@ -3238,7 +3238,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/upstage/solar-pro-3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "minimax/minimax-m2-her",
@@ -3253,7 +3253,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m2-her",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "writer/palmyra-x5",
@@ -3268,7 +3268,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/writer/palmyra-x5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-audio",
@@ -3283,7 +3283,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-audio",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-audio-mini",
@@ -3298,7 +3298,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-audio-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "z-ai/glm-4.7-flash",
@@ -3313,7 +3313,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-4.7-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5.2-codex",
@@ -3328,7 +3328,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.2-codex",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "bytedance-seed/seed-1.6-flash",
@@ -3343,7 +3343,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/bytedance-seed/seed-1.6-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "bytedance-seed/seed-1.6",
@@ -3358,7 +3358,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/bytedance-seed/seed-1.6",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "minimax/minimax-m2.1",
@@ -3373,7 +3373,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m2.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "z-ai/glm-4.7",
@@ -3388,7 +3388,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-4.7",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "google/gemini-3-flash-preview",
@@ -3403,7 +3403,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3-flash-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "google/gemini-3-flash-preview:batch",
@@ -3418,7 +3418,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3-flash-preview:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "nvidia/nemotron-3-nano-30b-a3b",
@@ -3433,7 +3433,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3-nano-30b-a3b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5.2-chat",
@@ -3448,7 +3448,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.2-chat",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5.2-pro",
@@ -3463,7 +3463,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.2-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5.2-pro:batch",
@@ -3478,7 +3478,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.2-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5.2",
@@ -3493,7 +3493,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5.2:batch",
@@ -3508,7 +3508,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.2:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "mistralai/devstral-2512",
@@ -3523,7 +3523,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/devstral-2512",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "relace/relace-search",
@@ -3538,7 +3538,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/relace/relace-search",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "z-ai/glm-4.6v",
@@ -3553,7 +3553,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-4.6v",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openrouter/bodybuilder",
@@ -3568,7 +3568,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openrouter/bodybuilder",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5.1-codex-max",
@@ -3583,7 +3583,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.1-codex-max",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "amazon/nova-2-lite-v1",
@@ -3598,7 +3598,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/amazon/nova-2-lite-v1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "mistralai/ministral-14b-2512",
@@ -3613,7 +3613,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/ministral-14b-2512",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "mistralai/ministral-8b-2512",
@@ -3628,7 +3628,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/ministral-8b-2512",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.436Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "mistralai/ministral-3b-2512",
@@ -3643,7 +3643,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/ministral-3b-2512",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "mistralai/mistral-large-2512",
@@ -3658,7 +3658,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-large-2512",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "deepseek/deepseek-v3.2",
@@ -3673,7 +3673,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v3.2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "anthropic/claude-opus-4.5",
@@ -3688,7 +3688,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "anthropic/claude-opus-4.5:batch",
@@ -3703,7 +3703,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "google/gemini-3-pro-image-preview",
@@ -3718,7 +3718,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3-pro-image-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5.1",
@@ -3733,7 +3733,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5.1:batch",
@@ -3748,7 +3748,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.1:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5.1-codex",
@@ -3763,7 +3763,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.1-codex",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5.1-codex-mini",
@@ -3778,7 +3778,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.1-codex-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "moonshotai/kimi-k2-thinking",
@@ -3793,7 +3793,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k2-thinking",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "amazon/nova-premier-v1",
@@ -3808,7 +3808,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/amazon/nova-premier-v1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "perplexity/sonar-pro-search",
@@ -3823,7 +3823,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/perplexity/sonar-pro-search",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "mistralai/voxtral-small-24b-2507",
@@ -3838,7 +3838,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/voxtral-small-24b-2507",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-oss-safeguard-20b",
@@ -3853,7 +3853,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-oss-safeguard-20b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "minimax/minimax-m2",
@@ -3868,7 +3868,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-vl-32b-instruct",
@@ -3883,7 +3883,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-vl-32b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "ibm-granite/granite-4.0-h-micro",
@@ -3898,7 +3898,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/ibm-granite/granite-4.0-h-micro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5-image-mini",
@@ -3913,7 +3913,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-image-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "anthropic/claude-haiku-4.5",
@@ -3928,7 +3928,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-haiku-4.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "anthropic/claude-haiku-4.5:batch",
@@ -3943,7 +3943,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-haiku-4.5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-vl-8b-thinking",
@@ -3958,7 +3958,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-vl-8b-thinking",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-vl-8b-instruct",
@@ -3973,7 +3973,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-vl-8b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5-image",
@@ -3988,7 +3988,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-image",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "google/gemini-2.5-flash-image",
@@ -4003,7 +4003,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-flash-image",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-vl-30b-a3b-thinking",
@@ -4018,7 +4018,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-vl-30b-a3b-thinking",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-vl-30b-a3b-instruct",
@@ -4033,7 +4033,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-vl-30b-a3b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5-pro",
@@ -4048,7 +4048,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5-pro:batch",
@@ -4063,7 +4063,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "z-ai/glm-4.6",
@@ -4078,7 +4078,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-4.6",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "anthropic/claude-sonnet-4.5",
@@ -4093,7 +4093,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-sonnet-4.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "anthropic/claude-sonnet-4.5:batch",
@@ -4108,7 +4108,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-sonnet-4.5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "deepseek/deepseek-v3.2-exp",
@@ -4123,7 +4123,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v3.2-exp",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "thedrummer/cydonia-24b-v4.1",
@@ -4138,7 +4138,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thedrummer/cydonia-24b-v4.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "relace/relace-apply-3",
@@ -4153,7 +4153,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/relace/relace-apply-3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-vl-235b-a22b-thinking",
@@ -4168,7 +4168,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-vl-235b-a22b-thinking",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-vl-235b-a22b-instruct",
@@ -4183,7 +4183,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-vl-235b-a22b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-max",
@@ -4198,7 +4198,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-max",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-coder-plus",
@@ -4213,7 +4213,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-coder-plus",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "deepseek/deepseek-v3.1-terminus",
@@ -4228,7 +4228,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v3.1-terminus",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-coder-flash",
@@ -4243,7 +4243,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-coder-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-next-80b-a3b-thinking",
@@ -4258,7 +4258,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-next-80b-a3b-thinking",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-next-80b-a3b-instruct",
@@ -4273,7 +4273,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-next-80b-a3b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen-plus-2025-07-28",
@@ -4288,7 +4288,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen-plus-2025-07-28",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "moonshotai/kimi-k2-0905",
@@ -4303,7 +4303,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k2-0905",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-30b-a3b-thinking-2507",
@@ -4318,7 +4318,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-30b-a3b-thinking-2507",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "nousresearch/hermes-4-70b",
@@ -4333,7 +4333,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nousresearch/hermes-4-70b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "nousresearch/hermes-4-405b",
@@ -4348,7 +4348,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nousresearch/hermes-4-405b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "deepseek/deepseek-chat-v3.1",
@@ -4363,7 +4363,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-chat-v3.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "mistralai/mistral-medium-3.1",
@@ -4378,7 +4378,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-medium-3.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "z-ai/glm-4.5v",
@@ -4393,7 +4393,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-4.5v",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5",
@@ -4408,7 +4408,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5:batch",
@@ -4423,7 +4423,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5-mini",
@@ -4438,7 +4438,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5-mini:batch",
@@ -4453,7 +4453,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-mini:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5-nano",
@@ -4468,7 +4468,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-nano",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-5-nano:batch",
@@ -4483,7 +4483,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-nano:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-oss-120b",
@@ -4498,7 +4498,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-oss-120b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-oss-120b:batch",
@@ -4513,7 +4513,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-oss-120b:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-oss-20b",
@@ -4528,7 +4528,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-oss-20b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-oss-20b:batch",
@@ -4543,7 +4543,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-oss-20b:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "anthropic/claude-opus-4.1",
@@ -4558,7 +4558,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "anthropic/claude-opus-4.1:batch",
@@ -4573,7 +4573,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.1:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "mistralai/codestral-2508",
@@ -4588,7 +4588,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/codestral-2508",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-coder-30b-a3b-instruct",
@@ -4603,7 +4603,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-coder-30b-a3b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-30b-a3b-instruct-2507",
@@ -4618,7 +4618,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-30b-a3b-instruct-2507",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "z-ai/glm-4.5",
@@ -4633,7 +4633,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-4.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "z-ai/glm-4.5-air",
@@ -4648,7 +4648,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-4.5-air",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-235b-a22b-thinking-2507",
@@ -4663,7 +4663,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-235b-a22b-thinking-2507",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-coder",
@@ -4678,7 +4678,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-coder",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "bytedance/ui-tars-1.5-7b",
@@ -4693,7 +4693,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/bytedance/ui-tars-1.5-7b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "google/gemini-2.5-flash-lite",
@@ -4708,7 +4708,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-flash-lite",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "google/gemini-2.5-flash-lite:batch",
@@ -4723,7 +4723,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-flash-lite:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-235b-a22b-2507",
@@ -4738,7 +4738,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-235b-a22b-2507",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "moonshotai/kimi-k2",
@@ -4753,7 +4753,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "cognitivecomputations/dolphin-mistral-24b-venice-edition",
@@ -4768,7 +4768,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/cognitivecomputations/dolphin-mistral-24b-venice-edition",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "tencent/hunyuan-a13b-instruct",
@@ -4783,7 +4783,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/tencent/hunyuan-a13b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "morph/morph-v3-large",
@@ -4798,7 +4798,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/morph/morph-v3-large",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "morph/morph-v3-fast",
@@ -4813,7 +4813,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/morph/morph-v3-fast",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "baidu/ernie-4.5-vl-424b-a47b",
@@ -4828,7 +4828,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/baidu/ernie-4.5-vl-424b-a47b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "mistralai/mistral-small-3.2-24b-instruct",
@@ -4843,7 +4843,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-small-3.2-24b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "minimax/minimax-m1",
@@ -4858,7 +4858,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "google/gemini-2.5-flash",
@@ -4873,7 +4873,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "google/gemini-2.5-flash:batch",
@@ -4888,7 +4888,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-flash:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "google/gemini-2.5-pro",
@@ -4903,7 +4903,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "google/gemini-2.5-pro:batch",
@@ -4918,7 +4918,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/o3-pro",
@@ -4933,7 +4933,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o3-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "google/gemini-2.5-pro-preview",
@@ -4948,7 +4948,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-pro-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "deepseek/deepseek-r1-0528",
@@ -4963,7 +4963,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-r1-0528",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "anthropic/claude-opus-4",
@@ -4978,7 +4978,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "anthropic/claude-sonnet-4",
@@ -4993,7 +4993,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-sonnet-4",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "mistralai/mistral-medium-3",
@@ -5008,7 +5008,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-medium-3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "google/gemini-2.5-pro-preview-05-06",
@@ -5023,7 +5023,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-pro-preview-05-06",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "meta-llama/llama-guard-4-12b",
@@ -5038,7 +5038,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-guard-4-12b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-30b-a3b",
@@ -5053,7 +5053,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-30b-a3b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-8b",
@@ -5068,7 +5068,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-8b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-14b",
@@ -5083,7 +5083,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-14b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-32b",
@@ -5098,7 +5098,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-32b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen3-235b-a22b",
@@ -5113,7 +5113,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-235b-a22b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/o4-mini-high",
@@ -5128,7 +5128,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o4-mini-high",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/o3",
@@ -5143,7 +5143,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/o3:batch",
@@ -5158,7 +5158,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o3:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/o4-mini",
@@ -5173,7 +5173,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o4-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/o4-mini:batch",
@@ -5188,7 +5188,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o4-mini:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-4.1",
@@ -5203,7 +5203,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-4.1:batch",
@@ -5218,7 +5218,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4.1:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-4.1-mini",
@@ -5233,7 +5233,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4.1-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-4.1-mini:batch",
@@ -5248,7 +5248,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4.1-mini:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-4.1-nano",
@@ -5263,7 +5263,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4.1-nano",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-4.1-nano:batch",
@@ -5278,7 +5278,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4.1-nano:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "meta-llama/llama-4-maverick",
@@ -5293,7 +5293,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-4-maverick",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "meta-llama/llama-4-scout",
@@ -5308,7 +5308,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-4-scout",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "deepseek/deepseek-chat-v3-0324",
@@ -5323,7 +5323,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-chat-v3-0324",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/o1-pro",
@@ -5338,7 +5338,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o1-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "mistralai/mistral-small-3.1-24b-instruct",
@@ -5353,7 +5353,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-small-3.1-24b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "google/gemma-3-4b-it",
@@ -5368,7 +5368,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-3-4b-it",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "google/gemma-3-12b-it",
@@ -5383,7 +5383,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-3-12b-it",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "cohere/command-a",
@@ -5398,7 +5398,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/cohere/command-a",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "rekaai/reka-flash-3",
@@ -5413,7 +5413,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/rekaai/reka-flash-3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "google/gemma-3-27b-it",
@@ -5428,7 +5428,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-3-27b-it",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "thedrummer/skyfall-36b-v2",
@@ -5443,7 +5443,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thedrummer/skyfall-36b-v2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "perplexity/sonar-reasoning-pro",
@@ -5458,7 +5458,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/perplexity/sonar-reasoning-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "perplexity/sonar-pro",
@@ -5473,7 +5473,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/perplexity/sonar-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "perplexity/sonar-deep-research",
@@ -5488,7 +5488,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/perplexity/sonar-deep-research",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "mistralai/mistral-saba",
@@ -5503,7 +5503,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-saba",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/o3-mini-high",
@@ -5518,7 +5518,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o3-mini-high",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "aion-labs/aion-rp-llama-3.1-8b",
@@ -5533,7 +5533,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/aion-labs/aion-rp-llama-3.1-8b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen2.5-vl-72b-instruct",
@@ -5548,7 +5548,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen2.5-vl-72b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen-plus",
@@ -5563,7 +5563,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen-plus",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/o3-mini",
@@ -5578,7 +5578,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o3-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/o3-mini:batch",
@@ -5593,7 +5593,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o3-mini:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "mistralai/mistral-small-24b-instruct-2501",
@@ -5608,7 +5608,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-small-24b-instruct-2501",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "perplexity/sonar",
@@ -5623,7 +5623,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/perplexity/sonar",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "deepseek/deepseek-r1-distill-llama-70b",
@@ -5638,7 +5638,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-r1-distill-llama-70b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "deepseek/deepseek-r1",
@@ -5653,7 +5653,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-r1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "minimax/minimax-01",
@@ -5668,7 +5668,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-01",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "microsoft/phi-4",
@@ -5683,7 +5683,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/microsoft/phi-4",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "deepseek/deepseek-chat",
@@ -5698,7 +5698,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-chat",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "sao10k/l3.3-euryale-70b",
@@ -5713,7 +5713,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/sao10k/l3.3-euryale-70b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/o1",
@@ -5728,7 +5728,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "cohere/command-r7b-12-2024",
@@ -5743,7 +5743,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/cohere/command-r7b-12-2024",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "meta-llama/llama-3.3-70b-instruct",
@@ -5758,7 +5758,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-3.3-70b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "amazon/nova-lite-v1",
@@ -5773,7 +5773,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/amazon/nova-lite-v1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "amazon/nova-micro-v1",
@@ -5788,7 +5788,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/amazon/nova-micro-v1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "amazon/nova-pro-v1",
@@ -5803,7 +5803,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/amazon/nova-pro-v1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "openai/gpt-4o-2024-11-20",
@@ -5818,7 +5818,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o-2024-11-20",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "mistralai/mistral-large-2407",
@@ -5833,7 +5833,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-large-2407",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen-2.5-coder-32b-instruct",
@@ -5848,7 +5848,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen-2.5-coder-32b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "thedrummer/unslopnemo-12b",
@@ -5863,7 +5863,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thedrummer/unslopnemo-12b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "anthracite-org/magnum-v4-72b",
@@ -5878,7 +5878,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthracite-org/magnum-v4-72b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.942Z"
     },
     {
       "id": "qwen/qwen-2.5-7b-instruct",
@@ -5893,7 +5893,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen-2.5-7b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "meta-llama/llama-3.2-1b-instruct",
@@ -5908,7 +5908,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-3.2-1b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "meta-llama/llama-3.2-3b-instruct",
@@ -5923,7 +5923,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-3.2-3b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "qwen/qwen-2.5-72b-instruct",
@@ -5938,7 +5938,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen-2.5-72b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "cohere/command-r-08-2024",
@@ -5953,7 +5953,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/cohere/command-r-08-2024",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "cohere/command-r-plus-08-2024",
@@ -5968,7 +5968,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/cohere/command-r-plus-08-2024",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "sao10k/l3.1-euryale-70b",
@@ -5983,7 +5983,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/sao10k/l3.1-euryale-70b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "nousresearch/hermes-3-llama-3.1-70b",
@@ -5998,7 +5998,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nousresearch/hermes-3-llama-3.1-70b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "nousresearch/hermes-3-llama-3.1-405b",
@@ -6013,7 +6013,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nousresearch/hermes-3-llama-3.1-405b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "sao10k/l3-lunaris-8b",
@@ -6028,7 +6028,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/sao10k/l3-lunaris-8b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-4o-2024-08-06",
@@ -6043,7 +6043,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o-2024-08-06",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "meta-llama/llama-3.1-70b-instruct",
@@ -6058,7 +6058,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-3.1-70b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "meta-llama/llama-3.1-8b-instruct",
@@ -6073,7 +6073,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-3.1-8b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "mistralai/mistral-nemo",
@@ -6088,7 +6088,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-nemo",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-4o-mini",
@@ -6103,7 +6103,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-4o-mini-2024-07-18",
@@ -6118,7 +6118,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o-mini-2024-07-18",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-4o-mini:batch",
@@ -6133,7 +6133,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o-mini:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "google/gemma-2-27b-it",
@@ -6148,7 +6148,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-2-27b-it",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-4o",
@@ -6163,7 +6163,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-4o-2024-05-13",
@@ -6178,7 +6178,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o-2024-05-13",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-4o:batch",
@@ -6193,7 +6193,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "mistralai/mixtral-8x22b-instruct",
@@ -6208,7 +6208,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mixtral-8x22b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "microsoft/wizardlm-2-8x22b",
@@ -6223,7 +6223,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/microsoft/wizardlm-2-8x22b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-4-turbo",
@@ -6238,7 +6238,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4-turbo",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-4-turbo:batch",
@@ -6253,7 +6253,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4-turbo:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "anthropic/claude-3-haiku",
@@ -6268,7 +6268,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-3-haiku",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "mistralai/mistral-large",
@@ -6283,7 +6283,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-large",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-3.5-turbo-0613",
@@ -6298,7 +6298,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-3.5-turbo-0613",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-4-turbo-preview",
@@ -6313,7 +6313,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4-turbo-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openrouter/auto",
@@ -6328,7 +6328,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openrouter/auto",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-3.5-turbo-instruct",
@@ -6343,7 +6343,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-3.5-turbo-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-3.5-turbo-16k",
@@ -6358,7 +6358,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-3.5-turbo-16k",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "mancer/weaver",
@@ -6373,7 +6373,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mancer/weaver",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "undi95/remm-slerp-l2-13b",
@@ -6388,7 +6388,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/undi95/remm-slerp-l2-13b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "gryphe/mythomax-l2-13b",
@@ -6403,7 +6403,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/gryphe/mythomax-l2-13b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-3.5-turbo",
@@ -6418,7 +6418,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-3.5-turbo",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-3.5-turbo:batch",
@@ -6433,7 +6433,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-3.5-turbo:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     },
     {
       "id": "openai/gpt-4",
@@ -6448,10 +6448,10 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:44:20.437Z"
+      "fetched_at": "2026-09-06T22:59:33.944Z"
     }
   ],
-  "fetched_at": "2026-09-06T22:44:20.653Z",
+  "fetched_at": "2026-09-06T22:59:34.113Z",
   "source": "update-script",
   "stats": {
     "openrouter": 430,
