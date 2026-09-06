@@ -13,7 +13,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-6-astra",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.577Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "openai/gpt-6-astra:batch",
@@ -28,7 +28,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-6-astra:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "openai/gpt-6-astra-pro",
@@ -43,7 +43,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-6-astra-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "openai/gpt-6-astra-pro:batch",
@@ -58,7 +58,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-6-astra-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "inclusionai/ling-3.0-flash-sante:free",
@@ -73,7 +73,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/inclusionai/ling-3.0-flash-sante:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "qwen/qwen3.8-max-0902",
@@ -88,7 +88,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.8-max-0902",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "meta/muse-spark-1.3-contributor",
@@ -103,7 +103,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta/muse-spark-1.3-contributor",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "meta/muse-spark-1.3",
@@ -118,7 +118,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta/muse-spark-1.3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "google/gemini-3.8-flash",
@@ -133,7 +133,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.8-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "google/gemini-3.8-flash:batch",
@@ -148,7 +148,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.8-flash:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "anthropic/claude-fable-5.1",
@@ -163,7 +163,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-fable-5.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "anthropic/claude-fable-5.1:batch",
@@ -178,7 +178,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-fable-5.1:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "inception/mercury-2.5-preview",
@@ -186,14 +186,14 @@
       "provider": "inception",
       "description": "Mercury 2.5 is the fastest reasoning LLM, and the latest diffusion LLM (dLLM) from Inception. Instead of generating tokens sequentially, Mercury 2.5 produces and refines multiple tokens in parallel, achieving...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 260000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/inception/mercury-2.5-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "ibm-granite/granite-4.2-8b",
@@ -208,7 +208,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/ibm-granite/granite-4.2-8b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "tencent/hy4-preview",
@@ -223,7 +223,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/tencent/hy4-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "inclusionai/ling-3.0-flash-fin",
@@ -238,7 +238,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/inclusionai/ling-3.0-flash-fin",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "inclusionai/ling-3.0-flash-fin:free",
@@ -253,7 +253,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/inclusionai/ling-3.0-flash-fin:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "~z-ai/glm-flash-latest",
@@ -268,7 +268,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~z-ai/glm-flash-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "qwen/qwen3.8-flash",
@@ -283,7 +283,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.8-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "z-ai/glm-5.3-flash",
@@ -298,7 +298,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5.3-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "z-ai/glm-5.3-flash:batch",
@@ -313,7 +313,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5.3-flash:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "meta/muse-spark-1.2-contributor",
@@ -328,7 +328,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta/muse-spark-1.2-contributor",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "deepseek/deepseek-v4-flash-vision-exp",
@@ -336,14 +336,14 @@
       "provider": "deepseek",
       "description": "DeepSeek V4 Flash Vision Exp is an experimental vision-enabled version of [DeepSeek V4 Flash 0731](https://openrouter.ai/deepseek/deepseek-v4-flash-0731) from DeepSeek, adding image understanding while matching the base model on text capabilities including agents,...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 1048576,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v4-flash-vision-exp",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "tencent/hy-mt2-1.8b",
@@ -358,7 +358,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/tencent/hy-mt2-1.8b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "tencent/hy-mt2-30b-a3b",
@@ -373,7 +373,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/tencent/hy-mt2-30b-a3b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "~z-ai/glm-latest",
@@ -388,7 +388,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~z-ai/glm-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "tencent/hy-mt2-7b",
@@ -403,7 +403,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/tencent/hy-mt2-7b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "z-ai/glm-5.3",
@@ -418,7 +418,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5.3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "qwen/qwen3.8-27b",
@@ -426,14 +426,14 @@
       "provider": "qwen",
       "description": "Qwen3.8 27B is an open-weight dense vision-language model from Qwen. It is suited for coding, professional workflows, research, multimodal interaction, and long-running agent tasks, with flexible thinking that can be...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 1000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.8-27b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "dots-studio/dots-3-note-preview:free",
@@ -448,7 +448,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/dots-studio/dots-3-note-preview:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "google/gemini-3.7-flash",
@@ -463,7 +463,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.7-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "google/gemini-3.7-flash:batch",
@@ -478,7 +478,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.7-flash:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "bytedance-seed/seed-2-1-turbo",
@@ -493,7 +493,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/bytedance-seed/seed-2-1-turbo",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "qwen/qwen3.8-2.4t-a95b",
@@ -508,7 +508,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.8-2.4t-a95b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "qwen/qwen3.8-2.4t-a95b:batch",
@@ -523,7 +523,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.8-2.4t-a95b:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "bytedance-seed/seed-2.0-code",
@@ -538,7 +538,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/bytedance-seed/seed-2.0-code",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "deepseek/deepseek-v4-pro-0813",
@@ -553,7 +553,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v4-pro-0813",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "deepseek/deepseek-v4-pro-0813:batch",
@@ -568,7 +568,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v4-pro-0813:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "x-ai/grok-4.6",
@@ -583,7 +583,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/x-ai/grok-4.6",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "liquid/lfm-2.5-2.6b:free",
@@ -598,7 +598,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/liquid/lfm-2.5-2.6b:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "nvidia/nemotron-3.5-lightning",
@@ -613,7 +613,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3.5-lightning",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "nvidia/nemotron-3.5-lightning:free",
@@ -628,7 +628,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3.5-lightning:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "sakana/sakana-namazu",
@@ -643,7 +643,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/sakana/sakana-namazu",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "upstage/solar-pro4",
@@ -658,7 +658,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/upstage/solar-pro4",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "meta/muse-glimmer-30b",
@@ -673,7 +673,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta/muse-glimmer-30b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "meta/muse-glimmer-30b:batch",
@@ -688,7 +688,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta/muse-glimmer-30b:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "meta/muse-spark-1.2",
@@ -696,14 +696,14 @@
       "provider": "meta",
       "description": "Muse Spark 1.2 is a reasoning model from Meta, designed for complex agentic tasks. It accepts text, images, video, audio, and PDF documents, returns text, and offers a 1M-token context...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 1048576,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/meta/muse-spark-1.2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "~deepseek/deepseek-v4-flash-latest",
@@ -718,7 +718,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~deepseek/deepseek-v4-flash-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "deepseek/deepseek-v4-flash-0731",
@@ -726,14 +726,14 @@
       "provider": "deepseek",
       "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 1310720,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v4-flash-0731",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "deepseek/deepseek-v4-flash-0731:batch",
@@ -741,14 +741,14 @@
       "provider": "deepseek",
       "description": "DeepSeek V4 Flash 0731 is a sparse mixture-of-experts model from DeepSeek, with 13B active parameters out of 284B total. This re-post-trained revision is suited for coding, reasoning, and agent workflows....",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 1048576,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v4-flash-0731:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "thinkingmachines/inkling-small",
@@ -763,7 +763,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thinkingmachines/inkling-small",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "thinkingmachines/inkling-small:batch",
@@ -778,7 +778,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thinkingmachines/inkling-small:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "thinkingmachines/inkling-small:free",
@@ -793,7 +793,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thinkingmachines/inkling-small:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "qwen/qwen3.7-flash",
@@ -801,14 +801,14 @@
       "provider": "qwen",
       "description": "Qwen3.7 Flash is a vision-language reasoning model from Alibaba. It is suited for multimodal agents, visual coding, search, and computer interaction, with strengths in object recognition, spatial understanding, and real-world...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 1000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.7-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "anthropic/claude-opus-5",
@@ -823,7 +823,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "anthropic/claude-opus-5:batch",
@@ -838,7 +838,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "inclusionai/ling-3.0-flash",
@@ -853,7 +853,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/inclusionai/ling-3.0-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "poolside/laguna-s-2.1",
@@ -868,7 +868,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/poolside/laguna-s-2.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "poolside/laguna-s-2.1:free",
@@ -883,7 +883,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/poolside/laguna-s-2.1:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "google/gemini-3.6-flash",
@@ -898,7 +898,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.6-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "google/gemini-3.6-flash:batch",
@@ -913,7 +913,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.6-flash:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "google/gemini-3.5-flash-lite",
@@ -928,7 +928,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.5-flash-lite",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "google/gemini-3.5-flash-lite:batch",
@@ -943,7 +943,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.5-flash-lite:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "meituan/longcat-2.0",
@@ -958,7 +958,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meituan/longcat-2.0",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "thinkingmachines/inkling",
@@ -973,7 +973,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thinkingmachines/inkling",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "thinkingmachines/inkling:batch",
@@ -988,7 +988,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thinkingmachines/inkling:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "thinkingmachines/inkling:free",
@@ -1003,7 +1003,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thinkingmachines/inkling:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "openrouter/auto-beta",
@@ -1018,7 +1018,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openrouter/auto-beta",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.578Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "moonshotai/kimi-k3",
@@ -1033,7 +1033,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "moonshotai/kimi-k3:batch",
@@ -1048,7 +1048,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k3:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "meta/muse-spark-1.1",
@@ -1056,14 +1056,14 @@
       "provider": "meta",
       "description": "Muse Spark 1.1 is a multimodal reasoning model from Meta, built for agentic tasks. It accepts text, images, video, audio, and PDF documents and returns text, with a 1M-token context...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 1048576,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/meta/muse-spark-1.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "kwaipilot/kat-coder-pro-v2.5",
@@ -1078,7 +1078,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/kwaipilot/kat-coder-pro-v2.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "openai/gpt-5.6-luna-pro",
@@ -1093,7 +1093,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-luna-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "openai/gpt-5.6-luna-pro:batch",
@@ -1108,7 +1108,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-luna-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "openai/gpt-5.6-luna",
@@ -1123,7 +1123,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-luna",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "openai/gpt-5.6-luna:batch",
@@ -1138,7 +1138,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-luna:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "openai/gpt-5.6-terra-pro",
@@ -1153,7 +1153,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-terra-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "openai/gpt-5.6-terra-pro:batch",
@@ -1168,7 +1168,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-terra-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.434Z"
     },
     {
       "id": "openai/gpt-5.6-terra",
@@ -1183,7 +1183,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-terra",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openai/gpt-5.6-terra:batch",
@@ -1198,7 +1198,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-terra:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openai/gpt-5.6-sol-pro",
@@ -1213,7 +1213,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-sol-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openai/gpt-5.6-sol-pro:batch",
@@ -1228,7 +1228,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-sol-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openai/gpt-5.6-sol",
@@ -1243,7 +1243,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-sol",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openai/gpt-5.6-sol:batch",
@@ -1258,7 +1258,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.6-sol:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "x-ai/grok-4.5",
@@ -1273,7 +1273,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/x-ai/grok-4.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "~x-ai/grok-latest",
@@ -1288,7 +1288,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~x-ai/grok-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "aion-labs/aion-3.0-mini",
@@ -1296,14 +1296,14 @@
       "provider": "aion-labs",
       "description": "Aion-3.0 Mini is a multi-model roleplaying and storytelling system from AionLabs, built on the DeepSeek family of models. It uses a collaborative generation process in which multiple specialized models each...",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 131072,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/aion-labs/aion-3.0-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "aion-labs/aion-3.0",
@@ -1311,14 +1311,14 @@
       "provider": "aion-labs",
       "description": "Aion-3.0 is a multi-model roleplaying and storytelling system from AionLabs, built on the GLM family of models. It uses a collaborative generation process in which multiple specialized models each contribute...",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 131072,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/aion-labs/aion-3.0",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "tencent/hy3",
@@ -1333,7 +1333,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/tencent/hy3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "poolside/laguna-xs-2.1",
@@ -1348,7 +1348,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/poolside/laguna-xs-2.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "poolside/laguna-xs-2.1:free",
@@ -1363,7 +1363,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/poolside/laguna-xs-2.1:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "anthropic/claude-sonnet-5",
@@ -1378,7 +1378,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-sonnet-5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "anthropic/claude-sonnet-5:batch",
@@ -1393,7 +1393,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-sonnet-5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "google/gemini-3.1-flash-lite-image",
@@ -1401,14 +1401,14 @@
       "provider": "google",
       "description": "Nano Banana 2 Lite (Gemini 3.1 Flash Lite Image) is Google's fastest, most cost-efficient Gemini image model, built for high-velocity developer pipelines and rapid-fire visual exploration. It delivers text-to-image generation...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 65536,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-flash-lite-image",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "nex-agi/nex-n2-mini",
@@ -1423,7 +1423,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nex-agi/nex-n2-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "sakana/fugu-ultra",
@@ -1431,14 +1431,14 @@
       "provider": "sakana",
       "description": "Fugu Ultra is the higher-performance model in Sakana AI's Fugu family. Rather than a single monolithic model, Fugu is a learned multi-agent orchestration system: a language model trained to route...",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 1000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/sakana/fugu-ultra",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "google/gemini-3.1-flash-image",
@@ -1446,14 +1446,14 @@
       "provider": "google",
       "description": "Gemini 3.1 Flash Image, a.k.a. \"Nano Banana 2,\" is Google’s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines advanced...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 131072,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-flash-image",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "google/gemini-3-pro-image",
@@ -1461,14 +1461,14 @@
       "provider": "google",
       "description": "Nano Banana Pro is Google’s most advanced image-generation and editing model, built on Gemini 3 Pro. It extends the original Nano Banana with significantly improved multimodal reasoning, real-world grounding, and...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 131072,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3-pro-image",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "cohere/north-mini-code:free",
@@ -1483,7 +1483,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/cohere/north-mini-code:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "z-ai/glm-5.2",
@@ -1498,7 +1498,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5.2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openrouter/fusion",
@@ -1506,14 +1506,14 @@
       "provider": "openrouter",
       "description": "Fusion turns your prompt into a small multi-model deliberation. A panel of expert models (see below) analyzes your prompt in parallel with web search and web fetch enabled, then a...",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 1000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/openrouter/fusion",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "moonshotai/kimi-k2.7-code",
@@ -1528,7 +1528,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k2.7-code",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "~anthropic/claude-fable-latest",
@@ -1543,7 +1543,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~anthropic/claude-fable-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "anthropic/claude-fable-5",
@@ -1551,14 +1551,14 @@
       "provider": "anthropic",
       "description": "Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous knowledge work and coding. It supports text, image, and file inputs with text output, with reasoning support and...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 1000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-fable-5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "anthropic/claude-fable-5:batch",
@@ -1566,14 +1566,14 @@
       "provider": "anthropic",
       "description": "Claude Fable 5 is a Mythos-class model from Anthropic, built for autonomous knowledge work and coding. It supports text, image, and file inputs with text output, with reasoning support and...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 1000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-fable-5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "nex-agi/nex-n2-pro",
@@ -1588,7 +1588,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nex-agi/nex-n2-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "nvidia/nemotron-3.5-content-safety",
@@ -1603,7 +1603,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3.5-content-safety",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "nvidia/nemotron-3.5-content-safety:free",
@@ -1618,7 +1618,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3.5-content-safety:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "nvidia/nemotron-3-ultra-550b-a55b",
@@ -1633,7 +1633,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3-ultra-550b-a55b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "nvidia/nemotron-3-ultra-550b-a55b:free",
@@ -1648,7 +1648,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3-ultra-550b-a55b:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "qwen/qwen3.7-plus",
@@ -1663,7 +1663,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.7-plus",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "minimax/minimax-m3",
@@ -1671,14 +1671,14 @@
       "provider": "minimax",
       "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 1048576,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "minimax/minimax-m3:batch",
@@ -1686,14 +1686,14 @@
       "provider": "minimax",
       "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 524288,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m3:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "minimax/minimax-m3:free",
@@ -1701,14 +1701,14 @@
       "provider": "minimax",
       "description": "MiniMax-M3 is a multimodal foundation model from MiniMax. It supports text, image, and video inputs with text output, a 1M-token context window, and is suited for long-horizon agentic work, coding,...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 1048576,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m3:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "stepfun/step-3.7-flash",
@@ -1723,7 +1723,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/stepfun/step-3.7-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "anthropic/claude-opus-4.8",
@@ -1731,14 +1731,14 @@
       "provider": "anthropic",
       "description": "Claude Opus 4.8 is Anthropic's most capable generally available model in the Opus family. It supports text, image, and file inputs with text output, with reasoning support and a 1M-token...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 1000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.8",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "anthropic/claude-opus-4.8:batch",
@@ -1746,14 +1746,14 @@
       "provider": "anthropic",
       "description": "Claude Opus 4.8 is Anthropic's most capable generally available model in the Opus family. It supports text, image, and file inputs with text output, with reasoning support and a 1M-token...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 1000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.8:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "qwen/qwen3.7-max",
@@ -1768,7 +1768,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.7-max",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "x-ai/grok-build-0.1",
@@ -1783,7 +1783,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/x-ai/grok-build-0.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "google/gemini-3.5-flash",
@@ -1798,7 +1798,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.5-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "google/gemini-3.5-flash:batch",
@@ -1813,7 +1813,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.5-flash:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "perceptron/perceptron-mk1",
@@ -1821,14 +1821,14 @@
       "provider": "perceptron",
       "description": "Perceptron Mk1 (Mark One) is Perceptron's highest-quality vision-language model for video and embodied reasoning.** It accepts image and video inputs paired with natural language queries, and produces detailed visual understanding...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 32768,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/perceptron/perceptron-mk1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "google/gemini-3.1-flash-lite",
@@ -1836,14 +1836,14 @@
       "provider": "google",
       "description": "Gemini 3.1 Flash Lite is Google’s GA high-efficiency multimodal model optimized for low-latency, high-volume workloads. It supports text, image, video, audio, and PDF inputs, and is designed for lightweight agentic...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 1048576,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-flash-lite",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "google/gemini-3.1-flash-lite:batch",
@@ -1851,14 +1851,14 @@
       "provider": "google",
       "description": "Gemini 3.1 Flash Lite is Google’s GA high-efficiency multimodal model optimized for low-latency, high-volume workloads. It supports text, image, video, audio, and PDF inputs, and is designed for lightweight agentic...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 1048576,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-flash-lite:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openai/gpt-chat-latest",
@@ -1873,7 +1873,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-chat-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "x-ai/grok-4.3",
@@ -1881,14 +1881,14 @@
       "provider": "x-ai",
       "description": "Grok 4.3 is a reasoning model from SpaceXAI. It accepts text and image inputs with text output, and is suited for agentic workflows, instruction-following tasks, and applications requiring high factual...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 1000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/x-ai/grok-4.3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "x-ai/grok-4.3:batch",
@@ -1896,14 +1896,14 @@
       "provider": "x-ai",
       "description": "Grok 4.3 is a reasoning model from SpaceXAI. It accepts text and image inputs with text output, and is suited for agentic workflows, instruction-following tasks, and applications requiring high factual...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 1000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/x-ai/grok-4.3:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "mistralai/mistral-medium-3-5",
@@ -1918,7 +1918,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-medium-3-5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "mistralai/mistral-medium-3-5:batch",
@@ -1933,7 +1933,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-medium-3-5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
@@ -1941,14 +1941,14 @@
       "provider": "nvidia",
       "description": "NVIDIA Nemotron™ 3 Nano Omni is a 30B-A3B open multimodal model designed to function as a perception and context sub-agent in enterprise agent systems. It accepts text, image, video, and...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 256000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "~anthropic/claude-haiku-latest",
@@ -1963,7 +1963,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~anthropic/claude-haiku-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "~openai/gpt-mini-latest",
@@ -1978,7 +1978,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~openai/gpt-mini-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "~google/gemini-pro-latest",
@@ -1993,7 +1993,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~google/gemini-pro-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "~moonshotai/kimi-latest",
@@ -2008,7 +2008,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~moonshotai/kimi-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "~google/gemini-flash-latest",
@@ -2023,7 +2023,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~google/gemini-flash-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "~anthropic/claude-sonnet-latest",
@@ -2038,7 +2038,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~anthropic/claude-sonnet-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "~openai/gpt-latest",
@@ -2053,7 +2053,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~openai/gpt-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "qwen/qwen3.5-plus-20260420",
@@ -2061,14 +2061,14 @@
       "provider": "qwen",
       "description": "Qwen3.5 Plus (April 2026) is a large-scale multimodal language model from Alibaba. It accepts text, image, and video input and produces text output, with a 1M token context window. This...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 1000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-plus-20260420",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "qwen/qwen3.6-flash",
@@ -2083,7 +2083,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.6-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "qwen/qwen3.6-35b-a3b",
@@ -2098,7 +2098,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.6-35b-a3b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "qwen/qwen3.6-max-preview",
@@ -2113,7 +2113,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.6-max-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "qwen/qwen3.6-27b",
@@ -2121,14 +2121,14 @@
       "provider": "qwen",
       "description": "Qwen3.6 27B is a dense 27-billion-parameter language model from the Qwen Team at Alibaba, released in April 2026. It features hybrid multimodal capabilities — accepting text, image, and video inputs...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.6-27b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openai/gpt-5.5-pro",
@@ -2143,7 +2143,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.5-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openai/gpt-5.5-pro:batch",
@@ -2158,7 +2158,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.5-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openai/gpt-5.5",
@@ -2173,7 +2173,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openai/gpt-5.5:batch",
@@ -2188,7 +2188,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "deepseek/deepseek-v4-pro",
@@ -2203,7 +2203,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v4-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "deepseek/deepseek-v4-flash",
@@ -2218,7 +2218,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v4-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "tencent/hy3-preview",
@@ -2233,7 +2233,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/tencent/hy3-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "xiaomi/mimo-v2.5-pro",
@@ -2248,7 +2248,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/xiaomi/mimo-v2.5-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "xiaomi/mimo-v2.5",
@@ -2256,14 +2256,14 @@
       "provider": "xiaomi",
       "description": "MiMo-V2.5 is a native omnimodal model by Xiaomi. It delivers Pro-level agentic performance at roughly half the inference cost, while surpassing MiMo-V2-Omni in multimodal perception across image and video understanding...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 1050000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/xiaomi/mimo-v2.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openai/gpt-5.4-image-2",
@@ -2271,14 +2271,14 @@
       "provider": "openai",
       "description": "[GPT-5.4](https://openrouter.ai/openai/gpt-5.4) Image 2 combines OpenAI's GPT-5.4 model with state-of-the-art image generation capabilities from GPT Image 2. It enables rich multimodal workflows, allowing users to seamlessly move between reasoning, coding, and...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 272000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4-image-2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "~anthropic/claude-opus-latest",
@@ -2293,7 +2293,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/~anthropic/claude-opus-latest",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openrouter/pareto-code",
@@ -2308,7 +2308,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openrouter/pareto-code",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "moonshotai/kimi-k2.6",
@@ -2323,7 +2323,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k2.6",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "anthropic/claude-opus-4.7",
@@ -2338,7 +2338,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.7",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.579Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "anthropic/claude-opus-4.7:batch",
@@ -2353,7 +2353,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.7:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "z-ai/glm-5.1",
@@ -2368,7 +2368,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "google/gemma-4-26b-a4b-it",
@@ -2383,7 +2383,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-4-26b-a4b-it",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "google/gemma-4-26b-a4b-it:free",
@@ -2398,7 +2398,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-4-26b-a4b-it:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "google/gemma-4-31b-it",
@@ -2406,14 +2406,14 @@
       "provider": "google",
       "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-4-31b-it",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "google/gemma-4-31b-it:batch",
@@ -2421,14 +2421,14 @@
       "provider": "google",
       "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-4-31b-it:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "google/gemma-4-31b-it:free",
@@ -2436,14 +2436,14 @@
       "provider": "google",
       "description": "Gemma 4 31B Instruct is Google DeepMind's 30.7B dense multimodal model supporting text and image input with text output. Features a 256K token context window, configurable thinking/reasoning mode, native function...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-4-31b-it:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "qwen/qwen3.6-plus",
@@ -2458,7 +2458,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.6-plus",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "z-ai/glm-5v-turbo",
@@ -2466,14 +2466,14 @@
       "provider": "z-ai",
       "description": "GLM-5V-Turbo is Z.ai’s first native multimodal agent foundation model, built for vision-based coding and agent-driven tasks. It natively handles image, video, and text inputs, excels at long-horizon planning, complex coding,...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 202752,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5v-turbo",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "arcee-ai/trinity-large-thinking",
@@ -2488,7 +2488,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/arcee-ai/trinity-large-thinking",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "x-ai/grok-4.20-multi-agent",
@@ -2496,14 +2496,14 @@
       "provider": "x-ai",
       "description": "Grok 4.20 Multi-Agent is a variant of SpaceXAI’s Grok 4.20 designed for collaborative, agent-based workflows. Multiple agents operate in parallel to conduct deep research, coordinate tool use, and synthesize information...",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 2000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/x-ai/grok-4.20-multi-agent",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "x-ai/grok-4.20",
@@ -2518,7 +2518,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/x-ai/grok-4.20",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "google/lyria-3-pro-preview",
@@ -2533,7 +2533,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/lyria-3-pro-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "google/lyria-3-clip-preview",
@@ -2548,7 +2548,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/lyria-3-clip-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "kwaipilot/kat-coder-pro-v2",
@@ -2563,7 +2563,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/kwaipilot/kat-coder-pro-v2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "rekaai/reka-edge",
@@ -2571,14 +2571,14 @@
       "provider": "rekaai",
       "description": "Reka Edge is an extremely efficient 7B multimodal vision-language model that accepts image/video+text inputs and generates text outputs. This model is optimized specifically to deliver industry-leading performance in image understanding,...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 16384,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/rekaai/reka-edge",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "minimax/minimax-m2.7",
@@ -2586,14 +2586,14 @@
       "provider": "minimax",
       "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 204800,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m2.7",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "minimax/minimax-m2.7:free",
@@ -2601,14 +2601,14 @@
       "provider": "minimax",
       "description": "MiniMax-M2.7 is a next-generation large language model designed for autonomous, real-world productivity and continuous improvement. Built to actively participate in its own evolution, M2.7 integrates advanced agentic capabilities through multi-agent...",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 196608,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m2.7:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openai/gpt-5.4-nano",
@@ -2623,7 +2623,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4-nano",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openai/gpt-5.4-nano:batch",
@@ -2638,7 +2638,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4-nano:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openai/gpt-5.4-mini",
@@ -2646,14 +2646,14 @@
       "provider": "openai",
       "description": "GPT-5.4 mini brings the core capabilities of GPT-5.4 to a faster, more efficient model optimized for high-throughput workloads. It supports text and image inputs with strong performance across reasoning, coding,...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 400000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "openai/gpt-5.4-mini:batch",
@@ -2661,14 +2661,14 @@
       "provider": "openai",
       "description": "GPT-5.4 mini brings the core capabilities of GPT-5.4 to a faster, more efficient model optimized for high-throughput workloads. It supports text and image inputs with strong performance across reasoning, coding,...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 400000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4-mini:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "mistralai/mistral-small-2603",
@@ -2683,7 +2683,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-small-2603",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "z-ai/glm-5-turbo",
@@ -2698,7 +2698,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5-turbo",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "nvidia/nemotron-3-super-120b-a12b",
@@ -2706,14 +2706,14 @@
       "provider": "nvidia",
       "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 1000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3-super-120b-a12b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "nvidia/nemotron-3-super-120b-a12b:free",
@@ -2721,14 +2721,14 @@
       "provider": "nvidia",
       "description": "NVIDIA Nemotron 3 Super is a 120B-parameter open hybrid MoE model, activating just 12B parameters for maximum compute efficiency and accuracy in complex multi-agent applications. Built on a hybrid Mamba-Transformer...",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3-super-120b-a12b:free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "bytedance-seed/seed-2.0-lite",
@@ -2743,7 +2743,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/bytedance-seed/seed-2.0-lite",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "qwen/qwen3.5-9b",
@@ -2751,14 +2751,14 @@
       "provider": "qwen",
       "description": "Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family, designed to deliver strong reasoning, coding, and visual understanding in an efficient 9B-parameter architecture. It uses a unified vision-language design...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-9b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.435Z"
     },
     {
       "id": "qwen/qwen3.5-9b:batch",
@@ -2766,14 +2766,14 @@
       "provider": "qwen",
       "description": "Qwen3.5-9B is a multimodal foundation model from the Qwen3.5 family, designed to deliver strong reasoning, coding, and visual understanding in an efficient 9B-parameter architecture. It uses a unified vision-language design...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-9b:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openai/gpt-5.4-pro",
@@ -2788,7 +2788,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openai/gpt-5.4-pro:batch",
@@ -2803,7 +2803,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openai/gpt-5.4",
@@ -2818,7 +2818,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openai/gpt-5.4:batch",
@@ -2833,7 +2833,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.4:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "inception/mercury-2",
@@ -2841,14 +2841,14 @@
       "provider": "inception",
       "description": "Mercury 2 is an extremely fast reasoning LLM, and the first reasoning diffusion LLM (dLLM). Instead of generating tokens sequentially, Mercury 2 produces and refines multiple tokens in parallel, achieving...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 128000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/inception/mercury-2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "google/gemini-3.1-flash-lite-preview",
@@ -2863,7 +2863,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-flash-lite-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "bytedance-seed/seed-2.0-mini",
@@ -2878,7 +2878,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/bytedance-seed/seed-2.0-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "google/gemini-3.1-flash-image-preview",
@@ -2886,14 +2886,14 @@
       "provider": "google",
       "description": "Gemini 3.1 Flash Image Preview, a.k.a. \"Nano Banana 2,\" is Google’s latest state of the art image generation and editing model, delivering Pro-level visual quality at Flash speed. It combines...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 65536,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-flash-image-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "qwen/qwen3.5-35b-a3b",
@@ -2901,14 +2901,14 @@
       "provider": "qwen",
       "description": "The Qwen3.5 Series 35B-A3B is a native vision-language model designed with a hybrid architecture that integrates linear attention mechanisms and a sparse mixture-of-experts model, achieving higher inference efficiency. Its overall...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-35b-a3b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "qwen/qwen3.5-27b",
@@ -2916,14 +2916,14 @@
       "provider": "qwen",
       "description": "The Qwen3.5 27B native vision-language Dense model incorporates a linear attention mechanism, delivering fast response times while balancing inference speed and performance. Its overall capabilities are comparable to those of...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-27b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "qwen/qwen3.5-122b-a10b",
@@ -2931,14 +2931,14 @@
       "provider": "qwen",
       "description": "The Qwen3.5 122B-A10B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. In terms of...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-122b-a10b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "qwen/qwen3.5-flash-02-23",
@@ -2946,14 +2946,14 @@
       "provider": "qwen",
       "description": "The Qwen3.5 native vision-language Flash models are built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. Compared to the...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 1000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-flash-02-23",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "google/gemini-3.1-pro-preview-customtools",
@@ -2968,7 +2968,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-pro-preview-customtools",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openai/gpt-5.3-codex",
@@ -2983,7 +2983,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.3-codex",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "aion-labs/aion-2.0",
@@ -2998,7 +2998,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/aion-labs/aion-2.0",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "google/gemini-3.1-pro-preview",
@@ -3013,7 +3013,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-pro-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "google/gemini-3.1-pro-preview:batch",
@@ -3028,7 +3028,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3.1-pro-preview:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "anthropic/claude-sonnet-4.6",
@@ -3043,7 +3043,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-sonnet-4.6",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "anthropic/claude-sonnet-4.6:batch",
@@ -3058,7 +3058,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-sonnet-4.6:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "qwen/qwen3.5-plus-02-15",
@@ -3066,14 +3066,14 @@
       "provider": "qwen",
       "description": "The Qwen3.5 native vision-language series Plus models are built on a hybrid architecture that integrates linear attention mechanisms with sparse mixture-of-experts models, achieving higher inference efficiency. In a variety of...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 1000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-plus-02-15",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "qwen/qwen3.5-397b-a17b",
@@ -3081,14 +3081,14 @@
       "provider": "qwen",
       "description": "The Qwen3.5 series 397B-A17B native vision-language model is built on a hybrid architecture that integrates a linear attention mechanism with a sparse mixture-of-experts model, achieving higher inference efficiency. It delivers...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3.5-397b-a17b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "minimax/minimax-m2.5",
@@ -3103,7 +3103,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m2.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "z-ai/glm-5",
@@ -3118,7 +3118,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "qwen/qwen3-max-thinking",
@@ -3133,7 +3133,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-max-thinking",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "anthropic/claude-opus-4.6",
@@ -3148,7 +3148,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.6",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "anthropic/claude-opus-4.6:batch",
@@ -3163,7 +3163,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.6:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "qwen/qwen3-coder-next",
@@ -3178,7 +3178,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-coder-next",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openrouter/free",
@@ -3193,7 +3193,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openrouter/free",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "stepfun/step-3.5-flash",
@@ -3208,7 +3208,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/stepfun/step-3.5-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "moonshotai/kimi-k2.5",
@@ -3223,7 +3223,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k2.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "upstage/solar-pro-3",
@@ -3238,7 +3238,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/upstage/solar-pro-3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "minimax/minimax-m2-her",
@@ -3246,14 +3246,14 @@
       "provider": "minimax",
       "description": "MiniMax M2-her is a dialogue-first large language model built for immersive roleplay, character-driven chat, and expressive multi-turn conversations. Designed to stay consistent in tone and personality, it supports rich message...",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 65536,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m2-her",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "writer/palmyra-x5",
@@ -3268,7 +3268,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/writer/palmyra-x5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openai/gpt-audio",
@@ -3283,7 +3283,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-audio",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openai/gpt-audio-mini",
@@ -3298,7 +3298,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-audio-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "z-ai/glm-4.7-flash",
@@ -3313,7 +3313,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-4.7-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openai/gpt-5.2-codex",
@@ -3328,7 +3328,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.2-codex",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "bytedance-seed/seed-1.6-flash",
@@ -3343,7 +3343,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/bytedance-seed/seed-1.6-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "bytedance-seed/seed-1.6",
@@ -3358,7 +3358,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/bytedance-seed/seed-1.6",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "minimax/minimax-m2.1",
@@ -3373,7 +3373,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m2.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "z-ai/glm-4.7",
@@ -3388,7 +3388,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-4.7",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "google/gemini-3-flash-preview",
@@ -3403,7 +3403,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3-flash-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "google/gemini-3-flash-preview:batch",
@@ -3418,7 +3418,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3-flash-preview:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "nvidia/nemotron-3-nano-30b-a3b",
@@ -3433,7 +3433,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nvidia/nemotron-3-nano-30b-a3b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openai/gpt-5.2-chat",
@@ -3448,7 +3448,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.2-chat",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openai/gpt-5.2-pro",
@@ -3463,7 +3463,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.2-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openai/gpt-5.2-pro:batch",
@@ -3478,7 +3478,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.2-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openai/gpt-5.2",
@@ -3493,7 +3493,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openai/gpt-5.2:batch",
@@ -3508,7 +3508,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.2:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "mistralai/devstral-2512",
@@ -3523,7 +3523,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/devstral-2512",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "relace/relace-search",
@@ -3538,7 +3538,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/relace/relace-search",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "z-ai/glm-4.6v",
@@ -3546,14 +3546,14 @@
       "provider": "z-ai",
       "description": "GLM-4.6V is a large multimodal model designed for high-fidelity visual understanding and long-context reasoning across images, documents, and mixed media. It supports up to 128K tokens, processes complex page layouts...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 131072,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-4.6v",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openrouter/bodybuilder",
@@ -3568,7 +3568,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openrouter/bodybuilder",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "openai/gpt-5.1-codex-max",
@@ -3583,7 +3583,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.1-codex-max",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "amazon/nova-2-lite-v1",
@@ -3591,14 +3591,14 @@
       "provider": "amazon",
       "description": "Nova 2 Lite is a fast, cost-effective reasoning model for everyday workloads that can process text, images, and videos to generate text. Nova 2 Lite demonstrates standout capabilities in processing...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 1000000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/amazon/nova-2-lite-v1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "mistralai/ministral-14b-2512",
@@ -3613,7 +3613,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/ministral-14b-2512",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "mistralai/ministral-8b-2512",
@@ -3621,14 +3621,14 @@
       "provider": "mistralai",
       "description": "A balanced model in the Ministral 3 family, Ministral 3 8B is a powerful, efficient tiny language model with vision capabilities.",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/ministral-8b-2512",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.436Z"
     },
     {
       "id": "mistralai/ministral-3b-2512",
@@ -3636,14 +3636,14 @@
       "provider": "mistralai",
       "description": "The smallest model in the Ministral 3 family, Ministral 3 3B is a powerful, efficient tiny language model with vision capabilities.",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 131072,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/ministral-3b-2512",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "mistralai/mistral-large-2512",
@@ -3658,7 +3658,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-large-2512",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "deepseek/deepseek-v3.2",
@@ -3673,7 +3673,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v3.2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "anthropic/claude-opus-4.5",
@@ -3688,7 +3688,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "anthropic/claude-opus-4.5:batch",
@@ -3703,7 +3703,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "google/gemini-3-pro-image-preview",
@@ -3711,14 +3711,14 @@
       "provider": "google",
       "description": "Nano Banana Pro is Google’s most advanced image-generation and editing model, built on Gemini 3 Pro. It extends the original Nano Banana with significantly improved multimodal reasoning, real-world grounding, and...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 65536,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-3-pro-image-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-5.1",
@@ -3733,7 +3733,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-5.1:batch",
@@ -3748,7 +3748,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.1:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-5.1-codex",
@@ -3763,7 +3763,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.1-codex",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-5.1-codex-mini",
@@ -3778,7 +3778,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5.1-codex-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "moonshotai/kimi-k2-thinking",
@@ -3793,7 +3793,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k2-thinking",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "amazon/nova-premier-v1",
@@ -3808,7 +3808,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/amazon/nova-premier-v1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "perplexity/sonar-pro-search",
@@ -3823,7 +3823,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/perplexity/sonar-pro-search",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "mistralai/voxtral-small-24b-2507",
@@ -3838,7 +3838,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/voxtral-small-24b-2507",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-oss-safeguard-20b",
@@ -3853,7 +3853,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-oss-safeguard-20b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "minimax/minimax-m2",
@@ -3868,7 +3868,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-vl-32b-instruct",
@@ -3876,14 +3876,14 @@
       "provider": "qwen",
       "description": "Qwen3-VL-32B-Instruct is a large-scale multimodal vision-language model designed for high-precision understanding and reasoning across text, images, and video. With 32 billion parameters, it combines deep visual perception with advanced text...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 131072,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-vl-32b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "ibm-granite/granite-4.0-h-micro",
@@ -3898,7 +3898,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/ibm-granite/granite-4.0-h-micro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-5-image-mini",
@@ -3906,14 +3906,14 @@
       "provider": "openai",
       "description": "GPT-5 Image Mini combines OpenAI's advanced language capabilities, powered by [GPT-5 Mini](https://openrouter.ai/openai/gpt-5-mini), with GPT Image 1 Mini for efficient image generation. This natively multimodal model features superior instruction following, text...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 400000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-image-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "anthropic/claude-haiku-4.5",
@@ -3928,7 +3928,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-haiku-4.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "anthropic/claude-haiku-4.5:batch",
@@ -3943,7 +3943,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-haiku-4.5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-vl-8b-thinking",
@@ -3958,7 +3958,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-vl-8b-thinking",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-vl-8b-instruct",
@@ -3966,14 +3966,14 @@
       "provider": "qwen",
       "description": "Qwen3-VL-8B-Instruct is a multimodal vision-language model from the Qwen3-VL series, built for high-fidelity understanding and reasoning across text, images, and video. It features improved multimodal fusion with Interleaved-MRoPE for long-horizon...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-vl-8b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-5-image",
@@ -3988,7 +3988,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-image",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "google/gemini-2.5-flash-image",
@@ -3996,14 +3996,14 @@
       "provider": "google",
       "description": "Gemini 2.5 Flash Image, a.k.a. \"Nano Banana,\" is now generally available. It is a state of the art image generation model with contextual understanding. It is capable of image generation,...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 32768,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-flash-image",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-vl-30b-a3b-thinking",
@@ -4011,14 +4011,14 @@
       "provider": "qwen",
       "description": "Qwen3-VL-30B-A3B-Thinking is a multimodal model that unifies strong text generation with visual understanding for images and videos. Its Thinking variant enhances reasoning in STEM, math, and complex tasks. It excels...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-vl-30b-a3b-thinking",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-vl-30b-a3b-instruct",
@@ -4026,14 +4026,14 @@
       "provider": "qwen",
       "description": "Qwen3-VL-30B-A3B-Instruct is a multimodal model that unifies strong text generation with visual understanding for images and videos. Its Instruct variant optimizes instruction-following for general multimodal tasks. It excels in perception...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-vl-30b-a3b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-5-pro",
@@ -4048,7 +4048,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-5-pro:batch",
@@ -4063,7 +4063,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "z-ai/glm-4.6",
@@ -4078,7 +4078,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-4.6",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "anthropic/claude-sonnet-4.5",
@@ -4093,7 +4093,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-sonnet-4.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "anthropic/claude-sonnet-4.5:batch",
@@ -4108,7 +4108,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-sonnet-4.5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "deepseek/deepseek-v3.2-exp",
@@ -4123,7 +4123,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v3.2-exp",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "thedrummer/cydonia-24b-v4.1",
@@ -4138,7 +4138,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thedrummer/cydonia-24b-v4.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "relace/relace-apply-3",
@@ -4153,7 +4153,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/relace/relace-apply-3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-vl-235b-a22b-thinking",
@@ -4161,14 +4161,14 @@
       "provider": "qwen",
       "description": "Qwen3-VL-235B-A22B Thinking is a multimodal model that unifies strong text generation with visual understanding across images and video. The Thinking model is optimized for multimodal reasoning in STEM and math....",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 131072,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-vl-235b-a22b-thinking",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-vl-235b-a22b-instruct",
@@ -4176,14 +4176,14 @@
       "provider": "qwen",
       "description": "Qwen3-VL-235B-A22B Instruct is an open-weight multimodal model that unifies strong text generation with visual understanding across images and video. The Instruct model targets general vision-language use (VQA, document parsing, chart/table...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-vl-235b-a22b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-max",
@@ -4198,7 +4198,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-max",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-coder-plus",
@@ -4213,7 +4213,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-coder-plus",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "deepseek/deepseek-v3.1-terminus",
@@ -4228,7 +4228,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-v3.1-terminus",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-coder-flash",
@@ -4243,7 +4243,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-coder-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-next-80b-a3b-thinking",
@@ -4258,7 +4258,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-next-80b-a3b-thinking",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-next-80b-a3b-instruct",
@@ -4273,7 +4273,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-next-80b-a3b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen-plus-2025-07-28",
@@ -4288,7 +4288,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen-plus-2025-07-28",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "moonshotai/kimi-k2-0905",
@@ -4303,7 +4303,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k2-0905",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-30b-a3b-thinking-2507",
@@ -4318,7 +4318,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-30b-a3b-thinking-2507",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "nousresearch/hermes-4-70b",
@@ -4333,7 +4333,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nousresearch/hermes-4-70b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "nousresearch/hermes-4-405b",
@@ -4348,7 +4348,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nousresearch/hermes-4-405b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "deepseek/deepseek-chat-v3.1",
@@ -4363,7 +4363,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-chat-v3.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "mistralai/mistral-medium-3.1",
@@ -4378,7 +4378,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-medium-3.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "z-ai/glm-4.5v",
@@ -4386,14 +4386,14 @@
       "provider": "z-ai",
       "description": "GLM-4.5V is a vision-language foundation model for multimodal agent applications. Built on a Mixture-of-Experts (MoE) architecture with 106B parameters and 12B activated parameters, it achieves state-of-the-art results in video understanding,...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 65536,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-4.5v",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-5",
@@ -4408,7 +4408,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-5:batch",
@@ -4423,7 +4423,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-5-mini",
@@ -4438,7 +4438,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-5-mini:batch",
@@ -4453,7 +4453,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-mini:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-5-nano",
@@ -4468,7 +4468,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-nano",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-5-nano:batch",
@@ -4483,7 +4483,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-5-nano:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-oss-120b",
@@ -4498,7 +4498,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-oss-120b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-oss-120b:batch",
@@ -4513,7 +4513,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-oss-120b:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-oss-20b",
@@ -4528,7 +4528,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-oss-20b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-oss-20b:batch",
@@ -4543,7 +4543,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-oss-20b:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "anthropic/claude-opus-4.1",
@@ -4558,7 +4558,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "anthropic/claude-opus-4.1:batch",
@@ -4573,7 +4573,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4.1:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "mistralai/codestral-2508",
@@ -4588,7 +4588,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/codestral-2508",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-coder-30b-a3b-instruct",
@@ -4603,7 +4603,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-coder-30b-a3b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-30b-a3b-instruct-2507",
@@ -4618,7 +4618,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-30b-a3b-instruct-2507",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "z-ai/glm-4.5",
@@ -4633,7 +4633,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-4.5",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "z-ai/glm-4.5-air",
@@ -4648,7 +4648,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/z-ai/glm-4.5-air",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-235b-a22b-thinking-2507",
@@ -4663,7 +4663,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-235b-a22b-thinking-2507",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-coder",
@@ -4678,7 +4678,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-coder",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "bytedance/ui-tars-1.5-7b",
@@ -4686,14 +4686,14 @@
       "provider": "bytedance",
       "description": "UI-TARS-1.5 is a multimodal vision-language agent optimized for GUI-based environments, including desktop interfaces, web browsers, mobile systems, and games. Built by ByteDance, it builds upon the UI-TARS framework with reinforcement...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 128000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/bytedance/ui-tars-1.5-7b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "google/gemini-2.5-flash-lite",
@@ -4708,7 +4708,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-flash-lite",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "google/gemini-2.5-flash-lite:batch",
@@ -4723,7 +4723,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-flash-lite:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-235b-a22b-2507",
@@ -4731,14 +4731,14 @@
       "provider": "qwen",
       "description": "Qwen3-235B-A22B-Instruct-2507 is a multilingual, instruction-tuned mixture-of-experts language model based on the Qwen3-235B architecture, with 22B active parameters per forward pass. It is optimized for general-purpose text generation, including instruction following,...",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 262144,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-235b-a22b-2507",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "moonshotai/kimi-k2",
@@ -4753,7 +4753,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/moonshotai/kimi-k2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "cognitivecomputations/dolphin-mistral-24b-venice-edition",
@@ -4768,7 +4768,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/cognitivecomputations/dolphin-mistral-24b-venice-edition",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "tencent/hunyuan-a13b-instruct",
@@ -4783,7 +4783,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/tencent/hunyuan-a13b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "morph/morph-v3-large",
@@ -4798,7 +4798,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/morph/morph-v3-large",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "morph/morph-v3-fast",
@@ -4813,7 +4813,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/morph/morph-v3-fast",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "baidu/ernie-4.5-vl-424b-a47b",
@@ -4821,14 +4821,14 @@
       "provider": "baidu",
       "description": "ERNIE-4.5-VL-424B-A47B is a multimodal Mixture-of-Experts (MoE) model from Baidu’s ERNIE 4.5 series, featuring 424B total parameters with 47B active per token. It is trained jointly on text and image data...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 123000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/baidu/ernie-4.5-vl-424b-a47b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "mistralai/mistral-small-3.2-24b-instruct",
@@ -4843,7 +4843,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-small-3.2-24b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "minimax/minimax-m1",
@@ -4858,7 +4858,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-m1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "google/gemini-2.5-flash",
@@ -4873,7 +4873,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-flash",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "google/gemini-2.5-flash:batch",
@@ -4888,7 +4888,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-flash:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "google/gemini-2.5-pro",
@@ -4903,7 +4903,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "google/gemini-2.5-pro:batch",
@@ -4918,7 +4918,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-pro:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/o3-pro",
@@ -4933,7 +4933,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o3-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "google/gemini-2.5-pro-preview",
@@ -4948,7 +4948,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-pro-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "deepseek/deepseek-r1-0528",
@@ -4963,7 +4963,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-r1-0528",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "anthropic/claude-opus-4",
@@ -4978,7 +4978,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-opus-4",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "anthropic/claude-sonnet-4",
@@ -4993,7 +4993,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-sonnet-4",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "mistralai/mistral-medium-3",
@@ -5008,7 +5008,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-medium-3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "google/gemini-2.5-pro-preview-05-06",
@@ -5023,7 +5023,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemini-2.5-pro-preview-05-06",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "meta-llama/llama-guard-4-12b",
@@ -5038,7 +5038,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-guard-4-12b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-30b-a3b",
@@ -5053,7 +5053,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-30b-a3b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-8b",
@@ -5068,7 +5068,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-8b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-14b",
@@ -5083,7 +5083,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-14b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-32b",
@@ -5098,7 +5098,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-32b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen3-235b-a22b",
@@ -5113,7 +5113,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen3-235b-a22b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/o4-mini-high",
@@ -5128,7 +5128,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o4-mini-high",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/o3",
@@ -5143,7 +5143,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/o3:batch",
@@ -5158,7 +5158,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o3:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/o4-mini",
@@ -5173,7 +5173,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o4-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/o4-mini:batch",
@@ -5188,7 +5188,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o4-mini:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4.1",
@@ -5203,7 +5203,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4.1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4.1:batch",
@@ -5218,7 +5218,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4.1:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4.1-mini",
@@ -5233,7 +5233,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4.1-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4.1-mini:batch",
@@ -5248,7 +5248,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4.1-mini:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4.1-nano",
@@ -5263,7 +5263,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4.1-nano",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4.1-nano:batch",
@@ -5278,7 +5278,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4.1-nano:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "meta-llama/llama-4-maverick",
@@ -5293,7 +5293,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-4-maverick",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "meta-llama/llama-4-scout",
@@ -5308,7 +5308,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-4-scout",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "deepseek/deepseek-chat-v3-0324",
@@ -5323,7 +5323,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-chat-v3-0324",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/o1-pro",
@@ -5338,7 +5338,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o1-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "mistralai/mistral-small-3.1-24b-instruct",
@@ -5353,7 +5353,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-small-3.1-24b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "google/gemma-3-4b-it",
@@ -5361,14 +5361,14 @@
       "provider": "google",
       "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 131072,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-3-4b-it",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "google/gemma-3-12b-it",
@@ -5376,14 +5376,14 @@
       "provider": "google",
       "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 131072,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-3-12b-it",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "cohere/command-a",
@@ -5391,14 +5391,14 @@
       "provider": "cohere",
       "description": "Command A is an open-weights 111B parameter model with a 256k context window focused on delivering great performance across agentic, multilingual, and coding use cases. Compared to other leading proprietary...",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 256000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/cohere/command-a",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "rekaai/reka-flash-3",
@@ -5413,7 +5413,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/rekaai/reka-flash-3",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "google/gemma-3-27b-it",
@@ -5421,14 +5421,14 @@
       "provider": "google",
       "description": "Gemma 3 introduces multimodality, supporting vision-language input and text outputs. It handles context windows up to 128k tokens, understands over 140 languages, and offers improved math, reasoning, and chat capabilities,...",
       "source": "openrouter",
-      "category": "image",
+      "category": "reasoning",
       "context_window": 131072,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-3-27b-it",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "thedrummer/skyfall-36b-v2",
@@ -5443,7 +5443,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thedrummer/skyfall-36b-v2",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "perplexity/sonar-reasoning-pro",
@@ -5458,7 +5458,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/perplexity/sonar-reasoning-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "perplexity/sonar-pro",
@@ -5473,7 +5473,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/perplexity/sonar-pro",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "perplexity/sonar-deep-research",
@@ -5488,7 +5488,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/perplexity/sonar-deep-research",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "mistralai/mistral-saba",
@@ -5503,7 +5503,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-saba",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/o3-mini-high",
@@ -5518,7 +5518,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o3-mini-high",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "aion-labs/aion-rp-llama-3.1-8b",
@@ -5533,7 +5533,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/aion-labs/aion-rp-llama-3.1-8b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen2.5-vl-72b-instruct",
@@ -5548,7 +5548,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen2.5-vl-72b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen-plus",
@@ -5563,7 +5563,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen-plus",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/o3-mini",
@@ -5578,7 +5578,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o3-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/o3-mini:batch",
@@ -5593,7 +5593,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o3-mini:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "mistralai/mistral-small-24b-instruct-2501",
@@ -5608,7 +5608,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-small-24b-instruct-2501",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "perplexity/sonar",
@@ -5623,7 +5623,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/perplexity/sonar",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "deepseek/deepseek-r1-distill-llama-70b",
@@ -5638,7 +5638,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-r1-distill-llama-70b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "deepseek/deepseek-r1",
@@ -5653,7 +5653,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-r1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "minimax/minimax-01",
@@ -5668,7 +5668,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/minimax/minimax-01",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "microsoft/phi-4",
@@ -5683,7 +5683,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/microsoft/phi-4",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "deepseek/deepseek-chat",
@@ -5698,7 +5698,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/deepseek/deepseek-chat",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "sao10k/l3.3-euryale-70b",
@@ -5713,7 +5713,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/sao10k/l3.3-euryale-70b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/o1",
@@ -5728,7 +5728,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/o1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "cohere/command-r7b-12-2024",
@@ -5743,7 +5743,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/cohere/command-r7b-12-2024",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "meta-llama/llama-3.3-70b-instruct",
@@ -5751,14 +5751,14 @@
       "provider": "meta-llama",
       "description": "The Meta Llama 3.3 multilingual large language model (LLM) is a pretrained and instruction tuned generative model in 70B (text in/text out). The Llama 3.3 instruction tuned text only model...",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 131072,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-3.3-70b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "amazon/nova-lite-v1",
@@ -5766,14 +5766,14 @@
       "provider": "amazon",
       "description": "Amazon Nova Lite 1.0 is a very low-cost multimodal model from Amazon that focused on fast processing of image, video, and text inputs to generate text output. Amazon Nova Lite...",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 300000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/amazon/nova-lite-v1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "amazon/nova-micro-v1",
@@ -5788,7 +5788,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/amazon/nova-micro-v1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.580Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "amazon/nova-pro-v1",
@@ -5803,7 +5803,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/amazon/nova-pro-v1",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4o-2024-11-20",
@@ -5818,7 +5818,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o-2024-11-20",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "mistralai/mistral-large-2407",
@@ -5833,7 +5833,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-large-2407",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen-2.5-coder-32b-instruct",
@@ -5848,7 +5848,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen-2.5-coder-32b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "thedrummer/unslopnemo-12b",
@@ -5863,7 +5863,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/thedrummer/unslopnemo-12b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "anthracite-org/magnum-v4-72b",
@@ -5878,7 +5878,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthracite-org/magnum-v4-72b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen-2.5-7b-instruct",
@@ -5893,7 +5893,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen-2.5-7b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "meta-llama/llama-3.2-1b-instruct",
@@ -5901,14 +5901,14 @@
       "provider": "meta-llama",
       "description": "Llama 3.2 1B is a 1-billion-parameter language model focused on efficiently performing natural language tasks, such as summarization, dialogue, and multilingual text analysis. Its smaller size allows it to operate...",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 60000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-3.2-1b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "meta-llama/llama-3.2-3b-instruct",
@@ -5923,7 +5923,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-3.2-3b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "qwen/qwen-2.5-72b-instruct",
@@ -5938,7 +5938,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/qwen/qwen-2.5-72b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "cohere/command-r-08-2024",
@@ -5953,7 +5953,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/cohere/command-r-08-2024",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "cohere/command-r-plus-08-2024",
@@ -5968,7 +5968,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/cohere/command-r-plus-08-2024",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "sao10k/l3.1-euryale-70b",
@@ -5983,7 +5983,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/sao10k/l3.1-euryale-70b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "nousresearch/hermes-3-llama-3.1-70b",
@@ -5998,7 +5998,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nousresearch/hermes-3-llama-3.1-70b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "nousresearch/hermes-3-llama-3.1-405b",
@@ -6013,7 +6013,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/nousresearch/hermes-3-llama-3.1-405b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "sao10k/l3-lunaris-8b",
@@ -6021,14 +6021,14 @@
       "provider": "sao10k",
       "description": "Lunaris 8B is a versatile generalist and roleplaying model based on Llama 3. It's a strategic merge of multiple models, designed to balance creativity with improved logic and general knowledge....",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 8192,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/sao10k/l3-lunaris-8b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4o-2024-08-06",
@@ -6043,7 +6043,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o-2024-08-06",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "meta-llama/llama-3.1-70b-instruct",
@@ -6058,7 +6058,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-3.1-70b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "meta-llama/llama-3.1-8b-instruct",
@@ -6073,7 +6073,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/meta-llama/llama-3.1-8b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "mistralai/mistral-nemo",
@@ -6081,14 +6081,14 @@
       "provider": "mistralai",
       "description": "A 12B parameter model with a 128k token context length built by Mistral in collaboration with NVIDIA. The model is multilingual, supporting English, French, German, Spanish, Italian, Portuguese, Chinese, Japanese,...",
       "source": "openrouter",
-      "category": "multimodal",
+      "category": "chat",
       "context_window": 131072,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-nemo",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4o-mini",
@@ -6103,7 +6103,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o-mini",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4o-mini-2024-07-18",
@@ -6118,7 +6118,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o-mini-2024-07-18",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4o-mini:batch",
@@ -6133,7 +6133,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o-mini:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "google/gemma-2-27b-it",
@@ -6148,7 +6148,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/google/gemma-2-27b-it",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4o",
@@ -6163,7 +6163,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4o-2024-05-13",
@@ -6178,7 +6178,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o-2024-05-13",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4o:batch",
@@ -6193,7 +6193,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4o:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "mistralai/mixtral-8x22b-instruct",
@@ -6208,7 +6208,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mixtral-8x22b-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "microsoft/wizardlm-2-8x22b",
@@ -6223,7 +6223,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/microsoft/wizardlm-2-8x22b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4-turbo",
@@ -6231,14 +6231,14 @@
       "provider": "openai",
       "description": "The latest GPT-4 Turbo model with vision capabilities. Vision requests can now use JSON mode and function calling.\n\nTraining data: up to December 2023.",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 128000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4-turbo",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4-turbo:batch",
@@ -6246,14 +6246,14 @@
       "provider": "openai",
       "description": "The latest GPT-4 Turbo model with vision capabilities. Vision requests can now use JSON mode and function calling.\n\nTraining data: up to December 2023.",
       "source": "openrouter",
-      "category": "image",
+      "category": "multimodal",
       "context_window": 128000,
       "input_price": 0,
       "output_price": 0,
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4-turbo:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "anthropic/claude-3-haiku",
@@ -6268,7 +6268,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/anthropic/claude-3-haiku",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "mistralai/mistral-large",
@@ -6283,7 +6283,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mistralai/mistral-large",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-3.5-turbo-0613",
@@ -6298,7 +6298,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-3.5-turbo-0613",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4-turbo-preview",
@@ -6313,7 +6313,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4-turbo-preview",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openrouter/auto",
@@ -6328,7 +6328,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openrouter/auto",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-3.5-turbo-instruct",
@@ -6343,7 +6343,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-3.5-turbo-instruct",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-3.5-turbo-16k",
@@ -6358,7 +6358,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-3.5-turbo-16k",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "mancer/weaver",
@@ -6373,7 +6373,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/mancer/weaver",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "undi95/remm-slerp-l2-13b",
@@ -6388,7 +6388,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/undi95/remm-slerp-l2-13b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "gryphe/mythomax-l2-13b",
@@ -6403,7 +6403,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/gryphe/mythomax-l2-13b",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-3.5-turbo",
@@ -6418,7 +6418,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-3.5-turbo",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-3.5-turbo:batch",
@@ -6433,7 +6433,7 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-3.5-turbo:batch",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     },
     {
       "id": "openai/gpt-4",
@@ -6448,9 +6448,14 @@
       "tags": [],
       "url": "https://openrouter.ai/models/openai/gpt-4",
       "benchmark": null,
-      "fetched_at": "2026-09-06T22:18:08.581Z"
+      "fetched_at": "2026-09-06T22:44:20.437Z"
     }
   ],
-  "fetched_at": "2026-09-06T22:18:08.581Z",
-  "source": "update-script"
+  "fetched_at": "2026-09-06T22:44:20.653Z",
+  "source": "update-script",
+  "stats": {
+    "openrouter": 430,
+    "lmsys": 0,
+    "artificial-analysis": 0
+  }
 }
