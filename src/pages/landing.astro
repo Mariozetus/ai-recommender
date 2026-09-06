@@ -31,6 +31,12 @@ const categories = [
 <Layout title={t('layout.title')}>
   <Hero locale={locale} />
 
+  <section id="recently-viewed" class="max-w-6xl mx-auto px-4 py-8 hidden">
+    <h2 class="text-xl font-bold text-white mb-4">Recently Viewed</h2>
+    <div id="recently-viewed-list" class="flex gap-4 overflow-x-auto pb-4">
+    </div>
+  </section>
+
   <section class="max-w-6xl mx-auto px-4 py-16">
     <h2 class="text-2xl font-bold text-white mb-8 text-center">
       {t('home.categories.title')}
@@ -61,3 +67,24 @@ const categories = [
     </div>
   </section>
 </Layout>
+
+<script define:vars={{ models: models.slice(0, 50) }}>
+  const history = JSON.parse(localStorage.getItem('viewHistory') || '[]');
+  const section = document.getElementById('recently-viewed');
+  const list = document.getElementById('recently-viewed-list');
+
+  if (history.length > 0 && list && section) {
+    const recentModels = history.slice(0, 6).map(id => models.find(m => m && m.id === id)).filter(Boolean);
+
+    if (recentModels.length > 0) {
+      section.classList.remove('hidden');
+      list.innerHTML = recentModels.map(m => `
+        <a href="/models/${encodeURIComponent(m.id)}" class="flex-shrink-0 w-48 bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition">
+          <h3 class="font-semibold text-white truncate">${m.name}</h3>
+          <p class="text-gray-500 text-sm">${m.provider}</p>
+          <p class="text-gray-400 text-xs mt-2">$${m.input_price + m.output_price}/1M</p>
+        </a>
+      `).join('');
+    }
+  }
+</script>

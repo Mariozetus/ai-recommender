@@ -215,6 +215,13 @@ const relatedModels = models
   const compareBtn = document.getElementById('compare-btn');
   const modelId = compareBtn?.dataset.modelId;
 
+  if (modelId) {
+    const history = JSON.parse(localStorage.getItem('viewHistory') || '[]');
+    const filtered = history.filter((h: string) => h !== modelId);
+    filtered.unshift(modelId);
+    localStorage.setItem('viewHistory', JSON.stringify(filtered.slice(0, 10)));
+  }
+
   compareBtn?.addEventListener('click', () => {
     const compareIds = JSON.parse(localStorage.getItem('compareIds') || '[]');
     if (!compareIds.includes(modelId)) {

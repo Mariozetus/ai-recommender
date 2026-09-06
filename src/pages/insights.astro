@@ -1,0 +1,186 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
+import { detectLocale, setLocale, t } from '../i18n/index';
+
+const acceptLanguage = Astro.request.headers.get('accept-language');
+const locale = detectLocale(acceptLanguage || undefined);
+setLocale(locale);
+
+const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
+const { models } = JSON.parse(rawData);
+
+const totalModels = models.length;
+const providers = [...new Set(models.map((m: any) => m.provider))];
+const categories = [...new Set(models.map((m: any) => m.category))];
+
+const priceRanges = {
+  free: models.filter((m: any) => m.pricing?.free).length,
+  cheap: models.filter((m: any) => m.input_price + m.output_price < 1).length,
+  mid: models.filter((m: any) => m.input_price + m.output_price >= 1 && m.input_price + m.output_price < 10).length,
+  expensive: models.filter((m: any) => m.input_price + m.output_price >= 10).length,
+};
+
+const contextRanges = {
+  below32k: models.filter((m: any) => m.context_window < 32768).length,
+  from32k: models.filter((m: any) => m.context_window >= 32768 && m.context_window < 65536).length,
+  from64k: models.filter((m: any) => m.context_window >= 65536 && m.context_window < 131072).length,
+  from128k: models.filter((m: any) => m.context_window >= 131072 && m.context_window < 200000).length,
+  above200k: models.filter((m: any) => m.context_window >= 200000).length,
+};
+
+const categoryCounts = categories.map(cat => ({
+  name: cat,
+  count: models.filter((m: any) => m.category === cat).length,
+})).sort((a, b) => b.count - a.count);
+
+const providerCounts = providers.map(prov => ({
+  name: prov,
+  count: models.filter((m: any) => m.provider === prov).length,
+})).sort((a, b) => b.count - a.count).slice(0, 10);
+
+const avgPrice = (models.reduce((s: number, m: any) => s + m.input_price + m.output_price, 0) / models.length).toFixed(3);
+const avgContext = Math.round(models.reduce((s: number, m: any) => s + m.context_window, 0) / models.length);
+const maxContext = Math.max(...models.map((m: any) => m.context_window));
+const minPrice = Math.min(...models.filter((m: any) => m.input_price + m.output_price > 0).map((m: any) => m.input_price + m.output_price));
+---
+
+<Layout title="Insights - AI Model Statistics">
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-white mb-2">{t('home.stats.models')}</h1>
+      <p class="text-gray-400">Statistics and trends in the AI model marketplace</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <div class="text-3xl font-bold text-white mb-1">{totalModels.toLocaleString()}</div>
+        <div class="text-gray-400 text-sm">Total Models</div>
+      </div>
+      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <div class="text-3xl font-bold text-white mb-1">{providers.length}</div>
+        <div class="text-gray-400 text-sm">Providers</div>
+      </div>
+      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <div class="text-3xl font-bold text-white mb-1">${avgPrice}</div>
+        <div class="text-gray-400 text-sm">Avg Price/1M</div>
+      </div>
+      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <div class="text-3xl font-bold text-white mb-1">{(avgContext / 1000).toFixed(0)}K</div>
+        <div class="text-gray-400 text-sm">Avg Context</div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-8">
+      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <h2 class="text-xl font-semibold text-white mb-6">Models by Category</h2>
+        <div class="space-y-4">
+          {categoryCounts.map(cat => (
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-300 capitalize">{cat.name}</span>
+                <span class="text-gray-500">{cat.count}</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div
+                  class="bg-teal-500 h-2 rounded-full"
+                  style={`width: ${(cat.count / totalModels) * 100}%`}
+                ></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <h2 class="text-xl font-semibold text-white mb-6">Top 10 Providers</h2>
+        <div class="space-y-3">
+          {providerCounts.map((prov, i) => (
+            <div class="flex items-center gap-3">
+              <span class="text-gray-500 text-sm w-4">{i + 1}</span>
+              <span class="text-gray-300 flex-1">{prov.name}</span>
+              <span class="text-gray-500 text-sm">{prov.count}</span>
+              <div class="w-24 bg-gray-700 rounded-full h-2">
+                <div
+                  class="bg-teal-500 h-2 rounded-full"
+                  style={`width: ${(prov.count / totalModels) * 100}%`}
+                ></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <h2 class="text-xl font-semibold text-white mb-6">Price Distribution</h2>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-green-900/30 border border-green-800 rounded-lg p-4 text-center">
+            <div class="text-2xl font-bold text-green-400">{priceRanges.free}</div>
+            <div class="text-sm text-green-300">Free Tier</div>
+          </div>
+          <div class="bg-blue-900/30 border border-blue-800 rounded-lg p-4 text-center">
+            <div class="text-2xl font-bold text-blue-400">{priceRanges.cheap}</div>
+            <div class="text-sm text-blue-300">&lt;$1/1M</div>
+          </div>
+          <div class="bg-yellow-900/30 border border-yellow-800 rounded-lg p-4 text-center">
+            <div class="text-2xl font-bold text-yellow-400">{priceRanges.mid}</div>
+            <div class="text-sm text-yellow-300">$1-$10/1M</div>
+          </div>
+          <div class="bg-red-900/30 border border-red-800 rounded-lg p-4 text-center">
+            <div class="text-2xl font-bold text-red-400">{priceRanges.expensive}</div>
+            <div class="text-sm text-red-300">&gt;$10/1M</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <h2 class="text-xl font-semibold text-white mb-6">Context Window Distribution</h2>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <span class="text-gray-400 text-sm w-20">-32K</span>
+            <div class="flex-1 bg-gray-700 rounded-full h-4">
+              <div class="bg-purple-500 h-4 rounded-full" style={`width: ${(contextRanges.below32k / totalModels) * 100}%`}></div>
+            </div>
+            <span class="text-gray-400 text-sm w-12">{contextRanges.below32k}</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-gray-400 text-sm w-20">32K-64K</span>
+            <div class="flex-1 bg-gray-700 rounded-full h-4">
+              <div class="bg-purple-500 h-4 rounded-full" style={`width: ${(contextRanges.from32k / totalModels) * 100}%`}></div>
+            </div>
+            <span class="text-gray-400 text-sm w-12">{contextRanges.from32k}</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-gray-400 text-sm w-20">64K-128K</span>
+            <div class="flex-1 bg-gray-700 rounded-full h-4">
+              <div class="bg-purple-500 h-4 rounded-full" style={`width: ${(contextRanges.from64k / totalModels) * 100}%`}></div>
+            </div>
+            <span class="text-gray-400 text-sm w-12">{contextRanges.from64k}</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-gray-400 text-sm w-20">128K-200K</span>
+            <div class="flex-1 bg-gray-700 rounded-full h-4">
+              <div class="bg-purple-500 h-4 rounded-full" style={`width: ${(contextRanges.from128k / totalModels) * 100}%`}></div>
+            </div>
+            <span class="text-gray-400 text-sm w-12">{contextRanges.from128k}</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-gray-400 text-sm w-20">200K+</span>
+            <div class="flex-1 bg-gray-700 rounded-full h-4">
+              <div class="bg-purple-500 h-4 rounded-full" style={`width: ${(contextRanges.above200k / totalModels) * 100}%`}></div>
+            </div>
+            <span class="text-gray-400 text-sm w-12">{contextRanges.above200k}</span>
+          </div>
+        </div>
+        <div class="mt-4 text-sm text-gray-500">
+          Max context: {maxContext.toLocaleString()} tokens
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

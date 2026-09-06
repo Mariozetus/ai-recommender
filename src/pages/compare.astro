@@ -56,6 +56,12 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
           {t('compare.back').replace('← ', '')}
         </a>
         <button
+          id="save-comparison"
+          class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded font-medium transition"
+        >
+          Save
+        </button>
+        <button
           id="clear-all"
           class="bg-red-900/50 hover:bg-red-800/50 text-red-300 px-4 py-2 rounded font-medium transition border border-red-800"
         >
@@ -326,9 +332,110 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
       </div>
     </div>
   </div>
+
+  <div id="save-modal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="save-modal-overlay"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-gray-800 rounded-lg border border-gray-700 p-6">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-semibold text-white">Save Comparison</h3>
+        <button id="close-save-modal" class="text-gray-400 hover:text-white">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm text-gray-400 mb-2">Name your comparison</label>
+        <input
+          type="text"
+          id="comparison-name"
+          placeholder="My best models"
+          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-teal-500"
+        />
+      </div>
+      <div class="flex gap-3">
+        <button id="confirm-save" class="flex-1 bg-teal-600 hover:bg-teal-500 text-white py-2 rounded font-medium transition">Save</button>
+        <button id="cancel-save" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded font-medium transition">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="saved-section" class="max-w-6xl mx-auto px-4 pb-8">
+    <h2 class="text-xl font-bold text-white mb-4">Saved Comparisons</h2>
+    <div id="saved-list" class="grid md:grid-cols-3 gap-4">
+    </div>
+  </div>
 </Layout>
 
 <script>
+  const currentIds = new URLSearchParams(window.location.search).get('ids')?.split(',').map(decodeURIComponent) || [];
+
+  function renderSavedList() {
+    const saved = JSON.parse(localStorage.getItem('savedComparisons') || '[]');
+    const container = document.getElementById('saved-list');
+    if (!container) return;
+
+    if (saved.length === 0) {
+      container.innerHTML = '<p class="text-gray-400 col-span-3">No saved comparisons yet.</p>';
+      return;
+    }
+
+    container.innerHTML = saved.map((s: any, i: number) => `
+      <div class="bg-gray-800 rounded-lg border border-gray-700 p-4">
+        <div class="flex justify-between items-start mb-3">
+          <h3 class="font-semibold text-white">${s.name}</h3>
+          <button class="delete-saved text-gray-500 hover:text-red-400" data-index="${i}">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          </button>
+        </div>
+        <p class="text-gray-400 text-sm mb-3">${s.ids.length} models</p>
+        <a href="/compare?ids=${s.ids.map(encodeURIComponent).join(',')}" class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition inline-block">Load</a>
+      </div>
+    `).join('');
+
+    container.querySelectorAll('.delete-saved').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const index = parseInt((btn as HTMLElement).dataset.index || '0');
+        saved.splice(index, 1);
+        localStorage.setItem('savedComparisons', JSON.stringify(saved));
+        renderSavedList();
+      });
+    });
+  }
+
+  const saveModal = document.getElementById('save-modal');
+  const comparisonName = document.getElementById('comparison-name') as HTMLInputElement;
+  const saveBtn = document.getElementById('save-comparison');
+  const closeSaveBtn = document.getElementById('close-save-modal');
+  const confirmSaveBtn = document.getElementById('confirm-save');
+  const cancelSaveBtn = document.getElementById('cancel-save');
+  const saveModalOverlay = document.getElementById('save-modal-overlay');
+
+  saveBtn?.addEventListener('click', () => {
+    saveModal?.classList.remove('hidden');
+    comparisonName?.focus();
+  });
+
+  closeSaveBtn?.addEventListener('click', () => saveModal?.classList.add('hidden'));
+  cancelSaveBtn?.addEventListener('click', () => saveModal?.classList.add('hidden'));
+  saveModalOverlay?.addEventListener('click', () => saveModal?.classList.add('hidden'));
+
+  confirmSaveBtn?.addEventListener('click', () => {
+    const name = comparisonName?.value.trim();
+    if (!name) return;
+
+    const saved = JSON.parse(localStorage.getItem('savedComparisons') || '[]');
+    saved.push({ name, ids: currentIds });
+    localStorage.setItem('savedComparisons', JSON.stringify(saved));
+    saveModal?.classList.add('hidden');
+    comparisonName.value = '';
+    renderSavedList();
+  });
+
+  renderSavedList();
+
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const tabId = (btn as HTMLElement).dataset.tab;
