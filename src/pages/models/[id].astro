@@ -3,6 +3,7 @@ export const prerender = false;
 
 import Layout from '../../layouts/Layout.astro';
 import PricingCalculator from '../../components/PricingCalculator.astro';
+import BenchmarkRadar from '../../components/BenchmarkRadar.astro';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
 import { detectLocale, setLocale, t } from '../../i18n/index';
@@ -93,39 +94,42 @@ const relatedModels = models
         </div>
 
         {model.benchmark && (
-          <div class="bg-gray-700/50 rounded-lg p-6 mb-8">
-            <h2 class="text-lg font-semibold mb-4 text-white">{t('model.benchmarks')}</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {model.benchmark.mmlu && (
-                <div class="text-center">
-                  <div class="text-2xl font-bold text-white mb-1">{model.benchmark.mmlu}%</div>
-                  <div class="text-xs text-gray-400">MMLU</div>
-                </div>
-              )}
-              {model.benchmark.mmlu_pro && (
-                <div class="text-center">
-                  <div class="text-2xl font-bold text-white mb-1">{model.benchmark.mmlu_pro}%</div>
-                  <div class="text-xs text-gray-400">MMLU Pro</div>
-                </div>
-              )}
-              {model.benchmark.humaneval && (
-                <div class="text-center">
-                  <div class="text-2xl font-bold text-white mb-1">{model.benchmark.humaneval}%</div>
-                  <div class="text-xs text-gray-400">HumanEval</div>
-                </div>
-              )}
-              {model.benchmark.math && (
-                <div class="text-center">
-                  <div class="text-2xl font-bold text-white mb-1">{model.benchmark.math}%</div>
-                  <div class="text-xs text-gray-400">MATH</div>
-                </div>
-              )}
-              {model.benchmark.arena_elo && (
-                <div class="text-center">
-                  <div class="text-2xl font-bold text-white mb-1">{model.benchmark.arena_elo}</div>
-                  <div class="text-xs text-gray-400">Arena ELO</div>
-                </div>
-              )}
+          <div class="grid md:grid-cols-2 gap-6 mb-8">
+            <BenchmarkRadar benchmarks={model.benchmark} size={280} />
+            <div class="bg-gray-700/50 rounded-lg p-6">
+              <h2 class="text-lg font-semibold mb-4 text-white">{t('model.benchmarks')}</h2>
+              <div class="space-y-3">
+                {model.benchmark.mmlu && (
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">MMLU</span>
+                    <span class="text-white font-mono">{model.benchmark.mmlu}%</span>
+                  </div>
+                )}
+                {model.benchmark.mmlu_pro && (
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">MMLU Pro</span>
+                    <span class="text-white font-mono">{model.benchmark.mmlu_pro}%</span>
+                  </div>
+                )}
+                {model.benchmark.humaneval && (
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">HumanEval</span>
+                    <span class="text-white font-mono">{model.benchmark.humaneval}%</span>
+                  </div>
+                )}
+                {model.benchmark.math && (
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">MATH</span>
+                    <span class="text-white font-mono">{model.benchmark.math}%</span>
+                  </div>
+                )}
+                {model.benchmark.arena_elo && (
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">Arena ELO</span>
+                    <span class="text-white font-mono">{model.benchmark.arena_elo}</span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         )}

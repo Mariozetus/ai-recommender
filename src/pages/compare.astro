@@ -2,12 +2,18 @@
 export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
+import BenchmarkRadar from '../components/BenchmarkRadar.astro';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
+import { detectLocale, setLocale, t } from '../i18n/index';
 
 const url = new URL(Astro.request.url);
 const idsParam = url.searchParams.get('ids') || '';
 let compareIds = idsParam.split(',').filter(Boolean);
+
+const acceptLanguage = Astro.request.headers.get('accept-language');
+const locale = detectLocale(acceptLanguage || undefined);
+setLocale(locale);
 
 const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
 const { models } = JSON.parse(rawData);
@@ -32,231 +38,315 @@ const categoryColors: Record<string, string> = {
 const lowestPrice = Math.min(...compareModels.map((m: any) => m.input_price + m.output_price));
 const highestMMLU = Math.max(...compareModels.filter((m: any) => m.benchmark?.mmlu).map((m: any) => m.benchmark.mmlu));
 const highestContext = Math.max(...compareModels.map((m: any) => m.context_window));
+const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark?.arena_elo).map((m: any) => m.benchmark.arena_elo));
 ---
 
-<Layout title="Compare AI Models">
+<Layout title={t('compare.title')}>
   <div class="max-w-7xl mx-auto px-4 py-8">
     <div class="flex justify-between items-center mb-8">
       <div>
-        <h1 class="text-3xl font-bold mb-2">Compare Models</h1>
-        <p class="text-gray-400">Comparing {compareModels.length} models</p>
+        <h1 class="text-3xl font-bold mb-2">{t('compare.title')}</h1>
+        <p class="text-gray-400">{t('compare.comparing', { count: compareModels.length.toString() })}</p>
       </div>
       <div class="flex gap-3">
         <a
           href="/"
           class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded font-medium transition"
         >
-          Back to Catalog
+          {t('compare.back').replace('← ', '')}
         </a>
         <button
           id="clear-all"
           class="bg-red-900/50 hover:bg-red-800/50 text-red-300 px-4 py-2 rounded font-medium transition border border-red-800"
         >
-          Clear All
+          {t('compare.clear_all')}
         </button>
       </div>
     </div>
 
-    <div class="overflow-x-auto">
-      <table class="w-full bg-gray-800 rounded-lg border border-gray-700">
-        <thead>
-          <tr class="border-b border-gray-700">
-            <th class="text-left p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">Feature</th>
-            {compareModels.map((model: any) => (
-              <th class="text-left p-4 min-w-[220px]">
-                <div class="flex justify-between items-start">
-                  <div class="flex-1">
-                    <a href={`/models/${encodeURIComponent(model.id)}`} class="text-lg font-semibold text-white hover:text-teal-400">
-                      {model.name}
-                    </a>
-                    <p class="text-gray-500 text-sm">{model.provider}</p>
+    <div class="mb-6 border-b border-gray-700">
+      <nav class="flex gap-4" id="tab-nav">
+        <button class="tab-btn active px-4 py-2 text-teal-400 border-b-2 border-teal-400 font-medium" data-tab="overview">Overview</button>
+        <button class="tab-btn px-4 py-2 text-gray-400 hover:text-white border-b-2 border-transparent" data-tab="benchmarks">Benchmarks</button>
+        <button class="tab-btn px-4 py-2 text-gray-400 hover:text-white border-b-2 border-transparent" data-tab="pricing">Pricing</button>
+      </nav>
+    </div>
+
+    <div id="tab-overview" class="tab-content">
+      <div class="overflow-x-auto">
+        <table class="w-full bg-gray-800 rounded-lg border border-gray-700">
+          <thead>
+            <tr class="border-b border-gray-700">
+              <th class="text-left p-4 text-gray-400 font-medium sticky left-0 bg-gray-800 min-w-[140px]">{t('compare.feature')}</th>
+              {compareModels.map((model: any) => (
+                <th class="text-left p-4 min-w-[200px]">
+                  <div class="flex justify-between items-start">
+                    <div class="flex-1">
+                      <a href={`/models/${encodeURIComponent(model.id)}`} class="text-lg font-semibold text-white hover:text-teal-400">
+                        {model.name}
+                      </a>
+                      <p class="text-gray-500 text-sm">{model.provider}</p>
+                    </div>
+                    <button
+                      class="remove-btn text-gray-500 hover:text-red-400 ml-2 p-1"
+                      data-model-id={model.id}
+                      title="Remove"
+                    >
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
                   </div>
-                  <button
-                    class="remove-btn text-gray-500 hover:text-red-400 ml-2 p-1"
-                    data-model-id={model.id}
-                    title="Remove from compare"
+                  <span
+                    class="inline-block mt-2 px-2 py-1 rounded text-xs font-medium text-white"
+                    style={`background-color: ${categoryColors[model.category] || '#374151'}`}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                  </button>
-                </div>
-                <span
-                  class="inline-block mt-2 px-2 py-1 rounded text-xs font-medium text-white"
-                  style={`background-color: ${categoryColors[model.category] || '#374151'}`}
-                >
-                  {model.category}
-                </span>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-b border-gray-700">
-            <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">Context Window</td>
-            {compareModels.map((model: any) => (
-              <td class="p-4">
-                <span class={`font-mono ${model.context_window === highestContext ? 'text-green-400' : 'text-white'}`}>
-                  {model.context_window.toLocaleString()} tokens
-                </span>
-                {model.context_window === highestContext && (
-                  <span class="ml-2 text-xs text-green-400">★ Best</span>
-                )}
-              </td>
-            ))}
-          </tr>
-          <tr class="border-b border-gray-700">
-            <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">Input Price</td>
-            {compareModels.map((model: any) => (
-              <td class="p-4">
-                <span class={`font-mono ${model.input_price === lowestPrice && model.input_price > 0 ? 'text-green-400' : 'text-white'}`}>
-                  ${model.input_price}/1M
-                </span>
-              </td>
-            ))}
-          </tr>
-          <tr class="border-b border-gray-700">
-            <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">Output Price</td>
-            {compareModels.map((model: any) => (
-              <td class="p-4">
-                <span class={`font-mono ${model.output_price === lowestPrice && model.output_price > 0 ? 'text-green-400' : 'text-white'}`}>
-                  ${model.output_price}/1M
-                </span>
-              </td>
-            ))}
-          </tr>
-          <tr class="border-b border-gray-700">
-            <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">Combined Price</td>
-            {compareModels.map((model: any) => {
-              const total = model.input_price + model.output_price;
-              return (
+                    {model.category}
+                  </span>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-700">
+              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.context')}</td>
+              {compareModels.map((model: any) => (
                 <td class="p-4">
-                  <span class={`font-mono ${total === lowestPrice && total > 0 ? 'text-green-400' : 'text-white'}`}>
-                    ${total.toFixed(2)}/1M
+                  <span class={`font-mono ${model.context_window === highestContext ? 'text-green-400' : 'text-white'}`}>
+                    {model.context_window.toLocaleString()}
+                  </span>
+                  {model.context_window === highestContext && (
+                    <span class="ml-2 text-xs text-green-400">★ {t('compare.best')}</span>
+                  )}
+                </td>
+              ))}
+            </tr>
+            <tr class="border-b border-gray-700">
+              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.description')}</td>
+              {compareModels.map((model: any) => (
+                <td class="p-4 text-gray-300 text-sm max-w-xs">{model.description}</td>
+              ))}
+            </tr>
+            <tr class="border-b border-gray-700">
+              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.tags')}</td>
+              {compareModels.map((model: any) => (
+                <td class="p-4">
+                  <div class="flex flex-wrap gap-1">
+                    {model.tags && model.tags.length > 0 ? (
+                      model.tags.slice(0, 4).map((tag: string) => (
+                        <span class="bg-gray-700 text-gray-400 px-2 py-1 rounded text-xs">{tag}</span>
+                      ))
+                    ) : (
+                      <span class="text-gray-500">—</span>
+                    )}
+                  </div>
+                </td>
+              ))}
+            </tr>
+            <tr>
+              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.action')}</td>
+              {compareModels.map((model: any) => (
+                <td class="p-4">
+                  <a
+                    href={model.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-teal-400 hover:text-teal-300 text-sm"
+                  >
+                    {t('model.view_on', { provider: model.provider })} →
+                  </a>
+                </td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="tab-benchmarks" class="tab-content hidden">
+      {compareModels.length <= 4 && (
+        <div class="grid gap-6" style={`grid-template-columns: repeat(${compareModels.length}, minmax(250px, 1fr))`}>
+          {compareModels.map((model: any) => (
+            <div>
+              <h3 class="text-lg font-semibold text-white mb-4">{model.name}</h3>
+              {model.benchmark ? (
+                <BenchmarkRadar benchmarks={model.benchmark} size={220} />
+              ) : (
+                <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 text-center text-gray-400">
+                  No benchmark data available
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+      <div class="overflow-x-auto mt-6">
+        <table class="w-full bg-gray-800 rounded-lg border border-gray-700">
+          <thead>
+            <tr class="border-b border-gray-700">
+              <th class="text-left p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.feature')}</th>
+              {compareModels.map((model: any) => (
+                <th class="text-left p-4 min-w-[160px]">
+                  <span class="text-white font-semibold">{model.name}</span>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {compareModels.some((m: any) => m.benchmark?.mmlu) && (
+              <tr class="border-b border-gray-700">
+                <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">MMLU</td>
+                {compareModels.map((model: any) => (
+                  <td class="p-4">
+                    {model.benchmark?.mmlu ? (
+                      <span class={`font-mono ${model.benchmark.mmlu === highestMMLU ? 'text-green-400' : 'text-white'}`}>
+                        {model.benchmark.mmlu}%
+                      </span>
+                    ) : <span class="text-gray-500">—</span>}
+                  </td>
+                ))}
+              </tr>
+            )}
+            {compareModels.some((m: any) => m.benchmark?.humaneval) && (
+              <tr class="border-b border-gray-700">
+                <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">HumanEval</td>
+                {compareModels.map((model: any) => (
+                  <td class="p-4">
+                    {model.benchmark?.humaneval ? (
+                      <span class="font-mono text-white">{model.benchmark.humaneval}%</span>
+                    ) : <span class="text-gray-500">—</span>}
+                  </td>
+                ))}
+              </tr>
+            )}
+            {compareModels.some((m: any) => m.benchmark?.math) && (
+              <tr class="border-b border-gray-700">
+                <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">MATH</td>
+                {compareModels.map((model: any) => (
+                  <td class="p-4">
+                    {model.benchmark?.math ? (
+                      <span class="font-mono text-white">{model.benchmark.math}%</span>
+                    ) : <span class="text-gray-500">—</span>}
+                  </td>
+                ))}
+              </tr>
+            )}
+            {compareModels.some((m: any) => m.benchmark?.arena_elo) && (
+              <tr class="border-b border-gray-700">
+                <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">Arena ELO</td>
+                {compareModels.map((model: any) => (
+                  <td class="p-4">
+                    {model.benchmark?.arena_elo ? (
+                      <span class={`font-mono ${model.benchmark.arena_elo === highestArenaElo ? 'text-green-400' : 'text-white'}`}>
+                        {model.benchmark.arena_elo}
+                      </span>
+                    ) : <span class="text-gray-500">—</span>}
+                  </td>
+                ))}
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="tab-pricing" class="tab-content hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full bg-gray-800 rounded-lg border border-gray-700">
+          <thead>
+            <tr class="border-b border-gray-700">
+              <th class="text-left p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.feature')}</th>
+              {compareModels.map((model: any) => (
+                <th class="text-left p-4 min-w-[160px]">
+                  <span class="text-white font-semibold">{model.name}</span>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-gray-700">
+              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.context')}</td>
+              {compareModels.map((model: any) => (
+                <td class="p-4">
+                  <span class={`font-mono ${model.context_window === highestContext ? 'text-green-400' : 'text-white'}`}>
+                    {model.context_window.toLocaleString()} {t('common.tokens')}
                   </span>
                 </td>
-              );
-            })}
-          </tr>
-          {compareModels.some((m: any) => m.pricing?.free) && (
+              ))}
+            </tr>
             <tr class="border-b border-gray-700">
-              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">Free Tier</td>
+              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.input_price')}</td>
               {compareModels.map((model: any) => (
                 <td class="p-4">
-                  {model.pricing?.free ? (
-                    <span class="text-green-400">✓ Yes</span>
-                  ) : (
-                    <span class="text-gray-500">—</span>
-                  )}
+                  <span class={`font-mono ${model.input_price === lowestPrice && model.input_price > 0 ? 'text-green-400' : 'text-white'}`}>
+                    ${model.input_price}{t('common.per_1m')}
+                  </span>
                 </td>
               ))}
             </tr>
-          )}
-          <tr class="border-b border-gray-700">
-            <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">Description</td>
-            {compareModels.map((model: any) => (
-              <td class="p-4 text-gray-300 text-sm max-w-xs">{model.description}</td>
-            ))}
-          </tr>
-          {compareModels.some((m: any) => m.benchmark?.mmlu) && (
             <tr class="border-b border-gray-700">
-              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">MMLU</td>
+              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.output_price')}</td>
               {compareModels.map((model: any) => (
                 <td class="p-4">
-                  {model.benchmark?.mmlu ? (
-                    <span class={`font-mono ${model.benchmark.mmlu === highestMMLU ? 'text-green-400' : 'text-white'}`}>
-                      {model.benchmark.mmlu}%
+                  <span class={`font-mono ${model.output_price === lowestPrice && model.output_price > 0 ? 'text-green-400' : 'text-white'}`}>
+                    ${model.output_price}{t('common.per_1m')}
+                  </span>
+                </td>
+              ))}
+            </tr>
+            <tr class="border-b border-gray-700">
+              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.combined_price')}</td>
+              {compareModels.map((model: any) => {
+                const total = model.input_price + model.output_price;
+                return (
+                  <td class="p-4">
+                    <span class={`font-mono ${total === lowestPrice && total > 0 ? 'text-green-400' : 'text-white'}`}>
+                      ${total.toFixed(2)}{t('common.per_1m')}
                     </span>
-                  ) : (
-                    <span class="text-gray-500">—</span>
-                  )}
-                  {model.benchmark?.mmlu === highestMMLU && (
-                    <span class="ml-2 text-xs text-green-400">★ Best</span>
-                  )}
-                </td>
-              ))}
+                  </td>
+                );
+              })}
             </tr>
-          )}
-          {compareModels.some((m: any) => m.benchmark?.humaneval) && (
-            <tr class="border-b border-gray-700">
-              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">HumanEval</td>
-              {compareModels.map((model: any) => (
-                <td class="p-4">
-                  {model.benchmark?.humaneval ? (
-                    <span class="font-mono text-white">{model.benchmark.humaneval}%</span>
-                  ) : (
-                    <span class="text-gray-500">—</span>
-                  )}
-                </td>
-              ))}
-            </tr>
-          )}
-          {compareModels.some((m: any) => m.benchmark?.math) && (
-            <tr class="border-b border-gray-700">
-              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">MATH</td>
-              {compareModels.map((model: any) => (
-                <td class="p-4">
-                  {model.benchmark?.math ? (
-                    <span class="font-mono text-white">{model.benchmark.math}%</span>
-                  ) : (
-                    <span class="text-gray-500">—</span>
-                  )}
-                </td>
-              ))}
-            </tr>
-          )}
-          {compareModels.some((m: any) => m.benchmark?.arena_elo) && (
-            <tr class="border-b border-gray-700">
-              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">Arena ELO</td>
-              {compareModels.map((model: any) => (
-                <td class="p-4">
-                  {model.benchmark?.arena_elo ? (
-                    <span class="font-mono text-white">{model.benchmark.arena_elo}</span>
-                  ) : (
-                    <span class="text-gray-500">—</span>
-                  )}
-                </td>
-              ))}
-            </tr>
-          )}
-          <tr class="border-b border-gray-700">
-            <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">Tags</td>
-            {compareModels.map((model: any) => (
-              <td class="p-4">
-                <div class="flex flex-wrap gap-1">
-                  {model.tags && model.tags.length > 0 ? (
-                    model.tags.slice(0, 5).map((tag: string) => (
-                      <span class="bg-gray-700 text-gray-400 px-2 py-1 rounded text-xs">{tag}</span>
-                    ))
-                  ) : (
-                    <span class="text-gray-500">—</span>
-                  )}
-                </div>
-              </td>
-            ))}
-          </tr>
-          <tr>
-            <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">Action</td>
-            {compareModels.map((model: any) => (
-              <td class="p-4">
-                <a
-                  href={model.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="text-teal-400 hover:text-teal-300 text-sm"
-                >
-                  View on {model.provider} →
-                </a>
-              </td>
-            ))}
-          </tr>
-        </tbody>
-      </table>
+            {compareModels.some((m: any) => m.pricing?.free) && (
+              <tr>
+                <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.free_tier')}</td>
+                {compareModels.map((model: any) => (
+                  <td class="p-4">
+                    {model.pricing?.free ? (
+                      <span class="text-green-400">✓ {t('compare.yes')}</span>
+                    ) : (
+                      <span class="text-gray-500">—</span>
+                    )}
+                  </td>
+                ))}
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </Layout>
 
 <script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabId = (btn as HTMLElement).dataset.tab;
+
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active', 'text-teal-400', 'border-teal-400');
+        b.classList.add('text-gray-400', 'border-transparent');
+      });
+      btn.classList.add('active', 'text-teal-400', 'border-teal-400');
+      btn.classList.remove('text-gray-400', 'border-transparent');
+
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.add('hidden');
+      });
+      document.getElementById(`tab-${tabId}`)?.classList.remove('hidden');
+    });
+  });
+
   document.getElementById('clear-all')?.addEventListener('click', () => {
     localStorage.removeItem('compareIds');
     window.location.href = '/';
