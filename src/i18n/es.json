@@ -1,0 +1,128 @@
+{
+  "layout": {
+    "title": "Recomendador de Modelos AI",
+    "nav": {
+      "catalog": "Catálogo",
+      "browse": "Explorar",
+      "insights": "Estadísticas",
+      "about": "Acerca de"
+    },
+    "footer": "AI Recommender - Datos de OpenRouter"
+  },
+  "home": {
+    "hero": {
+      "title": "Encuentra el modelo AI perfecto",
+      "subtitle": "Descubre, compara y obtén recomendaciones personalizadas para tu caso de uso",
+      "cta_catalog": "Explorar Catálogo",
+      "cta_recommend": "Obtener Recomendaciones"
+    },
+    "stats": {
+      "models": "modelos",
+      "providers": "proveedores",
+      "categories": "categorías"
+    },
+    "categories": {
+      "title": "Explorar por Categoría",
+      "chat": "Chat",
+      "chat_desc": "Modelos de conversación general",
+      "coding": "Código",
+      "coding_desc": "Generación y completado de código",
+      "reasoning": "Razonamiento",
+      "reasoning_desc": "Razonamiento lógico y matemáticas",
+      "image": "Generación de Imágenes",
+      "image_desc": "Crea imágenes desde texto",
+      "embedding": "Embeddings",
+      "embedding_desc": "Embeddings de texto y similitud",
+      "multimodal": "Multimodal",
+      "multimodal_desc": "Múltiples modos de entrada/salida"
+    }
+  },
+  "catalog": {
+    "title": "Catálogo de Modelos AI",
+    "subtitle": "Descubre y compara modelos AI de OpenRouter",
+    "search": {
+      "placeholder": "Buscar modelos...",
+      "button": "Buscar",
+      "clear": "Limpiar"
+    },
+    "filters": {
+      "title": "Filtros",
+      "category": "Categoría",
+      "provider": "Proveedor",
+      "context": "Contexto Máx",
+      "price": "Precio Máx",
+      "all": "Todos"
+    },
+    "sort": {
+      "label": "Ordenar:",
+      "name": "Nombre",
+      "price_low": "Precio: Ascendente",
+      "price_high": "Precio: Descendente",
+      "context": "Ventana de Contexto"
+    },
+    "results": {
+      "showing": "Mostrando {start}-{end} de {total} modelos",
+      "no_results": "Ningún modelo coincide con tus criterios",
+      "try_adjusting": "Intenta ajustar los filtros o términos de búsqueda"
+    },
+    "compare": {
+      "selected": "modelos seleccionados",
+      "compare": "Comparar",
+      "clear": "Limpiar"
+    }
+  },
+  "model": {
+    "back": "← Volver al Catálogo",
+    "pricing": "Precios",
+    "benchmarks": "Benchmarks",
+    "modalities": "Modalidades",
+    "tags": "Etiquetas",
+    "view_on": "Ver en {provider}",
+    "add_compare": "Añadir a Comparar",
+    "source": "Fuente",
+    "last_updated": "Última actualización"
+  },
+  "compare": {
+    "title": "Comparar Modelos",
+    "comparing": "Comparando {count} modelos",
+    "back": "Volver al Catálogo",
+    "clear_all": "Limpiar Todo",
+    "feature": "Característica",
+    "context": "Ventana de Contexto",
+    "input_price": "Precio Input",
+    "output_price": "Precio Output",
+    "combined_price": "Precio Combinado",
+    "free_tier": "Tier Gratuito",
+    "description": "Descripción",
+    "mmlu": "MMLU",
+    "humaneval": "HumanEval",
+    "math": "MATH",
+    "arena_elo": "Arena ELO",
+    "tags": "Etiquetas",
+    "action": "Acción",
+    "best": "Mejor",
+    "yes": "Sí",
+    "no": "No"
+  },
+  "recommend": {
+    "title": "Recomendaciones de Modelos AI",
+    "subtitle": "Recomendaciones personalizadas basadas en tus necesidades",
+    "use_case": "¿Para qué lo usarás?",
+    "max_context": "Ventana de Contexto Máxima",
+    "budget": "Presupuesto Mensual ($)",
+    "features": "Características Preferidas (separadas por coma)",
+    "features_placeholder": "visión, function calling, modo json",
+    "submit": "Obtener Recomendaciones",
+    "results_title": "Top {count} Recomendaciones para {useCase}"
+  },
+  "common": {
+    "tokens": "tokens",
+    "per_1m": "/1M tokens",
+    "loading": "Cargando...",
+    "error": "Algo salió mal",
+    "retry": "Reintentar",
+    "close": "Cerrar",
+    "previous": "Anterior",
+    "next": "Siguiente"
+  }
+}

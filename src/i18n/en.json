@@ -1,0 +1,128 @@
+{
+  "layout": {
+    "title": "AI Model Recommender",
+    "nav": {
+      "catalog": "Catalog",
+      "browse": "Browse",
+      "insights": "Insights",
+      "about": "About"
+    },
+    "footer": "AI Recommender - Data from OpenRouter"
+  },
+  "home": {
+    "hero": {
+      "title": "Find the perfect AI model",
+      "subtitle": "Discover, compare, and get personalized recommendations for your use case",
+      "cta_catalog": "Explore Catalog",
+      "cta_recommend": "Get Recommendations"
+    },
+    "stats": {
+      "models": "models",
+      "providers": "providers",
+      "categories": "categories"
+    },
+    "categories": {
+      "title": "Browse by Category",
+      "chat": "Chat",
+      "chat_desc": "General conversation models",
+      "coding": "Coding",
+      "coding_desc": "Code generation and completion",
+      "reasoning": "Reasoning",
+      "reasoning_desc": "Logical reasoning and math",
+      "image": "Image Generation",
+      "image_desc": "Create images from text",
+      "embedding": "Embedding",
+      "embedding_desc": "Text embeddings and similarity",
+      "multimodal": "Multimodal",
+      "multimodal_desc": "Multiple input/output modes"
+    }
+  },
+  "catalog": {
+    "title": "AI Model Catalog",
+    "subtitle": "Discover and compare AI models from OpenRouter",
+    "search": {
+      "placeholder": "Search models...",
+      "button": "Search",
+      "clear": "Clear"
+    },
+    "filters": {
+      "title": "Filters",
+      "category": "Category",
+      "provider": "Provider",
+      "context": "Max Context",
+      "price": "Max Price",
+      "all": "All"
+    },
+    "sort": {
+      "label": "Sort:",
+      "name": "Name",
+      "price_low": "Price: Low to High",
+      "price_high": "Price: High to Low",
+      "context": "Context Window"
+    },
+    "results": {
+      "showing": "Showing {start}-{end} of {total} models",
+      "no_results": "No models match your criteria",
+      "try_adjusting": "Try adjusting your filters or search terms"
+    },
+    "compare": {
+      "selected": "models selected",
+      "compare": "Compare",
+      "clear": "Clear"
+    }
+  },
+  "model": {
+    "back": "← Back to Catalog",
+    "pricing": "Pricing",
+    "benchmarks": "Benchmarks",
+    "modalities": "Modalities",
+    "tags": "Tags",
+    "view_on": "View on {provider}",
+    "add_compare": "Add to Compare",
+    "source": "Source",
+    "last_updated": "Last updated"
+  },
+  "compare": {
+    "title": "Compare Models",
+    "comparing": "Comparing {count} models",
+    "back": "Back to Catalog",
+    "clear_all": "Clear All",
+    "feature": "Feature",
+    "context": "Context Window",
+    "input_price": "Input Price",
+    "output_price": "Output Price",
+    "combined_price": "Combined Price",
+    "free_tier": "Free Tier",
+    "description": "Description",
+    "mmlu": "MMLU",
+    "humaneval": "HumanEval",
+    "math": "MATH",
+    "arena_elo": "Arena ELO",
+    "tags": "Tags",
+    "action": "Action",
+    "best": "Best",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "recommend": {
+    "title": "AI Model Recommendations",
+    "subtitle": "Personalized recommendations based on your needs",
+    "use_case": "What will you use it for?",
+    "max_context": "Maximum Context Window",
+    "budget": "Monthly Budget ($)",
+    "features": "Preferred Features (comma separated)",
+    "features_placeholder": "vision, function calling, json mode",
+    "submit": "Get Recommendations",
+    "results_title": "Top {count} Recommendations for {useCase}"
+  },
+  "common": {
+    "tokens": "tokens",
+    "per_1m": "/1M tokens",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "close": "Close",
+    "previous": "Previous",
+    "next": "Next"
+  }
+}

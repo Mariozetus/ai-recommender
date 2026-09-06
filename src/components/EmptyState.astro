@@ -1,0 +1,57 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  action?: {
+    label: string;
+    href?: string;
+    onClick?: string;
+  };
+  icon?: 'search' | 'filter' | 'compare' | 'error';
+}
+
+const { title, description, action, icon = 'search' } = Astro.props;
+
+const icons = {
+  search: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />`,
+  filter: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />`,
+  compare: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />`,
+  error: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />`
+};
+---
+
+<div class="bg-gray-800/50 rounded-lg border border-gray-700 p-8 text-center">
+  <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-700/50 mb-4">
+    <svg
+      class="w-8 h-8 text-gray-500"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      set:html={icons[icon]}
+    />
+  </div>
+  <h3 class="text-lg font-semibold text-white mb-2">{title}</h3>
+  {description && (
+    <p class="text-gray-400 text-sm mb-6 max-w-md mx-auto">{description}</p>
+  )}
+  {action && (
+    action.href ? (
+      <a
+        href={action.href}
+        class:list={[
+          'inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition',
+          'bg-teal-600 hover:bg-teal-500 text-white'
+        ]}
+      >
+        {action.label}
+      </a>
+    ) : (
+      <button
+        onclick={action.onClick}
+        class="inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition bg-teal-600 hover:bg-teal-500 text-white"
+      >
+        {action.label}
+      </button>
+    )
+  )}
+</div>

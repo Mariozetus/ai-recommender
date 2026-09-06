@@ -9,7 +9,7 @@ interface Props {
 const { categories, providers, selectedCategory, selectedProvider } = Astro.props;
 ---
 
-<aside class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+<aside class="hidden md:block bg-gray-800 rounded-lg p-6 border border-gray-700 sticky top-24">
   <h2 class="text-lg font-semibold mb-4">Filters</h2>
 
   <div class="mb-6">
@@ -70,3 +70,193 @@ const { categories, providers, selectedCategory, selectedProvider } = Astro.prop
     </select>
   </div>
 </aside>
+
+<div id="filter-drawer" class="fixed inset-0 z-50 hidden">
+  <div id="filter-drawer-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+  <div id="filter-drawer-content" class="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-gray-800 border-l border-gray-700 overflow-y-auto transform translate-x-full transition-transform duration-300">
+    <div class="p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-semibold text-white">Filters</h2>
+        <button
+          id="close-drawer"
+          class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-sm text-gray-400 mb-2">Category</label>
+        <select
+          id="category-filter-mobile"
+          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+        >
+          <option value="">All Categories</option>
+          {categories.map(cat => (
+            <option value={cat} selected={selectedCategory === cat}>
+              {cat.charAt(0).toUpperCase() + cat.slice(1)}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-sm text-gray-400 mb-2">Provider</label>
+        <select
+          id="provider-filter-mobile"
+          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+        >
+          <option value="">All Providers</option>
+          {providers.map(prov => (
+            <option value={prov} selected={selectedProvider === prov}>
+              {prov}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-sm text-gray-400 mb-2">Max Context (tokens)</label>
+        <select
+          id="context-filter-mobile"
+          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+        >
+          <option value="0">Any</option>
+          <option value="32768">32K</option>
+          <option value="65536">64K</option>
+          <option value="131072">128K</option>
+          <option value="200000">200K+</option>
+        </select>
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-sm text-gray-400 mb-2">Max Price ($/1M tokens)</label>
+        <select
+          id="price-filter-mobile"
+          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+        >
+          <option value="0">Any</option>
+          <option value="1">$1</option>
+          <option value="5">$5</option>
+          <option value="10">$10</option>
+          <option value="50">$50</option>
+        </select>
+      </div>
+
+      <div class="flex gap-3">
+        <button
+          id="apply-filters"
+          class="flex-1 bg-teal-600 hover:bg-teal-500 text-white py-3 rounded-lg font-medium transition"
+        >
+          Apply Filters
+        </button>
+        <button
+          id="clear-filters"
+          class="px-4 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition"
+        >
+          Clear
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button
+  id="open-filter-drawer"
+  class="md:hidden fixed bottom-24 left-4 z-40 bg-teal-600 hover:bg-teal-500 text-white p-4 rounded-full shadow-lg transition"
+>
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+  </svg>
+</button>
+
+<script>
+  const drawer = document.getElementById('filter-drawer');
+  const overlay = document.getElementById('filter-drawer-overlay');
+  const content = document.getElementById('filter-drawer-content');
+  const openBtn = document.getElementById('open-filter-drawer');
+  const closeBtn = document.getElementById('close-drawer');
+  const applyBtn = document.getElementById('apply-filters');
+  const clearBtn = document.getElementById('clear-filters');
+
+  function syncFiltersToMobile() {
+    const category = (document.getElementById('category-filter') as HTMLSelectElement)?.value || '';
+    const provider = (document.getElementById('provider-filter') as HTMLSelectElement)?.value || '';
+    const context = (document.getElementById('context-filter') as HTMLSelectElement)?.value || '0';
+    const price = (document.getElementById('price-filter') as HTMLSelectElement)?.value || '0';
+
+    const mobileCategory = document.getElementById('category-filter-mobile') as HTMLSelectElement;
+    const mobileProvider = document.getElementById('provider-filter-mobile') as HTMLSelectElement;
+    const mobileContext = document.getElementById('context-filter-mobile') as HTMLSelectElement;
+    const mobilePrice = document.getElementById('price-filter-mobile') as HTMLSelectElement;
+
+    if (mobileCategory) mobileCategory.value = category;
+    if (mobileProvider) mobileProvider.value = provider;
+    if (mobileContext) mobileContext.value = context;
+    if (mobilePrice) mobilePrice.value = price;
+  }
+
+  function openDrawer() {
+    syncFiltersToMobile();
+    drawer?.classList.remove('hidden');
+    requestAnimationFrame(() => {
+      content?.classList.remove('translate-x-full');
+    });
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    content?.classList.add('translate-x-full');
+    setTimeout(() => {
+      drawer?.classList.add('hidden');
+    }, 300);
+    document.body.style.overflow = '';
+  }
+
+  function applyFilters() {
+    const category = (document.getElementById('category-filter-mobile') as HTMLSelectElement)?.value || '';
+    const provider = (document.getElementById('provider-filter-mobile') as HTMLSelectElement)?.value || '';
+    const context = (document.getElementById('context-filter-mobile') as HTMLSelectElement)?.value || '0';
+    const price = (document.getElementById('price-filter-mobile') as HTMLSelectElement)?.value || '0';
+
+    const desktopCategory = document.getElementById('category-filter') as HTMLSelectElement;
+    const desktopProvider = document.getElementById('provider-filter') as HTMLSelectElement;
+    const desktopContext = document.getElementById('context-filter') as HTMLSelectElement;
+    const desktopPrice = document.getElementById('price-filter') as HTMLSelectElement;
+
+    if (desktopCategory) desktopCategory.value = category;
+    if (desktopProvider) desktopProvider.value = provider;
+    if (desktopContext) desktopContext.value = context;
+    if (desktopPrice) desktopPrice.value = price;
+
+    closeDrawer();
+    updateFilters();
+  }
+
+  function updateFilters() {
+    const category = (document.getElementById('category-filter') as HTMLSelectElement)?.value;
+    const provider = (document.getElementById('provider-filter') as HTMLSelectElement)?.value;
+    const context = (document.getElementById('context-filter') as HTMLSelectElement)?.value;
+    const price = (document.getElementById('price-filter') as HTMLSelectElement)?.value;
+
+    const params = new URLSearchParams(window.location.search);
+    if (category) params.set('category', category); else params.delete('category');
+    if (provider) params.set('provider', provider); else params.delete('provider');
+    if (context && context !== '0') params.set('context', context); else params.delete('context');
+    if (price && price !== '0') params.set('price', price); else params.delete('price');
+    params.delete('page');
+
+    const newUrl = params.toString() ? `/?${params.toString()}` : '/';
+    window.location.href = newUrl;
+  }
+
+  openBtn?.addEventListener('click', openDrawer);
+  closeBtn?.addEventListener('click', closeDrawer);
+  overlay?.addEventListener('click', closeDrawer);
+  applyBtn?.addEventListener('click', applyFilters);
+  clearBtn?.addEventListener('click', () => {
+    window.location.href = '/';
+  });
+</script>
