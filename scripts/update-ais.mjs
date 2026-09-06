@@ -5,6 +5,17 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DATA_PATH = path.join(__dirname, '..', 'data', 'ais.json');
+const ENV_PATH = path.join(__dirname, '..', '.env');
+
+if (fs.existsSync(ENV_PATH)) {
+  const envContent = fs.readFileSync(ENV_PATH, 'utf-8');
+  for (const line of envContent.split('\n')) {
+    const [key, ...valueParts] = line.split('=');
+    if (key && valueParts.length > 0) {
+      process.env[key.trim()] = valueParts.join('=').trim();
+    }
+  }
+}
 
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
 const HUGGINGFACE_TOKEN = process.env.HUGGINGFACE_TOKEN;
@@ -31,7 +42,7 @@ async function fetchOpenRouterModels() {
     name: model.name,
     provider: model.id.split('/')[0],
     description: model.description || `AI model by ${model.id.split('/')[0]}`,
-    source: 'openrouter' as const,
+    source: 'openrouter',
     category: inferCategory(model.id, model.name, model.description),
     context_window: model.context_length || 4096,
     input_price: model.pricing?.input ? parseFloat(model.pricing.input) * 1e6 : 0,
