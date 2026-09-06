@@ -1,0 +1,90 @@
+---
+interface Props {
+  categories: string[];
+}
+
+const { categories } = Astro.props;
+---
+
+<form id="recommender-form" class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+  <h2 class="text-xl font-semibold mb-6">Find Your AI Model</h2>
+
+  <div class="mb-6">
+    <label class="block text-sm text-gray-400 mb-2">What will you use it for?</label>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+      {categories.map(cat => (
+        <label class="cursor-pointer">
+          <input
+            type="radio"
+            name="use_case"
+            value={cat}
+            class="peer hidden"
+            required
+          />
+          <div class="bg-gray-700 border border-gray-600 rounded px-4 py-3 text-center text-sm peer-checked:border-teal-500 peer-checked:bg-teal-900/30 hover:bg-gray-650 transition">
+            {cat.charAt(0).toUpperCase() + cat.slice(1)}
+          </div>
+        </label>
+      ))}
+    </div>
+  </div>
+
+  <div class="mb-6">
+    <label class="block text-sm text-gray-400 mb-2">Maximum Context Window</label>
+    <select
+      name="max_context"
+      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-teal-500"
+    >
+      <option value="32768">32K tokens</option>
+      <option value="65536">64K tokens</option>
+      <option value="131072" selected>128K tokens</option>
+      <option value="200000">200K+ tokens</option>
+    </select>
+  </div>
+
+  <div class="mb-6">
+    <label class="block text-sm text-gray-400 mb-2">Monthly Budget ($)</label>
+    <input
+      type="number"
+      name="max_budget"
+      min="0"
+      step="1"
+      value="50"
+      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-teal-500"
+    />
+  </div>
+
+  <div class="mb-6">
+    <label class="block text-sm text-gray-400 mb-2">Preferred Features (comma separated)</label>
+    <input
+      type="text"
+      name="preferred_features"
+      placeholder="vision, function calling, json mode"
+      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-teal-500"
+    />
+  </div>
+
+  <button
+    type="submit"
+    class="w-full bg-teal-600 hover:bg-teal-500 text-white font-semibold py-3 rounded transition"
+  >
+    Get Recommendations
+  </button>
+</form>
+
+<script>
+  const form = document.getElementById('recommender-form') as HTMLFormElement;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const params = new URLSearchParams();
+    params.set('use_case', formData.get('use_case') as string);
+    params.set('max_context', formData.get('max_context') as string);
+    params.set('max_budget', formData.get('max_budget') as string);
+    const features = formData.get('preferred_features') as string;
+    if (features) {
+      params.set('features', features);
+    }
+    window.location.href = `/recommend?${params.toString()}`;
+  });
+</script>

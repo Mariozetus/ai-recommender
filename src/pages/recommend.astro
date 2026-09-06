@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Recommender from '../components/Recommender.astro';
+import ResultsList from '../components/ResultsList.astro';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
+import type { UserPreferences } from '../lib/types';
+import { sortByScore } from '../lib/scorer';
+
+const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
+const { models } = JSON.parse(rawData);
+
+const url = new URL(Astro.request.url);
+const useCase = url.searchParams.get('use_case') || 'chat';
+const maxContext = parseInt(url.searchParams.get('max_context') || '131072');
+const maxBudget = parseFloat(url.searchParams.get('max_budget') || '50');
+const featuresParam = url.searchParams.get('features') || '';
+const preferredFeatures = featuresParam.split(',').map(f => f.trim()).filter(Boolean);
+
+const prefs: UserPreferences = {
+  use_case: useCase as UserPreferences['use_case'],
+  max_context: maxContext,
+  max_budget: maxBudget,
+  preferred_features: preferredFeatures,
+};
+
+const recommended = sortByScore(models, prefs).slice(0, 12);
+---
+
+<Layout title="AI Recommendations">
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="text-center mb-12">
+      <h1 class="text-4xl font-bold mb-4">AI Model Recommendations</h1>
+      <p class="text-gray-400 text-lg">Personalized recommendations based on your needs</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="md:col-span-1">
+        <Recommender categories={[...new Set(models.map((m: any) => m.category))]} />
+      </div>
+
+      <div class="md:col-span-2">
+        {Astro.request.url.includes('use_case') ? (
+          <ResultsList models={recommended} title={`Top ${recommended.length} Recommendations for ${useCase}`} />
+        ) : (
+          <div class="bg-gray-800 rounded-lg p-8 text-center border border-gray-700">
+            <p class="text-gray-400">Fill out the form to get personalized recommendations.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,72 @@
+---
+interface Props {
+  categories: string[];
+  providers: string[];
+  selectedCategory?: string;
+  selectedProvider?: string;
+}
+
+const { categories, providers, selectedCategory, selectedProvider } = Astro.props;
+---
+
+<aside class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+  <h2 class="text-lg font-semibold mb-4">Filters</h2>
+
+  <div class="mb-6">
+    <label class="block text-sm text-gray-400 mb-2">Category</label>
+    <select
+      id="category-filter"
+      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+    >
+      <option value="">All Categories</option>
+      {categories.map(cat => (
+        <option value={cat} selected={selectedCategory === cat}>
+          {cat.charAt(0).toUpperCase() + cat.slice(1)}
+        </option>
+      ))}
+    </select>
+  </div>
+
+  <div class="mb-6">
+    <label class="block text-sm text-gray-400 mb-2">Provider</label>
+    <select
+      id="provider-filter"
+      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+    >
+      <option value="">All Providers</option>
+      {providers.map(prov => (
+        <option value={prov} selected={selectedProvider === prov}>
+          {prov}
+        </option>
+      ))}
+    </select>
+  </div>
+
+  <div class="mb-6">
+    <label class="block text-sm text-gray-400 mb-2">Max Context (tokens)</label>
+    <select
+      id="context-filter"
+      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+    >
+      <option value="0">Any</option>
+      <option value="32768">32K</option>
+      <option value="65536">64K</option>
+      <option value="131072">128K</option>
+      <option value="200000">200K+</option>
+    </select>
+  </div>
+
+  <div>
+    <label class="block text-sm text-gray-400 mb-2">Max Price ($/1M tokens)</label>
+    <select
+      id="price-filter"
+      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+    >
+      <option value="0">Any</option>
+      <option value="1">$1</option>
+      <option value="5">$5</option>
+      <option value="10">$10</option>
+      <option value="50">$50</option>
+    </select>
+  </div>
+</aside>
