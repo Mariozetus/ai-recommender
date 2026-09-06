@@ -12,6 +12,7 @@ const selectedCategory = url.searchParams.get('category') || '';
 const selectedProvider = url.searchParams.get('provider') || '';
 const maxContext = parseInt(url.searchParams.get('context') || '0');
 const maxPrice = parseFloat(url.searchParams.get('price') || '0');
+const searchQuery = url.searchParams.get('q') || '';
 
 let filtered = models;
 
@@ -26,6 +27,15 @@ if (maxContext > 0) {
 }
 if (maxPrice > 0) {
   filtered = filtered.filter((m: any) => m.input_price <= maxPrice && m.output_price <= maxPrice);
+}
+if (searchQuery) {
+  const q = searchQuery.toLowerCase();
+  filtered = filtered.filter((m: any) =>
+    m.name.toLowerCase().includes(q) ||
+    m.provider.toLowerCase().includes(q) ||
+    m.description.toLowerCase().includes(q) ||
+    m.tags?.some((t: string) => t.toLowerCase().includes(q))
+  );
 }
 
 const categories = [...new Set(models.map((m: any) => m.category))];
@@ -43,9 +53,41 @@ const categoryColors: Record<string, string> = {
 
 <Layout title="AI Model Catalog">
   <div class="max-w-6xl mx-auto px-4 py-8">
-    <div class="text-center mb-12">
+    <div class="text-center mb-8">
       <h1 class="text-4xl font-bold mb-4">AI Model Catalog</h1>
       <p class="text-gray-400 text-lg">Discover and compare AI models from OpenRouter</p>
+    </div>
+
+    <div class="mb-6">
+      <form method="get" action="/">
+        <div class="flex gap-4">
+          <input
+            type="text"
+            name="q"
+            value={searchQuery}
+            placeholder="Search models..."
+            class="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-teal-500"
+          />
+          <button
+            type="submit"
+            class="bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded-lg font-medium transition"
+          >
+            Search
+          </button>
+          {searchQuery && (
+            <a
+              href="/"
+              class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition"
+            >
+              Clear
+            </a>
+          )}
+        </div>
+        <input type="hidden" name="category" value={selectedCategory} />
+        <input type="hidden" name="provider" value={selectedProvider} />
+        <input type="hidden" name="context" value={maxContext || ''} />
+        <input type="hidden" name="price" value={maxPrice || ''} />
+      </form>
     </div>
 
     <div class="grid md:grid-cols-4 gap-8">
@@ -59,6 +101,27 @@ const categoryColors: Record<string, string> = {
       </div>
 
       <div class="md:col-span-3">
+        <div id="compare-bar" class="hidden mb-4 bg-teal-900/30 border border-teal-700 rounded-lg p-4">
+          <div class="flex justify-between items-center">
+            <span id="compare-count" class="text-teal-300">0 models selected for compare</span>
+            <div class="flex gap-2">
+              <a
+                id="compare-link"
+                href="/compare"
+                class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition"
+              >
+                Compare
+              </a>
+              <button
+                id="clear-compare"
+                class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div id="results-count" class="mb-4 text-gray-400">
           Showing {filtered.length} of {models.length} models
         </div>
@@ -66,7 +129,9 @@ const categoryColors: Record<string, string> = {
           {filtered.map((model: any) => (
             <article class="bg-gray-800 rounded-lg p-6 border border-gray-700 transition hover:border-gray-600">
               <div class="flex justify-between items-start mb-3">
-                <h3 class="text-lg font-semibold text-white">{model.name}</h3>
+                <a href={`/models/${encodeURIComponent(model.id)}`} class="hover:text-teal-400">
+                  <h3 class="text-lg font-semibold text-white">{model.name}</h3>
+                </a>
                 <span
                   class="px-2 py-1 rounded text-xs font-medium text-white"
                   style={`background-color: ${categoryColors[model.category] || '#374151'}`}
@@ -82,7 +147,7 @@ const categoryColors: Record<string, string> = {
                 </div>
                 <div>
                   <span class="text-gray-500">Context</span>
-                  <p class="text-gray-300">{model.context_window.toLocaleString()} tokens</p>
+                  <p class="text-gray-300">{model.context_window.toLocaleString()}</p>
                 </div>
                 <div>
                   <span class="text-gray-500">Input</span>
@@ -100,14 +165,20 @@ const categoryColors: Record<string, string> = {
                   ))}
                 </div>
               )}
-              <a
-                href={model.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-block bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition"
-              >
-                View
-              </a>
+              <div class="flex gap-2">
+                <a
+                  href={`/models/${encodeURIComponent(model.id)}`}
+                  class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition"
+                >
+                  Details
+                </a>
+                <button
+                  class="compare-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition"
+                  data-model-id={model.id}
+                >
+                  Compare
+                </button>
+              </div>
             </article>
           ))}
         </div>
@@ -122,24 +193,48 @@ const categoryColors: Record<string, string> = {
 </Layout>
 
 <script>
-  function updateFilters() {
-    const category = (document.getElementById('category-filter') as HTMLSelectElement)?.value;
-    const provider = (document.getElementById('provider-filter') as HTMLSelectElement)?.value;
-    const context = (document.getElementById('context-filter') as HTMLSelectElement)?.value;
-    const price = (document.getElementById('price-filter') as HTMLSelectElement)?.value;
+  let compareIds: string[] = [];
 
-    const params = new URLSearchParams();
-    if (category) params.set('category', category);
-    if (provider) params.set('provider', provider);
-    if (context && context !== '0') params.set('context', context);
-    if (price && price !== '0') params.set('price', price);
+  function updateCompareBar() {
+    const bar = document.getElementById('compare-bar');
+    const count = document.getElementById('compare-count');
+    const link = document.getElementById('compare-link') as HTMLAnchorElement;
 
-    const newUrl = params.toString() ? `?${params.toString()}` : window.location.pathname;
-    window.location.href = newUrl;
+    if (compareIds.length > 0) {
+      bar?.classList.remove('hidden');
+      if (count) count.textContent = `${compareIds.length} models selected for compare`;
+      if (link) link.href = `/compare?ids=${compareIds.join(',')}`;
+    } else {
+      bar?.classList.add('hidden');
+    }
   }
 
-  document.getElementById('category-filter')?.addEventListener('change', updateFilters);
-  document.getElementById('provider-filter')?.addEventListener('change', updateFilters);
-  document.getElementById('context-filter')?.addEventListener('change', updateFilters);
-  document.getElementById('price-filter')?.addEventListener('change', updateFilters);
+  function handleCompareClick(e: Event) {
+    const target = e.target as HTMLElement;
+    const btn = target.closest('.compare-btn') as HTMLButtonElement;
+    if (!btn) return;
+
+    const modelId = btn.dataset.modelId;
+    if (!modelId) return;
+
+    if (!compareIds.includes(modelId)) {
+      compareIds.push(modelId);
+      btn.textContent = 'Added';
+      btn.disabled = true;
+      updateCompareBar();
+    }
+  }
+
+  document.getElementById('clear-compare')?.addEventListener('click', () => {
+    compareIds = [];
+    document.querySelectorAll('.compare-btn').forEach(btn => {
+      (btn as HTMLButtonElement).textContent = 'Compare';
+      (btn as HTMLButtonElement).disabled = false;
+    });
+    updateCompareBar();
+  });
+
+  document.getElementById('results-list')?.addEventListener('click', handleCompareClick);
+
+  updateCompareBar();
 </script>

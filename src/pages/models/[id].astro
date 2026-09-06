@@ -1,0 +1,187 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
+
+const { id } = Astro.params;
+
+const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
+const { models } = JSON.parse(rawData);
+
+const model = models.find((m: any) => m.id === id);
+
+if (!model) {
+  return Astro.redirect('/404');
+}
+
+const categoryColors: Record<string, string> = {
+  chat: '#1e3a5f',
+  coding: '#1a3d1a',
+  reasoning: '#3d1a5c',
+  image: '#3d1a3d',
+  embedding: '#5c3d1a',
+  multimodal: '#1a3d3d',
+};
+---
+
+<Layout title={`${model.name} - AI Model`} description={model.description}>
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <a href="/" class="text-teal-400 hover:text-teal-300 mb-6 inline-block">← Back to Catalog</a>
+
+    <article class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
+      <div class="p-8">
+        <div class="flex justify-between items-start mb-6">
+          <div>
+            <h1 class="text-3xl font-bold text-white mb-2">{model.name}</h1>
+            <p class="text-gray-400">{model.provider}</p>
+          </div>
+          <span
+            class="px-3 py-1 rounded text-sm font-medium text-white"
+            style={`background-color: ${categoryColors[model.category] || '#374151'}`}
+          >
+            {model.category}
+          </span>
+        </div>
+
+        <p class="text-gray-300 text-lg mb-8">{model.description}</p>
+
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <div class="bg-gray-700/50 rounded-lg p-6">
+            <h2 class="text-lg font-semibold mb-4 text-white">Pricing</h2>
+            <div class="space-y-3">
+              <div class="flex justify-between">
+                <span class="text-gray-400">Input</span>
+                <span class="text-white font-mono">${model.input_price}/1M tokens</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-400">Output</span>
+                <span class="text-white font-mono">${model.output_price}/1M tokens</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-400">Context Window</span>
+                <span class="text-white font-mono">{model.context_window.toLocaleString()} tokens</span>
+              </div>
+              {model.pricing?.free && (
+                <div class="flex justify-between">
+                  <span class="text-gray-400">Free Tier</span>
+                  <span class="text-green-400 font-mono">Available</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {model.benchmark && (
+            <div class="bg-gray-700/50 rounded-lg p-6">
+              <h2 class="text-lg font-semibold mb-4 text-white">Benchmarks</h2>
+              <div class="space-y-3">
+                {model.benchmark.mmlu && (
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">MMLU</span>
+                    <span class="text-white font-mono">{model.benchmark.mmlu}%</span>
+                  </div>
+                )}
+                {model.benchmark.mmlu_pro && (
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">MMLU Pro</span>
+                    <span class="text-white font-mono">{model.benchmark.mmlu_pro}%</span>
+                  </div>
+                )}
+                {model.benchmark.humaneval && (
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">HumanEval</span>
+                    <span class="text-white font-mono">{model.benchmark.humaneval}%</span>
+                  </div>
+                )}
+                {model.benchmark.math && (
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">MATH</span>
+                    <span class="text-white font-mono">{model.benchmark.math}%</span>
+                  </div>
+                )}
+                {model.benchmark.arena_elo && (
+                  <div class="flex justify-between">
+                    <span class="text-gray-400">Arena ELO</span>
+                    <span class="text-white font-mono">{model.benchmark.arena_elo}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {model.modalities && (
+          <div class="mb-8">
+            <h2 class="text-lg font-semibold mb-4 text-white">Modalities</h2>
+            <div class="flex flex-wrap gap-2">
+              {model.modalities.text && (
+                <span class="bg-blue-900 text-blue-300 px-3 py-1 rounded text-sm">Text Input</span>
+              )}
+              {model.modalities.image_input && (
+                <span class="bg-pink-900 text-pink-300 px-3 py-1 rounded text-sm">Image Input</span>
+              )}
+              {model.modalities.image_output && (
+                <span class="bg-purple-900 text-purple-300 px-3 py-1 rounded text-sm">Image Output</span>
+              )}
+              {model.modalities.audio_input && (
+                <span class="bg-green-900 text-green-300 px-3 py-1 rounded text-sm">Audio Input</span>
+              )}
+              {model.modalities.audio_output && (
+                <span class="bg-orange-900 text-orange-300 px-3 py-1 rounded text-sm">Audio Output</span>
+              )}
+            </div>
+          </div>
+        )}
+
+        {model.tags && model.tags.length > 0 && (
+          <div class="mb-8">
+            <h2 class="text-lg font-semibold mb-4 text-white">Tags</h2>
+            <div class="flex flex-wrap gap-2">
+              {model.tags.map((tag: string) => (
+                <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded text-sm">{tag}</span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div class="flex gap-4">
+          <a
+            href={model.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded font-medium transition"
+          >
+            View on {model.provider}
+          </a>
+          <button
+            id="compare-btn"
+            data-model-id={model.id}
+            class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded font-medium transition"
+          >
+            Add to Compare
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-gray-900/50 px-8 py-4 border-t border-gray-700">
+        <p class="text-gray-500 text-sm">
+          Source: {model.source} • Last updated: {new Date(model.fetched_at).toLocaleDateString()}
+        </p>
+      </div>
+    </article>
+  </div>
+</Layout>
+
+<script>
+  const compareBtn = document.getElementById('compare-btn');
+  const modelId = compareBtn?.dataset.modelId;
+
+  compareBtn?.addEventListener('click', () => {
+    const compareIds = JSON.parse(localStorage.getItem('compareIds') || '[]');
+    if (!compareIds.includes(modelId)) {
+      compareIds.push(modelId);
+      localStorage.setItem('compareIds', JSON.stringify(compareIds));
+      compareBtn.textContent = 'Added!';
+      compareBtn.disabled = true;
+    }
+  });
+</script>

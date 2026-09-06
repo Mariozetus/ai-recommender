@@ -1,0 +1,185 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
+
+const url = new URL(Astro.request.url);
+const idsParam = url.searchParams.get('ids') || '';
+const compareIds = idsParam.split(',').filter(Boolean);
+
+const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
+const { models } = JSON.parse(rawData);
+
+const compareModels = compareIds
+  .map(id => models.find((m: any) => m.id === decodeURIComponent(id)))
+  .filter(Boolean);
+
+if (compareModels.length === 0) {
+  return Astro.redirect('/');
+}
+
+const categoryColors: Record<string, string> = {
+  chat: '#1e3a5f',
+  coding: '#1a3d1a',
+  reasoning: '#3d1a5c',
+  image: '#3d1a3d',
+  embedding: '#5c3d1a',
+  multimodal: '#1a3d3d',
+};
+---
+
+<Layout title="Compare AI Models">
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-8">
+      <div>
+        <h1 class="text-3xl font-bold mb-2">Compare Models</h1>
+        <p class="text-gray-400">Comparing {compareModels.length} models</p>
+      </div>
+      <a
+        href="/"
+        class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded font-medium transition"
+      >
+        Back to Catalog
+      </a>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full bg-gray-800 rounded-lg border border-gray-700">
+        <thead>
+          <tr class="border-b border-gray-700">
+            <th class="text-left p-4 text-gray-400 font-medium">Feature</th>
+            {compareModels.map((model: any) => (
+              <th class="text-left p-4 min-w-[200px]">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <a href={`/models/${encodeURIComponent(model.id)}`} class="text-lg font-semibold text-white hover:text-teal-400">
+                      {model.name}
+                    </a>
+                    <p class="text-gray-500 text-sm">{model.provider}</p>
+                  </div>
+                  <span
+                    class="px-2 py-1 rounded text-xs font-medium text-white"
+                    style={`background-color: ${categoryColors[model.category] || '#374151'}`}
+                  >
+                    {model.category}
+                  </span>
+                </div>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-gray-700">
+            <td class="p-4 text-gray-400">Description</td>
+            {compareModels.map((model: any) => (
+              <td class="p-4 text-gray-300 text-sm">{model.description}</td>
+            ))}
+          </tr>
+          <tr class="border-b border-gray-700">
+            <td class="p-4 text-gray-400">Context Window</td>
+            {compareModels.map((model: any) => (
+              <td class="p-4 text-white font-mono">{model.context_window.toLocaleString()} tokens</td>
+            ))}
+          </tr>
+          <tr class="border-b border-gray-700">
+            <td class="p-4 text-gray-400">Input Price</td>
+            {compareModels.map((model: any) => (
+              <td class="p-4 text-white font-mono">${model.input_price}/1M</td>
+            ))}
+          </tr>
+          <tr class="border-b border-gray-700">
+            <td class="p-4 text-gray-400">Output Price</td>
+            {compareModels.map((model: any) => (
+              <td class="p-4 text-white font-mono">${model.output_price}/1M</td>
+            ))}
+          </tr>
+          {compareModels.some((m: any) => m.pricing?.free) && (
+            <tr class="border-b border-gray-700">
+              <td class="p-4 text-gray-400">Free Tier</td>
+              {compareModels.map((model: any) => (
+                <td class="p-4">
+                  {model.pricing?.free ? (
+                    <span class="text-green-400">Yes</span>
+                  ) : (
+                    <span class="text-gray-500">No</span>
+                  )}
+                </td>
+              ))}
+            </tr>
+          )}
+          {compareModels.some((m: any) => m.benchmark?.mmlu) && (
+            <tr class="border-b border-gray-700">
+              <td class="p-4 text-gray-400">MMLU</td>
+              {compareModels.map((model: any) => (
+                <td class="p-4 text-white font-mono">
+                  {model.benchmark?.mmlu ? `${model.benchmark.mmlu}%` : '-'}
+                </td>
+              ))}
+            </tr>
+          )}
+          {compareModels.some((m: any) => m.benchmark?.humaneval) && (
+            <tr class="border-b border-gray-700">
+              <td class="p-4 text-gray-400">HumanEval</td>
+              {compareModels.map((model: any) => (
+                <td class="p-4 text-white font-mono">
+                  {model.benchmark?.humaneval ? `${model.benchmark.humaneval}%` : '-'}
+                </td>
+              ))}
+            </tr>
+          )}
+          {compareModels.some((m: any) => m.benchmark?.math) && (
+            <tr class="border-b border-gray-700">
+              <td class="p-4 text-gray-400">MATH</td>
+              {compareModels.map((model: any) => (
+                <td class="p-4 text-white font-mono">
+                  {model.benchmark?.math ? `${model.benchmark.math}%` : '-'}
+                </td>
+              ))}
+            </tr>
+          )}
+          {compareModels.some((m: any) => m.benchmark?.arena_elo) && (
+            <tr class="border-b border-gray-700">
+              <td class="p-4 text-gray-400">Arena ELO</td>
+              {compareModels.map((model: any) => (
+                <td class="p-4 text-white font-mono">
+                  {model.benchmark?.arena_elo || '-'}
+                </td>
+              ))}
+            </tr>
+          )}
+          <tr class="border-b border-gray-700">
+            <td class="p-4 text-gray-400">Tags</td>
+            {compareModels.map((model: any) => (
+              <td class="p-4">
+                <div class="flex flex-wrap gap-1">
+                  {model.tags && model.tags.length > 0 ? (
+                    model.tags.slice(0, 5).map((tag: string) => (
+                      <span class="bg-gray-700 text-gray-400 px-2 py-1 rounded text-xs">{tag}</span>
+                    ))
+                  ) : (
+                    <span class="text-gray-500">-</span>
+                  )}
+                </div>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td class="p-4 text-gray-400">Link</td>
+            {compareModels.map((model: any) => (
+              <td class="p-4">
+                <a
+                  href={model.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-teal-400 hover:text-teal-300 text-sm"
+                >
+                  View on {model.provider} →
+                </a>
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</Layout>
