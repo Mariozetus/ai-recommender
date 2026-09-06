@@ -1,0 +1,357 @@
+---
+export const prerender = false;
+
+import Layout from '../layouts/Layout.astro';
+import FilterBar from '../components/FilterBar.astro';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
+import { detectLocale, setLocale, t } from '../i18n/index';
+
+const acceptLanguage = Astro.request.headers.get('accept-language');
+const locale = detectLocale(acceptLanguage || undefined);
+setLocale(locale);
+
+const ITEMS_PER_PAGE = 24;
+
+const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
+const { models } = JSON.parse(rawData);
+
+const url = new URL(Astro.request.url);
+const selectedCategory = url.searchParams.get('category') || '';
+const selectedProvider = url.searchParams.get('provider') || '';
+const maxContext = parseInt(url.searchParams.get('context') || '0');
+const maxPrice = parseFloat(url.searchParams.get('price') || '0');
+const searchQuery = url.searchParams.get('q') || '';
+const sortBy = url.searchParams.get('sort') || 'name';
+const page = Math.max(1, parseInt(url.searchParams.get('page') || '1'));
+
+let filtered = [...models];
+
+if (selectedCategory) {
+  filtered = filtered.filter((m: any) => m.category === selectedCategory);
+}
+if (selectedProvider) {
+  filtered = filtered.filter((m: any) => m.provider === selectedProvider);
+}
+if (maxContext > 0) {
+  filtered = filtered.filter((m: any) => m.context_window <= maxContext);
+}
+if (maxPrice > 0) {
+  filtered = filtered.filter((m: any) => m.input_price <= maxPrice && m.output_price <= maxPrice);
+}
+if (searchQuery) {
+  const q = searchQuery.toLowerCase();
+  filtered = filtered.filter((m: any) =>
+    m.name.toLowerCase().includes(q) ||
+    m.provider.toLowerCase().includes(q) ||
+    m.description.toLowerCase().includes(q) ||
+    m.tags?.some((t: string) => t.toLowerCase().includes(q))
+  );
+}
+
+switch (sortBy) {
+  case 'price-low':
+    filtered.sort((a, b) => (a.input_price + a.output_price) - (b.input_price + b.output_price));
+    break;
+  case 'price-high':
+    filtered.sort((a, b) => (b.input_price + b.output_price) - (a.input_price + a.output_price));
+    break;
+  case 'context':
+    filtered.sort((a, b) => b.context_window - a.context_window);
+    break;
+  case 'name':
+  default:
+    filtered.sort((a, b) => a.name.localeCompare(b.name));
+    break;
+}
+
+const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+const startIndex = (page - 1) * ITEMS_PER_PAGE;
+const paginatedModels = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+const categories = [...new Set(models.map((m: any) => m.category))];
+const providers = [...new Set(models.map((m: any) => m.provider))];
+
+const categoryColors: Record<string, string> = {
+  chat: '#1e3a5f',
+  coding: '#1a3d1a',
+  reasoning: '#3d1a5c',
+  image: '#3d1a3d',
+  embedding: '#5c3d1a',
+  multimodal: '#1a3d3d',
+};
+
+function buildPageUrl(p: number) {
+  const params = new URLSearchParams();
+  if (selectedCategory) params.set('category', selectedCategory);
+  if (selectedProvider) params.set('provider', selectedProvider);
+  if (maxContext > 0) params.set('context', maxContext.toString());
+  if (maxPrice > 0) params.set('price', maxPrice.toString());
+  if (searchQuery) params.set('q', searchQuery);
+  if (sortBy !== 'name') params.set('sort', sortBy);
+  if (p > 1) params.set('page', p.toString());
+  return params.toString() ? `/catalog?${params.toString()}` : '/catalog';
+}
+---
+
+<Layout title={t('catalog.title')}>
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold mb-4">AI Model Catalog</h1>
+      <p class="text-gray-400 text-lg">Discover and compare AI models from OpenRouter</p>
+    </div>
+
+    <div class="mb-6">
+      <form method="get" action="/catalog">
+        <div class="flex gap-4">
+          <input
+            type="text"
+            name="q"
+            value={searchQuery}
+            placeholder="Search models..."
+            class="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-teal-500"
+          />
+          <button
+            type="submit"
+            class="bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded-lg font-medium transition"
+          >
+            Search
+          </button>
+          {searchQuery && (
+            <a
+              href="/catalog"
+              class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition"
+            >
+              Clear
+            </a>
+          )}
+        </div>
+        <input type="hidden" name="category" value={selectedCategory} />
+        <input type="hidden" name="provider" value={selectedProvider} />
+        <input type="hidden" name="context" value={maxContext || ''} />
+        <input type="hidden" name="price" value={maxPrice || ''} />
+        <input type="hidden" name="sort" value={sortBy} />
+      </form>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-8">
+      <div class="md:col-span-1">
+        <FilterBar
+          categories={categories}
+          providers={providers}
+          selectedCategory={selectedCategory}
+          selectedProvider={selectedProvider}
+        />
+      </div>
+
+      <div class="md:col-span-3">
+        <div id="compare-bar" class="hidden mb-4 bg-teal-900/30 border border-teal-700 rounded-lg p-4">
+          <div class="flex justify-between items-center">
+            <span id="compare-count" class="text-teal-300">0 models selected</span>
+            <div class="flex gap-2">
+              <a
+                id="compare-link"
+                href="/compare"
+                class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition"
+              >
+                Compare
+              </a>
+              <button
+                id="clear-compare"
+                class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center mb-4">
+          <p class="text-gray-400">
+            Showing {startIndex + 1}-{Math.min(startIndex + ITEMS_PER_PAGE, filtered.length)} of {filtered.length} models
+          </p>
+          <form method="get" action="/" class="flex gap-2 items-center">
+            <label class="text-gray-400 text-sm">Sort:</label>
+            <select
+              name="sort"
+              onchange="this.form.submit()"
+              class="bg-gray-800 border border-gray-700 rounded px-3 py-1 text-white text-sm focus:outline-none focus:border-teal-500"
+            >
+              <option value="name" selected={sortBy === 'name'}>Name</option>
+              <option value="price-low" selected={sortBy === 'price-low'}>Price: Low to High</option>
+              <option value="price-high" selected={sortBy === 'price-high'}>Price: High to Low</option>
+              <option value="context" selected={sortBy === 'context'}>Context Window</option>
+            </select>
+            {selectedCategory && <input type="hidden" name="category" value={selectedCategory} />}
+            {selectedProvider && <input type="hidden" name="provider" value={selectedProvider} />}
+            {maxContext > 0 && <input type="hidden" name="context" value={maxContext} />}
+            {maxPrice > 0 && <input type="hidden" name="price" value={maxPrice} />}
+            {searchQuery && <input type="hidden" name="q" value={searchQuery} />}
+            {page > 1 && <input type="hidden" name="page" value={page} />}
+          </form>
+        </div>
+
+        <div id="results-list" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {paginatedModels.map((model: any) => (
+            <article class="bg-gray-800 rounded-lg p-6 border border-gray-700 transition hover:border-gray-600">
+              <div class="flex justify-between items-start mb-3">
+                <a href={`/models/${encodeURIComponent(model.id)}`} class="hover:text-teal-400">
+                  <h3 class="text-lg font-semibold text-white">{model.name}</h3>
+                </a>
+                <span
+                  class="px-2 py-1 rounded text-xs font-medium text-white"
+                  style={`background-color: ${categoryColors[model.category] || '#374151'}`}
+                >
+                  {model.category}
+                </span>
+              </div>
+              <p class="text-gray-400 text-sm mb-4 line-clamp-2">{model.description}</p>
+              <div class="grid grid-cols-2 gap-4 text-sm mb-4">
+                <div>
+                  <span class="text-gray-500">Provider</span>
+                  <p class="text-gray-300">{model.provider}</p>
+                </div>
+                <div>
+                  <span class="text-gray-500">Context</span>
+                  <p class="text-gray-300">{model.context_window.toLocaleString()}</p>
+                </div>
+                <div>
+                  <span class="text-gray-500">Input</span>
+                  <p class="text-gray-300">${model.input_price}/1M</p>
+                </div>
+                <div>
+                  <span class="text-gray-500">Output</span>
+                  <p class="text-gray-300">${model.output_price}/1M</p>
+                </div>
+              </div>
+              {model.tags && model.tags.length > 0 && (
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {model.tags.slice(0, 5).map((tag: string) => (
+                    <span class="bg-gray-700 text-gray-400 px-2 py-1 rounded text-xs">{tag}</span>
+                  ))}
+                </div>
+              )}
+              <div class="flex gap-2">
+                <a
+                  href={`/models/${encodeURIComponent(model.id)}`}
+                  class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition"
+                >
+                  Details
+                </a>
+                <button
+                  class="compare-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition"
+                  data-model-id={model.id}
+                >
+                  Compare
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {filtered.length === 0 && (
+          <div class="bg-gray-800 rounded-lg p-8 text-center border border-gray-700">
+            <p class="text-gray-400">No models match your criteria.</p>
+          </div>
+        )}
+
+        {totalPages > 1 && (
+          <nav class="flex justify-center gap-2 mt-8" aria-label="Pagination">
+            {page > 1 && (
+              <a
+                href={buildPageUrl(page - 1)}
+                class="px-4 py-2 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 text-white"
+              >
+                Previous
+              </a>
+            )}
+            {Array.from({ length: Math.min(7, totalPages) }, (_, i) => {
+              let pageNum: number;
+              if (totalPages <= 7) {
+                pageNum = i + 1;
+              } else if (page <= 4) {
+                pageNum = i + 1;
+              } else if (page >= totalPages - 3) {
+                pageNum = totalPages - 6 + i;
+              } else {
+                pageNum = page - 3 + i;
+              }
+              const isCurrent = pageNum === page;
+              return (
+                <a
+                  href={buildPageUrl(pageNum)}
+                  class={`px-4 py-2 border rounded ${isCurrent ? 'bg-teal-600 border-teal-600 text-white' : 'bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700'}`}
+                >
+                  {pageNum}
+                </a>
+              );
+            })}
+            {page < totalPages && (
+              <a
+                href={buildPageUrl(page + 1)}
+                class="px-4 py-2 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 text-white"
+              >
+                Next
+              </a>
+            )}
+          </nav>
+        )}
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  let compareIds: string[] = JSON.parse(localStorage.getItem('compareIds') || '[]');
+
+  function updateCompareBar() {
+    const bar = document.getElementById('compare-bar');
+    const count = document.getElementById('compare-count');
+    const link = document.getElementById('compare-link') as HTMLAnchorElement;
+
+    if (compareIds.length > 0) {
+      bar?.classList.remove('hidden');
+      if (count) count.textContent = `${compareIds.length} models selected`;
+      if (link) link.href = `/compare?ids=${compareIds.join(',')}`;
+    } else {
+      bar?.classList.add('hidden');
+    }
+
+    document.querySelectorAll('.compare-btn').forEach(btn => {
+      const id = (btn as HTMLButtonElement).dataset.modelId;
+      if (compareIds.includes(id || '')) {
+        btn.textContent = 'Added';
+        (btn as HTMLButtonElement).disabled = true;
+      }
+    });
+  }
+
+  function handleCompareClick(e: Event) {
+    const target = e.target as HTMLElement;
+    const btn = target.closest('.compare-btn') as HTMLButtonElement;
+    if (!btn) return;
+
+    const modelId = btn.dataset.modelId;
+    if (!modelId || compareIds.includes(modelId)) return;
+
+    compareIds.push(modelId);
+    localStorage.setItem('compareIds', JSON.stringify(compareIds));
+    btn.textContent = 'Added';
+    btn.disabled = true;
+    updateCompareBar();
+  }
+
+  document.getElementById('clear-compare')?.addEventListener('click', () => {
+    compareIds = [];
+    localStorage.removeItem('compareIds');
+    document.querySelectorAll('.compare-btn').forEach(btn => {
+      btn.textContent = 'Compare';
+      (btn as HTMLButtonElement).disabled = false;
+    });
+    updateCompareBar();
+  });
+
+  document.getElementById('results-list')?.addEventListener('click', handleCompareClick);
+
+  updateCompareBar();
+</script>
