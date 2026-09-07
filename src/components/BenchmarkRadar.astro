@@ -1,12 +1,24 @@
 ---
 interface Benchmark {
-  mmlu?: number;
-  mmlu_pro?: number;
-  humaneval?: number;
-  math?: number;
-  gpqa?: number;
-  livecodebench?: number;
-  arena_elo?: number;
+  mmlu?: number | null;
+  mmlu_pro?: number | null;
+  mmlu_redux?: number | null;
+  humaneval?: number | null;
+  mbpp?: number | null;
+  math?: number | null;
+  gpqa?: number | null;
+  livecodebench?: number | null;
+  hellaswag?: number | null;
+  truthfulqa?: number | null;
+  winogrande?: number | null;
+  arc_challenge?: number | null;
+  ifeval?: number | null;
+  mt_bench?: number | null;
+  arena_elo?: number | null;
+  chatbot_arena_elo?: number | null;
+  intelligence_index?: number | null;
+  coding_index?: number | null;
+  agentic_index?: number | null;
 }
 
 interface Props {
@@ -21,22 +33,32 @@ const metrics = [
   { key: 'mmlu_pro', label: 'MMLU Pro', max: 100 },
   { key: 'humaneval', label: 'HumanEval', max: 100 },
   { key: 'math', label: 'MATH', max: 100 },
-  { key: 'arena_elo', label: 'Arena ELO', max: 1400 },
+  { key: 'gpqa', label: 'GPQA', max: 100 },
+  { key: 'livecodebench', label: 'LiveCode', max: 100 },
+  { key: 'intelligence_index', label: 'AA Intel', max: 100 },
+  { key: 'coding_index', label: 'AA Coding', max: 100 },
+  { key: 'agentic_index', label: 'AA Agent', max: 100 },
+  { key: 'chatbot_arena_elo', label: 'Arena ELO', max: 1400 },
 ] as const;
 
-const activeMetrics = metrics.filter(m => benchmarks[m.key] !== undefined && benchmarks[m.key] !== null);
+const activeMetrics = metrics.filter(m => {
+  const v = benchmarks[m.key as keyof Benchmark];
+  return v !== undefined && v !== null;
+});
 
 const center = size / 2;
 const radius = size / 2 - 40;
-const angleStep = (2 * Math.PI) / activeMetrics.length;
+
+const effectiveCount = Math.max(activeMetrics.length, 3);
+const angleStep = (2 * Math.PI) / effectiveCount;
 
 const points = activeMetrics.map((m, i) => {
-  const value = benchmarks[m.key as keyof Benchmark] || 0;
+  const value = benchmarks[m.key as keyof Benchmark] as number;
   const normalized = Math.min(value / m.max, 1);
   const angle = i * angleStep - Math.PI / 2;
   const x = center + radius * normalized * Math.cos(angle);
   const y = center + radius * normalized * Math.sin(angle);
-  return { x, y, value, label: m.label };
+  return { x, y, value, label: m.label, key: m.key };
 });
 
 const polygonPoints = points.map(p => `${p.x},${p.y}`).join(' ');
@@ -79,18 +101,18 @@ const gridLevels = [0.25, 0.5, 0.75, 1];
         stroke-width="2"
       />
 
-      {points.map((p, i) => (
+      {points.map((p) => (
         <circle cx={p.x} cy={p.y} r="4" fill="rgb(20,184,166)" />
       ))}
 
-      {labelPoints.map((lp, i) => (
+      {labelPoints.map((lp) => (
         <text
           x={lp.x}
           y={lp.y}
           text-anchor="middle"
           dominant-baseline="middle"
           fill="rgb(156,163,175)"
-          font-size="12"
+          font-size="11"
         >
           {lp.label}
         </text>
@@ -98,11 +120,13 @@ const gridLevels = [0.25, 0.5, 0.75, 1];
     </svg>
   </div>
 
-  <div class="grid grid-cols-2 gap-2 mt-4">
+  <div class="grid grid-cols-2 gap-2 mt-4 text-sm">
     {points.map(p => (
-      <div class="flex justify-between text-sm">
+      <div class="flex justify-between">
         <span class="text-gray-400">{p.label}</span>
-        <span class="text-white font-mono">{typeof p.value === 'number' ? p.value.toFixed(1) : p.value}</span>
+        <span class="text-white font-mono">
+          {p.key === 'chatbot_arena_elo' ? p.value : `${p.value.toFixed(1)}${p.key.endsWith('index') || p.key === 'arena_elo' ? '' : '%'}`}
+        </span>
       </div>
     ))}
   </div>

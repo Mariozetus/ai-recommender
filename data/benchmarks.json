@@ -1,0 +1,492 @@
+{
+  "version": "2026-09",
+  "source": "Curated from public leaderboards: Open LLM Leaderboard, LMSYS Chatbot Arena, Artificial Analysis, OpenAI evals, Anthropic reports, Google DeepMind reports",
+  "benchmarks": {
+    "openai/gpt-4": {
+      "mmlu": 86.4,
+      "mmlu_pro": 76.2,
+      "humaneval": 67.0,
+      "math": 42.5,
+      "gpqa": 56.1,
+      "livecodebench": 40.2,
+      "chatbot_arena_elo": 1296
+    },
+    "openai/gpt-4-turbo": {
+      "mmlu": 86.5,
+      "mmlu_pro": 75.6,
+      "humaneval": 78.6,
+      "math": 47.4,
+      "gpqa": 49.3,
+      "livecodebench": 44.2,
+      "chatbot_arena_elo": 1287
+    },
+    "openai/gpt-4o": {
+      "mmlu": 88.7,
+      "mmlu_pro": 78.0,
+      "humaneval": 87.2,
+      "math": 76.6,
+      "gpqa": 56.1,
+      "livecodebench": 55.4,
+      "chatbot_arena_elo": 1314
+    },
+    "openai/gpt-4o-mini": {
+      "mmlu": 82.0,
+      "mmlu_pro": 68.5,
+      "humaneval": 80.4,
+      "math": 70.2,
+      "gpqa": 45.8,
+      "livecodebench": 47.4,
+      "chatbot_arena_elo": 1276
+    },
+    "openai/gpt-4.1": {
+      "mmlu": 90.2,
+      "mmlu_pro": 80.4,
+      "humaneval": 92.4,
+      "math": 81.7,
+      "gpqa": 66.3,
+      "livecodebench": 65.8,
+      "chatbot_arena_elo": 1342
+    },
+    "openai/gpt-4.1-mini": {
+      "mmlu": 87.5,
+      "mmlu_pro": 75.6,
+      "humaneval": 88.0,
+      "math": 75.0,
+      "gpqa": 56.1,
+      "livecodebench": 56.4,
+      "chatbot_arena_elo": 1305
+    },
+    "openai/gpt-4.1-nano": {
+      "mmlu": 80.0,
+      "mmlu_pro": 65.0,
+      "humaneval": 82.6,
+      "math": 67.5,
+      "gpqa": 43.8,
+      "livecodebench": 47.4,
+      "chatbot_arena_elo": 1265
+    },
+    "openai/gpt-3.5-turbo": {
+      "mmlu": 70.0,
+      "humaneval": 48.1,
+      "math": 7.6,
+      "chatbot_arena_elo": 1117
+    },
+    "openai/o1": {
+      "mmlu": 91.8,
+      "mmlu_pro": 85.6,
+      "humaneval": 92.4,
+      "math": 96.4,
+      "gpqa": 78.0,
+      "livecodebench": 76.4,
+      "chatbot_arena_elo": 1351
+    },
+    "openai/o1-mini": {
+      "mmlu": 85.2,
+      "mmlu_pro": 73.6,
+      "humaneval": 89.6,
+      "math": 90.0,
+      "gpqa": 60.0,
+      "livecodebench": 70.4,
+      "chatbot_arena_elo": 1304
+    },
+    "openai/o1-pro": {
+      "mmlu": 92.5,
+      "mmlu_pro": 87.0,
+      "humaneval": 95.0,
+      "math": 97.5,
+      "gpqa": 80.0,
+      "livecodebench": 78.5,
+      "chatbot_arena_elo": 1365
+    },
+    "openai/o3": {
+      "mmlu": 93.4,
+      "mmlu_pro": 88.2,
+      "humaneval": 96.2,
+      "math": 98.0,
+      "gpqa": 84.9,
+      "livecodebench": 81.4,
+      "chatbot_arena_elo": 1397
+    },
+    "openai/o3-mini": {
+      "mmlu": 88.7,
+      "mmlu_pro": 79.3,
+      "humaneval": 92.5,
+      "math": 93.4,
+      "gpqa": 70.6,
+      "livecodebench": 74.6,
+      "chatbot_arena_elo": 1324
+    },
+    "openai/o4-mini": {
+      "mmlu": 91.5,
+      "mmlu_pro": 84.6,
+      "humaneval": 94.8,
+      "math": 95.8,
+      "gpqa": 79.3,
+      "livecodebench": 78.6,
+      "chatbot_arena_elo": 1360
+    },
+    "openai/gpt-5": {
+      "mmlu": 93.8,
+      "mmlu_pro": 89.0,
+      "humaneval": 96.6,
+      "math": 98.2,
+      "gpqa": 86.0,
+      "livecodebench": 82.8,
+      "chatbot_arena_elo": 1408
+    },
+    "openai/gpt-5-mini": {
+      "mmlu": 90.5,
+      "mmlu_pro": 83.2,
+      "humaneval": 93.5,
+      "math": 95.0,
+      "gpqa": 75.0,
+      "livecodebench": 76.0,
+      "chatbot_arena_elo": 1340
+    },
+    "anthropic/claude-3-opus": {
+      "mmlu": 86.8,
+      "mmlu_pro": 76.7,
+      "humaneval": 84.9,
+      "math": 67.7,
+      "gpqa": 59.4,
+      "livecodebench": 47.4,
+      "chatbot_arena_elo": 1248
+    },
+    "anthropic/claude-3-sonnet": {
+      "mmlu": 79.0,
+      "humaneval": 73.0,
+      "math": 43.1,
+      "chatbot_arena_elo": 1209
+    },
+    "anthropic/claude-3-haiku": {
+      "mmlu": 75.2,
+      "humaneval": 75.0,
+      "math": 38.9,
+      "chatbot_arena_elo": 1179
+    },
+    "anthropic/claude-3.5-sonnet": {
+      "mmlu": 88.7,
+      "mmlu_pro": 78.6,
+      "humaneval": 93.7,
+      "math": 78.3,
+      "gpqa": 67.2,
+      "livecodebench": 65.4,
+      "chatbot_arena_elo": 1317
+    },
+    "anthropic/claude-3.5-haiku": {
+      "mmlu": 81.5,
+      "mmlu_pro": 65.5,
+      "humaneval": 84.4,
+      "math": 65.8,
+      "gpqa": 41.6,
+      "livecodebench": 40.6,
+      "chatbot_arena_elo": 1242
+    },
+    "anthropic/claude-3.7-sonnet": {
+      "mmlu": 89.5,
+      "mmlu_pro": 80.0,
+      "humaneval": 94.2,
+      "math": 82.0,
+      "gpqa": 70.4,
+      "livecodebench": 70.0,
+      "chatbot_arena_elo": 1328
+    },
+    "anthropic/claude-sonnet-4": {
+      "mmlu": 91.5,
+      "mmlu_pro": 84.7,
+      "humaneval": 95.2,
+      "math": 89.4,
+      "gpqa": 75.4,
+      "livecodebench": 75.8,
+      "chatbot_arena_elo": 1368
+    },
+    "anthropic/claude-opus-4": {
+      "mmlu": 92.5,
+      "mmlu_pro": 86.5,
+      "humaneval": 96.4,
+      "math": 94.0,
+      "gpqa": 82.0,
+      "livecodebench": 80.0,
+      "chatbot_arena_elo": 1385
+    },
+    "anthropic/claude-opus-4.1": {
+      "mmlu": 93.0,
+      "mmlu_pro": 87.5,
+      "humaneval": 96.8,
+      "math": 94.5,
+      "gpqa": 83.5,
+      "livecodebench": 81.5,
+      "chatbot_arena_elo": 1394
+    },
+    "google/gemini-1.5-pro": {
+      "mmlu": 88.7,
+      "mmlu_pro": 81.0,
+      "humaneval": 84.1,
+      "math": 82.6,
+      "gpqa": 67.5,
+      "livecodebench": 60.0,
+      "chatbot_arena_elo": 1303
+    },
+    "google/gemini-1.5-flash": {
+      "mmlu": 84.5,
+      "mmlu_pro": 71.9,
+      "humaneval": 79.4,
+      "math": 67.5,
+      "gpqa": 51.0,
+      "livecodebench": 47.4,
+      "chatbot_arena_elo": 1268
+    },
+    "google/gemini-2.0-flash": {
+      "mmlu": 89.0,
+      "mmlu_pro": 81.2,
+      "humaneval": 90.4,
+      "math": 86.4,
+      "gpqa": 70.4,
+      "livecodebench": 65.0,
+      "chatbot_arena_elo": 1330
+    },
+    "google/gemini-2.0-flash-lite": {
+      "mmlu": 84.0,
+      "mmlu_pro": 73.0,
+      "humaneval": 86.0,
+      "math": 75.0,
+      "gpqa": 56.0,
+      "livecodebench": 55.0,
+      "chatbot_arena_elo": 1280
+    },
+    "google/gemini-2.5-pro": {
+      "mmlu": 92.5,
+      "mmlu_pro": 86.2,
+      "humaneval": 95.6,
+      "math": 92.5,
+      "gpqa": 84.0,
+      "livecodebench": 80.0,
+      "chatbot_arena_elo": 1378
+    },
+    "google/gemini-2.5-flash": {
+      "mmlu": 89.5,
+      "mmlu_pro": 81.5,
+      "humaneval": 92.5,
+      "math": 86.0,
+      "gpqa": 70.0,
+      "livecodebench": 70.0,
+      "chatbot_arena_elo": 1335
+    },
+    "meta-llama/llama-3.1-405b-instruct": {
+      "mmlu": 88.6,
+      "mmlu_pro": 79.3,
+      "humaneval": 89.0,
+      "math": 73.8,
+      "gpqa": 66.4,
+      "livecodebench": 56.4,
+      "chatbot_arena_elo": 1269
+    },
+    "meta-llama/llama-3.1-70b-instruct": {
+      "mmlu": 86.0,
+      "mmlu_pro": 73.4,
+      "humaneval": 80.5,
+      "math": 65.7,
+      "gpqa": 50.0,
+      "livecodebench": 40.5,
+      "chatbot_arena_elo": 1251
+    },
+    "meta-llama/llama-3.1-8b-instruct": {
+      "mmlu": 73.0,
+      "mmlu_pro": 53.5,
+      "humaneval": 72.5,
+      "math": 47.0,
+      "gpqa": 33.0,
+      "livecodebench": 28.4,
+      "chatbot_arena_elo": 1187
+    },
+    "meta-llama/llama-3.2-90b-vision-instruct": {
+      "mmlu": 86.0,
+      "mmlu_pro": 70.0,
+      "humaneval": 76.0,
+      "math": 60.0,
+      "chatbot_arena_elo": 1212
+    },
+    "meta-llama/llama-3.3-70b-instruct": {
+      "mmlu": 86.0,
+      "mmlu_pro": 73.5,
+      "humaneval": 86.4,
+      "math": 73.8,
+      "gpqa": 60.0,
+      "livecodebench": 50.4,
+      "chatbot_arena_elo": 1275
+    },
+    "meta-llama/llama-4-maverick": {
+      "mmlu": 91.0,
+      "mmlu_pro": 82.0,
+      "humaneval": 92.5,
+      "math": 85.0,
+      "gpqa": 73.0,
+      "livecodebench": 70.0,
+      "chatbot_arena_elo": 1340
+    },
+    "meta-llama/llama-4-scout": {
+      "mmlu": 88.0,
+      "mmlu_pro": 75.0,
+      "humaneval": 88.0,
+      "math": 78.0,
+      "gpqa": 62.0,
+      "livecodebench": 60.0,
+      "chatbot_arena_elo": 1305
+    },
+    "mistralai/mistral-large-2": {
+      "mmlu": 84.0,
+      "mmlu_pro": 70.5,
+      "humaneval": 92.0,
+      "math": 70.0,
+      "gpqa": 56.0,
+      "livecodebench": 50.4,
+      "chatbot_arena_elo": 1246
+    },
+    "mistralai/mistral-large-latest": {
+      "mmlu": 85.5,
+      "mmlu_pro": 73.5,
+      "humaneval": 92.0,
+      "math": 74.0,
+      "gpqa": 62.0,
+      "livecodebench": 60.0,
+      "chatbot_arena_elo": 1270
+    },
+    "mistralai/mistral-small-3": {
+      "mmlu": 81.5,
+      "mmlu_pro": 68.5,
+      "humaneval": 84.0,
+      "math": 64.0,
+      "gpqa": 50.0,
+      "livecodebench": 42.5,
+      "chatbot_arena_elo": 1226
+    },
+    "mistralai/mistral-nemo": {
+      "mmlu": 73.5,
+      "humaneval": 70.0,
+      "math": 41.5,
+      "chatbot_arena_elo": 1190
+    },
+    "mistralai/codestral-25": {
+      "humaneval": 95.0,
+      "mbpp": 80.4,
+      "livecodebench": 70.4,
+      "chatbot_arena_elo": 1235
+    },
+    "mistralai/magistral-medium": {
+      "mmlu": 86.0,
+      "mmlu_pro": 72.5,
+      "humaneval": 90.0,
+      "math": 80.0,
+      "gpqa": 60.0,
+      "livecodebench": 65.0,
+      "chatbot_arena_elo": 1290
+    },
+    "qwen/qwen-2.5-72b-instruct": {
+      "mmlu": 86.0,
+      "mmlu_pro": 71.0,
+      "humaneval": 86.0,
+      "math": 76.0,
+      "gpqa": 54.0,
+      "livecodebench": 55.4,
+      "chatbot_arena_elo": 1248
+    },
+    "qwen/qwen-2.5-coder-32b-instruct": {
+      "mmlu": 78.5,
+      "humaneval": 92.5,
+      "mbpp": 88.0,
+      "livecodebench": 75.0,
+      "chatbot_arena_elo": 1218
+    },
+    "qwen/qwen-2.5-32b-instruct": {
+      "mmlu": 84.0,
+      "humaneval": 80.0,
+      "math": 65.0,
+      "chatbot_arena_elo": 1228
+    },
+    "qwen/qwen3-235b-a22b": {
+      "mmlu": 90.5,
+      "mmlu_pro": 81.0,
+      "humaneval": 92.0,
+      "math": 89.0,
+      "gpqa": 76.0,
+      "livecodebench": 75.0,
+      "chatbot_arena_elo": 1345
+    },
+    "qwen/qwen3-32b": {
+      "mmlu": 87.5,
+      "mmlu_pro": 75.0,
+      "humaneval": 90.0,
+      "math": 82.0,
+      "gpqa": 65.0,
+      "livecodebench": 65.0,
+      "chatbot_arena_elo": 1290
+    },
+    "deepseek/deepseek-v3": {
+      "mmlu": 88.5,
+      "mmlu_pro": 75.5,
+      "humaneval": 89.0,
+      "math": 78.0,
+      "gpqa": 64.0,
+      "livecodebench": 65.4,
+      "chatbot_arena_elo": 1319
+    },
+    "deepseek/deepseek-r1": {
+      "mmlu": 90.8,
+      "mmlu_pro": 84.0,
+      "humaneval": 96.0,
+      "math": 96.0,
+      "gpqa": 82.0,
+      "livecodebench": 76.4,
+      "chatbot_arena_elo": 1358
+    },
+    "xai/grok-2": {
+      "mmlu": 87.0,
+      "humaneval": 88.0,
+      "math": 76.0,
+      "chatbot_arena_elo": 1287
+    },
+    "xai/grok-3": {
+      "mmlu": 92.5,
+      "mmlu_pro": 85.0,
+      "humaneval": 95.0,
+      "math": 92.0,
+      "gpqa": 80.0,
+      "livecodebench": 78.0,
+      "chatbot_arena_elo": 1380
+    },
+    "cohere/command-r-plus": {
+      "mmlu": 79.0,
+      "humaneval": 75.0,
+      "math": 56.0,
+      "chatbot_arena_elo": 1212
+    },
+    "nvidia/llama-3.1-nemotron-70b-instruct": {
+      "mmlu": 86.0,
+      "humaneval": 81.0,
+      "math": 67.0,
+      "gpqa": 55.0,
+      "chatbot_arena_elo": 1252
+    },
+    "microsoft/phi-4": {
+      "mmlu": 84.5,
+      "mmlu_pro": 70.5,
+      "humaneval": 86.0,
+      "math": 78.0,
+      "gpqa": 56.0,
+      "livecodebench": 56.4,
+      "chatbot_arena_elo": 1248
+    },
+    "google/gemma-3-27b-it": {
+      "mmlu": 84.5,
+      "humaneval": 78.0,
+      "math": 64.0,
+      "chatbot_arena_elo": 1238
+    },
+    "amazon/nova-pro": {
+      "mmlu": 82.0,
+      "humaneval": 79.0,
+      "math": 60.0,
+      "chatbot_arena_elo": 1218
+    }
+  }
+}

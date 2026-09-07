@@ -35,8 +35,21 @@ const AIModelSchema = z.object({
   url: z.string(),
   benchmark: z.object({
     mmlu: z.number().optional().nullable(),
+    mmlu_pro: z.number().optional().nullable(),
+    mmlu_redux: z.number().optional().nullable(),
     humaneval: z.number().optional().nullable(),
+    mbpp: z.number().optional().nullable(),
     math: z.number().optional().nullable(),
+    gpqa: z.number().optional().nullable(),
+    livecodebench: z.number().optional().nullable(),
+    hellaswag: z.number().optional().nullable(),
+    truthfulqa: z.number().optional().nullable(),
+    winogrande: z.number().optional().nullable(),
+    arc_challenge: z.number().optional().nullable(),
+    ifeval: z.number().optional().nullable(),
+    mt_bench: z.number().optional().nullable(),
+    arena_elo: z.number().optional().nullable(),
+    chatbot_arena_elo: z.number().optional().nullable(),
     intelligence_index: z.number().optional().nullable(),
     coding_index: z.number().optional().nullable(),
     agentic_index: z.number().optional().nullable(),
@@ -57,6 +70,10 @@ const AIModelSchema = z.object({
   supported_parameters: z.array(z.string()).optional(),
   max_completion_tokens: z.number().optional().nullable(),
   tokenizer: z.string().optional(),
+  hf_likes: z.number().optional(),
+  hf_downloads: z.number().optional(),
+  hf_id: z.string().optional(),
+  pipeline_tag: z.string().optional().nullable(),
 });
 
 function inferCategory(id, name, description, modalities) {
@@ -118,8 +135,11 @@ async function fetchOpenRouterModels() {
         coding_index: aaBench.coding_index ?? null,
         agentic_index: aaBench.agentic_index ?? null,
       };
-      const hasBench = Object.values(benchmark).some(v => v !== null);
-      const cleanBench = hasBench ? benchmark : null;
+      const cleanBenchmark = Object.fromEntries(
+        Object.entries(benchmark).filter(([_, v]) => v !== null && v !== undefined)
+      );
+      const hasBench = Object.keys(cleanBenchmark).length > 0;
+      const cleanBench = hasBench ? cleanBenchmark : null;
 
       return {
         id: model.id,
@@ -257,6 +277,90 @@ async function mergeWithExisting(newModels, existingModels) {
   return merged;
 }
 
+const HF_CACHE_PATH = path.join(__dirname, '..', 'data', 'hf-cache.json');
+const BENCHMARKS_PATH = path.join(__dirname, '..', 'data', 'benchmarks.json');
+
+function loadHfCache() {
+  if (fs.existsSync(HF_CACHE_PATH)) {
+    try {
+      return JSON.parse(fs.readFileSync(HF_CACHE_PATH, 'utf-8'));
+    } catch {
+      return {};
+    }
+  }
+  return {};
+}
+
+function saveHfCache(cache) {
+  fs.writeFileSync(HF_CACHE_PATH, JSON.stringify(cache, null, 2));
+}
+
+function loadCuratedBenchmarks() {
+  if (!fs.existsSync(BENCHMARKS_PATH)) return {};
+  try {
+    const data = JSON.parse(fs.readFileSync(BENCHMARKS_PATH, 'utf-8'));
+    return data.benchmarks || {};
+  } catch {
+    return {};
+  }
+}
+
+const PROVIDER_TO_HF_ORG = {
+  'meta-llama': ['meta-llama'],
+  'mistralai': ['mistralai'],
+  'google': ['google'],
+  'qwen': ['Qwen'],
+  'deepseek': ['deepseek-ai'],
+  'microsoft': ['microsoft'],
+  'cohere': ['CohereForAI'],
+  'nvidia': ['nvidia'],
+  'ibm-granite': ['ibm-granite'],
+  'baidu': ['baidu'],
+  'tencent': ['Tencent-Hunyuan'],
+  'bytedance': ['ByteDance-Seed'],
+  'xai': ['xai-org'],
+  '01-ai': ['01-ai'],
+  'allenai': ['allenai'],
+  'amazon': ['amazon'],
+};
+
+async function fetchHuggingFaceMetadata(model) {
+  const cache = loadHfCache();
+  if (cache[model.id]) return cache[model.id];
+
+  const provider = model.provider;
+  const modelName = model.id.split('/')[1] || '';
+  if (!modelName) return null;
+
+  const orgCandidates = PROVIDER_TO_HF_ORG[provider] || [provider];
+
+  for (const org of orgCandidates) {
+    const hfId = `${org}/${modelName}`;
+    try {
+      const response = await fetch(`https://huggingface.co/api/models/${hfId}`, {
+        headers: { 'User-Agent': 'ai-recommender-scraper' },
+      });
+
+      if (!response.ok) continue;
+
+      const data = await response.json();
+      const result = {
+        hf_likes: data.likes || 0,
+        hf_downloads: data.downloads || 0,
+        hf_id: hfId,
+        pipeline_tag: data.pipeline_tag || null,
+      };
+
+      cache[model.id] = result;
+      return result;
+    } catch {
+      continue;
+    }
+  }
+
+  return null;
+}
+
 function validateModels(models) {
   const validated = [];
   const errors = [];
@@ -307,7 +411,57 @@ async function main() {
 
   const allNewModels = [...openRouterModels, ...lmsysModels, ...aaModels];
   const mergedModels = await mergeWithExisting(allNewModels, existingModels);
-  const validatedModels = validateModels(mergedModels);
+
+  console.log('Loading curated benchmarks...');
+  const curatedBenchmarks = loadCuratedBenchmarks();
+  console.log(`Loaded benchmarks for ${Object.keys(curatedBenchmarks).length} models`);
+
+  console.log('Fetching HuggingFace metadata...');
+  const hfCache = loadHfCache();
+  let hfUpdated = 0;
+  const enrichedModels = await Promise.all(mergedModels.map(async (model) => {
+    let enriched = { ...model };
+
+    if (curatedBenchmarks[model.id]) {
+      const cb = curatedBenchmarks[model.id];
+      enriched.benchmark = {
+        ...enriched.benchmark,
+        ...cb,
+      };
+      enriched.benchmark = Object.fromEntries(
+        Object.entries(enriched.benchmark).filter(([_, v]) => v !== null && v !== undefined && v !== '')
+      );
+      if (Object.keys(enriched.benchmark).length === 0) {
+        enriched.benchmark = null;
+      }
+    }
+
+    const hfCached = hfCache[model.id];
+    const cacheAge = hfCached ? (Date.now() - hfCached._fetched_at) : Infinity;
+    if (!hfCached || cacheAge > 7 * 24 * 60 * 60 * 1000) {
+      const hf = await fetchHuggingFaceMetadata(model);
+      if (hf) {
+        hfUpdated++;
+        if (hf.hf_likes > 0) enriched.hf_likes = hf.hf_likes;
+        if (hf.hf_downloads > 0) enriched.hf_downloads = hf.hf_downloads;
+        if (hf.hf_id) enriched.hf_id = hf.hf_id;
+        if (hf.pipeline_tag) enriched.pipeline_tag = hf.pipeline_tag;
+        hfCache[model.id] = { ...hf, _fetched_at: Date.now() };
+      }
+    } else if (hfCached) {
+      if (hfCached.hf_likes > 0) enriched.hf_likes = hfCached.hf_likes;
+      if (hfCached.hf_downloads > 0) enriched.hf_downloads = hfCached.hf_downloads;
+      if (hfCached.hf_id) enriched.hf_id = hfCached.hf_id;
+      if (hfCached.pipeline_tag) enriched.pipeline_tag = hfCached.pipeline_tag;
+    }
+
+    return enriched;
+  }));
+
+  saveHfCache(hfCache);
+  console.log(`Updated ${hfUpdated} HuggingFace entries`);
+
+  const validatedModels = validateModels(enrichedModels);
 
   const output = {
     models: validatedModels,
@@ -317,6 +471,8 @@ async function main() {
       openrouter: openRouterModels.length,
       lmsys: lmsysModels.length,
       'artificial-analysis': aaModels.length,
+      huggingface: hfUpdated,
+      curated_benchmarks: Object.keys(curatedBenchmarks).length,
     }
   };
 

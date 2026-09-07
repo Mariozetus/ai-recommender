@@ -11,13 +11,25 @@ export interface AIModel {
   tags: string[];
   url: string;
   benchmark?: {
-    mmlu?: number;
-    mmlu_pro?: number;
-    humaneval?: number;
-    math?: number;
-    gpqa?: number;
-    livecodebench?: number;
-    arena_elo?: number;
+    mmlu?: number | null;
+    mmlu_pro?: number | null;
+    mmlu_redux?: number | null;
+    humaneval?: number | null;
+    mbpp?: number | null;
+    math?: number | null;
+    gpqa?: number | null;
+    livecodebench?: number | null;
+    arena_elo?: number | null;
+    hellaswag?: number | null;
+    truthfulqa?: number | null;
+    winogrande?: number | null;
+    arc_challenge?: number | null;
+    ifeval?: number | null;
+    mt_bench?: number | null;
+    chatbot_arena_elo?: number | null;
+    intelligence_index?: number | null;
+    coding_index?: number | null;
+    agentic_index?: number | null;
   };
   modalities?: {
     text?: boolean;
@@ -25,13 +37,21 @@ export interface AIModel {
     image_output?: boolean;
     audio_input?: boolean;
     audio_output?: boolean;
+    file_input?: boolean;
   };
   pricing?: {
     free?: boolean;
     batch?: boolean;
   };
+  supported_parameters?: string[];
+  max_completion_tokens?: number | null;
+  tokenizer?: string;
   fetched_at: string;
   last_updated?: string;
+  hf_likes?: number;
+  hf_downloads?: number;
+  hf_id?: string;
+  pipeline_tag?: string;
 }
 
 export interface UserPreferences {

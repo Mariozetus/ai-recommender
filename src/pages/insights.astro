@@ -46,6 +46,37 @@ const avgPrice = (models.reduce((s: number, m: any) => s + m.input_price + m.out
 const avgContext = Math.round(models.reduce((s: number, m: any) => s + m.context_window, 0) / models.length);
 const maxContext = Math.max(...models.map((m: any) => m.context_window));
 const minPrice = Math.min(...models.filter((m: any) => m.input_price + m.output_price > 0).map((m: any) => m.input_price + m.output_price));
+
+const modelsWithBench = models.filter((m: any) => m.benchmark !== null && m.benchmark !== undefined);
+const modelsWithHf = models.filter((m: any) => m.hf_likes !== undefined);
+
+const topMmlu = modelsWithBench
+  .filter((m: any) => typeof m.benchmark.mmlu === 'number')
+  .sort((a: any, b: any) => b.benchmark.mmlu - a.benchmark.mmlu)
+  .slice(0, 10);
+
+const topHumaneval = modelsWithBench
+  .filter((m: any) => typeof m.benchmark.humaneval === 'number')
+  .sort((a: any, b: any) => b.benchmark.humaneval - a.benchmark.humaneval)
+  .slice(0, 10);
+
+const topArena = modelsWithBench
+  .filter((m: any) => typeof m.benchmark.chatbot_arena_elo === 'number')
+  .sort((a: any, b: any) => b.benchmark.chatbot_arena_elo - a.benchmark.chatbot_arena_elo)
+  .slice(0, 10);
+
+const topHfLikes = modelsWithHf
+  .sort((a: any, b: any) => (b.hf_likes || 0) - (a.hf_likes || 0))
+  .slice(0, 10);
+
+const benchmarkStats: Record<string, number> = {};
+modelsWithBench.forEach((m: any) => {
+  Object.keys(m.benchmark).forEach(k => {
+    if (typeof m.benchmark[k] === 'number') {
+      benchmarkStats[k] = (benchmarkStats[k] || 0) + 1;
+    }
+  });
+});
 ---
 
 <Layout title="Insights - AI Model Statistics">
@@ -182,5 +213,125 @@ const minPrice = Math.min(...models.filter((m: any) => m.input_price + m.output_
         </div>
       </div>
     </div>
+
+    <section class="mt-12">
+      <h2 class="text-2xl font-bold text-white mb-6">Top por benchmark</h2>
+      <div class="grid md:grid-cols-3 gap-6 mb-8">
+        <div class="bg-gray-800 rounded-lg border border-gray-700 p-6">
+          <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <span class="px-2 py-1 rounded text-xs bg-teal-900/50 border border-teal-700 text-teal-300">Top 10</span>
+            MMLU
+          </h3>
+          <ol class="space-y-2 text-sm">
+            {topMmlu.map((m: any, i: number) => (
+              <li class="flex justify-between items-center">
+                <a href={`/models/${m.provider}/${m.id.split('/')[1] || ''}`} class="text-gray-300 hover:text-teal-400 truncate flex-1">
+                  {i + 1}. {m.name}
+                </a>
+                <span class="text-teal-400 font-mono ml-2">{m.benchmark.mmlu}%</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div class="bg-gray-800 rounded-lg border border-gray-700 p-6">
+          <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <span class="px-2 py-1 rounded text-xs bg-teal-900/50 border border-teal-700 text-teal-300">Top 10</span>
+            HumanEval
+          </h3>
+          <ol class="space-y-2 text-sm">
+            {topHumaneval.map((m: any, i: number) => (
+              <li class="flex justify-between items-center">
+                <a href={`/models/${m.provider}/${m.id.split('/')[1] || ''}`} class="text-gray-300 hover:text-teal-400 truncate flex-1">
+                  {i + 1}. {m.name}
+                </a>
+                <span class="text-teal-400 font-mono ml-2">{m.benchmark.humaneval}%</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div class="bg-gray-800 rounded-lg border border-gray-700 p-6">
+          <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <span class="px-2 py-1 rounded text-xs bg-teal-900/50 border border-teal-700 text-teal-300">Top 10</span>
+            Arena ELO
+          </h3>
+          <ol class="space-y-2 text-sm">
+            {topArena.map((m: any, i: number) => (
+              <li class="flex justify-between items-center">
+                <a href={`/models/${m.provider}/${m.id.split('/')[1] || ''}`} class="text-gray-300 hover:text-teal-400 truncate flex-1">
+                  {i + 1}. {m.name}
+                </a>
+                <span class="text-teal-400 font-mono ml-2">{m.benchmark.chatbot_arena_elo}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-gray-800 rounded-lg border border-gray-700 p-6">
+          <h3 class="text-lg font-semibold text-white mb-4">Cobertura de benchmarks</h3>
+          <div class="space-y-2 text-sm">
+            {Object.entries(benchmarkStats).sort((a, b) => b[1] - a[1]).slice(0, 15).map(([key, count]) => {
+              const labels: Record<string, string> = {
+                mmlu: 'MMLU',
+                mmlu_pro: 'MMLU Pro',
+                mmlu_redux: 'MMLU Redux',
+                humaneval: 'HumanEval',
+                mbpp: 'MBPP',
+                math: 'MATH',
+                gpqa: 'GPQA',
+                livecodebench: 'LiveCodeBench',
+                hellaswag: 'HellaSwag',
+                truthfulqa: 'TruthfulQA',
+                winogrande: 'Winogrande',
+                arc_challenge: 'ARC-Challenge',
+                ifeval: 'IFEval',
+                mt_bench: 'MT-Bench',
+                arena_elo: 'Arena ELO',
+                chatbot_arena_elo: 'Chatbot Arena ELO',
+                intelligence_index: 'Intelligence Index',
+                coding_index: 'Coding Index',
+                agentic_index: 'Agentic Index',
+              };
+              return (
+                <div class="flex justify-between items-center">
+                  <span class="text-gray-400">{labels[key] || key}</span>
+                  <div class="flex items-center gap-2">
+                    <div class="w-32 bg-gray-700 rounded h-2">
+                      <div class="bg-teal-500 h-2 rounded" style={`width: ${(count / totalModels) * 100}%`}></div>
+                    </div>
+                    <span class="text-gray-300 w-10 text-right font-mono">{count}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div class="bg-gray-800 rounded-lg border border-gray-700 p-6">
+          <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <svg class="w-4 h-4 text-yellow-400" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+            </svg>
+            Top 10 HuggingFace (Likes)
+          </h3>
+          <ol class="space-y-2 text-sm">
+            {topHfLikes.map((m: any, i: number) => (
+              <li class="flex justify-between items-center">
+                <a href={`/models/${m.provider}/${m.id.split('/')[1] || ''}`} class="text-gray-300 hover:text-yellow-400 truncate flex-1">
+                  {i + 1}. {m.name}
+                </a>
+                <span class="text-yellow-400 font-mono ml-2">{(m.hf_likes || 0).toLocaleString()} ❤</span>
+              </li>
+            ))}
+          </ol>
+          <p class="text-xs text-gray-500 mt-4">
+            {modelsWithHf.length} modelos con datos de HuggingFace · {modelsWithBench.length} con benchmarks
+          </p>
+        </div>
+      </div>
+    </section>
   </div>
 </Layout>

@@ -211,56 +211,85 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
             <BenchmarkRadar benchmarks={model.benchmark} size={280} />
             <div class="bg-gray-700/50 rounded-lg p-6">
               <h2 class="text-lg font-semibold mb-4 text-white">Benchmarks</h2>
-              <div class="space-y-3">
-                {model.benchmark.mmlu && (
-                  <div class="flex justify-between">
-                    <span class="text-gray-400">MMLU</span>
-                    <span class="text-white font-mono">{model.benchmark.mmlu}%</span>
-                  </div>
-                )}
-                {model.benchmark.mmlu_pro && (
-                  <div class="flex justify-between">
-                    <span class="text-gray-400">MMLU Pro</span>
-                    <span class="text-white font-mono">{model.benchmark.mmlu_pro}%</span>
-                  </div>
-                )}
-                {model.benchmark.humaneval && (
-                  <div class="flex justify-between">
-                    <span class="text-gray-400">HumanEval</span>
-                    <span class="text-white font-mono">{model.benchmark.humaneval}%</span>
-                  </div>
-                )}
-                {model.benchmark.math && (
-                  <div class="flex justify-between">
-                    <span class="text-gray-400">MATH</span>
-                    <span class="text-white font-mono">{model.benchmark.math}%</span>
-                  </div>
-                )}
-                {model.benchmark.arena_elo && (
-                  <div class="flex justify-between">
-                    <span class="text-gray-400">Arena ELO</span>
-                    <span class="text-white font-mono">{model.benchmark.arena_elo}</span>
-                  </div>
-                )}
-                {model.benchmark.intelligence_index && (
-                  <div class="flex justify-between">
-                    <span class="text-gray-400">Intelligence Index</span>
-                    <span class="text-teal-400 font-mono">{model.benchmark.intelligence_index}</span>
-                  </div>
-                )}
-                {model.benchmark.coding_index && (
-                  <div class="flex justify-between">
-                    <span class="text-gray-400">Coding Index</span>
-                    <span class="text-teal-400 font-mono">{model.benchmark.coding_index}</span>
-                  </div>
-                )}
-                {model.benchmark.agentic_index && (
-                  <div class="flex justify-between">
-                    <span class="text-gray-400">Agentic Index</span>
-                    <span class="text-teal-400 font-mono">{model.benchmark.agentic_index}</span>
-                  </div>
-                )}
+              <div class="space-y-2 max-h-80 overflow-y-auto pr-2">
+                {Object.entries(model.benchmark).map(([key, value]) => {
+                  if (value === null || value === undefined) return null;
+                  const labels: Record<string, string> = {
+                    mmlu: 'MMLU',
+                    mmlu_pro: 'MMLU Pro',
+                    mmlu_redux: 'MMLU Redux',
+                    humaneval: 'HumanEval',
+                    mbpp: 'MBPP',
+                    math: 'MATH',
+                    gpqa: 'GPQA',
+                    livecodebench: 'LiveCodeBench',
+                    hellaswag: 'HellaSwag',
+                    truthfulqa: 'TruthfulQA',
+                    winogrande: 'Winogrande',
+                    arc_challenge: 'ARC-Challenge',
+                    ifeval: 'IFEval',
+                    mt_bench: 'MT-Bench',
+                    arena_elo: 'Arena ELO',
+                    chatbot_arena_elo: 'Chatbot Arena ELO',
+                    intelligence_index: 'Intelligence Index',
+                    coding_index: 'Coding Index',
+                    agentic_index: 'Agentic Index',
+                  };
+                  const label = labels[key] || key;
+                  const isIndex = key.endsWith('_index') || key === 'arena_elo' || key === 'chatbot_arena_elo';
+                  const isHf = ['hf_likes', 'hf_downloads'].includes(key);
+                  return (
+                    <div class="flex justify-between items-center text-sm">
+                      <span class="text-gray-400">{label}</span>
+                      <span class={`font-mono ${isIndex ? 'text-teal-400' : 'text-white'}`}>
+                        {isHf && typeof value === 'number' && value > 1000
+                          ? value.toLocaleString()
+                          : typeof value === 'number' && !isIndex
+                          ? `${value.toFixed(1)}%`
+                          : String(value)}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
+            </div>
+          </div>
+        )}
+
+        {(model.hf_likes || model.hf_downloads || model.hf_id) && (
+          <div class="mb-8 bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border border-yellow-700/50 rounded-lg p-5">
+            <h3 class="text-sm font-semibold text-yellow-300 mb-3 flex items-center gap-2">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+              </svg>
+              Datos de HuggingFace
+            </h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {model.hf_likes !== undefined && (
+                <div>
+                  <div class="text-xs text-gray-500">Likes</div>
+                  <div class="text-lg font-semibold text-white">{model.hf_likes.toLocaleString()}</div>
+                </div>
+              )}
+              {model.hf_downloads !== undefined && (
+                <div>
+                  <div class="text-xs text-gray-500">Descargas</div>
+                  <div class="text-lg font-semibold text-white">{model.hf_downloads.toLocaleString()}</div>
+                </div>
+              )}
+              {model.hf_id && (
+                <div>
+                  <div class="text-xs text-gray-500">HF ID</div>
+                  <a
+                    href={`https://huggingface.co/${model.hf_id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-sm text-yellow-300 hover:text-yellow-200 truncate inline-block max-w-full"
+                  >
+                    {model.hf_id} ↗
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         )}
