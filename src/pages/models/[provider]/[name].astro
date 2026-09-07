@@ -1,27 +1,35 @@
 ---
 export const prerender = false;
 
-import Layout from '../../layouts/Layout.astro';
-import PricingCalculator from '../../components/PricingCalculator.astro';
-import BenchmarkRadar from '../../components/BenchmarkRadar.astro';
+import Layout from '../../../layouts/Layout.astro';
+import PricingCalculator from '../../../components/PricingCalculator.astro';
+import BenchmarkRadar from '../../../components/BenchmarkRadar.astro';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
-import { detectLocale, setLocale, t } from '../../i18n/index';
+import { detectLocale, setLocale, t } from '../../../i18n/index';
+import { sanitizeModel } from '../../../lib/sanitize';
 
-const { id } = Astro.params;
+const { provider, name } = Astro.params;
 
 const acceptLanguage = Astro.request.headers.get('accept-language');
 const locale = detectLocale(acceptLanguage || undefined);
 setLocale(locale);
 
+if (!provider || !name) {
+  return new Response('Not Found', { status: 404 });
+}
+
 const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
 const { models } = JSON.parse(rawData);
 
-const model = models.find((m: any) => m.id === id);
+const modelId = `${provider}/${name}`;
+const rawModel = models.find((m: any) => m.id === modelId);
 
-if (!model) {
-  return Astro.redirect('/404');
+if (!rawModel) {
+  return new Response('Not Found', { status: 404 });
 }
+
+const model = sanitizeModel(rawModel);
 
 const categoryColors: Record<string, string> = {
   chat: '#1e3a5f',
@@ -66,11 +74,25 @@ const useCaseMap: Record<string, { slug: string; title: string }[]> = {
 };
 
 const useCases = useCaseMap[model.category] || [];
+
+const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 ---
 
 <Layout title={`${model.name} - AI Model`} description={model.description}>
   <div class="max-w-6xl mx-auto px-4 py-8">
-    <a href="/catalog" class="text-teal-400 hover:text-teal-300 mb-6 inline-block">← Volver al catálogo</a>
+    <nav class="text-sm text-gray-500 mb-6">
+      <a href="/" class="hover:text-teal-400">Inicio</a>
+      <span class="mx-2">/</span>
+      <a href="/catalog" class="hover:text-teal-400">Catálogo</a>
+      <span class="mx-2">/</span>
+      <a href={`/provider/${model.provider}`} class="hover:text-teal-400">{model.provider}</a>
+      <span class="mx-2">/</span>
+      <span class="text-gray-400">{model.name}</span>
+    </nav>
 
     <article class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
       <div class="p-8">
@@ -81,12 +103,19 @@ const useCases = useCaseMap[model.category] || [];
               <a href={`/provider/${model.provider}`} class="hover:text-teal-400">{model.provider}</a>
             </p>
           </div>
-          <span
-            class="px-3 py-1 rounded text-sm font-medium text-white"
-            style={`background-color: ${categoryColors[model.category] || '#374151'}`}
-          >
-            {model.category}
-          </span>
+          <div class="flex gap-2">
+            {model.pricing?.free && (
+              <span class="px-3 py-1 rounded text-sm font-medium bg-green-900/50 border border-green-700 text-green-300">
+                FREE
+              </span>
+            )}
+            <span
+              class="px-3 py-1 rounded text-sm font-medium text-white"
+              style={`background-color: ${categoryColors[model.category] || '#374151'}`}
+            >
+              {model.category}
+            </span>
+          </div>
         </div>
 
         <p class="text-gray-300 text-lg mb-8">{model.description}</p>
@@ -112,19 +141,19 @@ const useCases = useCaseMap[model.category] || [];
 
         <div class="grid md:grid-cols-2 gap-6 mb-8">
           <div class="bg-gray-700/50 rounded-lg p-6">
-            <h2 class="text-lg font-semibold mb-4 text-white">{t('model.pricing')}</h2>
+            <h2 class="text-lg font-semibold mb-4 text-white">Precios</h2>
             <div class="space-y-3">
               <div class="flex justify-between">
                 <span class="text-gray-400">Input</span>
-                <span class="text-white font-mono">${model.input_price}{t('common.per_1m')}</span>
+                <span class="text-white font-mono">${model.input_price.toFixed(2)}/1M tokens</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-gray-400">Output</span>
-                <span class="text-white font-mono">${model.output_price}{t('common.per_1m')}</span>
+                <span class="text-white font-mono">${model.output_price.toFixed(2)}/1M tokens</span>
               </div>
               <div class="flex justify-between">
                 <span class="text-gray-400">Context Window</span>
-                <span class="text-white font-mono">{model.context_window.toLocaleString()} {t('common.tokens')}</span>
+                <span class="text-white font-mono">{model.context_window.toLocaleString()} tokens</span>
               </div>
               {model.max_completion_tokens && (
                 <div class="flex justify-between">
@@ -144,6 +173,12 @@ const useCases = useCaseMap[model.category] || [];
                   <span class="text-teal-400 font-mono">Sí (50% descuento)</span>
                 </div>
               )}
+              {model.tokenizer && (
+                <div class="flex justify-between">
+                  <span class="text-gray-400">Tokenizer</span>
+                  <span class="text-white font-mono">{model.tokenizer}</span>
+                </div>
+              )}
             </div>
           </div>
 
@@ -159,7 +194,7 @@ const useCases = useCaseMap[model.category] || [];
           <div class="grid md:grid-cols-2 gap-6 mb-8">
             <BenchmarkRadar benchmarks={model.benchmark} size={280} />
             <div class="bg-gray-700/50 rounded-lg p-6">
-              <h2 class="text-lg font-semibold mb-4 text-white">{t('model.benchmarks')}</h2>
+              <h2 class="text-lg font-semibold mb-4 text-white">Benchmarks</h2>
               <div class="space-y-3">
                 {model.benchmark.mmlu && (
                   <div class="flex justify-between">
@@ -216,7 +251,7 @@ const useCases = useCaseMap[model.category] || [];
 
         {model.modalities && (
           <div class="mb-8">
-            <h2 class="text-lg font-semibold mb-4 text-white">{t('model.modalities')}</h2>
+            <h2 class="text-lg font-semibold mb-4 text-white">Modalidades</h2>
             <div class="flex flex-wrap gap-2">
               {model.modalities.text && (
                 <span class="bg-blue-900 text-blue-300 px-3 py-1 rounded text-sm">Text Input/Output</span>
@@ -242,7 +277,7 @@ const useCases = useCaseMap[model.category] || [];
 
         {model.supported_parameters && model.supported_parameters.length > 0 && (
           <div class="mb-8">
-            <h2 class="text-lg font-semibold mb-4 text-white">Capacidades</h2>
+            <h2 class="text-lg font-semibold mb-4 text-white">Capacidades técnicas</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
               {model.supported_parameters.map((param: string) => (
                 <span class="bg-gray-900/50 border border-gray-700 text-gray-300 px-3 py-2 rounded text-sm flex items-center gap-2">
@@ -256,9 +291,22 @@ const useCases = useCaseMap[model.category] || [];
           </div>
         )}
 
+        {model.supported_languages && model.supported_languages.length > 0 && (
+          <div class="mb-8">
+            <h2 class="text-lg font-semibold mb-4 text-white">Idiomas soportados</h2>
+            <div class="flex flex-wrap gap-2">
+              {model.supported_languages.map(lang => (
+                <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded text-sm">
+                  {lang.flag} {lang.name}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
         {model.tags && model.tags.length > 0 && (
           <div class="mb-8">
-            <h2 class="text-lg font-semibold mb-4 text-white">{t('model.tags')}</h2>
+            <h2 class="text-lg font-semibold mb-4 text-white">Tags</h2>
             <div class="flex flex-wrap gap-2">
               {model.tags.map((tag: string) => (
                 <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded text-sm">{tag}</span>
@@ -288,7 +336,7 @@ const useCases = useCaseMap[model.category] || [];
 
       <div class="bg-gray-900/50 px-8 py-4 border-t border-gray-700">
         <p class="text-gray-500 text-sm">
-          Fuente: {model.source} · Actualizado: {new Date(model.fetched_at).toLocaleDateString()}
+          Fuente: {model.source} · Actualizado: {formattedDate}
         </p>
       </div>
     </article>
@@ -298,7 +346,7 @@ const useCases = useCaseMap[model.category] || [];
         <h2 class="text-xl font-bold text-white mb-6">Modelos similares</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {relatedModels.map((m: any) => (
-            <a href={`/models/${encodeURIComponent(m.id)}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition">
+            <a href={`/models/${m.provider}/${encodeURIComponent(m.id.split('/')[1] || '')}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition">
               <h3 class="font-semibold text-white mb-1 truncate">{m.name}</h3>
               <p class="text-gray-500 text-sm mb-2">{m.provider}</p>
               <p class="text-gray-400 text-xs">${(m.input_price + m.output_price).toFixed(2)}/1M</p>
@@ -313,7 +361,7 @@ const useCases = useCaseMap[model.category] || [];
         <h2 class="text-xl font-bold text-white mb-6">Otros modelos de {model.provider}</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {sameProvider.map((m: any) => (
-            <a href={`/models/${encodeURIComponent(m.id)}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition">
+            <a href={`/models/${m.provider}/${encodeURIComponent(m.id.split('/')[1] || '')}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition">
               <h3 class="font-semibold text-white mb-1 truncate">{m.name}</h3>
               <p class="text-gray-500 text-sm mb-2 capitalize">{m.category}</p>
               <p class="text-gray-400 text-xs">${(m.input_price + m.output_price).toFixed(2)}/1M</p>

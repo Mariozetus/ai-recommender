@@ -75,7 +75,7 @@ const categoryColors: Record<string, string> = {
 
           <div class="flex justify-between items-start mb-3">
             <div class="flex-1 min-w-0">
-              <a href={`/models/${encodeURIComponent(model.id)}`} class="hover:text-teal-400">
+              <a href={`/models/${model.provider}/${encodeURIComponent(model.id.split("/")[1] || "")}`} class="hover:text-teal-400">
                 <h3 class="text-lg font-semibold text-white truncate">{model.name}</h3>
               </a>
               <p class="text-gray-500 text-sm">{model.provider}</p>
@@ -105,7 +105,7 @@ const categoryColors: Record<string, string> = {
             </div>
             <div class="flex gap-2">
               <a
-                href={`/models/${encodeURIComponent(model.id)}`}
+                href={`/models/${model.provider}/${encodeURIComponent(model.id.split("/")[1] || "")}`}
                 class="text-teal-400 hover:text-teal-300 text-sm font-medium"
               >
                 Detalles →

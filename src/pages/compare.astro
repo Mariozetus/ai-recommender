@@ -88,7 +88,7 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
                 <th class="text-left p-4 min-w-[200px]">
                   <div class="flex justify-between items-start">
                     <div class="flex-1">
-                      <a href={`/models/${encodeURIComponent(model.id)}`} class="text-lg font-semibold text-white hover:text-teal-400">
+                      <a href={`/models/${model.provider}/${encodeURIComponent(model.id.split("/")[1] || "")}`} class="text-lg font-semibold text-white hover:text-teal-400">
                         {model.name}
                       </a>
                       <p class="text-gray-500 text-sm">{model.provider}</p>
@@ -478,3 +478,4 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
     });
   });
 </script>
+

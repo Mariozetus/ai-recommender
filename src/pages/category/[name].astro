@@ -110,7 +110,7 @@ const bestContext = Math.max(...categoryModels.map((m: any) => m.context_window)
           {categoryModels.slice(0, 24).map((model: any) => (
             <article class="bg-gray-800 rounded-lg p-6 border border-gray-700 transition hover:border-gray-600">
               <div class="flex justify-between items-start mb-3">
-                <a href={`/models/${encodeURIComponent(model.id)}`} class="hover:text-teal-400">
+                <a href={`/models/${model.provider}/${encodeURIComponent(model.id.split("/")[1] || "")}`} class="hover:text-teal-400">
                   <h3 class="text-lg font-semibold text-white">{model.name}</h3>
                   <p class="text-gray-500 text-sm">{model.provider}</p>
                 </a>
@@ -128,7 +128,7 @@ const bestContext = Math.max(...categoryModels.map((m: any) => m.context_window)
               </div>
               <div class="flex gap-2 mt-4">
                 <a
-                  href={`/models/${encodeURIComponent(model.id)}`}
+                  href={`/models/${model.provider}/${encodeURIComponent(model.id.split("/")[1] || "")}`}
                   class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition"
                 >
                   {t('model.back').replace('← ', '')}
