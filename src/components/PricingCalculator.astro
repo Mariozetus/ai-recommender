@@ -7,83 +7,103 @@ interface Props {
 }
 
 const { modelId, modelName, inputPrice, outputPrice } = Astro.props;
-
-const currencyFmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 4 });
 ---
 
-<div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
-  <h3 class="text-lg font-semibold text-white mb-4 text-balance">Pricing Calculator</h3>
+<div class="bg-[var(--color-paper-2)] p-6">
+  <p class="text-[13px] text-[var(--color-ink-3)] mb-4">
+    Estima el costo para un caso típico. Los precios son por millón de tokens.
+  </p>
 
-  <div class="space-y-4">
+  <div class="grid sm:grid-cols-2 gap-4 mb-4">
     <div>
-      <label for="calc-input-tokens" class="block text-sm text-gray-400 mb-2">Input tokens</label>
+      <label for={`calc-input-${modelId}`} class="block text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-2">
+        Tokens de entrada
+      </label>
       <input
         type="number"
-        id="calc-input-tokens"
-        name="calc-input-tokens"
-        value="100000"
+        id={`calc-input-${modelId}`}
+        name="input-tokens"
         min="0"
+        step="100"
+        value="1000"
         inputmode="numeric"
         autocomplete="off"
-        class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus-ring focus:border-teal-500 tnum"
+        data-calc-input
+        data-price={inputPrice}
+        class="w-full bg-[var(--color-paper)] border rule text-[var(--color-ink)] rounded-sm px-3 py-2 text-[15px] tnum focus-ring"
       />
     </div>
-
     <div>
-      <label for="calc-output-tokens" class="block text-sm text-gray-400 mb-2">Output tokens</label>
+      <label for={`calc-output-${modelId}`} class="block text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-2">
+        Tokens de salida
+      </label>
       <input
         type="number"
-        id="calc-output-tokens"
-        name="calc-output-tokens"
-        value="50000"
+        id={`calc-output-${modelId}`}
+        name="output-tokens"
         min="0"
+        step="100"
+        value="500"
         inputmode="numeric"
         autocomplete="off"
-        class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus-ring focus:border-teal-500 tnum"
+        data-calc-output
+        data-price={outputPrice}
+        class="w-full bg-[var(--color-paper)] border rule text-[var(--color-ink)] rounded-sm px-3 py-2 text-[15px] tnum focus-ring"
       />
-    </div>
-
-    <div class="pt-4 border-t border-gray-700">
-      <div class="flex justify-between items-center mb-2">
-        <span class="text-gray-400">Input cost</span>
-        <span id="calc-input-cost" class="text-white font-mono tnum">$0.30</span>
-      </div>
-      <div class="flex justify-between items-center mb-2">
-        <span class="text-gray-400">Output cost</span>
-        <span id="calc-output-cost" class="text-white font-mono tnum">$0.75</span>
-      </div>
-      <div class="flex justify-between items-center pt-2 border-t border-gray-600">
-        <span class="text-white font-semibold">Total</span>
-        <span id="calc-total" class="text-teal-400 font-bold text-xl tnum">$1.05</span>
-      </div>
     </div>
   </div>
+
+  <dl class="border-t rule pt-4 grid grid-cols-3 gap-2 text-center">
+    <div>
+      <dt class="text-[11px] text-[var(--color-ink-3)] uppercase tracking-wider mb-1">Input</dt>
+      <dd class="text-[14px] tnum text-[var(--color-ink-2)]" data-calc-input-cost>$0.00</dd>
+    </div>
+    <div>
+      <dt class="text-[11px] text-[var(--color-ink-3)] uppercase tracking-wider mb-1">Output</dt>
+      <dd class="text-[14px] tnum text-[var(--color-ink-2)]" data-calc-output-cost>$0.00</dd>
+    </div>
+    <div>
+      <dt class="text-[11px] text-[var(--color-ink-3)] uppercase tracking-wider mb-1">Total</dt>
+      <dd class="text-[15px] tnum font-semibold text-[var(--color-ink)]" data-calc-total>$0.00</dd>
+    </div>
+  </dl>
 </div>
 
-<script define:vars={{ inputPrice, outputPrice, locale: undefined }}>
-  const fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 4 });
+<script>
+  const fmt = new Intl.NumberFormat(document.documentElement.lang, {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 4,
+  });
 
-  const inputTokens = document.getElementById('calc-input-tokens');
-  const outputTokens = document.getElementById('calc-output-tokens');
-  const inputCostEl = document.getElementById('calc-input-cost');
-  const outputCostEl = document.getElementById('calc-output-cost');
-  const totalEl = document.getElementById('calc-total');
+  function setup(root: HTMLElement) {
+    const input = root.querySelector('[data-calc-input]') as HTMLInputElement | null;
+    const output = root.querySelector('[data-calc-output]') as HTMLInputElement | null;
+    const inputCost = root.querySelector('[data-calc-input-cost]');
+    const outputCost = root.querySelector('[data-calc-output-cost]');
+    const total = root.querySelector('[data-calc-total]');
+    if (!input || !output || !inputCost || !outputCost || !total) return;
 
-  function calculate() {
-    const inTokens = parseInt(inputTokens?.value || '0') || 0;
-    const outTokens = parseInt(outputTokens?.value || '0') || 0;
+    const inputPrice = parseFloat(input.dataset.price || '0');
+    const outputPrice = parseFloat(output.dataset.price || '0');
 
-    const inCost = (inTokens / 1e6) * inputPrice;
-    const outCost = (outTokens / 1e6) * outputPrice;
-    const total = inCost + outCost;
+    const update = () => {
+      const inTok = Math.max(0, parseFloat(input.value) || 0);
+      const outTok = Math.max(0, parseFloat(output.value) || 0);
+      const inCost = (inTok / 1_000_000) * inputPrice;
+      const outCost = (outTok / 1_000_000) * outputPrice;
+      inputCost.textContent = fmt.format(inCost);
+      outputCost.textContent = fmt.format(outCost);
+      total.textContent = fmt.format(inCost + outCost);
+    };
 
-    if (inputCostEl) inputCostEl.textContent = fmt.format(inCost);
-    if (outputCostEl) outputCostEl.textContent = fmt.format(outCost);
-    if (totalEl) totalEl.textContent = fmt.format(total);
+    input.addEventListener('input', update);
+    output.addEventListener('input', update);
+    update();
   }
 
-  inputTokens?.addEventListener('input', calculate);
-  outputTokens?.addEventListener('input', calculate);
-
-  calculate();
+  document.querySelectorAll('[data-calc-input]').forEach(el => {
+    setup(el.closest('div')?.parentElement?.parentElement || el.parentElement!);
+  });
 </script>

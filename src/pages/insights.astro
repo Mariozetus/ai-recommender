@@ -4,12 +4,9 @@ export const prerender = false;
 import Layout from '../layouts/Layout.astro';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
-import { detectLocale, setLocale, t } from '../i18n/index';
 
 const acceptLanguage = Astro.request.headers.get('accept-language');
-const locale = detectLocale(acceptLanguage || undefined);
-setLocale(locale);
-
+const locale = acceptLanguage?.includes('es') ? 'es' : 'en';
 const numberFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US');
 const currencyFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US', { style: 'currency', currency: 'USD' });
 
@@ -22,7 +19,7 @@ const categories = [...new Set(models.map((m: any) => m.category))];
 
 const priceRanges = {
   free: models.filter((m: any) => m.pricing?.free).length,
-  cheap: models.filter((m: any) => m.input_price + m.output_price < 1).length,
+  cheap: models.filter((m: any) => m.input_price + m.output_price > 0 && m.input_price + m.output_price < 1).length,
   mid: models.filter((m: any) => m.input_price + m.output_price >= 1 && m.input_price + m.output_price < 10).length,
   expensive: models.filter((m: any) => m.input_price + m.output_price >= 10).length,
 };
@@ -35,20 +32,19 @@ const contextRanges = {
   above200k: models.filter((m: any) => m.context_window >= 200000).length,
 };
 
-const categoryCounts = categories.map(cat => ({
+const categoryCounts = categories.map((cat: string) => ({
   name: cat,
   count: models.filter((m: any) => m.category === cat).length,
 })).sort((a, b) => b.count - a.count);
 
-const providerCounts = providers.map(prov => ({
+const providerCounts = providers.map((prov: string) => ({
   name: prov,
   count: models.filter((m: any) => m.provider === prov).length,
 })).sort((a, b) => b.count - a.count).slice(0, 10);
 
-const avgPrice = (models.reduce((s: number, m: any) => s + m.input_price + m.output_price, 0) / models.length).toFixed(3);
+const avgPrice = models.reduce((s: number, m: any) => s + m.input_price + m.output_price, 0) / models.length;
 const avgContext = Math.round(models.reduce((s: number, m: any) => s + m.context_window, 0) / models.length);
 const maxContext = Math.max(...models.map((m: any) => m.context_window));
-const minPrice = Math.min(...models.filter((m: any) => m.input_price + m.output_price > 0).map((m: any) => m.input_price + m.output_price));
 
 const modelsWithBench = models.filter((m: any) => m.benchmark !== null && m.benchmark !== undefined);
 const modelsWithHf = models.filter((m: any) => m.hf_likes !== undefined);
@@ -74,267 +70,248 @@ const topHfLikes = modelsWithHf
 
 const benchmarkStats: Record<string, number> = {};
 modelsWithBench.forEach((m: any) => {
-  Object.keys(m.benchmark).forEach(k => {
+  Object.keys(m.benchmark).forEach((k: string) => {
     if (typeof m.benchmark[k] === 'number') {
       benchmarkStats[k] = (benchmarkStats[k] || 0) + 1;
     }
   });
 });
+
+const maxCategoryCount = categoryCounts[0]?.count || 1;
+const maxProviderCount = providerCounts[0]?.count || 1;
+const maxBenchCount = Math.max(...Object.values(benchmarkStats), 1);
 ---
 
-<Layout title="Insights - AI Model Statistics">
-  <div class="max-w-6xl mx-auto px-4 py-8">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold text-white mb-2 text-balance">{t('home.stats.models')}</h1>
-      <p class="text-gray-400 text-pretty">Statistics and trends in the AI model marketplace</p>
+<Layout title="Insights">
+  <div class="border-b rule">
+    <div class="max-w-6xl mx-auto px-6 py-12">
+      <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-3">
+        Insights
+      </p>
+      <h1 class="text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-[var(--color-ink)] mb-3 text-balance">
+        Mercado de modelos de IA
+      </h1>
+      <p class="text-[var(--color-ink-2)] max-w-2xl text-pretty">
+        Distribución de precios, contexto, benchmarks y popularidad.
+      </p>
     </div>
+  </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
-        <div class="text-3xl font-bold text-white mb-1 tnum">{numberFmt.format(totalModels)}</div>
-        <div class="text-gray-400 text-sm">Total Models</div>
-      </div>
-      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
-        <div class="text-3xl font-bold text-white mb-1 tnum">{numberFmt.format(providers.length)}</div>
-        <div class="text-gray-400 text-sm">Providers</div>
-      </div>
-      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
-        <div class="text-3xl font-bold text-white mb-1 tnum">{currencyFmt.format(parseFloat(avgPrice))}</div>
-        <div class="text-gray-400 text-sm">Avg Price/1M</div>
-      </div>
-      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
-        <div class="text-3xl font-bold text-white mb-1 tnum">{numberFmt.format(avgContext)}</div>
-        <div class="text-gray-400 text-sm">Avg Context</div>
-      </div>
-    </div>
+  <div class="max-w-6xl mx-auto px-6 py-12">
 
-    <div class="grid md:grid-cols-2 gap-8 mb-8">
-      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
-        <h2 class="text-xl font-semibold text-white mb-6 text-balance">Models by Category</h2>
-        <div class="space-y-4">
-          {categoryCounts.map(cat => (
-            <div>
-              <div class="flex justify-between text-sm mb-1 gap-2">
-                <span class="text-gray-300 capitalize">{cat.name}</span>
-                <span class="text-gray-500 tnum">{numberFmt.format(cat.count)}</span>
-              </div>
-              <div class="w-full bg-gray-700 rounded-full h-2">
-                <div
-                  class="bg-teal-500 h-2 rounded-full"
-                  style={`width: ${(cat.count / totalModels) * 100}%`}
-                ></div>
-              </div>
-            </div>
-          ))}
+    <section class="mb-16">
+      <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+        Resumen
+      </p>
+      <dl class="grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--color-rule)]">
+        <div class="bg-[var(--color-paper)] p-5">
+          <dt class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-1">Modelos</dt>
+          <dd class="text-2xl font-semibold tnum text-[var(--color-ink)]">{numberFmt.format(totalModels)}</dd>
         </div>
-      </div>
-
-      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
-        <h2 class="text-xl font-semibold text-white mb-6 text-balance">Top 10 Providers</h2>
-        <div class="space-y-3">
-          {providerCounts.map((prov, i) => (
-            <div class="flex items-center gap-3 min-w-0">
-              <span class="text-gray-500 text-sm w-4 tnum">{i + 1}</span>
-              <span class="text-gray-300 flex-1 truncate">{prov.name}</span>
-              <span class="text-gray-500 text-sm tnum">{numberFmt.format(prov.count)}</span>
-              <div class="w-24 bg-gray-700 rounded-full h-2">
-                <div
-                  class="bg-teal-500 h-2 rounded-full"
-                  style={`width: ${(prov.count / totalModels) * 100}%`}
-                ></div>
-              </div>
-            </div>
-          ))}
+        <div class="bg-[var(--color-paper)] p-5">
+          <dt class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-1">Proveedores</dt>
+          <dd class="text-2xl font-semibold tnum text-[var(--color-ink)]">{providers.length}</dd>
         </div>
-      </div>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
-        <h2 class="text-xl font-semibold text-white mb-6 text-balance">Price Distribution</h2>
-        <div class="grid grid-cols-2 gap-4">
-          <div class="bg-green-900/30 border border-green-800 rounded-lg p-4 text-center">
-            <div class="text-2xl font-bold text-green-400 tnum">{numberFmt.format(priceRanges.free)}</div>
-            <div class="text-sm text-green-300">Free Tier</div>
-          </div>
-          <div class="bg-blue-900/30 border border-blue-800 rounded-lg p-4 text-center">
-            <div class="text-2xl font-bold text-blue-400 tnum">{numberFmt.format(priceRanges.cheap)}</div>
-            <div class="text-sm text-blue-300">&lt;$1/1M</div>
-          </div>
-          <div class="bg-yellow-900/30 border border-yellow-800 rounded-lg p-4 text-center">
-            <div class="text-2xl font-bold text-yellow-400 tnum">{numberFmt.format(priceRanges.mid)}</div>
-            <div class="text-sm text-yellow-300">$1-$10/1M</div>
-          </div>
-          <div class="bg-red-900/30 border border-red-800 rounded-lg p-4 text-center">
-            <div class="text-2xl font-bold text-red-400 tnum">{numberFmt.format(priceRanges.expensive)}</div>
-            <div class="text-sm text-red-300">&gt;$10/1M</div>
-          </div>
+        <div class="bg-[var(--color-paper)] p-5">
+          <dt class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-1">Precio medio</dt>
+          <dd class="text-2xl font-semibold tnum text-[var(--color-ink)]">{currencyFmt.format(avgPrice)} <span class="text-[14px] text-[var(--color-ink-3)] font-normal">/ 1M</span></dd>
         </div>
-      </div>
-
-      <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
-        <h2 class="text-xl font-semibold text-white mb-6 text-balance">Context Window Distribution</h2>
-        <div class="space-y-3">
-          <div class="flex items-center gap-3 min-w-0">
-            <span class="text-gray-400 text-sm w-20">-32K</span>
-            <div class="flex-1 bg-gray-700 rounded-full h-4">
-              <div class="bg-purple-500 h-4 rounded-full" style={`width: ${(contextRanges.below32k / totalModels) * 100}%`}></div>
-            </div>
-            <span class="text-gray-400 text-sm w-12 text-right tnum">{numberFmt.format(contextRanges.below32k)}</span>
-          </div>
-          <div class="flex items-center gap-3 min-w-0">
-            <span class="text-gray-400 text-sm w-20">32K-64K</span>
-            <div class="flex-1 bg-gray-700 rounded-full h-4">
-              <div class="bg-purple-500 h-4 rounded-full" style={`width: ${(contextRanges.from32k / totalModels) * 100}%`}></div>
-            </div>
-            <span class="text-gray-400 text-sm w-12 text-right tnum">{numberFmt.format(contextRanges.from32k)}</span>
-          </div>
-          <div class="flex items-center gap-3 min-w-0">
-            <span class="text-gray-400 text-sm w-20">64K-128K</span>
-            <div class="flex-1 bg-gray-700 rounded-full h-4">
-              <div class="bg-purple-500 h-4 rounded-full" style={`width: ${(contextRanges.from64k / totalModels) * 100}%`}></div>
-            </div>
-            <span class="text-gray-400 text-sm w-12 text-right tnum">{numberFmt.format(contextRanges.from64k)}</span>
-          </div>
-          <div class="flex items-center gap-3 min-w-0">
-            <span class="text-gray-400 text-sm w-20">128K-200K</span>
-            <div class="flex-1 bg-gray-700 rounded-full h-4">
-              <div class="bg-purple-500 h-4 rounded-full" style={`width: ${(contextRanges.from128k / totalModels) * 100}%`}></div>
-            </div>
-            <span class="text-gray-400 text-sm w-12 text-right tnum">{numberFmt.format(contextRanges.from128k)}</span>
-          </div>
-          <div class="flex items-center gap-3 min-w-0">
-            <span class="text-gray-400 text-sm w-20">200K+</span>
-            <div class="flex-1 bg-gray-700 rounded-full h-4">
-              <div class="bg-purple-500 h-4 rounded-full" style={`width: ${(contextRanges.above200k / totalModels) * 100}%`}></div>
-            </div>
-            <span class="text-gray-400 text-sm w-12 text-right tnum">{numberFmt.format(contextRanges.above200k)}</span>
-          </div>
+        <div class="bg-[var(--color-paper)] p-5">
+          <dt class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-1">Contexto medio</dt>
+          <dd class="text-2xl font-semibold tnum text-[var(--color-ink)]">{Math.round(avgContext / 1000)}K</dd>
         </div>
-        <div class="mt-4 text-sm text-gray-500 tnum">
-          Max context: {numberFmt.format(maxContext)} tokens
-        </div>
-      </div>
-    </div>
+      </dl>
+    </section>
 
-    <section class="mt-12">
-      <h2 class="text-2xl font-bold text-white mb-6 text-balance">Top por benchmark</h2>
-      <div class="grid md:grid-cols-3 gap-6 mb-8">
-        <div class="bg-gray-800 rounded-lg border border-gray-700 p-6">
-          <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2 text-balance">
-            <span class="px-2 py-1 rounded text-xs bg-teal-900/50 border border-teal-700 text-teal-300">Top 10</span>
-            MMLU
-          </h3>
-          <ol class="space-y-2 text-sm">
-            {topMmlu.map((m: any, i: number) => (
-              <li class="flex justify-between items-center min-w-0 gap-2">
-                <a href={`/models/${m.provider}/${m.id.split('/')[1] || ''}`} class="text-gray-300 hover:text-teal-400 focus-ring truncate flex-1 min-w-0">
-                  {i + 1}. {m.name}
-                </a>
-                <span class="text-teal-400 font-mono ml-2 tnum">{numberFmt.format(m.benchmark.mmlu)}%</span>
+    <section class="mb-16">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+            Por categoría
+          </p>
+          <ul class="space-y-3">
+            {categoryCounts.map(c => (
+              <li>
+                <div class="flex justify-between text-[13px] mb-1">
+                  <span class="text-[var(--color-ink-2)] capitalize">{c.name}</span>
+                  <span class="text-[var(--color-ink-3)] tnum">{numberFmt.format(c.count)}</span>
+                </div>
+                <div class="h-px bg-[var(--color-rule)]">
+                  <div class="h-px bg-[var(--color-ink)]" style={`width: ${(c.count / maxCategoryCount) * 100}%`}></div>
+                </div>
               </li>
             ))}
-          </ol>
+          </ul>
         </div>
 
-        <div class="bg-gray-800 rounded-lg border border-gray-700 p-6">
-          <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2 text-balance">
-            <span class="px-2 py-1 rounded text-xs bg-teal-900/50 border border-teal-700 text-teal-300">Top 10</span>
-            HumanEval
-          </h3>
-          <ol class="space-y-2 text-sm">
-            {topHumaneval.map((m: any, i: number) => (
-              <li class="flex justify-between items-center min-w-0 gap-2">
-                <a href={`/models/${m.provider}/${m.id.split('/')[1] || ''}`} class="text-gray-300 hover:text-teal-400 focus-ring truncate flex-1 min-w-0">
-                  {i + 1}. {m.name}
-                </a>
-                <span class="text-teal-400 font-mono ml-2 tnum">{numberFmt.format(m.benchmark.humaneval)}%</span>
+        <div>
+          <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+            Top 10 proveedores
+          </p>
+          <ul class="space-y-3">
+            {providerCounts.map(p => (
+              <li>
+                <div class="flex justify-between text-[13px] mb-1">
+                  <span class="text-[var(--color-ink-2)]">{p.name}</span>
+                  <span class="text-[var(--color-ink-3)] tnum">{numberFmt.format(p.count)}</span>
+                </div>
+                <div class="h-px bg-[var(--color-rule)]">
+                  <div class="h-px bg-[var(--color-ink)]" style={`width: ${(p.count / maxProviderCount) * 100}%`}></div>
+                </div>
               </li>
             ))}
-          </ol>
-        </div>
-
-        <div class="bg-gray-800 rounded-lg border border-gray-700 p-6">
-          <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2 text-balance">
-            <span class="px-2 py-1 rounded text-xs bg-teal-900/50 border border-teal-700 text-teal-300">Top 10</span>
-            Arena ELO
-          </h3>
-          <ol class="space-y-2 text-sm">
-            {topArena.map((m: any, i: number) => (
-              <li class="flex justify-between items-center min-w-0 gap-2">
-                <a href={`/models/${m.provider}/${m.id.split('/')[1] || ''}`} class="text-gray-300 hover:text-teal-400 focus-ring truncate flex-1 min-w-0">
-                  {i + 1}. {m.name}
-                </a>
-                <span class="text-teal-400 font-mono ml-2 tnum">{numberFmt.format(m.benchmark.chatbot_arena_elo)}</span>
-              </li>
-            ))}
-          </ol>
+          </ul>
         </div>
       </div>
+    </section>
 
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-gray-800 rounded-lg border border-gray-700 p-6">
-          <h3 class="text-lg font-semibold text-white mb-4 text-balance">Cobertura de benchmarks</h3>
-          <div class="space-y-2 text-sm">
-            {Object.entries(benchmarkStats).sort((a, b) => b[1] - a[1]).slice(0, 15).map(([key, count]) => {
-              const labels: Record<string, string> = {
-                mmlu: 'MMLU',
-                mmlu_pro: 'MMLU Pro',
-                mmlu_redux: 'MMLU Redux',
-                humaneval: 'HumanEval',
-                mbpp: 'MBPP',
-                math: 'MATH',
-                gpqa: 'GPQA',
-                livecodebench: 'LiveCodeBench',
-                hellaswag: 'HellaSwag',
-                truthfulqa: 'TruthfulQA',
-                winogrande: 'Winogrande',
-                arc_challenge: 'ARC-Challenge',
-                ifeval: 'IFEval',
-                mt_bench: 'MT-Bench',
-                arena_elo: 'Arena ELO',
-                chatbot_arena_elo: 'Chatbot Arena ELO',
-                intelligence_index: 'Intelligence Index',
-                coding_index: 'Coding Index',
-                agentic_index: 'Agentic Index',
-              };
+    <section class="mb-16">
+      <div class="grid md:grid-cols-2 gap-12">
+        <div>
+          <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+            Distribución de precio
+          </p>
+          <dl class="space-y-3">
+            {[
+              { label: 'Gratis', value: priceRanges.free, key: 'free' },
+              { label: '< $1 / 1M', value: priceRanges.cheap, key: 'cheap' },
+              { label: '$1 – $10 / 1M', value: priceRanges.mid, key: 'mid' },
+              { label: '> $10 / 1M', value: priceRanges.expensive, key: 'expensive' },
+            ].map(r => {
+              const pct = (r.value / totalModels) * 100;
               return (
-                <div class="flex justify-between items-center min-w-0 gap-2">
-                  <span class="text-gray-400 min-w-0">{labels[key] || key}</span>
-                  <div class="flex items-center gap-2 min-w-0">
-                    <div class="w-32 bg-gray-700 rounded h-2">
-                      <div class="bg-teal-500 h-2 rounded" style={`width: ${(count / totalModels) * 100}%`}></div>
-                    </div>
-                    <span class="text-gray-300 w-10 text-right font-mono tnum">{numberFmt.format(count)}</span>
+                <div>
+                  <div class="flex justify-between text-[13px] mb-1">
+                    <dt class="text-[var(--color-ink-2)]">{r.label}</dt>
+                    <dd class="text-[var(--color-ink-3)] tnum">{numberFmt.format(r.value)}</dd>
+                  </div>
+                  <div class="h-px bg-[var(--color-rule)]">
+                    <div class="h-px bg-[var(--color-ink)]" style={`width: ${pct}%`}></div>
                   </div>
                 </div>
               );
             })}
-          </div>
+          </dl>
         </div>
 
-        <div class="bg-gray-800 rounded-lg border border-gray-700 p-6">
-          <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2 text-balance">
-            <svg class="w-4 h-4 text-yellow-400" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
-            </svg>
-            Top 10 HuggingFace (Likes)
-          </h3>
-          <ol class="space-y-2 text-sm">
-            {topHfLikes.map((m: any, i: number) => (
-              <li class="flex justify-between items-center min-w-0 gap-2">
-                <a href={`/models/${m.provider}/${m.id.split('/')[1] || ''}`} class="text-gray-300 hover:text-yellow-400 focus-ring truncate flex-1 min-w-0">
-                  {i + 1}. {m.name}
-                </a>
-                <span class="text-yellow-400 font-mono ml-2 tnum">{numberFmt.format(m.hf_likes || 0)} ❤</span>
-              </li>
-            ))}
-          </ol>
-          <p class="text-xs text-gray-500 mt-4 text-pretty">
-            {numberFmt.format(modelsWithHf.length)} modelos con datos de HuggingFace · {numberFmt.format(modelsWithBench.length)} con benchmarks
+        <div>
+          <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+            Ventana de contexto
+          </p>
+          <dl class="space-y-3">
+            {[
+              { label: '≤ 32K', value: contextRanges.below32k },
+              { label: '32K – 64K', value: contextRanges.from32k },
+              { label: '64K – 128K', value: contextRanges.from64k },
+              { label: '128K – 200K', value: contextRanges.from128k },
+              { label: '≥ 200K', value: contextRanges.above200k },
+            ].map(r => {
+              const pct = (r.value / totalModels) * 100;
+              return (
+                <div>
+                  <div class="flex justify-between text-[13px] mb-1">
+                    <dt class="text-[var(--color-ink-2)]">{r.label}</dt>
+                    <dd class="text-[var(--color-ink-3)] tnum">{numberFmt.format(r.value)}</dd>
+                  </div>
+                  <div class="h-px bg-[var(--color-rule)]">
+                    <div class="h-px bg-[var(--color-ink)]" style={`width: ${pct}%`}></div>
+                  </div>
+                </div>
+              );
+            })}
+          </dl>
+          <p class="text-[12px] text-[var(--color-ink-3)] mt-3 tnum">
+            Contexto máximo: {maxContext >= 1_000_000 ? `${(maxContext / 1_000_000).toFixed(1)}M` : `${Math.round(maxContext / 1000)}K`}
           </p>
         </div>
       </div>
     </section>
+
+    <section class="mb-16">
+      <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+        Rankings
+      </p>
+      <div class="grid md:grid-cols-3 gap-12">
+        {[
+          { title: 'MMLU', list: topMmlu, valueKey: 'mmlu', suffix: '%' },
+          { title: 'HumanEval', list: topHumaneval, valueKey: 'humaneval', suffix: '%' },
+          { title: 'Arena ELO', list: topArena, valueKey: 'chatbot_arena_elo', suffix: '' },
+        ].map(section => (
+          <div>
+            <h3 class="text-[14px] font-medium text-[var(--color-ink)] mb-4">{section.title}</h3>
+            <ol class="space-y-2 text-[13px]">
+              {section.list.slice(0, 5).map((m: any, i: number) => (
+                <li class="flex justify-between items-center gap-2">
+                  <a
+                    href={`/models/${m.provider}/${m.id.split('/')[1] || ''}`}
+                    class="text-[var(--color-ink-2)] hover:text-[var(--color-ink)] focus-ring flex-1 min-w-0 truncate"
+                  >
+                    {m.name}
+                  </a>
+                  <span class="text-[var(--color-ink)] tnum whitespace-nowrap">
+                    {section.valueKey === 'chatbot_arena_elo'
+                      ? numberFmt.format(Math.round(m.benchmark[section.valueKey]))
+                      : `${m.benchmark[section.valueKey].toFixed(1)}${section.suffix}`}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="grid md:grid-cols-2 gap-12">
+      <div>
+        <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+          Cobertura de benchmarks
+        </p>
+        <ul class="space-y-2 text-[12px]">
+          {Object.entries(benchmarkStats).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([key, count]) => {
+            const labels: Record<string, string> = {
+              mmlu: 'MMLU', mmlu_pro: 'MMLU Pro', humaneval: 'HumanEval',
+              math: 'MATH', gpqa: 'GPQA', livecodebench: 'LiveCodeBench',
+              chatbot_arena_elo: 'Arena ELO', intelligence_index: 'AA Intelligence',
+              coding_index: 'AA Coding', agentic_index: 'AA Agentic',
+              mbpp: 'MBPP', hellaswag: 'HellaSwag', truthfulqa: 'TruthfulQA',
+            };
+            return (
+              <li>
+                <div class="flex justify-between mb-1">
+                  <span class="text-[var(--color-ink-2)]">{labels[key] || key}</span>
+                  <span class="text-[var(--color-ink-3)] tnum">{count}</span>
+                </div>
+                <div class="h-px bg-[var(--color-rule)]">
+                  <div class="h-px bg-[var(--color-ink)]" style={`width: ${(count / maxBenchCount) * 100}%`}></div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+          Top 10 HuggingFace
+        </p>
+        <ol class="space-y-2 text-[13px]">
+          {topHfLikes.slice(0, 10).map((m: any, i: number) => (
+            <li class="flex justify-between items-center gap-2">
+              <a
+                href={`/models/${m.provider}/${m.id.split('/')[1] || ''}`}
+                class="text-[var(--color-ink-2)] hover:text-[var(--color-ink)] focus-ring flex-1 min-w-0 truncate"
+              >
+                {m.name}
+              </a>
+              <span class="text-[var(--color-ink-3)] tnum whitespace-nowrap">{numberFmt.format(m.hf_likes || 0)}</span>
+            </li>
+          ))}
+        </ol>
+        <p class="text-[12px] text-[var(--color-ink-3)] mt-4 tnum">
+          {modelsWithHf.length} modelos con datos de HuggingFace · {modelsWithBench.length} con benchmarks
+        </p>
+      </div>
+    </section>
+
   </div>
 </Layout>

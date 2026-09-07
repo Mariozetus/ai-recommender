@@ -15,7 +15,7 @@ setLocale(locale);
 const numberFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US');
 const currencyFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US', { style: 'currency', currency: 'USD' });
 
-const ITEMS_PER_PAGE = 24;
+const ITEMS_PER_PAGE = 30;
 
 const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
 const { models } = JSON.parse(rawData);
@@ -80,15 +80,6 @@ const paginatedModels = filtered.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 const categories = [...new Set(models.map((m: any) => m.category))];
 const providers = [...new Set(models.map((m: any) => m.provider))];
 
-const categoryColors: Record<string, string> = {
-  chat: '#1e3a5f',
-  coding: '#1a3d1a',
-  reasoning: '#3d1a5c',
-  image: '#3d1a3d',
-  embedding: '#5c3d1a',
-  multimodal: '#1a3d3d',
-};
-
 function buildPageUrl(p: number) {
   const params = new URLSearchParams();
   if (selectedCategory) params.set('category', selectedCategory);
@@ -97,49 +88,50 @@ function buildPageUrl(p: number) {
   if (maxPrice > 0) params.set('price', maxPrice.toString());
   if (searchQuery) params.set('q', searchQuery);
   if (sortBy !== 'name') params.set('sort', sortBy);
+  if (freeOnly) params.set('free', '1');
   if (p > 1) params.set('page', p.toString());
   return params.toString() ? `/catalog?${params.toString()}` : '/catalog';
 }
 ---
 
-<Layout title={t('catalog.title')}>
-  <div class="max-w-6xl mx-auto px-4 py-8">
-    <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold mb-4 text-balance">AI Model Catalog</h1>
-      <p class="text-gray-400 text-lg text-pretty">Discover and compare AI models from OpenRouter</p>
+<Layout title="Catálogo">
+  <div class="border-b rule">
+    <div class="max-w-6xl mx-auto px-6 py-12">
+      <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-3">
+        Catálogo
+      </p>
+      <h1 class="text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-[var(--color-ink)] mb-3 text-balance">
+        {numberFmt.format(models.length)} modelos
+      </h1>
+      <p class="text-[var(--color-ink-2)] max-w-2xl text-pretty">
+        Datos de OpenRouter. Filtra por categoría, proveedor, contexto o precio.
+      </p>
     </div>
+  </div>
 
-    <div class="mb-6">
+  <div class="max-w-6xl mx-auto px-6 py-10">
+
+    <div class="mb-8 pb-8 border-b rule">
       <form method="get" action="/catalog">
-        <div class="flex gap-4 items-start">
+        <div class="flex flex-col sm:flex-row gap-3">
           <div class="flex-1">
             <SearchInput models={models} initialQuery={searchQuery} />
           </div>
-          <button
-            type="submit"
-            class="bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded-lg font-medium transition-colors focus-ring"
-          >
-            Search
-          </button>
           {searchQuery && (
             <a
               href="/catalog"
-              class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition-colors focus-ring"
+              class="border rule text-[var(--color-ink)] hover:bg-[var(--color-paper-2)] px-4 py-2 rounded-sm text-[14px] font-medium transition-colors focus-ring text-center"
             >
-              Clear
+              Limpiar búsqueda
             </a>
           )}
         </div>
-        <input type="hidden" name="category" value={selectedCategory} />
-        <input type="hidden" name="provider" value={selectedProvider} />
-        <input type="hidden" name="context" value={maxContext || ''} />
-        <input type="hidden" name="price" value={maxPrice || ''} />
-        <input type="hidden" name="sort" value={sortBy} />
       </form>
     </div>
 
-    <div class="grid md:grid-cols-4 gap-8">
-      <div class="md:col-span-1">
+    <div class="grid md:grid-cols-[200px_1fr] gap-10">
+
+      <div class="hidden md:block">
         <FilterBar
           categories={categories}
           providers={providers}
@@ -148,174 +140,154 @@ function buildPageUrl(p: number) {
         />
       </div>
 
-      <div class="md:col-span-3">
-        <div id="compare-bar" class="hidden mb-4 bg-teal-900/30 border border-teal-700 rounded-lg p-4">
-          <div class="flex justify-between items-center">
-            <span id="compare-count" class="text-teal-300">0 models selected</span>
-            <div class="flex gap-2">
-              <a
-                id="compare-link"
-                href="/compare"
-                class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition-colors focus-ring"
-              >
-                Compare
-              </a>
-              <button
-                id="clear-compare"
-                type="button"
-                class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors focus-ring"
-              >
-                Clear
-              </button>
-            </div>
+      <div>
+        <div id="compare-bar" class="hidden mb-6 border rule bg-[var(--color-paper-2)] p-4 flex items-center justify-between">
+          <span id="compare-count" class="text-[14px] text-[var(--color-ink-2)] tnum">0 modelos</span>
+          <div class="flex gap-2">
+            <a
+              id="compare-link"
+              href="/compare"
+              class="bg-[var(--color-ink)] text-[var(--color-paper)] hover:bg-[var(--color-ink-2)] px-4 py-1.5 rounded-sm text-[13px] font-medium transition-colors focus-ring"
+            >
+              Comparar
+            </a>
+            <button
+              id="clear-compare"
+              type="button"
+              class="border rule text-[var(--color-ink)] hover:bg-[var(--color-paper)] px-4 py-1.5 rounded-sm text-[13px] font-medium transition-colors focus-ring"
+            >
+              Limpiar
+            </button>
           </div>
         </div>
 
-        <div class="flex justify-between items-center mb-4">
-          <p class="text-gray-400 text-pretty">
-            Showing {startIndex + 1}-{Math.min(startIndex + ITEMS_PER_PAGE, filtered.length)} of {filtered.length} models
+        <div class="flex flex-wrap justify-between items-baseline gap-3 mb-6 pb-4 border-b rule">
+          <p class="text-[13px] text-[var(--color-ink-3)] tnum">
+            {filtered.length === 0 ? 'Sin resultados' : `${startIndex + 1}–${Math.min(startIndex + ITEMS_PER_PAGE, filtered.length)} de ${numberFmt.format(filtered.length)}`}
           </p>
-          <form method="get" action="/" class="flex gap-2 items-center">
-            <label for="sort-select" class="text-gray-400 text-sm">Sort:</label>
+          <form method="get" action="/catalog" class="flex gap-2 items-center">
+            <label for="sort-select" class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)]">Orden</label>
             <select
               id="sort-select"
               name="sort"
+              autocomplete="off"
+              class="bg-[var(--color-paper-2)] border rule text-[var(--color-ink)] rounded-sm px-2.5 py-1.5 text-[13px] focus-ring focus:border-[var(--color-ink-3)]"
               onchange="this.form.submit()"
-              class="bg-gray-800 border border-gray-700 rounded px-3 py-1 text-white text-sm focus-ring focus:border-teal-500"
             >
-              <option value="name" selected={sortBy === 'name'}>Name</option>
-              <option value="price-low" selected={sortBy === 'price-low'}>Price: Low to High</option>
-              <option value="price-high" selected={sortBy === 'price-high'}>Price: High to Low</option>
-              <option value="context" selected={sortBy === 'context'}>Context Window</option>
+              <option value="name" selected={sortBy === 'name'}>Nombre</option>
+              <option value="price-low" selected={sortBy === 'price-low'}>Precio: menor</option>
+              <option value="price-high" selected={sortBy === 'price-high'}>Precio: mayor</option>
+              <option value="context" selected={sortBy === 'context'}>Contexto</option>
             </select>
             {selectedCategory && <input type="hidden" name="category" value={selectedCategory} />}
             {selectedProvider && <input type="hidden" name="provider" value={selectedProvider} />}
             {maxContext > 0 && <input type="hidden" name="context" value={maxContext} />}
             {maxPrice > 0 && <input type="hidden" name="price" value={maxPrice} />}
             {searchQuery && <input type="hidden" name="q" value={searchQuery} />}
+            {freeOnly && <input type="hidden" name="free" value="1" />}
             {page > 1 && <input type="hidden" name="page" value={page} />}
           </form>
         </div>
 
-        <div id="results-list" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {paginatedModels.map((model: any) => (
-            <article class="bg-gray-800 rounded-lg p-6 border border-gray-700 transition-colors hover:border-gray-600">
-              <div class="flex justify-between items-start mb-3">
-                <a href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`} class="hover:text-teal-400 focus-ring">
-                  <h3 class="text-lg font-semibold text-white">{model.name}</h3>
-                </a>
-                <div class="flex gap-1">
-                  {model.pricing?.free && (
-                    <span class="px-2 py-1 rounded text-xs font-medium bg-green-900/50 border border-green-700 text-green-300">
-                      FREE
-                    </span>
-                  )}
-                  <span
-                    class="px-2 py-1 rounded text-xs font-medium text-white"
-                    style={`background-color: ${categoryColors[model.category] || '#374151'}`}
-                    aria-label={model.category}
-                  >
-                    {model.category}
-                  </span>
-                </div>
-              </div>
-              <p class="text-gray-400 text-sm mb-4 line-clamp-2 text-pretty">{model.description}</p>
-              <div class="grid grid-cols-2 gap-4 text-sm mb-4">
-                <div>
-                  <span class="text-gray-500">Provider</span>
-                  <p class="text-gray-300">{model.provider}</p>
-                </div>
-                <div>
-                  <span class="text-gray-500">Context</span>
-                  <p class="text-gray-300 tnum">{numberFmt.format(model.context_window)}</p>
-                </div>
-                <div>
-                  <span class="text-gray-500">Input</span>
-                  <p class="text-gray-300 tnum">{currencyFmt.format(model.input_price)}/1M</p>
-                </div>
-                <div>
-                  <span class="text-gray-500">Output</span>
-                  <p class="text-gray-300 tnum">{currencyFmt.format(model.output_price)}/1M</p>
-                </div>
-              </div>
-              {model.tags && model.tags.length > 0 && (
-                <div class="flex flex-wrap gap-2 mb-4">
-                  {model.tags.slice(0, 5).map((tag: string) => (
-                    <span class="bg-gray-700 text-gray-400 px-2 py-1 rounded text-xs">{tag}</span>
-                  ))}
-                </div>
-              )}
-              <div class="flex gap-2">
-                <a
-                  href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`}
-                  class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition-colors focus-ring"
-                  aria-label={`Ver detalles de ${model.name}`}
-                >
-                  Details
-                </a>
-                <button
-                  type="button"
-                  class="compare-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors focus-ring"
-                  data-model-id={model.id}
-                  aria-label={`Añadir ${model.name} a comparación`}
-                >
-                  Compare
-                </button>
-              </div>
-            </article>
-          ))}
+        <div id="results-list">
+          {paginatedModels.length === 0 ? (
+            <div class="py-16 text-center">
+              <p class="text-[var(--color-ink-3)] text-[14px]">
+                Ningún modelo coincide con los filtros actuales.
+              </p>
+              <a
+                href="/catalog"
+                class="inline-block mt-4 text-[13px] text-[var(--color-ink-2)] underline underline-offset-4 hover:text-[var(--color-ink)] focus-ring"
+              >
+                Limpiar filtros
+              </a>
+            </div>
+          ) : (
+            <ul class="divide-y divide-[var(--color-rule)]">
+              {paginatedModels.map((model: any) => {
+                const slug = model.id.split('/')[1] || '';
+                const detailUrl = `/models/${model.provider}/${slug}`;
+                const totalPrice = model.input_price + model.output_price;
+                return (
+                  <li>
+                    <article class="grid md:grid-cols-[1fr_180px] gap-4 py-5 hover:bg-[var(--color-paper-2)] transition-colors -mx-3 px-3 rounded-sm group">
+                      <div class="min-w-0">
+                        <div class="flex items-baseline gap-2 mb-1.5 text-[12px] uppercase tracking-wider text-[var(--color-ink-3)]">
+                          <span>{model.category}</span>
+                          {model.pricing?.free && (
+                            <>
+                              <span class="text-[var(--color-ink-4)]">·</span>
+                              <span class="text-[var(--color-accent)]">Free</span>
+                            </>
+                          )}
+                          <span class="text-[var(--color-ink-4)]">·</span>
+                          <span>{model.provider}</span>
+                        </div>
+                        <h3 class="text-[16px] font-semibold text-[var(--color-ink)] mb-1.5">
+                          <a href={detailUrl} class="hover:text-[var(--color-accent)] focus-ring">{model.name}</a>
+                        </h3>
+                        <p class="text-[13px] text-[var(--color-ink-2)] line-clamp-2 text-pretty leading-relaxed">{model.description}</p>
+                      </div>
+
+                      <div class="md:text-right md:border-l md:border-[var(--color-rule)] md:pl-4 flex md:flex-col gap-4 md:gap-1.5">
+                        <div>
+                          <div class="text-[11px] uppercase tracking-wider text-[var(--color-ink-3)]">Contexto</div>
+                          <div class="text-[14px] text-[var(--color-ink)] tnum">
+                            {model.context_window >= 1_000_000
+                              ? `${(model.context_window / 1_000_000).toFixed(1)}M`
+                              : `${Math.round(model.context_window / 1000)}K`}
+                          </div>
+                        </div>
+                        <div>
+                          <div class="text-[11px] uppercase tracking-wider text-[var(--color-ink-3)]">In + Out</div>
+                          <div class="text-[14px] text-[var(--color-ink)] tnum">
+                            {totalPrice === 0 ? 'Gratis' : `${currencyFmt.format(totalPrice)} / 1M`}
+                          </div>
+                        </div>
+                        <div class="flex md:justify-end gap-2 mt-2">
+                          <button
+                            type="button"
+                            class="compare-btn border rule text-[var(--color-ink)] hover:bg-[var(--color-paper)] px-2.5 py-1 rounded-sm text-[12px] font-medium transition-colors focus-ring"
+                            data-model-id={model.id}
+                            aria-label={`Añadir ${model.name} a comparación`}
+                          >
+                            Comparar
+                          </button>
+                        </div>
+                      </div>
+                    </article>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
 
-        {filtered.length === 0 && (
-          <div class="bg-gray-800 rounded-lg p-8 text-center border border-gray-700">
-            <p class="text-gray-400">No models match your criteria.</p>
-          </div>
-        )}
-
         {totalPages > 1 && (
-          <nav class="flex justify-center gap-2 mt-8" aria-label="Paginación">
-            {page > 1 && (
+          <nav class="flex justify-between items-center gap-2 mt-10 pt-6 border-t rule" aria-label="Paginación">
+            {page > 1 ? (
               <a
                 href={buildPageUrl(page - 1)}
                 rel="prev"
-                class="px-4 py-2 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 text-white transition-colors focus-ring"
+                class="text-[13px] text-[var(--color-ink-2)] hover:text-[var(--color-ink)] focus-ring"
               >
-                Previous
+                ← Anterior
               </a>
-            )}
-            {Array.from({ length: Math.min(7, totalPages) }, (_, i) => {
-              let pageNum: number;
-              if (totalPages <= 7) {
-                pageNum = i + 1;
-              } else if (page <= 4) {
-                pageNum = i + 1;
-              } else if (page >= totalPages - 3) {
-                pageNum = totalPages - 6 + i;
-              } else {
-                pageNum = page - 3 + i;
-              }
-              const isCurrent = pageNum === page;
-              return (
-                <a
-                  href={buildPageUrl(pageNum)}
-                  rel={isCurrent ? 'canonical' : undefined}
-                  aria-current={isCurrent ? 'page' : undefined}
-                  class={`px-4 py-2 border rounded transition-colors focus-ring ${isCurrent ? 'bg-teal-600 border-teal-600 text-white' : 'bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700'}`}
-                  aria-label={`Ir a la página ${pageNum}`}
-                >
-                  {pageNum}
-                </a>
-              );
-            })}
-            {page < totalPages && (
+            ) : <span class="text-[13px] text-[var(--color-ink-4)]">← Anterior</span>}
+
+            <p class="text-[12px] tnum text-[var(--color-ink-3)]">
+              Página {page} de {totalPages}
+            </p>
+
+            {page < totalPages ? (
               <a
                 href={buildPageUrl(page + 1)}
                 rel="next"
-                class="px-4 py-2 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 text-white transition-colors focus-ring"
+                class="text-[13px] text-[var(--color-ink-2)] hover:text-[var(--color-ink)] focus-ring"
               >
-                Next
+                Siguiente →
               </a>
-            )}
+            ) : <span class="text-[13px] text-[var(--color-ink-4)]">Siguiente →</span>}
           </nav>
         )}
       </div>
@@ -332,10 +304,9 @@ function buildPageUrl(p: number) {
     if (typeof fn === 'function') fn(message, kind);
   }
 
-  // Initialize filter checkbox state from URL
   const urlParams = new URLSearchParams(window.location.search);
   const freeParam = urlParams.get('free');
-  const freeCheckbox = document.getElementById('free-filter') as HTMLInputElement;
+  const freeCheckbox = document.getElementById('free-filter') as HTMLInputElement | null;
   if (freeCheckbox && freeParam === '1') {
     freeCheckbox.checked = true;
   }
@@ -343,11 +314,11 @@ function buildPageUrl(p: number) {
   function updateCompareBar() {
     const bar = document.getElementById('compare-bar');
     const count = document.getElementById('compare-count');
-    const link = document.getElementById('compare-link') as HTMLAnchorElement;
+    const link = document.getElementById('compare-link') as HTMLAnchorElement | null;
 
     if (compareIds.length > 0) {
       bar?.classList.remove('hidden');
-      if (count) count.textContent = `${compareIds.length} models selected`;
+      if (count) count.textContent = `${compareIds.length} ${compareIds.length === 1 ? 'modelo' : 'modelos'}`;
       if (link) link.href = `/compare?ids=${compareIds.join(',')}`;
     } else {
       bar?.classList.add('hidden');
@@ -356,15 +327,15 @@ function buildPageUrl(p: number) {
     document.querySelectorAll('.compare-btn').forEach(btn => {
       const id = (btn as HTMLButtonElement).dataset.modelId;
       if (compareIds.includes(id || '')) {
-        btn.textContent = 'Added';
-        (btn as HTMLButtonElement).disabled = true;
+        btn.textContent = 'Añadido';
+        btn.setAttribute('disabled', 'true');
       }
     });
   }
 
   function handleCompareClick(e: Event) {
     const target = e.target as HTMLElement;
-    const btn = target.closest('.compare-btn') as HTMLButtonElement;
+    const btn = target.closest('.compare-btn') as HTMLButtonElement | null;
     if (!btn) return;
 
     const modelId = btn.dataset.modelId;
@@ -377,8 +348,8 @@ function buildPageUrl(p: number) {
 
     compareIds.push(modelId);
     localStorage.setItem('compareIds', JSON.stringify(compareIds));
-    btn.textContent = 'Added';
-    btn.disabled = true;
+    btn.textContent = 'Añadido';
+    btn.setAttribute('disabled', 'true');
     showToast('Modelo añadido a comparación', 'success');
     updateCompareBar();
   }
@@ -387,10 +358,10 @@ function buildPageUrl(p: number) {
     compareIds = [];
     localStorage.removeItem('compareIds');
     document.querySelectorAll('.compare-btn').forEach(btn => {
-      btn.textContent = 'Compare';
-      (btn as HTMLButtonElement).disabled = false;
+      btn.textContent = 'Comparar';
+      btn.removeAttribute('disabled');
     });
-    showToast('Comparaci├│n limpiada', 'info');
+    showToast('Comparación limpiada', 'info');
     updateCompareBar();
   });
 

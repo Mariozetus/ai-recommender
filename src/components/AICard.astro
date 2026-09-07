@@ -6,72 +6,22 @@ interface Props {
 }
 
 const { model } = Astro.props;
-
-const categoryColors: Record<string, string> = {
-  chat: 'bg-blue-900 text-blue-300',
-  coding: 'bg-green-900 text-green-300',
-  reasoning: 'bg-purple-900 text-purple-300',
-  image: 'bg-pink-900 text-pink-300',
-  embedding: 'bg-orange-900 text-orange-300',
-  multimodal: 'bg-cyan-900 text-cyan-300',
-};
-
-const numberFmt = new Intl.NumberFormat('en-US');
-const currencyFmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
 ---
 
-<article class="bg-gray-800 rounded-lg p-6 hover:bg-gray-750 transition-colors border border-gray-700">
-  <div class="flex justify-between items-start mb-3">
-    <h3 class="text-lg font-semibold text-white text-balance">{model.name}</h3>
-    <span class={`px-2 py-1 rounded text-xs font-medium ${categoryColors[model.category] || 'bg-gray-700'}`} aria-label={model.category}>
-      {model.category}
-    </span>
+<article class="p-5 hover:bg-[var(--color-paper-2)] transition-colors focus-within:bg-[var(--color-paper-2)] h-full">
+  <div class="flex items-baseline gap-1.5 mb-1.5 text-[11px] uppercase tracking-wider text-[var(--color-ink-3)]">
+    <span>{model.category}</span>
+    <span class="text-[var(--color-ink-4)]">·</span>
+    <span class="truncate">{model.provider}</span>
   </div>
 
-  <p class="text-gray-400 text-sm mb-4 line-clamp-2 text-pretty">{model.description}</p>
+  <h3 class="text-[15px] font-semibold text-[var(--color-ink)] mb-1.5 line-clamp-2">
+    <a href={`/models/${model.provider}/${model.id.split('/')[1] || ''}`} class="hover:text-[var(--color-accent)] focus-ring">
+      {model.name}
+    </a>
+  </h3>
 
-  <div class="grid grid-cols-2 gap-4 text-sm mb-4">
-    <div>
-      <span class="text-gray-500">Provider</span>
-      <p class="text-gray-300">{model.provider}</p>
-    </div>
-    <div>
-      <span class="text-gray-500">Context</span>
-      <p class="text-gray-300 tnum">{numberFmt.format(model.context_window)} tokens</p>
-    </div>
-    <div>
-      <span class="text-gray-500">Input</span>
-      <p class="text-gray-300 tnum">{currencyFmt.format(model.input_price)}/1M</p>
-    </div>
-    <div>
-      <span class="text-gray-500">Output</span>
-      <p class="text-gray-300 tnum">{currencyFmt.format(model.output_price)}/1M</p>
-    </div>
-  </div>
-
-  {model.benchmark && (
-    <div class="flex gap-4 text-xs mb-4">
-      {model.benchmark.mmlu && (
-        <span class="bg-gray-700 px-2 py-1 rounded">MMLU: {model.benchmark.mmlu}</span>
-      )}
-      {model.benchmark.humaneval && (
-        <span class="bg-gray-700 px-2 py-1 rounded">HumanEval: {model.benchmark.humaneval}</span>
-      )}
-    </div>
-  )}
-
-  <div class="flex flex-wrap gap-2 mb-4">
-    {model.tags.slice(0, 5).map(tag => (
-      <span class="bg-gray-700 text-gray-400 px-2 py-1 rounded text-xs">{tag}</span>
-    ))}
-  </div>
-
-  <a
-    href={model.url}
-    target="_blank"
-    rel="noopener noreferrer"
-    class="inline-block bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition-colors focus-ring"
-  >
-    View on {model.provider}
-  </a>
+  <p class="text-[12px] text-[var(--color-ink-2)] line-clamp-3 text-pretty leading-relaxed">
+    {model.description}
+  </p>
 </article>

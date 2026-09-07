@@ -7,28 +7,26 @@ interface Props {
 }
 
 const { categories, providers, selectedCategory, selectedProvider } = Astro.props;
-
-const features = [
-  { value: 'tools', label: 'Function calling' },
-  { value: 'vision', label: 'Vision' },
-  { value: 'json_mode', label: 'JSON mode' },
-  { value: 'reasoning', label: 'Reasoning' },
-  { value: 'streaming', label: 'Streaming' },
-];
 ---
 
-<aside class="hidden md:block bg-gray-800 rounded-lg p-6 border border-gray-700 sticky top-24" aria-label="Filtros del catálogo">
-  <h2 class="text-lg font-semibold mb-4">Filtros</h2>
+<aside class="space-y-8" aria-label="Filtros del catálogo">
+  <div>
+    <p class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] font-medium mb-3">
+      Filtros
+    </p>
+  </div>
 
-  <div class="mb-6">
-    <label for="category-filter" class="block text-sm text-gray-400 mb-2">Categoría</label>
+  <div>
+    <label for="category-filter" class="block text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-2">
+      Categoría
+    </label>
     <select
       id="category-filter"
       name="category"
       autocomplete="off"
-      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
+      class="w-full bg-[var(--color-paper-2)] border rule text-[var(--color-ink)] rounded-sm px-3 py-2 text-[14px] focus-ring focus:border-[var(--color-ink-3)]"
     >
-      <option value="">Todas las categorías</option>
+      <option value="">Todas</option>
       {categories.map(cat => (
         <option value={cat} selected={selectedCategory === cat}>
           {cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -37,15 +35,17 @@ const features = [
     </select>
   </div>
 
-  <div class="mb-6">
-    <label for="provider-filter" class="block text-sm text-gray-400 mb-2">Proveedor</label>
+  <div>
+    <label for="provider-filter" class="block text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-2">
+      Proveedor
+    </label>
     <select
       id="provider-filter"
       name="provider"
       autocomplete="off"
-      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
+      class="w-full bg-[var(--color-paper-2)] border rule text-[var(--color-ink)] rounded-sm px-3 py-2 text-[14px] focus-ring focus:border-[var(--color-ink-3)]"
     >
-      <option value="">Todos los proveedores</option>
+      <option value="">Todos</option>
       {providers.map(prov => (
         <option value={prov} selected={selectedProvider === prov}>
           {prov}
@@ -54,54 +54,56 @@ const features = [
     </select>
   </div>
 
-  <div class="mb-6">
-    <label for="context-filter" class="block text-sm text-gray-400 mb-2">Contexto máximo (tokens)</label>
+  <div>
+    <label for="context-filter" class="block text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-2">
+      Contexto máx.
+    </label>
     <select
       id="context-filter"
       name="context"
       autocomplete="off"
-      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
+      class="w-full bg-[var(--color-paper-2)] border rule text-[var(--color-ink)] rounded-sm px-3 py-2 text-[14px] focus-ring focus:border-[var(--color-ink-3)]"
     >
       <option value="0">Cualquiera</option>
-      <option value="32768">32K</option>
-      <option value="65536">64K</option>
-      <option value="131072">128K</option>
-      <option value="200000">200K+</option>
+      <option value="32768">≤ 32K</option>
+      <option value="65536">≤ 64K</option>
+      <option value="131072">≤ 128K</option>
+      <option value="200000">≤ 200K</option>
     </select>
   </div>
 
   <div>
-    <label for="price-filter" class="block text-sm text-gray-400 mb-2">Precio máximo ($/1M tokens)</label>
+    <label for="price-filter" class="block text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-2">
+      Precio máx. / 1M
+    </label>
     <select
       id="price-filter"
       name="price"
       autocomplete="off"
-      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
+      class="w-full bg-[var(--color-paper-2)] border rule text-[var(--color-ink)] rounded-sm px-3 py-2 text-[14px] focus-ring focus:border-[var(--color-ink-3)]"
     >
       <option value="0">Cualquiera</option>
-      <option value="1">$1</option>
-      <option value="5">$5</option>
-      <option value="10">$10</option>
-      <option value="50">$50</option>
+      <option value="1">≤ $1</option>
+      <option value="5">≤ $5</option>
+      <option value="10">≤ $10</option>
+      <option value="50">≤ $50</option>
     </select>
   </div>
 
-  <div class="mt-6">
-    <label for="free-filter" class="flex items-center gap-2 cursor-pointer text-sm text-gray-300">
-      <input
-        type="checkbox"
-        id="free-filter"
-        name="free"
-        class="w-4 h-4 bg-gray-700 border-gray-600 rounded text-teal-500 focus-ring"
-      />
-      <span>Mostrar solo modelos gratuitos</span>
-    </label>
-  </div>
+  <label for="free-filter" class="flex items-center gap-2 cursor-pointer text-[13px] text-[var(--color-ink-2)]">
+    <input
+      type="checkbox"
+      id="free-filter"
+      name="free"
+      class="w-4 h-4 bg-[var(--color-paper-2)] border rule rounded-sm text-[var(--color-accent)] focus-ring"
+    />
+    <span>Solo modelos gratuitos</span>
+  </label>
 
   <button
     type="button"
     id="clear-all-filters"
-    class="mt-6 w-full bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg text-sm font-medium transition-colors focus-ring"
+    class="w-full text-[13px] text-[var(--color-ink-3)] hover:text-[var(--color-ink)] py-2 border-t rule transition-colors focus-ring"
   >
     Limpiar filtros
   </button>
@@ -109,28 +111,28 @@ const features = [
 
 <div id="filter-drawer" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-label="Filtros">
   <div id="filter-drawer-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-  <div id="filter-drawer-content" class="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-gray-800 border-l border-gray-700 overflow-y-auto overscroll-contain transform translate-x-full transition-transform duration-300">
-    <div class="p-6">
-      <div class="flex items-center justify-between mb-6">
-        <h2 class="text-lg font-semibold text-white">Filtros</h2>
+  <div id="filter-drawer-content" class="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-[var(--color-paper)] border-l rule overflow-y-auto overscroll-contain transform translate-x-full transition-transform duration-300">
+    <div class="p-6 space-y-6">
+      <div class="flex items-center justify-between">
+        <h2 class="text-[15px] font-semibold text-[var(--color-ink)]">Filtros</h2>
         <button
           id="close-drawer"
           type="button"
           aria-label="Cerrar filtros"
-          class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors focus-ring"
+          class="p-2 -mr-2 text-[var(--color-ink-3)] hover:text-[var(--color-ink)] focus-ring"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 6l12 12M6 18L18 6" />
           </svg>
         </button>
       </div>
 
-      <div class="mb-6">
-        <label for="category-filter-mobile" class="block text-sm text-gray-400 mb-2">Categoría</label>
+      <div>
+        <label for="category-filter-mobile" class="block text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-2">Categoría</label>
         <select
           id="category-filter-mobile"
           autocomplete="off"
-          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
+          class="w-full bg-[var(--color-paper-2)] border rule text-[var(--color-ink)] rounded-sm px-3 py-2 text-[14px] focus-ring"
         >
           <option value="">Todas</option>
           {categories.map(cat => (
@@ -141,12 +143,12 @@ const features = [
         </select>
       </div>
 
-      <div class="mb-6">
-        <label for="provider-filter-mobile" class="block text-sm text-gray-400 mb-2">Proveedor</label>
+      <div>
+        <label for="provider-filter-mobile" class="block text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-2">Proveedor</label>
         <select
           id="provider-filter-mobile"
           autocomplete="off"
-          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
+          class="w-full bg-[var(--color-paper-2)] border rule text-[var(--color-ink)] rounded-sm px-3 py-2 text-[14px] focus-ring"
         >
           <option value="">Todos</option>
           {providers.map(prov => (
@@ -157,59 +159,57 @@ const features = [
         </select>
       </div>
 
-      <div class="mb-6">
-        <label for="context-filter-mobile" class="block text-sm text-gray-400 mb-2">Contexto máximo (tokens)</label>
+      <div>
+        <label for="context-filter-mobile" class="block text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-2">Contexto máx.</label>
         <select
           id="context-filter-mobile"
           autocomplete="off"
-          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
+          class="w-full bg-[var(--color-paper-2)] border rule text-[var(--color-ink)] rounded-sm px-3 py-2 text-[14px] focus-ring"
         >
           <option value="0">Cualquiera</option>
-          <option value="32768">32K</option>
-          <option value="65536">64K</option>
-          <option value="131072">128K</option>
-          <option value="200000">200K+</option>
+          <option value="32768">≤ 32K</option>
+          <option value="65536">≤ 64K</option>
+          <option value="131072">≤ 128K</option>
+          <option value="200000">≤ 200K</option>
         </select>
       </div>
 
-      <div class="mb-6">
-        <label for="price-filter-mobile" class="block text-sm text-gray-400 mb-2">Precio máximo ($/1M tokens)</label>
+      <div>
+        <label for="price-filter-mobile" class="block text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-2">Precio máx. / 1M</label>
         <select
           id="price-filter-mobile"
           autocomplete="off"
-          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
+          class="w-full bg-[var(--color-paper-2)] border rule text-[var(--color-ink)] rounded-sm px-3 py-2 text-[14px] focus-ring"
         >
           <option value="0">Cualquiera</option>
-          <option value="1">$1</option>
-          <option value="5">$5</option>
-          <option value="10">$10</option>
-          <option value="50">$50</option>
+          <option value="1">≤ $1</option>
+          <option value="5">≤ $5</option>
+          <option value="10">≤ $10</option>
+          <option value="50">≤ $50</option>
         </select>
       </div>
 
-      <div class="mb-6">
-        <label for="free-filter-mobile" class="flex items-center gap-2 cursor-pointer text-sm text-gray-300">
-          <input
-            type="checkbox"
-            id="free-filter-mobile"
-            class="w-4 h-4 bg-gray-700 border-gray-600 rounded text-teal-500 focus-ring"
-          />
-          <span>Solo modelos gratuitos</span>
-        </label>
-      </div>
+      <label for="free-filter-mobile" class="flex items-center gap-2 cursor-pointer text-[13px] text-[var(--color-ink-2)]">
+        <input
+          type="checkbox"
+          id="free-filter-mobile"
+          class="w-4 h-4 bg-[var(--color-paper-2)] border rule rounded-sm text-[var(--color-accent)] focus-ring"
+        />
+        <span>Solo modelos gratuitos</span>
+      </label>
 
-      <div class="flex gap-3">
+      <div class="flex gap-2 pt-4 border-t rule">
         <button
           id="apply-filters"
           type="button"
-          class="flex-1 bg-teal-600 hover:bg-teal-500 text-white py-3 rounded-lg font-medium transition-colors focus-ring"
+          class="flex-1 bg-[var(--color-ink)] text-[var(--color-paper)] hover:bg-[var(--color-ink-2)] py-2.5 rounded-sm text-[14px] font-medium transition-colors focus-ring"
         >
-          Aplicar filtros
+          Aplicar
         </button>
         <button
           id="clear-filters"
           type="button"
-          class="px-4 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors focus-ring"
+          class="px-4 py-2.5 border rule text-[var(--color-ink)] hover:bg-[var(--color-paper-2)] rounded-sm text-[14px] font-medium transition-colors focus-ring"
         >
           Limpiar
         </button>
@@ -222,10 +222,10 @@ const features = [
   id="open-filter-drawer"
   type="button"
   aria-label="Abrir filtros"
-  class="md:hidden fixed bottom-24 left-4 z-40 bg-teal-600 hover:bg-teal-500 text-white p-4 rounded-full shadow-lg transition-colors focus-ring touch-manipulation"
+  class="md:hidden fixed bottom-6 right-6 z-40 bg-[var(--color-ink)] text-[var(--color-paper)] p-3.5 rounded-full shadow-lg transition-colors focus-ring touch-manipulation"
 >
-  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
   </svg>
 </button>
 

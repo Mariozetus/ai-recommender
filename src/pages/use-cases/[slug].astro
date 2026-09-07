@@ -37,171 +37,135 @@ const ranked = matched
   }))
   .sort((a, b) => b.score - a.score)
   .slice(0, 8);
-
-const categoryColors: Record<string, string> = {
-  chat: 'bg-blue-900/30 border-blue-700 text-blue-300',
-  coding: 'bg-green-900/30 border-green-700 text-green-300',
-  reasoning: 'bg-purple-900/30 border-purple-700 text-purple-300',
-  image: 'bg-pink-900/30 border-pink-700 text-pink-300',
-  embedding: 'bg-orange-900/30 border-orange-700 text-orange-300',
-  multimodal: 'bg-cyan-900/30 border-cyan-700 text-cyan-300',
-};
 ---
 
-<Layout title={`${useCase.title} - AI Models`} description={useCase.description}>
-  <div class="bg-gradient-to-b from-gray-900 to-gray-800 py-16">
-    <div class="max-w-4xl mx-auto px-4">
-      <nav class="text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-teal-400 focus-ring">Inicio</a>
-        <span class="mx-2" aria-hidden="true">/</span>
-        <a href="/use-cases" class="hover:text-teal-400 focus-ring">Casos de uso</a>
-        <span class="mx-2" aria-hidden="true">/</span>
-        <span class="text-gray-400" aria-current="page">{useCase.title}</span>
-      </nav>
+<Layout title={`${useCase.title}`} description={useCase.description}>
+  <article class="max-w-5xl mx-auto px-6 py-12 md:py-16">
+    <nav class="text-[13px] text-[var(--color-ink-3)] mb-10 flex flex-wrap items-center gap-x-2" aria-label="Ruta">
+      <a href="/use-cases" class="hover:text-[var(--color-ink)] focus-ring">Casos de uso</a>
+      <span aria-hidden="true">/</span>
+      <span class="text-[var(--color-ink-2)]" aria-current="page">{useCase.title}</span>
+    </nav>
 
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 text-balance">{useCase.title}</h1>
-      <p class="text-xl text-gray-300 mb-6 text-pretty">{useCase.tagline}</p>
-      <p class="text-gray-400 leading-relaxed max-w-3xl text-pretty">{useCase.description}</p>
-    </div>
-  </div>
+    <header class="mb-12 pb-12 border-b rule">
+      <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-4">
+        Caso de uso
+      </p>
+      <h1 class="text-4xl md:text-5xl font-semibold tracking-[-0.02em] text-[var(--color-ink)] mb-4 text-balance">
+        {useCase.title}
+      </h1>
+      <p class="text-xl text-[var(--color-ink-2)] mb-6 text-pretty">{useCase.tagline}</p>
+      <p class="text-[var(--color-ink-2)] leading-relaxed max-w-3xl text-pretty">{useCase.description}</p>
+    </header>
 
-  <div class="max-w-6xl mx-auto px-4 py-12">
-    <div class="grid md:grid-cols-3 gap-8 mb-12">
-      <div class="md:col-span-2">
-        <h2 class="text-2xl font-bold text-white mb-6 text-balance">Modelos recomendados</h2>
-        <div class="space-y-4">
+    <div class="grid lg:grid-cols-[1fr_280px] gap-12 mb-16">
+      <section>
+        <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+          {ranked.length} modelos recomendados
+        </p>
+        <ol class="divide-y divide-[var(--color-rule)]">
           {ranked.map(({ model, score }, i) => (
-            <article class="bg-gray-800 rounded-lg border border-gray-700 p-6 hover:border-gray-600 transition-colors">
-              <div class="flex items-start gap-4">
-                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-teal-900/50 border border-teal-700 flex items-center justify-center text-teal-300 font-bold" aria-hidden="true">
-                  #{i + 1}
-                </div>
-                <div class="flex-1 min-w-0">
-                  <div class="flex items-start justify-between gap-3 mb-2">
-                    <div class="min-w-0">
-                      <a href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`} class="text-lg font-semibold text-white hover:text-teal-400 focus-ring text-balance">
-                        {model.name}
-                      </a>
-                      <p class="text-gray-500 text-sm truncate">{model.provider}</p>
-                    </div>
-                    <span class={`px-2 py-1 rounded text-xs font-medium whitespace-nowrap ${categoryColors[model.category] || 'bg-gray-700 text-gray-300'}`} aria-label={model.category}>
-                      {model.category}
-                    </span>
+            <li>
+              <article class="py-5 grid md:grid-cols-[40px_1fr] gap-4 hover:bg-[var(--color-paper-2)] transition-colors -mx-3 px-3 rounded-sm">
+                <div class="text-[13px] tnum text-[var(--color-ink-3)] pt-1">#{i + 1}</div>
+                <div class="min-w-0">
+                  <div class="flex items-baseline gap-2 mb-1.5 text-[12px] uppercase tracking-wider text-[var(--color-ink-3)]">
+                    <span>{model.category}</span>
+                    <span class="text-[var(--color-ink-4)]">·</span>
+                    <span>{model.provider}</span>
                   </div>
+                  <h3 class="text-[16px] font-semibold text-[var(--color-ink)] mb-1">
+                    <a href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`} class="hover:text-[var(--color-accent)] focus-ring">{model.name}</a>
+                  </h3>
+                  <p class="text-[13px] text-[var(--color-ink-2)] line-clamp-2 text-pretty leading-relaxed mb-3">{model.description}</p>
 
-                  <p class="text-gray-400 text-sm mb-3 line-clamp-2 text-pretty">{model.description}</p>
+                  <dl class="grid grid-cols-4 gap-4 text-[12px]">
+                    <div>
+                      <dt class="text-[var(--color-ink-3)] uppercase tracking-wider text-[10px] mb-0.5">Contexto</dt>
+                      <dd class="text-[var(--color-ink)] tnum">
+                        {model.context_window >= 1_000_000 ? `${(model.context_window / 1_000_000).toFixed(1)}M` : `${Math.round(model.context_window / 1000)}K`}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt class="text-[var(--color-ink-3)] uppercase tracking-wider text-[10px] mb-0.5">Input</dt>
+                      <dd class="text-[var(--color-ink)] tnum">{currencyFmt.format(model.input_price)}</dd>
+                    </div>
+                    <div>
+                      <dt class="text-[var(--color-ink-3)] uppercase tracking-wider text-[10px] mb-0.5">Output</dt>
+                      <dd class="text-[var(--color-ink)] tnum">{currencyFmt.format(model.output_price)}</dd>
+                    </div>
+                    <div>
+                      <dt class="text-[var(--color-ink-3)] uppercase tracking-wider text-[10px] mb-0.5">Score</dt>
+                      <dd class="text-[var(--color-accent)] tnum font-medium">{Math.round(score)}/100</dd>
+                    </div>
+                  </dl>
 
-                  <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
-                    <div>
-                      <span class="text-gray-500">Contexto</span>
-                      <p class="text-gray-300 font-mono tnum">{(model.context_window / 1000).toFixed(0)}K</p>
-                    </div>
-                    <div>
-                      <span class="text-gray-500">Input</span>
-                      <p class="text-gray-300 font-mono tnum">{currencyFmt.format(model.input_price)}/1M</p>
-                    </div>
-                    <div>
-                      <span class="text-gray-500">Output</span>
-                      <p class="text-gray-300 font-mono tnum">{currencyFmt.format(model.output_price)}/1M</p>
-                    </div>
-                    <div>
-                      <span class="text-gray-500">Score</span>
-                      <p class="text-teal-400 font-mono tnum">{Math.round(score)}/100</p>
-                    </div>
-                  </div>
-
-                  <div class="flex gap-2 mt-4">
-                    <a
-                      href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`}
-                      class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition-colors focus-ring"
-                    >
-                      Ver detalles
-                    </a>
+                  <div class="flex gap-2 mt-3">
                     <button
                       type="button"
-                      aria-label={`Añadir ${model.name} a comparación`}
-                      class="compare-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors focus-ring"
+                      class="compare-btn border rule text-[var(--color-ink)] hover:bg-[var(--color-paper)] px-3 py-1.5 rounded-sm text-[12px] font-medium transition-colors focus-ring"
                       data-model-id={model.id}
+                      aria-label={`Añadir ${model.name} a comparación`}
                     >
                       Comparar
                     </button>
                   </div>
                 </div>
-              </div>
-            </article>
+              </article>
+            </li>
           ))}
-        </div>
+        </ol>
+      </section>
 
-        <div class="mt-8 text-center">
-          <a
-            href="/catalog"
-            class="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 transition-colors focus-ring"
-          >
-            Ver todos los {numberFmt.format(matched.length)} modelos en el catálogo
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </a>
-        </div>
-      </div>
-
-      <aside class="md:col-span-1 space-y-6">
-        <div class="bg-gray-800 rounded-lg border border-gray-700 p-6 sticky top-24">
-          <h3 class="text-lg font-semibold text-white mb-4 text-balance">Requisitos clave</h3>
-          <ul class="space-y-3">
+      <aside class="space-y-10">
+        <section>
+          <p class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] font-medium mb-3">
+            Requisitos
+          </p>
+          <ul class="space-y-2 text-[14px] text-[var(--color-ink-2)]">
             {useCase.requirements.map(req => (
-              <li class="flex items-start gap-2 text-sm">
-                <svg class="w-5 h-5 text-teal-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span class="text-gray-300 text-pretty">{req}</span>
-              </li>
+              <li class="pl-3 border-l rule">{req}</li>
             ))}
           </ul>
-        </div>
+        </section>
 
-        <div class="bg-gray-800 rounded-lg border border-gray-700 p-6">
-          <h3 class="text-lg font-semibold text-white mb-4 text-balance">Tips prácticos</h3>
-          <ol class="space-y-3 text-sm">
+        <section>
+          <p class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] font-medium mb-3">
+            Tips prácticos
+          </p>
+          <ol class="space-y-3 text-[13px] text-[var(--color-ink-2)] tnum">
             {useCase.tips.map((tip, i) => (
-              <li class="flex items-start gap-3">
-                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-teal-900/50 border border-teal-700 text-teal-300 text-xs flex items-center justify-center" aria-hidden="true">
-                  {i + 1}
-                </span>
-                <span class="text-gray-300 text-pretty">{tip}</span>
+              <li class="flex gap-3">
+                <span class="text-[var(--color-ink-4)]">{i + 1}.</span>
+                <span class="text-pretty">{tip}</span>
               </li>
             ))}
           </ol>
-        </div>
-
-        <div class="bg-gradient-to-br from-teal-900/30 to-purple-900/30 border border-teal-700 rounded-lg p-6">
-          <h3 class="text-lg font-semibold text-white mb-2 text-balance">¿No encuentras el ideal?</h3>
-          <p class="text-gray-400 text-sm mb-4 text-pretty">Responde unas preguntas y obtén recomendaciones personalizadas</p>
-          <a
-            href="/recommend"
-            class="block text-center bg-teal-600 hover:bg-teal-500 text-white py-2 rounded font-medium transition-colors focus-ring"
-          >
-            Hacer el quiz
-          </a>
-        </div>
+        </section>
       </aside>
     </div>
 
-    <section class="border-t border-gray-700 pt-12 mt-12">
-      <h2 class="text-2xl font-bold text-white mb-6 text-balance">Otros casos de uso</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <section class="pt-10 border-t rule">
+      <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+        Otros casos
+      </p>
+      <ul class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--color-rule)]">
         {USE_CASES.filter(u => u.slug !== useCase.slug).slice(0, 4).map(u => (
-          <a
-            href={`/use-cases/${u.slug}`}
-            class="block bg-gray-800 rounded-lg border border-gray-700 p-5 hover:border-teal-600 transition-colors focus-ring"
-          >
-            <h3 class="font-semibold text-white mb-1">{u.title}</h3>
-            <p class="text-gray-400 text-sm line-clamp-2 text-pretty">{u.tagline}</p>
-          </a>
+          <li class="bg-[var(--color-paper)]">
+            <a href={`/use-cases/${u.slug}`} class="block p-4 hover:bg-[var(--color-paper-2)] transition-colors focus-ring min-w-0">
+              <h3 class="font-medium text-[var(--color-ink)] truncate mb-1">{u.title}</h3>
+              <p class="text-[12px] text-[var(--color-ink-3)] line-clamp-2 text-pretty">{u.tagline}</p>
+            </a>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
-  </div>
+
+    <p class="mt-12 text-[12px] text-[var(--color-ink-3)]">
+      {numberFmt.format(matched.length)} modelos disponibles en el catálogo que coinciden con este caso de uso.
+      <a href="/catalog" class="text-[var(--color-ink-2)] underline underline-offset-4 hover:text-[var(--color-ink)] focus-ring ml-1">Ver todos</a>
+    </p>
+  </article>
 </Layout>
 
 <script>
@@ -217,13 +181,13 @@ const categoryColors: Record<string, string> = {
     const id = (btn as HTMLButtonElement).dataset.modelId;
     if (compareIds.includes(id || '')) {
       btn.textContent = 'Añadido';
-      (btn as HTMLButtonElement).disabled = true;
+      btn.setAttribute('disabled', 'true');
     }
   });
 
   document.addEventListener('click', (e) => {
     const target = e.target as HTMLElement;
-    const btn = target.closest('.compare-btn') as HTMLButtonElement;
+    const btn = target.closest('.compare-btn') as HTMLButtonElement | null;
     if (!btn) return;
 
     const modelId = btn.dataset.modelId;
@@ -237,7 +201,7 @@ const categoryColors: Record<string, string> = {
     compareIds.push(modelId);
     localStorage.setItem('compareIds', JSON.stringify(compareIds));
     btn.textContent = 'Añadido';
-    btn.disabled = true;
+    btn.setAttribute('disabled', 'true');
     showToast('Modelo añadido a comparación', 'success');
   });
 </script>

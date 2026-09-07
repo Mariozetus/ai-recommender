@@ -12,9 +12,6 @@ const acceptLanguage = Astro.request.headers.get('accept-language');
 const locale = detectLocale(acceptLanguage || undefined);
 setLocale(locale);
 
-const numberFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US');
-const currencyFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US', { style: 'currency', currency: 'USD' });
-
 const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
 const { models } = JSON.parse(rawData);
 
@@ -36,60 +33,84 @@ const categories = [
 <Layout title={t('layout.title')}>
   <Hero locale={locale} />
 
-  <section id="recently-viewed" class="max-w-6xl mx-auto px-4 py-8 hidden">
-    <h2 class="text-xl font-bold text-white mb-4 text-balance">Recently Viewed</h2>
-    <div id="recently-viewed-list" class="flex gap-4 overflow-x-auto pb-4">
+  <section class="border-b rule">
+    <div class="max-w-6xl mx-auto px-6 py-20">
+      <div class="mb-12">
+        <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-3">
+          Categorías
+        </p>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-[var(--color-ink)] text-balance">
+          Explorar por tipo
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--color-rule)]">
+        {categories.map(cat => (
+          <CategoryCard
+            category={cat.id}
+            name={cat.name}
+            description={cat.desc}
+            count={categoryCounts[cat.id] || 0}
+            locale={locale}
+          />
+        ))}
+      </div>
     </div>
   </section>
 
-  <section class="max-w-6xl mx-auto px-4 py-16">
-    <h2 class="text-2xl font-bold text-white mb-8 text-center text-balance">
-      {t('home.categories.title')}
-    </h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {categories.map(cat => (
-        <CategoryCard
-          category={cat.id}
-          name={cat.name}
-          description={cat.desc}
-          count={categoryCounts[cat.id] || 0}
-          locale={locale}
-        />
-      ))}
-    </div>
-  </section>
+  <section>
+    <div class="max-w-6xl mx-auto px-6 py-20">
+      <div class="mb-12">
+        <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-3">
+          Reseñas curadas
+        </p>
+        <h2 class="text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-[var(--color-ink)] text-balance">
+          Rankings por necesidad
+        </h2>
+        <p class="text-[var(--color-ink-2)] mt-3 max-w-xl">
+          Listas curadas según el caso de uso, no solo por ranking genérico.
+        </p>
+      </div>
 
-  <section class="bg-gray-900/50 py-16">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <h2 class="text-2xl font-bold text-white mb-4 text-balance">Ready to find your model?</h2>
-      <p class="text-gray-400 mb-8 text-pretty">Answer a few questions and get personalized recommendations</p>
-      <a
-        href="/recommend"
-        class="inline-flex items-center justify-center bg-teal-600 hover:bg-teal-500 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors transition-transform hover:scale-[1.02] focus-ring"
-      >
-        Get Personalized Recommendations
-      </a>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--color-rule)]">
+        <a href="/best/free" class="group bg-[var(--color-paper)] p-6 hover:bg-[var(--color-paper-2)] transition-colors focus-ring">
+          <p class="text-[13px] text-[var(--color-ink-3)] mb-1">Top</p>
+          <h3 class="font-semibold text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">Modelos gratuitos</h3>
+          <p class="text-sm text-[var(--color-ink-2)] mt-2 text-pretty">Con tier gratuito o totalmente gratis</p>
+        </a>
+        <a href="/best/cheap" class="group bg-[var(--color-paper)] p-6 hover:bg-[var(--color-paper-2)] transition-colors focus-ring">
+          <p class="text-[13px] text-[var(--color-ink-3)] mb-1">Top</p>
+          <h3 class="font-semibold text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">Más baratos</h3>
+          <p class="text-sm text-[var(--color-ink-2)] mt-2 text-pretty">Bajo costo, buena calidad</p>
+        </a>
+        <a href="/best/long-context" class="group bg-[var(--color-paper)] p-6 hover:bg-[var(--color-paper-2)] transition-colors focus-ring">
+          <p class="text-[13px] text-[var(--color-ink-3)] mb-1">Top</p>
+          <h3 class="font-semibold text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">Contexto largo</h3>
+          <p class="text-sm text-[var(--color-ink-2)] mt-2 text-pretty">200K+ tokens para documentos</p>
+        </a>
+        <a href="/best/reasoning" class="group bg-[var(--color-paper)] p-6 hover:bg-[var(--color-paper-2)] transition-colors focus-ring">
+          <p class="text-[13px] text-[var(--color-ink-3)] mb-1">Top</p>
+          <h3 class="font-semibold text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors">Razonamiento</h3>
+          <p class="text-sm text-[var(--color-ink-2)] mt-2 text-pretty">Lógica, matemáticas, código</p>
+        </a>
+      </div>
     </div>
   </section>
 </Layout>
 
 <script define:vars={{ models: models.slice(0, 50) }}>
-  const currencyFmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
-
   const history = JSON.parse(localStorage.getItem('viewHistory') || '[]');
   const section = document.getElementById('recently-viewed');
   const list = document.getElementById('recently-viewed-list');
 
   if (history.length > 0 && list && section) {
     const recentModels = history.slice(0, 6).map(id => models.find(m => m && m.id === id)).filter(Boolean);
-
     if (recentModels.length > 0) {
       section.classList.remove('hidden');
       list.innerHTML = recentModels.map(m => `
-        <a href="/models/${m.provider}/${m.id.split("/")[1] || ""}" class="flex-shrink-0 w-48 bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition-colors focus-ring">
-          <h3 class="font-semibold text-white truncate">${m.name}</h3>
-          <p class="text-gray-500 text-sm">${m.provider}</p>
-          <p class="text-gray-400 text-xs mt-2 tnum">${currencyFmt.format(m.input_price + m.output_price)}/1M</p>
+        <a href="/models/${m.provider}/${m.id.split("/")[1] || ""}" class="block p-4 hover:bg-[var(--color-paper-2)] transition-colors focus-ring">
+          <h3 class="font-medium text-[var(--color-ink)] truncate">${m.name}</h3>
+          <p class="text-[13px] text-[var(--color-ink-3)] mt-0.5">${m.provider}</p>
         </a>
       `).join('');
     }

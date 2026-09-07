@@ -30,16 +30,16 @@ const searchable = models.slice(0, 200).map(m => ({
       aria-controls="search-suggestions"
       aria-activedescendant=""
       data-search-input
-      class="w-full bg-gray-800 border border-gray-700 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-500 focus-ring focus:border-teal-500"
+      class="w-full bg-[var(--color-paper-2)] border rule text-[var(--color-ink)] placeholder-[var(--color-ink-4)] rounded-sm pl-10 pr-4 py-2.5 text-[14px] focus-ring focus:border-[var(--color-ink-3)]"
     />
     <svg
-      class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none"
+      class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--color-ink-3)] pointer-events-none"
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
       aria-hidden="true"
     >
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
     </svg>
   </div>
 
@@ -48,7 +48,7 @@ const searchable = models.slice(0, 200).map(m => ({
     role="listbox"
     aria-label="Sugerencias de búsqueda"
     data-search-suggestions
-    class="hidden absolute z-30 mt-1 w-full bg-gray-800 border border-gray-700 rounded-lg shadow-xl max-h-80 overflow-y-auto overscroll-contain"
+    class="hidden absolute z-30 mt-1 w-full bg-[var(--color-paper-2)] border rule rounded-sm shadow-xl max-h-80 overflow-y-auto overscroll-contain"
   >
   </div>
 </div>
@@ -60,7 +60,6 @@ const searchable = models.slice(0, 200).map(m => ({
 
   if (root && input && suggestions) {
     let activeIndex = -1;
-    let lastMatches = [];
 
     function score(query, target) {
       const q = query.toLowerCase();
@@ -86,9 +85,9 @@ const searchable = models.slice(0, 200).map(m => ({
       return results.slice(0, 8);
     }
 
-    function render(matches, query) {
+    function render(matches) {
       if (matches.length === 0) {
-        suggestions.innerHTML = '<div class="px-4 py-3 text-gray-500 text-sm">Sin resultados</div>';
+        suggestions.innerHTML = '<div class="px-4 py-3 text-[var(--color-ink-3)] text-[13px]">Sin resultados</div>';
         return;
       }
 
@@ -101,13 +100,13 @@ const searchable = models.slice(0, 200).map(m => ({
           id="search-opt-${i}"
           data-index="${i}"
           aria-selected="${i === activeIndex}"
-          class="flex items-center justify-between px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-0 transition-colors cursor-pointer ${i === activeIndex ? 'bg-gray-700' : ''}"
+          class="flex items-center justify-between px-4 py-2.5 hover:bg-[var(--color-paper)] border-b rule last:border-0 transition-colors cursor-pointer ${i === activeIndex ? 'bg-[var(--color-paper)]' : ''}"
         >
           <div class="flex-1 min-w-0">
-            <div class="font-medium text-white truncate">${escape(m.name)}</div>
-            <div class="text-xs text-gray-500 truncate">${escape(m.id)}</div>
+            <div class="text-[14px] text-[var(--color-ink)] truncate">${escape(m.name)}</div>
+            <div class="text-[12px] text-[var(--color-ink-3)] truncate">${escape(m.id)}</div>
           </div>
-          <span class="ml-3 text-xs text-gray-400 bg-gray-900 px-2 py-1 rounded">${escape(m.category)}</span>
+          <span class="ml-3 text-[11px] uppercase tracking-wider text-[var(--color-ink-3)]">${escape(m.category)}</span>
         </a>
       `).join('');
     }
@@ -117,11 +116,11 @@ const searchable = models.slice(0, 200).map(m => ({
       input.setAttribute('aria-activedescendant', activeIndex >= 0 ? `search-opt-${activeIndex}` : '');
       links.forEach((link, i) => {
         if (i === activeIndex) {
-          link.classList.add('bg-gray-700');
+          link.classList.add('bg-[var(--color-paper)]');
           link.setAttribute('aria-selected', 'true');
           link.scrollIntoView({ block: 'nearest' });
         } else {
-          link.classList.remove('bg-gray-700');
+          link.classList.remove('bg-[var(--color-paper)]');
           link.setAttribute('aria-selected', 'false');
         }
       });
@@ -138,8 +137,8 @@ const searchable = models.slice(0, 200).map(m => ({
         return;
       }
 
-      lastMatches = bestMatch(q);
-      render(lastMatches, q);
+      const matches = bestMatch(q);
+      render(matches);
       suggestions.classList.remove('hidden');
       input.setAttribute('aria-expanded', 'true');
     });
@@ -154,21 +153,12 @@ const searchable = models.slice(0, 200).map(m => ({
         e.preventDefault();
         activeIndex = Math.max(0, activeIndex - 1);
         updateActive();
-      } else if (e.key === 'Home') {
-        e.preventDefault();
-        activeIndex = 0;
-        updateActive();
-      } else if (e.key === 'End') {
-        e.preventDefault();
-        activeIndex = links.length - 1;
-        updateActive();
       } else if (e.key === 'Enter' && activeIndex >= 0 && links[activeIndex]) {
         e.preventDefault();
         window.location.href = links[activeIndex].href;
       } else if (e.key === 'Escape') {
         suggestions.classList.add('hidden');
         input.setAttribute('aria-expanded', 'false');
-        input.setAttribute('aria-activedescendant', '');
       }
     });
 

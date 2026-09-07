@@ -2,7 +2,7 @@
 export const prerender = false;
 
 import Layout from '../layouts/Layout.astro';
-import BenchmarkRadar from '../components/BenchmarkRadar.astro';
+import BenchmarkBar from '../components/BenchmarkBar.astro';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
 import { detectLocale, setLocale, t } from '../i18n/index';
@@ -29,15 +29,6 @@ if (compareModels.length === 0) {
   return Astro.redirect('/');
 }
 
-const categoryColors: Record<string, string> = {
-  chat: '#1e3a5f',
-  coding: '#1a3d1a',
-  reasoning: '#3d1a5c',
-  image: '#3d1a3d',
-  embedding: '#5c3d1a',
-  multimodal: '#1a3d3d',
-};
-
 const lowestPrice = Math.min(...compareModels.map((m: any) => m.input_price + m.output_price));
 const highestMMLU = Math.max(...compareModels.filter((m: any) => m.benchmark?.mmlu).map((m: any) => m.benchmark.mmlu));
 const highestContext = Math.max(...compareModels.map((m: any) => m.context_window));
@@ -45,335 +36,330 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
 ---
 
 <Layout title={t('compare.title')}>
-  <div class="max-w-7xl mx-auto px-4 py-8">
-    <div class="flex justify-between items-center mb-8 gap-4 flex-wrap">
-      <div>
-        <h1 class="text-3xl font-bold mb-2 text-balance">{t('compare.title')}</h1>
-        <p class="text-gray-400 text-pretty">{t('compare.comparing', { count: compareModels.length.toString() })}</p>
-      </div>
-      <div class="flex gap-3 flex-wrap">
-        <a
-          href="/"
-          class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded font-medium transition-colors focus-ring"
-        >
-          {t('compare.back').replace('← ', '')}
-        </a>
-        <button
-          type="button"
-          id="save-comparison"
-          class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded font-medium transition-colors focus-ring"
-        >
-          Save
-        </button>
-        <button
-          type="button"
-          id="clear-all"
-          class="bg-red-900/50 hover:bg-red-800/50 text-red-300 px-4 py-2 rounded font-medium transition-colors border border-red-800 focus-ring"
-        >
-          {t('compare.clear_all')}
-        </button>
+  <div class="border-b rule">
+    <div class="max-w-7xl mx-auto px-6 py-12">
+      <div class="flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6">
+        <div class="min-w-0">
+          <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-3">
+            Comparación
+          </p>
+          <h1 class="text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-[var(--color-ink)] mb-3 text-balance">
+            {t('compare.comparing', { count: numberFmt.format(compareModels.length) })}
+          </h1>
+          <p class="text-[var(--color-ink-2)] max-w-2xl text-pretty">
+            Análisis lado a lado de precio, contexto y benchmarks.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-2 lg:flex-shrink-0">
+          <a
+            href="/"
+            class="border rule text-[var(--color-ink)] hover:bg-[var(--color-paper-2)] px-4 py-2 rounded-sm text-[13px] font-medium transition-colors focus-ring"
+          >
+            {t('compare.back').replace('← ', '')}
+          </a>
+          <button
+            type="button"
+            id="save-comparison"
+            class="border rule text-[var(--color-ink)] hover:bg-[var(--color-paper-2)] px-4 py-2 rounded-sm text-[13px] font-medium transition-colors focus-ring"
+          >
+            Guardar
+          </button>
+          <button
+            type="button"
+            id="clear-all"
+            class="border rule text-[var(--color-accent)] hover:bg-[var(--color-paper-2)] px-4 py-2 rounded-sm text-[13px] font-medium transition-colors focus-ring"
+          >
+            {t('compare.clear_all')}
+          </button>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div class="mb-6 border-b border-gray-700">
-      <nav class="flex gap-4" id="tab-nav" aria-label="Secciones">
-        <button type="button" role="tab" aria-selected="true" class="tab-btn active px-4 py-2 text-teal-400 border-b-2 border-teal-400 font-medium focus-ring" data-tab="overview">Overview</button>
-        <button type="button" role="tab" aria-selected="false" class="tab-btn px-4 py-2 text-gray-400 hover:text-white border-b-2 border-transparent focus-ring" data-tab="benchmarks">Benchmarks</button>
-        <button type="button" role="tab" aria-selected="false" class="tab-btn px-4 py-2 text-gray-400 hover:text-white border-b-2 border-transparent focus-ring" data-tab="pricing">Pricing</button>
-      </nav>
-    </div>
+  <div class="border-b rule">
+    <nav class="max-w-7xl mx-auto px-6 flex gap-6 overflow-x-auto" id="tab-nav" aria-label="Secciones">
+      <button
+        type="button"
+        role="tab"
+        aria-selected="true"
+        aria-controls="tab-overview"
+        class="tab-btn py-3 text-[14px] font-medium border-b-2 border-[var(--color-ink)] text-[var(--color-ink)] focus-ring"
+        data-tab="overview"
+      >Overview</button>
+      <button
+        type="button"
+        role="tab"
+        aria-selected="false"
+        aria-controls="tab-benchmarks"
+        class="tab-btn py-3 text-[14px] font-medium border-b-2 border-transparent text-[var(--color-ink-3)] hover:text-[var(--color-ink-2)] focus-ring"
+        data-tab="benchmarks"
+      >Benchmarks</button>
+      <button
+        type="button"
+        role="tab"
+        aria-selected="false"
+        aria-controls="tab-pricing"
+        class="tab-btn py-3 text-[14px] font-medium border-b-2 border-transparent text-[var(--color-ink-3)] hover:text-[var(--color-ink-2)] focus-ring"
+        data-tab="pricing"
+      >Pricing</button>
+    </nav>
+  </div>
 
-    <div id="tab-overview" class="tab-content">
-      <div class="overflow-x-auto">
-        <table class="w-full bg-gray-800 rounded-lg border border-gray-700">
+  <div class="max-w-7xl mx-auto px-6 py-10">
+    <div id="tab-overview" class="tab-content" role="tabpanel">
+      <div class="overflow-x-auto border rule">
+        <table class="w-full text-[14px]">
           <thead>
-            <tr class="border-b border-gray-700">
-              <th class="text-left p-4 text-gray-400 font-medium sticky left-0 bg-gray-800 min-w-[140px]">{t('compare.feature')}</th>
+            <tr class="border-b rule">
+              <th class="text-left p-4 text-[var(--color-ink-3)] font-medium bg-[var(--color-paper-2)] min-w-[160px]">{t('compare.feature')}</th>
               {compareModels.map((model: any) => (
-                <th class="text-left p-4 min-w-[200px]">
-                  <div class="flex justify-between items-start">
-                    <div class="flex-1">
-                      <a href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`} class="text-lg font-semibold text-white hover:text-teal-400">
+                <th class="text-left p-4 min-w-[200px] align-top">
+                  <div class="flex justify-between items-start gap-3">
+                    <div class="min-w-0 flex-1">
+                      <p class="text-[11px] uppercase tracking-wider text-[var(--color-ink-3)] mb-1">{model.provider}</p>
+                      <a
+                        href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`}
+                        class="text-[15px] font-semibold text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors focus-ring"
+                      >
                         {model.name}
                       </a>
-                      <p class="text-gray-500 text-sm">{model.provider}</p>
                     </div>
-<button
+                    <button
                       type="button"
-                      class="remove-btn text-gray-500 hover:text-red-400 ml-2 p-1 focus-ring"
+                      class="remove-btn text-[var(--color-ink-3)] hover:text-[var(--color-accent)] p-1 -m-1 focus-ring"
                       data-model-id={model.id}
                       aria-label={`Quitar ${model.name} de la comparación`}
                       title="Remove"
                     >
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     </button>
                   </div>
-                  <span
-                    class="inline-block mt-2 px-2 py-1 rounded text-xs font-medium text-white"
-                    style={`background-color: ${categoryColors[model.category] || '#374151'}`}
-                    aria-label={model.category}
-                  >
-                    {model.category}
-                  </span>
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody>
-<tr class="border-b border-gray-700">
-              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.context')}</td>
+          <tbody class="divide-y divide-[var(--color-rule)]">
+            <tr>
+              <td class="p-4 bg-[var(--color-paper-2)] align-top">
+                <p class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)]">Proveedor</p>
+              </td>
               {compareModels.map((model: any) => (
-                <td class="p-4">
-                  <span class={`font-mono tnum ${model.context_window === highestContext ? 'text-green-400' : 'text-white'}`}>
-                    {numberFmt.format(model.context_window)}
-                  </span>
-                  {model.context_window === highestContext && (
-                    <span class="ml-2 text-xs text-green-400">★ {t('compare.best')}</span>
+                <td class="p-4 text-[var(--color-ink-2)] tnum">{model.provider}</td>
+              ))}
+            </tr>
+            <tr>
+              <td class="p-4 bg-[var(--color-paper-2)] align-top">
+                <p class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)]">{t('compare.context')}</p>
+              </td>
+              {compareModels.map((model: any) => (
+                <td class="p-4 tnum">
+                  {model.context_window === highestContext ? (
+                    <span class="text-[var(--color-accent)] font-medium">{numberFmt.format(model.context_window)}</span>
+                  ) : (
+                    <span class="text-[var(--color-ink)]">{numberFmt.format(model.context_window)}</span>
                   )}
                 </td>
               ))}
             </tr>
-            <tr class="border-b border-gray-700">
-              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.description')}</td>
-              {compareModels.map((model: any) => (
-                <td class="p-4 text-gray-300 text-sm max-w-xs text-pretty">{model.description}</td>
-              ))}
-            </tr>
-            <tr class="border-b border-gray-700">
-              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.tags')}</td>
-              {compareModels.map((model: any) => (
-                <td class="p-4">
-                  <div class="flex flex-wrap gap-1">
-                    {model.tags && model.tags.length > 0 ? (
-                      model.tags.slice(0, 4).map((tag: string) => (
-                        <span class="bg-gray-700 text-gray-400 px-2 py-1 rounded text-xs">{tag}</span>
-                      ))
-                    ) : (
-                      <span class="text-gray-500">—</span>
-                    )}
-                  </div>
-                </td>
-              ))}
-            </tr>
             <tr>
-              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.action')}</td>
-              {compareModels.map((model: any) => (
-                <td class="p-4">
-                  <a
-                    href={model.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Ver ${model.name} en ${model.provider}`}
-                    class="text-teal-400 hover:text-teal-300 text-sm focus-ring"
-                  >
-                    {t('model.view_on', { provider: model.provider })} →
-                  </a>
-                </td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div id="tab-benchmarks" class="tab-content hidden">
-      {compareModels.length <= 4 && (
-        <div class="grid gap-6" style={`grid-template-columns: repeat(${compareModels.length}, minmax(250px, 1fr))`}>
-          {compareModels.map((model: any) => (
-            <div>
-              <h3 class="text-lg font-semibold text-white mb-4">{model.name}</h3>
-              {model.benchmark ? (
-                <BenchmarkRadar benchmarks={model.benchmark} size={220} />
-              ) : (
-                <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 text-center text-gray-400">
-                  No benchmark data available
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-      <div class="overflow-x-auto mt-6">
-        <table class="w-full bg-gray-800 rounded-lg border border-gray-700">
-          <thead>
-            <tr class="border-b border-gray-700">
-              <th class="text-left p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.feature')}</th>
-              {compareModels.map((model: any) => (
-                <th class="text-left p-4 min-w-[160px]">
-                  <span class="text-white font-semibold">{model.name}</span>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-{compareModels.some((m: any) => m.benchmark?.mmlu) && (
-              <tr class="border-b border-gray-700">
-                <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">MMLU</td>
-                {compareModels.map((model: any) => (
-                  <td class="p-4">
-                    {model.benchmark?.mmlu ? (
-                      <span class={`font-mono tnum ${model.benchmark.mmlu === highestMMLU ? 'text-green-400' : 'text-white'}`}>
-                        {model.benchmark.mmlu}%
-                      </span>
-                    ) : <span class="text-gray-500">—</span>}
-                  </td>
-                ))}
-              </tr>
-            )}
-            {compareModels.some((m: any) => m.benchmark?.humaneval) && (
-              <tr class="border-b border-gray-700">
-                <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">HumanEval</td>
-                {compareModels.map((model: any) => (
-                  <td class="p-4">
-                    {model.benchmark?.humaneval ? (
-                      <span class="font-mono tnum text-white">{model.benchmark.humaneval}%</span>
-                    ) : <span class="text-gray-500">—</span>}
-                  </td>
-                ))}
-              </tr>
-            )}
-            {compareModels.some((m: any) => m.benchmark?.math) && (
-              <tr class="border-b border-gray-700">
-                <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">MATH</td>
-                {compareModels.map((model: any) => (
-                  <td class="p-4">
-                    {model.benchmark?.math ? (
-                      <span class="font-mono tnum text-white">{model.benchmark.math}%</span>
-                    ) : <span class="text-gray-500">—</span>}
-                  </td>
-                ))}
-              </tr>
-            )}
-            {compareModels.some((m: any) => m.benchmark?.arena_elo) && (
-              <tr class="border-b border-gray-700">
-                <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">Arena ELO</td>
-                {compareModels.map((model: any) => (
-                  <td class="p-4">
-                    {model.benchmark?.arena_elo ? (
-                      <span class={`font-mono tnum ${model.benchmark.arena_elo === highestArenaElo ? 'text-green-400' : 'text-white'}`}>
-                        {numberFmt.format(model.benchmark.arena_elo)}
-                      </span>
-                    ) : <span class="text-gray-500">—</span>}
-                  </td>
-                ))}
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div id="tab-pricing" class="tab-content hidden">
-      <div class="overflow-x-auto">
-        <table class="w-full bg-gray-800 rounded-lg border border-gray-700">
-          <thead>
-            <tr class="border-b border-gray-700">
-              <th class="text-left p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.feature')}</th>
-              {compareModels.map((model: any) => (
-                <th class="text-left p-4 min-w-[160px]">
-                  <span class="text-white font-semibold">{model.name}</span>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-<tr class="border-b border-gray-700">
-              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.context')}</td>
-              {compareModels.map((model: any) => (
-                <td class="p-4">
-                  <span class={`font-mono tnum ${model.context_window === highestContext ? 'text-green-400' : 'text-white'}`}>
-                    {numberFmt.format(model.context_window)} {t('common.tokens')}
-                  </span>
-                </td>
-              ))}
-            </tr>
-            <tr class="border-b border-gray-700">
-              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.input_price')}</td>
-              {compareModels.map((model: any) => (
-                <td class="p-4">
-                  <span class={`font-mono tnum ${model.input_price === lowestPrice && model.input_price > 0 ? 'text-green-400' : 'text-white'}`}>
-                    {currencyFmt.format(model.input_price)}{t('common.per_1m')}
-                  </span>
-                </td>
-              ))}
-            </tr>
-            <tr class="border-b border-gray-700">
-              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.output_price')}</td>
-              {compareModels.map((model: any) => (
-                <td class="p-4">
-                  <span class={`font-mono tnum ${model.output_price === lowestPrice && model.output_price > 0 ? 'text-green-400' : 'text-white'}`}>
-                    {currencyFmt.format(model.output_price)}{t('common.per_1m')}
-                  </span>
-                </td>
-              ))}
-            </tr>
-            <tr class="border-b border-gray-700">
-              <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.combined_price')}</td>
+              <td class="p-4 bg-[var(--color-paper-2)] align-top">
+                <p class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)]">{t('compare.input_price')}</p>
+              </td>
               {compareModels.map((model: any) => {
-                const total = model.input_price + model.output_price;
+                const minInput = Math.min(...compareModels.filter((m: any) => m.input_price > 0).map((m: any) => m.input_price));
+                const isBest = model.input_price > 0 && model.input_price === minInput;
                 return (
-                  <td class="p-4">
-                    <span class={`font-mono tnum ${total === lowestPrice && total > 0 ? 'text-green-400' : 'text-white'}`}>
-                      {currencyFmt.format(total)}{t('common.per_1m')}
-                    </span>
+                  <td class="p-4 tnum">
+                    {isBest ? (
+                      <span class="text-[var(--color-accent)] font-medium">{currencyFmt.format(model.input_price)}</span>
+                    ) : (
+                      <span class="text-[var(--color-ink)]">{currencyFmt.format(model.input_price)}</span>
+                    )}
                   </td>
                 );
               })}
             </tr>
-            {compareModels.some((m: any) => m.pricing?.free) && (
-              <tr>
-                <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.free_tier')}</td>
-                {compareModels.map((model: any) => (
-                  <td class="p-4">
-                    {model.pricing?.free ? (
-                      <span class="text-green-400">✓ {t('compare.yes')}</span>
+            <tr>
+              <td class="p-4 bg-[var(--color-paper-2)] align-top">
+                <p class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)]">{t('compare.output_price')}</p>
+              </td>
+              {compareModels.map((model: any) => {
+                const minOutput = Math.min(...compareModels.filter((m: any) => m.output_price > 0).map((m: any) => m.output_price));
+                const isBest = model.output_price > 0 && model.output_price === minOutput;
+                return (
+                  <td class="p-4 tnum">
+                    {isBest ? (
+                      <span class="text-[var(--color-accent)] font-medium">{currencyFmt.format(model.output_price)}</span>
                     ) : (
-                      <span class="text-gray-500">—</span>
+                      <span class="text-[var(--color-ink)]">{currencyFmt.format(model.output_price)}</span>
                     )}
                   </td>
-                ))}
-              </tr>
+                );
+              })}
+            </tr>
+            <tr>
+              <td class="p-4 bg-[var(--color-paper-2)] align-top">
+                <p class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)]">{t('compare.combined_price')}</p>
+              </td>
+              {compareModels.map((model: any) => {
+                const total = model.input_price + model.output_price;
+                const isBest = total > 0 && total === lowestPrice;
+                return (
+                  <td class="p-4 tnum">
+                    {isBest ? (
+                      <span class="text-[var(--color-accent)] font-medium">{currencyFmt.format(total)}</span>
+                    ) : (
+                      <span class="text-[var(--color-ink)]">{currencyFmt.format(total)}</span>
+                    )}
+                  </td>
+                );
+              })}
+            </tr>
+            <tr>
+              <td class="p-4 bg-[var(--color-paper-2)] align-top">
+                <p class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)]">{t('compare.free_tier')}</p>
+              </td>
+              {compareModels.map((model: any) => (
+                <td class="p-4">
+                  {model.pricing?.free ? (
+                    <span class="text-[var(--color-accent)] font-medium">{t('compare.yes')}</span>
+                  ) : (
+                    <span class="text-[var(--color-ink-3)]">—</span>
+                  )}
+                </td>
+              ))}
+            </tr>
+            <tr>
+              <td class="p-4 bg-[var(--color-paper-2)] align-top">
+                <p class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)]">Batch API</p>
+              </td>
+              {compareModels.map((model: any) => (
+                <td class="p-4">
+                  {model.pricing?.batch ? (
+                    <span class="text-[var(--color-accent)] font-medium">{t('compare.yes')}</span>
+                  ) : (
+                    <span class="text-[var(--color-ink-3)]">—</span>
+                  )}
+                </td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="tab-benchmarks" class="tab-content hidden" role="tabpanel">
+      <div class="grid gap-6" style={`grid-template-columns: repeat(${Math.min(compareModels.length, 4)}, minmax(0, 1fr))`}>
+        {compareModels.map((model: any) => (
+          <section class="border rule p-5">
+            <p class="text-[11px] uppercase tracking-wider text-[var(--color-ink-3)] mb-1">{model.provider}</p>
+            <h3 class="text-[15px] font-semibold text-[var(--color-ink)] mb-4">{model.name}</h3>
+            {model.benchmark ? (
+              <BenchmarkBar benchmarks={model.benchmark} />
+            ) : (
+              <p class="text-[13px] text-[var(--color-ink-3)]">Sin datos</p>
             )}
+          </section>
+        ))}
+      </div>
+    </div>
+
+    <div id="tab-pricing" class="tab-content hidden" role="tabpanel">
+      <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-4">
+        Costos
+      </p>
+      <div class="overflow-x-auto border rule">
+        <table class="w-full text-[14px]">
+          <thead>
+            <tr class="border-b rule">
+              <th class="text-left p-4 text-[var(--color-ink-3)] font-medium bg-[var(--color-paper-2)] min-w-[180px]">Escenario</th>
+              {compareModels.map((model: any) => (
+                <th class="text-left p-4 min-w-[160px]">
+                  <p class="text-[11px] uppercase tracking-wider text-[var(--color-ink-3)] mb-1">{model.provider}</p>
+                  <span class="text-[14px] font-semibold text-[var(--color-ink)]">{model.name}</span>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--color-rule)]">
+            {[
+              { label: 'Input / 1M tokens', key: 'input' },
+              { label: 'Output / 1M tokens', key: 'output' },
+              { label: '1K input + 500 output', key: '1k500' },
+              { label: '10K input + 2K output', key: '10k2k' },
+              { label: '100K input + 20K output', key: '100k20k' },
+            ].map((scenario) => {
+              const totals = compareModels.map((m: any) => {
+                if (scenario.key === 'input') return m.input_price;
+                if (scenario.key === 'output') return m.output_price;
+                if (scenario.key === '1k500') return (1000 / 1_000_000) * m.input_price + (500 / 1_000_000) * m.output_price;
+                if (scenario.key === '10k2k') return (10_000 / 1_000_000) * m.input_price + (2_000 / 1_000_000) * m.output_price;
+                return (100_000 / 1_000_000) * m.input_price + (20_000 / 1_000_000) * m.output_price;
+              });
+              const minTotal = Math.min(...totals.filter(v => v > 0));
+              return (
+                <tr>
+                  <td class="p-4 bg-[var(--color-paper-2)] align-top">
+                    <p class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)]">{scenario.label}</p>
+                  </td>
+                  {compareModels.map((model: any, i: number) => {
+                    const v = totals[i];
+                    const isBest = v > 0 && v === minTotal;
+                    return (
+                      <td class="p-4 tnum">
+                        {v === 0 ? (
+                          <span class="text-[var(--color-ink-3)]">Gratis</span>
+                        ) : isBest ? (
+                          <span class="text-[var(--color-accent)] font-medium">{currencyFmt.format(v)}</span>
+                        ) : (
+                          <span class="text-[var(--color-ink)]">{currencyFmt.format(v)}</span>
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
     </div>
   </div>
 
-<div id="save-modal" class="fixed inset-0 z-50 hidden">
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="save-modal-overlay"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-gray-800 rounded-lg border border-gray-700 p-6">
+  <div id="save-modal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/60" id="save-modal-overlay"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-[var(--color-paper)] border rule p-6">
       <div class="flex justify-between items-center mb-4">
-        <h3 class="text-lg font-semibold text-white text-balance">Save Comparison</h3>
-        <button id="close-save-modal" type="button" aria-label="Cerrar" class="text-gray-400 hover:text-white p-1 focus-ring">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        <h3 class="text-[15px] font-semibold text-[var(--color-ink)] text-balance">Save Comparison</h3>
+        <button id="close-save-modal" type="button" aria-label="Cerrar" class="text-[var(--color-ink-3)] hover:text-[var(--color-ink)] p-1 -m-1 focus-ring">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
       <div class="mb-4">
-        <label for="comparison-name" class="block text-sm text-gray-400 mb-2">Name your comparison</label>
+        <label for="comparison-name" class="block text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-2">Name your comparison</label>
         <input
           type="text"
           id="comparison-name"
           name="comparison-name"
           placeholder="My best models"
           autocomplete="off"
-          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white placeholder-gray-500 focus-ring focus:border-teal-500"
+          class="w-full bg-[var(--color-paper-2)] border rule text-[var(--color-ink)] placeholder-[var(--color-ink-3)] rounded-sm px-3 py-2 text-[14px] focus-ring focus:border-[var(--color-ink-3)]"
         />
       </div>
-      <div class="flex gap-3">
-        <button id="confirm-save" type="button" class="flex-1 bg-teal-600 hover:bg-teal-500 text-white py-2 rounded font-medium transition-colors focus-ring">Save</button>
-        <button id="cancel-save" type="button" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded font-medium transition-colors focus-ring">Cancel</button>
+      <div class="flex gap-2">
+        <button id="confirm-save" type="button" class="flex-1 bg-[var(--color-ink)] text-[var(--color-paper)] hover:bg-[var(--color-ink-2)] py-2 rounded-sm text-[13px] font-medium transition-colors focus-ring">Save</button>
+        <button id="cancel-save" type="button" class="flex-1 border rule text-[var(--color-ink)] hover:bg-[var(--color-paper-2)] py-2 rounded-sm text-[13px] font-medium transition-colors focus-ring">Cancel</button>
       </div>
     </div>
   </div>
 
-  <div id="saved-section" class="max-w-6xl mx-auto px-4 pb-8">
-    <h2 class="text-xl font-bold text-white mb-4 text-balance">Saved Comparisons</h2>
-    <div id="saved-list" class="grid md:grid-cols-3 gap-4">
+  <div class="max-w-7xl mx-auto px-6 pb-12">
+    <h2 class="text-[15px] font-semibold text-[var(--color-ink)] mb-4 text-balance">Comparaciones guardadas</h2>
+    <div id="saved-list" class="grid md:grid-cols-3 gap-3">
     </div>
   </div>
 </Layout>
@@ -387,22 +373,22 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
     if (!container) return;
 
     if (saved.length === 0) {
-      container.innerHTML = '<p class="text-gray-400 col-span-3">No saved comparisons yet.</p>';
+      container.innerHTML = '<p class="text-[var(--color-ink-3)] text-[13px] col-span-3">No hay comparaciones guardadas.</p>';
       return;
     }
 
     container.innerHTML = saved.map((s: any, i: number) => `
-<div class="bg-gray-800 rounded-lg border border-gray-700 p-4">
+      <div class="border rule p-4 bg-[var(--color-paper)]">
         <div class="flex justify-between items-start mb-3 gap-2">
-          <h3 class="font-semibold text-white min-w-0">${s.name}</h3>
-          <button type="button" aria-label="Eliminar" class="delete-saved text-gray-500 hover:text-red-400 focus-ring" data-index="${i}">
+          <h3 class="font-semibold text-[var(--color-ink)] min-w-0">${s.name}</h3>
+          <button type="button" aria-label="Eliminar" class="delete-saved text-[var(--color-ink-3)] hover:text-[var(--color-accent)] focus-ring" data-index="${i}">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
           </button>
         </div>
-        <p class="text-gray-400 text-sm mb-3">${s.ids.length} models</p>
-        <a href="/compare?ids=${s.ids.map(encodeURIComponent).join(',')}" class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition-colors inline-block focus-ring">Load</a>
+        <p class="text-[var(--color-ink-3)] text-[12px] tnum mb-3">${s.ids.length} modelos</p>
+        <a href="/compare?ids=${s.ids.map(encodeURIComponent).join(',')}" class="border rule text-[var(--color-ink)] hover:bg-[var(--color-paper-2)] px-3 py-1.5 rounded-sm text-[13px] font-medium transition-colors inline-block focus-ring">Cargar</a>
       </div>
     `).join('');
 
@@ -452,11 +438,13 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
       const tabId = (btn as HTMLElement).dataset.tab;
 
       document.querySelectorAll('.tab-btn').forEach(b => {
-        b.classList.remove('active', 'text-teal-400', 'border-teal-400');
-        b.classList.add('text-gray-400', 'border-transparent');
+        b.setAttribute('aria-selected', 'false');
+        b.classList.remove('border-[var(--color-ink)]', 'text-[var(--color-ink)]');
+        b.classList.add('border-transparent', 'text-[var(--color-ink-3)]');
       });
-      btn.classList.add('active', 'text-teal-400', 'border-teal-400');
-      btn.classList.remove('text-gray-400', 'border-transparent');
+      btn.setAttribute('aria-selected', 'true');
+      btn.classList.add('border-[var(--color-ink)]', 'text-[var(--color-ink)]');
+      btn.classList.remove('border-transparent', 'text-[var(--color-ink-3)]');
 
       document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.add('hidden');

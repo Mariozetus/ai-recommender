@@ -7,7 +7,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'Discover and compare AI models. Get personalized recommendations based on your use case, budget, and preferences.' } = Astro.props;
+const { title, description = 'Catálogo de modelos de IA con precios, contexto y benchmarks reales. Compara y encuentra el modelo para tu caso de uso.' } = Astro.props;
 
 const pathname = Astro.url.pathname;
 const isActive = (href: string) => {
@@ -18,21 +18,22 @@ const isActive = (href: string) => {
 const navLinks = [
   { href: '/catalog', label: 'Catálogo' },
   { href: '/use-cases', label: 'Casos de uso' },
-  { href: '/best', label: 'Best Picks' },
+  { href: '/best', label: 'Rankings' },
   { href: '/providers', label: 'Proveedores' },
   { href: '/insights', label: 'Insights' },
-  { href: '/recommend', label: 'Quiz' },
 ];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#1f2937" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <link rel="preconnect" href="https://rsms.me" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
@@ -40,47 +41,59 @@ const navLinks = [
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary" />
   </head>
-  <body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col">
+  <body class="min-h-screen flex flex-col">
     <a
       href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-teal-600 focus:text-white focus:px-3 focus:py-2 focus:rounded"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-[var(--color-accent)] focus:text-[var(--color-paper)] focus:px-3 focus:py-2 focus:rounded-sm focus:font-medium"
     >
-      Saltar al contenido principal
+      Saltar al contenido
     </a>
 
-    <header class="border-b border-gray-800 sticky top-0 z-40 bg-gray-900/95 backdrop-blur-sm">
-      <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between" aria-label="Principal">
-        <a href="/" class="text-xl font-bold text-teal-400 focus-ring">AI Recommender</a>
-        <div class="hidden md:flex gap-6 text-sm" role="list">
+    <header class="border-b rule">
+      <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <a href="/" class="font-semibold text-[15px] tracking-tight focus-ring">
+          <span class="text-[var(--color-ink)]">AI</span><span class="text-[var(--color-accent)]">/</span><span class="text-[var(--color-ink-2)]">Recommender</span>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-1 text-[14px]" aria-label="Principal">
           {navLinks.map(link => (
             <a
               href={link.href}
-              class="hover:text-teal-400 transition-colors focus-ring"
+              class="px-3 py-1.5 rounded-sm text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:bg-[var(--color-paper-2)] transition-colors focus-ring"
               aria-current={isActive(link.href) ? 'page' : undefined}
             >
               {link.label}
             </a>
           ))}
-        </div>
+          <a
+            href="/recommend"
+            class="ml-2 px-3 py-1.5 rounded-sm text-[var(--color-paper)] bg-[var(--color-accent)] hover:bg-[var(--color-accent-2)] transition-colors font-medium focus-ring"
+            aria-current={isActive('/recommend') ? 'page' : undefined}
+          >
+            Quiz
+          </a>
+        </nav>
+
         <button
           id="mobile-menu-btn"
           type="button"
           aria-label="Abrir menú"
           aria-expanded="false"
           aria-controls="mobile-menu"
-          class="md:hidden p-2 text-gray-400 hover:text-white focus-ring"
+          class="md:hidden p-2 -mr-2 text-[var(--color-ink-2)] hover:text-[var(--color-ink)] focus-ring"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
-      </nav>
-      <div id="mobile-menu" class="hidden md:hidden border-t border-gray-800">
-        <nav class="px-4 py-3 space-y-1 text-sm" aria-label="Móvil">
-          {navLinks.map(link => (
+      </div>
+
+      <div id="mobile-menu" class="hidden md:hidden border-t rule">
+        <nav class="px-6 py-3 space-y-1 text-[14px]" aria-label="Móvil">
+          {[...navLinks, { href: '/recommend', label: 'Quiz' }].map(link => (
             <a
               href={link.href}
-              class="block py-2 px-2 rounded text-gray-300 hover:text-teal-400 hover:bg-gray-800 transition-colors focus-ring"
+              class="block py-2 px-2 -mx-2 rounded-sm text-[var(--color-ink-2)] hover:text-[var(--color-ink)] hover:bg-[var(--color-paper-2)] transition-colors focus-ring"
               aria-current={isActive(link.href) ? 'page' : undefined}
             >
               {link.label}
@@ -90,12 +103,18 @@ const navLinks = [
       </div>
     </header>
 
-    <main id="main" class="flex-1 focus-ring" tabindex="-1">
+    <main id="main" class="flex-1 focus:outline-none" tabindex="-1">
       <slot />
     </main>
 
-    <footer class="border-t border-gray-800 mt-16 py-8 text-center text-gray-500 text-sm">
-      <p>AI Recommender &middot; Datos de OpenRouter</p>
+    <footer class="border-t rule mt-24">
+      <div class="max-w-6xl mx-auto px-6 py-8 flex flex-wrap items-center justify-between gap-4 text-[13px] text-[var(--color-ink-3)]">
+        <p>Datos de OpenRouter. Actualizado periódicamente.</p>
+        <div class="flex gap-6">
+          <a href="/insights" class="hover:text-[var(--color-ink)] transition-colors focus-ring">Insights</a>
+          <a href="/catalog" class="hover:text-[var(--color-ink)] transition-colors focus-ring">Catálogo</a>
+        </div>
+      </div>
     </footer>
     <Toast />
   </body>

@@ -1,0 +1,110 @@
+---
+interface Benchmark {
+  mmlu?: number | null;
+  mmlu_pro?: number | null;
+  mmlu_redux?: number | null;
+  humaneval?: number | null;
+  mbpp?: number | null;
+  math?: number | null;
+  gpqa?: number | null;
+  livecodebench?: number | null;
+  hellaswag?: number | null;
+  truthfulqa?: number | null;
+  winogrande?: number | null;
+  arc_challenge?: number | null;
+  ifeval?: number | null;
+  mt_bench?: number | null;
+  arena_elo?: number | null;
+  chatbot_arena_elo?: number | null;
+  intelligence_index?: number | null;
+  coding_index?: number | null;
+  agentic_index?: number | null;
+}
+
+interface Props {
+  benchmarks: Benchmark;
+}
+
+const { benchmarks } = Astro.props;
+
+const labels: Record<string, string> = {
+  mmlu: 'MMLU',
+  mmlu_pro: 'MMLU Pro',
+  mmlu_redux: 'MMLU Redux',
+  humaneval: 'HumanEval',
+  mbpp: 'MBPP',
+  math: 'MATH',
+  gpqa: 'GPQA',
+  livecodebench: 'LiveCodeBench',
+  hellaswag: 'HellaSwag',
+  truthfulqa: 'TruthfulQA',
+  winogrande: 'Winogrande',
+  arc_challenge: 'ARC-Challenge',
+  ifeval: 'IFEval',
+  mt_bench: 'MT-Bench',
+  arena_elo: 'Arena ELO',
+  chatbot_arena_elo: 'Arena ELO',
+  intelligence_index: 'AA Intelligence',
+  coding_index: 'AA Coding',
+  agentic_index: 'AA Agentic',
+};
+
+const order = [
+  'mmlu',
+  'mmlu_pro',
+  'humaneval',
+  'math',
+  'gpqa',
+  'livecodebench',
+  'hellaswag',
+  'truthfulqa',
+  'winogrande',
+  'arc_challenge',
+  'ifeval',
+  'mt_bench',
+  'mbpp',
+  'intelligence_index',
+  'coding_index',
+  'agentic_index',
+  'chatbot_arena_elo',
+];
+
+const items = order
+  .map(k => {
+    const v = benchmarks[k as keyof Benchmark];
+    if (v === null || v === undefined) return null;
+    const max = k === 'chatbot_arena_elo' || k === 'arena_elo' ? 1500 : 100;
+    return {
+      key: k,
+      label: labels[k],
+      value: v,
+      max,
+      pct: Math.min(100, (v / max) * 100),
+    };
+  })
+  .filter((x): x is { key: string; label: string; value: number; max: number; pct: number } => x !== null);
+---
+
+<div>
+  <ol class="divide-y divide-[var(--color-rule)]">
+    {items.map(item => {
+      const isElo = item.key === 'chatbot_arena_elo' || item.key === 'arena_elo';
+      const display = isElo ? Math.round(item.value).toLocaleString() : item.value.toFixed(1);
+      return (
+        <li class="py-3 first:pt-0 last:pb-0 grid grid-cols-[140px_1fr_72px] gap-4 items-center">
+          <span class="text-[14px] text-[var(--color-ink-2)]">{item.label}</span>
+          <div class="relative h-2 bg-[var(--color-paper-2)] rounded-sm overflow-hidden">
+            <div
+              class="absolute inset-y-0 left-0 bg-[var(--color-ink)] rounded-sm"
+              style={`width: ${item.pct}%`}
+            ></div>
+          </div>
+          <span class="text-right tnum text-[14px] text-[var(--color-ink)] font-medium">{display}{!isElo && <span class="text-[var(--color-ink-3)] text-[12px]">%</span>}</span>
+        </li>
+      );
+    })}
+  </ol>
+  {items.length === 0 && (
+    <p class="text-[var(--color-ink-3)] text-sm">No hay benchmarks disponibles para este modelo.</p>
+  )}
+</div>

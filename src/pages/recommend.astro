@@ -50,29 +50,43 @@ const hasQuery = url.searchParams.has('use_case');
 const recommended = hasQuery ? topRecommendations(models, prefs, 12, weights) : [];
 ---
 
-<Layout title="AI Recommendations">
-  <div class="max-w-6xl mx-auto px-4 py-8">
-    <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold mb-4 text-balance">Recomendador de Modelos IA</h1>
-      <p class="text-gray-400 text-lg text-pretty">Recomendaciones personalizadas según tus necesidades</p>
+<Layout title="Recomendaciones">
+  <div class="border-b rule">
+    <div class="max-w-6xl mx-auto px-6 py-12">
+      <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-3">
+        Quiz
+      </p>
+      <h1 class="text-3xl md:text-4xl font-semibold tracking-[-0.02em] text-[var(--color-ink)] mb-3 text-balance">
+        Recomendaciones
+      </h1>
+      <p class="text-[var(--color-ink-2)] max-w-2xl text-pretty">
+        Contesta las preguntas y obtén modelos rankeados según tu caso de uso.
+      </p>
     </div>
+  </div>
 
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="md:col-span-1">
+  <div class="max-w-6xl mx-auto px-6 py-12">
+    <div class="grid md:grid-cols-[320px_1fr] gap-12">
+      <div>
         <Recommender categories={[...new Set(models.map((m: any) => m.category))]} />
       </div>
 
-      <div class="md:col-span-2">
+      <div>
         {hasQuery ? (
           <ResultsList
             models={recommended.map(r => r.model)}
-            scores={recommended.map(r => ({ id: r.model.id, score: r.score, breakdown: r.breakdown }))}
+            scores={recommended.map(r => ({ id: r.model.id, score: r.score, breakdown: r.breakdown })))}
             title={`Top ${recommended.length} para ${useCase}`}
             strategy={strategy}
           />
         ) : (
-          <div class="bg-gray-800 rounded-lg p-8 text-center border border-gray-700">
-            <p class="text-gray-400 text-pretty">Completa el formulario para obtener recomendaciones personalizadas.</p>
+          <div class="py-16 text-center border border-dashed border-[var(--color-rule)] rounded-sm">
+            <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-3">
+              Esperando tu input
+            </p>
+            <p class="text-[14px] text-[var(--color-ink-2)] max-w-md mx-auto text-pretty">
+              Completa el formulario para ver recomendaciones personalizadas.
+            </p>
           </div>
         )}
       </div>

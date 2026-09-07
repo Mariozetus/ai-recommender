@@ -3,7 +3,7 @@ export const prerender = false;
 
 import Layout from '../../../layouts/Layout.astro';
 import PricingCalculator from '../../../components/PricingCalculator.astro';
-import BenchmarkRadar from '../../../components/BenchmarkRadar.astro';
+import BenchmarkBar from '../../../components/BenchmarkBar.astro';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
 import { detectLocale, setLocale, t } from '../../../i18n/index';
@@ -17,11 +17,7 @@ setLocale(locale);
 
 const numberFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US');
 const currencyFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US', { style: 'currency', currency: 'USD' });
-const dateFmt = new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const dateFmt = new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
 if (!provider || !name) {
   return new Response('Not Found', { status: 404 });
@@ -39,15 +35,6 @@ if (!rawModel) {
 
 const model = sanitizeModel(rawModel);
 
-const categoryColors: Record<string, string> = {
-  chat: '#1e3a5f',
-  coding: '#1a3d1a',
-  reasoning: '#3d1a5c',
-  image: '#3d1a3d',
-  embedding: '#5c3d1a',
-  multimodal: '#1a3d3d',
-};
-
 const relatedModels = models
   .filter((m: any) => m.category === model.category && m.id !== model.id)
   .slice(0, 4);
@@ -58,26 +45,26 @@ const sameProvider = models
 
 const useCaseMap: Record<string, { slug: string; title: string }[]> = {
   chat: [
-    { slug: 'customer-support', title: 'AI for Customer Support' },
-    { slug: 'content-generation', title: 'AI for Content Generation' },
-    { slug: 'translation', title: 'AI for Translation' },
+    { slug: 'customer-support', title: 'Atención al cliente' },
+    { slug: 'content-generation', title: 'Generación de contenido' },
+    { slug: 'translation', title: 'Traducción' },
   ],
   coding: [
-    { slug: 'code-review', title: 'AI for Code Review' },
-    { slug: 'data-analysis', title: 'AI for Data Analysis' },
+    { slug: 'code-review', title: 'Revisión de código' },
+    { slug: 'data-analysis', title: 'Análisis de datos' },
   ],
   reasoning: [
-    { slug: 'data-analysis', title: 'AI for Data Analysis' },
-    { slug: 'code-review', title: 'AI for Code Review' },
+    { slug: 'data-analysis', title: 'Análisis de datos' },
+    { slug: 'code-review', title: 'Revisión de código' },
   ],
   multimodal: [
-    { slug: 'vision-analysis', title: 'AI for Vision & Image Analysis' },
+    { slug: 'vision-analysis', title: 'Análisis de imagen' },
   ],
   image: [
-    { slug: 'image-generation', title: 'AI for Image Generation' },
+    { slug: 'image-generation', title: 'Generación de imágenes' },
   ],
   embedding: [
-    { slug: 'embeddings', title: 'AI for Embeddings & Search' },
+    { slug: 'embeddings', title: 'Embeddings y búsqueda' },
   ],
 };
 
@@ -86,363 +73,244 @@ const useCases = useCaseMap[model.category] || [];
 const formattedDate = dateFmt.format(new Date(model.fetched_at));
 ---
 
-<Layout title={`${model.name} - AI Model`} description={model.description}>
-  <div class="max-w-6xl mx-auto px-4 py-8">
-    <nav class="text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
-      <a href="/" class="hover:text-teal-400 focus-ring">Inicio</a>
-      <span class="mx-2" aria-hidden="true">/</span>
-      <a href="/catalog" class="hover:text-teal-400 focus-ring">Catálogo</a>
-      <span class="mx-2" aria-hidden="true">/</span>
-      <a href={`/provider/${model.provider}`} class="hover:text-teal-400 focus-ring">{model.provider}</a>
-      <span class="mx-2" aria-hidden="true">/</span>
-      <span class="text-gray-400" aria-current="page">{model.name}</span>
+<Layout title={`${model.name} · AI Model`} description={model.description}>
+  <article class="max-w-5xl mx-auto px-6 py-12 md:py-16">
+
+    <nav class="text-[13px] text-[var(--color-ink-3)] mb-10 flex flex-wrap items-center gap-x-2" aria-label="Ruta">
+      <a href="/" class="hover:text-[var(--color-ink)] focus-ring">Inicio</a>
+      <span aria-hidden="true">/</span>
+      <a href="/catalog" class="hover:text-[var(--color-ink)] focus-ring">Catálogo</a>
+      <span aria-hidden="true">/</span>
+      <a href={`/provider/${model.provider}`} class="hover:text-[var(--color-ink)] focus-ring">{model.provider}</a>
+      <span aria-hidden="true">/</span>
+      <span class="text-[var(--color-ink-2)]" aria-current="page">{model.name}</span>
     </nav>
 
-    <article class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
-      <div class="p-8">
-        <div class="flex flex-wrap justify-between items-start gap-4 mb-6">
-          <div>
-            <h1 class="text-3xl font-bold text-white mb-2 text-balance">{model.name}</h1>
-            <p class="text-gray-400">
-              <a href={`/provider/${model.provider}`} class="hover:text-teal-400 focus-ring">{model.provider}</a>
-            </p>
-          </div>
-          <div class="flex gap-2">
-            {model.pricing?.free && (
-              <span class="px-3 py-1 rounded text-sm font-medium bg-green-900/50 border border-green-700 text-green-300">
-                FREE
-              </span>
-            )}
-            <span
-              class="px-3 py-1 rounded text-sm font-medium text-white"
-              style={`background-color: ${categoryColors[model.category] || '#374151'}`}
-              aria-label={model.category}
-            >
-              {model.category}
-            </span>
-          </div>
-        </div>
-
-        <p class="text-gray-300 text-lg mb-8 text-pretty">{model.description}</p>
-
-        {model.strengths && model.strengths.length > 0 && (
-          <div class="mb-8 bg-gray-900/30 border border-gray-700 rounded-lg p-5">
-            <h3 class="text-sm font-semibold text-gray-300 mb-3 text-balance">Puntos fuertes</h3>
-            <div class="flex flex-wrap gap-2">
-              {model.strengths.map((s: string) => (
-                <span class="inline-flex items-center gap-1.5 bg-teal-900/30 border border-teal-700 text-teal-300 px-3 py-1.5 rounded-full text-sm">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                  {s}
-                </span>
-              ))}
-            </div>
-          </div>
+    <header class="mb-12 pb-12 border-b rule">
+      <div class="flex flex-wrap items-baseline gap-3 mb-4 text-[13px]">
+        <span class="uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium">
+          {model.category}
+        </span>
+        {model.pricing?.free && (
+          <>
+            <span class="text-[var(--color-ink-4)]" aria-hidden="true">·</span>
+            <span class="text-[var(--color-accent)] font-medium">Capa gratuita</span>
+          </>
         )}
-
-        {useCases.length > 0 && (
-          <div class="mb-8 bg-gradient-to-r from-teal-900/20 to-purple-900/20 border border-teal-800/50 rounded-lg p-5">
-            <h3 class="text-sm font-semibold text-teal-300 mb-3 text-balance">Casos de uso ideales para este modelo</h3>
-            <div class="flex flex-wrap gap-2">
-              {useCases.map(uc => (
-                <a
-                  href={`/use-cases/${uc.slug}`}
-                  class="inline-flex items-center gap-2 bg-gray-800/70 hover:bg-gray-700 border border-gray-700 hover:border-teal-600 px-4 py-2 rounded-lg text-sm text-white transition-colors focus-ring"
-                >
-                  <svg class="w-4 h-4 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                  </svg>
-                  {uc.title}
-                </a>
-              ))}
-            </div>
-          </div>
+        {model.pricing?.batch && (
+          <>
+            <span class="text-[var(--color-ink-4)]" aria-hidden="true">·</span>
+            <span class="text-[var(--color-ink-2)]">Batch disponible</span>
+          </>
         )}
-
-        <div class="grid md:grid-cols-2 gap-6 mb-8">
-          <div class="bg-gray-700/50 rounded-lg p-6">
-            <h2 class="text-lg font-semibold mb-4 text-white text-balance">Precios</h2>
-            <div class="space-y-3">
-              <div class="flex justify-between gap-2">
-                <span class="text-gray-400">Input</span>
-                <span class="text-white font-mono tnum">{currencyFmt.format(model.input_price)}/1M tokens</span>
-              </div>
-              <div class="flex justify-between gap-2">
-                <span class="text-gray-400">Output</span>
-                <span class="text-white font-mono tnum">{currencyFmt.format(model.output_price)}/1M tokens</span>
-              </div>
-              <div class="flex justify-between gap-2">
-                <span class="text-gray-400">Context Window</span>
-                <span class="text-white font-mono tnum">{numberFmt.format(model.context_window)} tokens</span>
-              </div>
-              {model.max_completion_tokens && (
-                <div class="flex justify-between gap-2">
-                  <span class="text-gray-400">Max output</span>
-                  <span class="text-white font-mono tnum">{numberFmt.format(model.max_completion_tokens)} tokens</span>
-                </div>
-              )}
-              {model.pricing?.free && (
-                <div class="flex justify-between gap-2">
-                  <span class="text-gray-400">Free Tier</span>
-                  <span class="text-green-400 font-mono">Sí</span>
-                </div>
-              )}
-              {model.pricing?.batch && (
-                <div class="flex justify-between gap-2">
-                  <span class="text-gray-400">Batch API</span>
-                  <span class="text-teal-400 font-mono">Sí (50% descuento)</span>
-                </div>
-              )}
-              {model.tokenizer && (
-                <div class="flex justify-between gap-2 min-w-0">
-                  <span class="text-gray-400">Tokenizer</span>
-                  <span class="text-white font-mono truncate">{model.tokenizer}</span>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <PricingCalculator
-            modelId={model.id}
-            modelName={model.name}
-            inputPrice={model.input_price}
-            outputPrice={model.output_price}
-          />
-        </div>
-
-        {model.benchmark && (
-          <div class="grid md:grid-cols-2 gap-6 mb-8">
-            <BenchmarkRadar benchmarks={model.benchmark} size={280} />
-            <div class="bg-gray-700/50 rounded-lg p-6">
-              <h2 class="text-lg font-semibold mb-4 text-white text-balance">Benchmarks</h2>
-              <div class="space-y-2 max-h-80 overflow-y-auto pr-2">
-                {Object.entries(model.benchmark).map(([key, value]) => {
-                  if (value === null || value === undefined) return null;
-                  const labels: Record<string, string> = {
-                    mmlu: 'MMLU',
-                    mmlu_pro: 'MMLU Pro',
-                    mmlu_redux: 'MMLU Redux',
-                    humaneval: 'HumanEval',
-                    mbpp: 'MBPP',
-                    math: 'MATH',
-                    gpqa: 'GPQA',
-                    livecodebench: 'LiveCodeBench',
-                    hellaswag: 'HellaSwag',
-                    truthfulqa: 'TruthfulQA',
-                    winogrande: 'Winogrande',
-                    arc_challenge: 'ARC-Challenge',
-                    ifeval: 'IFEval',
-                    mt_bench: 'MT-Bench',
-                    arena_elo: 'Arena ELO',
-                    chatbot_arena_elo: 'Chatbot Arena ELO',
-                    intelligence_index: 'Intelligence Index',
-                    coding_index: 'Coding Index',
-                    agentic_index: 'Agentic Index',
-                  };
-                  const label = labels[key] || key;
-                  const isIndex = key.endsWith('_index') || key === 'arena_elo' || key === 'chatbot_arena_elo';
-                  const isHf = ['hf_likes', 'hf_downloads'].includes(key);
-                  return (
-                    <div class="flex justify-between items-center text-sm gap-2">
-                      <span class="text-gray-400">{label}</span>
-                      <span class={`font-mono tnum ${isIndex ? 'text-teal-400' : 'text-white'}`}>
-                        {isHf && typeof value === 'number' && value > 1000
-                          ? numberFmt.format(value)
-                          : typeof value === 'number' && !isIndex
-                          ? `${value.toFixed(1)}%`
-                          : String(value)}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {(model.hf_likes || model.hf_downloads || model.hf_id) && (
-          <div class="mb-8 bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border border-yellow-700/50 rounded-lg p-5">
-            <h3 class="text-sm font-semibold text-yellow-300 mb-3 flex items-center gap-2">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-              </svg>
-              Datos de HuggingFace
-            </h3>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {model.hf_likes !== undefined && (
-                <div class="min-w-0">
-                  <div class="text-xs text-gray-500">Likes</div>
-                  <div class="text-lg font-semibold text-white tnum">{numberFmt.format(model.hf_likes)}</div>
-                </div>
-              )}
-              {model.hf_downloads !== undefined && (
-                <div class="min-w-0">
-                  <div class="text-xs text-gray-500">Descargas</div>
-                  <div class="text-lg font-semibold text-white tnum">{numberFmt.format(model.hf_downloads)}</div>
-                </div>
-              )}
-              {model.hf_id && (
-                <div class="min-w-0">
-                  <div class="text-xs text-gray-500">HF ID</div>
-                  <a
-                    href={`https://huggingface.co/${model.hf_id}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Ver ${model.hf_id} en HuggingFace`}
-                    class="text-sm text-yellow-300 hover:text-yellow-200 truncate inline-block max-w-full focus-ring"
-                  >
-                    {model.hf_id} ↗
-                  </a>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
-        {model.modalities && (
-          <div class="mb-8">
-            <h2 class="text-lg font-semibold mb-4 text-white text-balance">Modalidades</h2>
-            <div class="flex flex-wrap gap-2">
-              {model.modalities.text && (
-                <span class="bg-blue-900 text-blue-300 px-3 py-1 rounded text-sm">Text Input/Output</span>
-              )}
-              {model.modalities.image_input && (
-                <span class="bg-pink-900 text-pink-300 px-3 py-1 rounded text-sm">Image Input</span>
-              )}
-              {model.modalities.image_output && (
-                <span class="bg-purple-900 text-purple-300 px-3 py-1 rounded text-sm">Image Output</span>
-              )}
-              {model.modalities.audio_input && (
-                <span class="bg-green-900 text-green-300 px-3 py-1 rounded text-sm">Audio Input</span>
-              )}
-              {model.modalities.audio_output && (
-                <span class="bg-orange-900 text-orange-300 px-3 py-1 rounded text-sm">Audio Output</span>
-              )}
-              {model.modalities.file_input && (
-                <span class="bg-yellow-900 text-yellow-300 px-3 py-1 rounded text-sm">File (PDF) Input</span>
-              )}
-            </div>
-          </div>
-        )}
-
-        {model.supported_parameters && model.supported_parameters.length > 0 && (
-          <div class="mb-8">
-            <h2 class="text-lg font-semibold mb-4 text-white text-balance">Capacidades técnicas</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {model.supported_parameters.map((param: string) => (
-                <span class="bg-gray-900/50 border border-gray-700 text-gray-300 px-3 py-2 rounded text-sm flex items-center gap-2 min-w-0">
-                  <svg class="w-4 h-4 text-teal-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span class="truncate">{param.replace(/_/g, ' ')}</span>
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {model.supported_languages && model.supported_languages.length > 0 && (
-          <div class="mb-8">
-            <h2 class="text-lg font-semibold mb-4 text-white text-balance">Idiomas soportados</h2>
-            <div class="flex flex-wrap gap-2">
-              {model.supported_languages.map(lang => (
-                <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded text-sm">
-                  {lang.flag} {lang.name}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {model.tags && model.tags.length > 0 && (
-          <div class="mb-8">
-            <h2 class="text-lg font-semibold mb-4 text-white text-balance">Tags</h2>
-            <div class="flex flex-wrap gap-2">
-              {model.tags.map((tag: string) => (
-                <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded text-sm">{tag}</span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        <div class="flex flex-wrap gap-4">
-          <a
-            href={model.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Ver ${model.name} en ${model.provider}`}
-            class="bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded font-medium transition-colors focus-ring"
-          >
-            Ver en {model.provider} →
-          </a>
-          <button
-            type="button"
-            id="compare-btn"
-            data-model-id={model.id}
-            class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded font-medium transition-colors focus-ring"
-          >
-            Añadir a comparación
-          </button>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8 pt-8 border-t border-gray-700">
-          <div class="text-center">
-            <div class="text-2xl font-bold text-white tnum">{model.context_window >= 1000000 ? `${(model.context_window / 1000000).toFixed(1)}M` : `${(model.context_window / 1000).toFixed(0)}K`}</div>
-            <div class="text-xs text-gray-500 mt-1">Tokens contexto</div>
-          </div>
-          <div class="text-center">
-            <div class="text-2xl font-bold text-white tnum">{currencyFmt.format(model.input_price)}</div>
-            <div class="text-xs text-gray-500 mt-1">Input / 1M</div>
-          </div>
-          <div class="text-center">
-            <div class="text-2xl font-bold text-white tnum">{currencyFmt.format(model.output_price)}</div>
-            <div class="text-xs text-gray-500 mt-1">Output / 1M</div>
-          </div>
-          <div class="text-center">
-            <div class="text-2xl font-bold text-teal-400 tnum">{numberFmt.format(model.supported_languages?.length || 1)}</div>
-            <div class="text-xs text-gray-500 mt-1">Idiomas</div>
-          </div>
-        </div>
       </div>
 
-      <div class="bg-gray-900/50 px-8 py-4 border-t border-gray-700">
-        <p class="text-gray-500 text-sm text-pretty">
-          Fuente: {model.source} · Actualizado: {formattedDate}
+      <h1 class="text-4xl md:text-5xl font-semibold tracking-[-0.02em] text-[var(--color-ink)] mb-4 text-balance">
+        {model.name}
+      </h1>
+
+      <p class="text-[var(--color-ink-2)] text-lg leading-relaxed text-pretty max-w-3xl">
+        {model.description}
+      </p>
+    </header>
+
+    <section class="mb-16">
+      <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+        Cifras clave
+      </p>
+
+      <dl class="grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--color-rule)]">
+        <div class="bg-[var(--color-paper)] p-5">
+          <dt class="text-[12px] text-[var(--color-ink-3)] uppercase tracking-wider mb-2">Input</dt>
+          <dd class="text-2xl font-semibold text-[var(--color-ink)] tnum">{currencyFmt.format(model.input_price)}</dd>
+          <p class="text-[12px] text-[var(--color-ink-3)] mt-1">por millón de tokens</p>
+        </div>
+        <div class="bg-[var(--color-paper)] p-5">
+          <dt class="text-[12px] text-[var(--color-ink-3)] uppercase tracking-wider mb-2">Output</dt>
+          <dd class="text-2xl font-semibold text-[var(--color-ink)] tnum">{currencyFmt.format(model.output_price)}</dd>
+          <p class="text-[12px] text-[var(--color-ink-3)] mt-1">por millón de tokens</p>
+        </div>
+        <div class="bg-[var(--color-paper)] p-5">
+          <dt class="text-[12px] text-[var(--color-ink-3)] uppercase tracking-wider mb-2">Contexto</dt>
+          <dd class="text-2xl font-semibold text-[var(--color-ink)] tnum">
+            {model.context_window >= 1_000_000
+              ? `${(model.context_window / 1_000_000).toFixed(1)}M`
+              : model.context_window >= 1000
+                ? `${Math.round(model.context_window / 1000)}K`
+                : model.context_window}
+          </dd>
+          <p class="text-[12px] text-[var(--color-ink-3)] mt-1">tokens de entrada</p>
+        </div>
+        <div class="bg-[var(--color-paper)] p-5">
+          <dt class="text-[12px] text-[var(--color-ink-3)] uppercase tracking-wider mb-2">Idiomas</dt>
+          <dd class="text-2xl font-semibold text-[var(--color-ink)] tnum">{model.supported_languages?.length || 1}</dd>
+          <p class="text-[12px] text-[var(--color-ink-3)] mt-1">soportados</p>
+        </div>
+      </dl>
+    </section>
+
+    {model.benchmark && (
+      <section class="mb-16">
+        <div class="flex items-baseline justify-between mb-6">
+          <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium">
+            Benchmarks
+          </p>
+          <p class="text-[12px] text-[var(--color-ink-3)]">
+            Cuanto más alta la barra, mejor
+          </p>
+        </div>
+        <BenchmarkBar benchmarks={model.benchmark} />
+      </section>
+    )}
+
+    <section class="mb-16">
+      <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+        Calculadora de costo
+      </p>
+      <PricingCalculator
+        modelId={model.id}
+        modelName={model.name}
+        inputPrice={model.input_price}
+        outputPrice={model.output_price}
+      />
+    </section>
+
+    {useCases.length > 0 && (
+      <section class="mb-16">
+        <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+          Casos de uso
         </p>
+        <div class="grid sm:grid-cols-2 gap-px bg-[var(--color-rule)]">
+          {useCases.map(uc => (
+            <a
+              href={`/use-cases/${uc.slug}`}
+              class="group bg-[var(--color-paper)] p-5 hover:bg-[var(--color-paper-2)] transition-colors focus-ring"
+            >
+              <h3 class="font-medium text-[var(--color-ink)] group-hover:text-[var(--color-accent)] transition-colors mb-1">
+                {uc.title}
+              </h3>
+              <p class="text-[13px] text-[var(--color-ink-3)]">Ver ranking y guía</p>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {model.supported_parameters && model.supported_parameters.length > 0 && (
+      <section class="mb-16">
+        <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+          Capacidades técnicas
+        </p>
+        <ul class="flex flex-wrap gap-1.5">
+          {model.supported_parameters.map((param: string) => (
+            <li class="bg-[var(--color-paper-2)] border rule text-[var(--color-ink-2)] px-2.5 py-1 rounded-sm text-[12px] tnum">
+              {param.replace(/_/g, ' ')}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {model.supported_languages && model.supported_languages.length > 0 && (
+      <section class="mb-16">
+        <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+          Idiomas
+        </p>
+        <ul class="flex flex-wrap gap-1.5">
+          {model.supported_languages.map(lang => (
+            <li class="bg-[var(--color-paper-2)] border rule text-[var(--color-ink-2)] px-2.5 py-1 rounded-sm text-[12px]">
+              {lang.flag} {lang.name}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {(model.hf_likes || model.hf_downloads || model.hf_id) && (
+      <section class="mb-16">
+        <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+          HuggingFace
+        </p>
+        <dl class="grid grid-cols-3 gap-px bg-[var(--color-rule)]">
+          {model.hf_likes !== undefined && (
+            <div class="bg-[var(--color-paper)] p-5">
+              <dt class="text-[12px] text-[var(--color-ink-3)] uppercase tracking-wider mb-2">Likes</dt>
+              <dd class="text-xl font-semibold tnum text-[var(--color-ink)]">{numberFmt.format(model.hf_likes)}</dd>
+            </div>
+          )}
+          {model.hf_downloads !== undefined && (
+            <div class="bg-[var(--color-paper)] p-5">
+              <dt class="text-[12px] text-[var(--color-ink-3)] uppercase tracking-wider mb-2">Descargas</dt>
+              <dd class="text-xl font-semibold tnum text-[var(--color-ink)]">{numberFmt.format(model.hf_downloads)}</dd>
+            </div>
+          )}
+          {model.hf_id && (
+            <div class="bg-[var(--color-paper)] p-5 min-w-0">
+              <dt class="text-[12px] text-[var(--color-ink-3)] uppercase tracking-wider mb-2">HF ID</dt>
+              <dd class="min-w-0">
+                <a
+                  href={`https://huggingface.co/${model.hf_id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Ver ${model.hf_id} en HuggingFace`}
+                  class="text-sm text-[var(--color-ink-2)] hover:text-[var(--color-ink)] truncate inline-block max-w-full focus-ring"
+                >
+                  {model.hf_id}
+                </a>
+              </dd>
+            </div>
+          )}
+        </dl>
+      </section>
+    )}
+
+    <section class="mb-16 pt-8 border-t rule">
+      <div class="flex flex-wrap gap-3">
+        <a
+          href={model.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-[var(--color-ink)] text-[var(--color-paper)] hover:bg-[var(--color-ink-2)] px-5 py-2.5 rounded-sm text-[15px] font-medium transition-colors focus-ring"
+          aria-label={`Ver ${model.name} en ${model.provider} (enlace externo)`}
+        >
+          Ver en {model.provider}
+        </a>
+        <button
+          id="compare-btn"
+          data-model-id={model.id}
+          type="button"
+          class="inline-flex items-center gap-2 border rule text-[var(--color-ink)] hover:bg-[var(--color-paper-2)] px-5 py-2.5 rounded-sm text-[15px] font-medium transition-colors focus-ring"
+        >
+          Añadir a comparación
+        </button>
       </div>
-    </article>
+    </section>
 
     {relatedModels.length > 0 && (
-      <section class="mt-12">
-        <h2 class="text-xl font-bold text-white mb-6 text-balance">Modelos similares</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <section class="mb-12">
+        <p class="text-[13px] uppercase tracking-[0.12em] text-[var(--color-ink-3)] font-medium mb-6">
+          Modelos similares
+        </p>
+        <ul class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--color-rule)]">
           {relatedModels.map((m: any) => (
-            <a href={`/models/${m.provider}/${m.id.split("/")[1] || ""}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition-colors focus-ring">
-              <h3 class="font-semibold text-white mb-1 truncate">{m.name}</h3>
-              <p class="text-gray-500 text-sm mb-2">{m.provider}</p>
-              <p class="text-gray-400 text-xs tnum">{currencyFmt.format(m.input_price + m.output_price)}/1M</p>
-            </a>
+            <li class="bg-[var(--color-paper)]">
+              <a href={`/models/${m.provider}/${m.id.split("/")[1] || ""}`} class="block p-4 hover:bg-[var(--color-paper-2)] transition-colors focus-ring min-w-0">
+                <p class="text-[12px] text-[var(--color-ink-3)] mb-1 truncate">{m.provider}</p>
+                <h3 class="font-medium text-[var(--color-ink)] truncate mb-2">{m.name}</h3>
+                <p class="text-[13px] tnum text-[var(--color-ink-2)]">
+                  {currencyFmt.format(m.input_price + m.output_price)}<span class="text-[var(--color-ink-3)] text-[11px]"> /1M</span>
+                </p>
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
     )}
 
-    {sameProvider.length > 0 && (
-      <section class="mt-12">
-        <h2 class="text-xl font-bold text-white mb-6 text-balance">Otros modelos de {model.provider}</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {sameProvider.map((m: any) => (
-            <a href={`/models/${m.provider}/${m.id.split("/")[1] || ""}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition-colors focus-ring">
-              <h3 class="font-semibold text-white mb-1 truncate">{m.name}</h3>
-              <p class="text-gray-500 text-sm mb-2 capitalize">{m.category}</p>
-              <p class="text-gray-400 text-xs tnum">{currencyFmt.format(m.input_price + m.output_price)}/1M</p>
-            </a>
-          ))}
-        </div>
-      </section>
-    )}
-  </div>
+    <p class="text-[12px] text-[var(--color-ink-3)] pt-8 border-t rule">
+      Fuente: {model.source} · Actualizado {formattedDate}
+    </p>
+  </article>
 </Layout>
 
 <script>
@@ -472,8 +340,8 @@ const formattedDate = dateFmt.format(new Date(model.fetched_at));
       compareIds.push(modelId);
       localStorage.setItem('compareIds', JSON.stringify(compareIds));
       if (compareBtn) {
-        compareBtn.textContent = 'Añadido ✓';
-        compareBtn.disabled = true;
+        compareBtn.textContent = 'Añadido';
+        compareBtn.setAttribute('disabled', 'true');
       }
       showToast('Modelo añadido a comparación', 'success');
     }

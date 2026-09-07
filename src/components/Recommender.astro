@@ -12,23 +12,16 @@ const strategies = [
 ];
 ---
 
-<form id="recommender-form" class="bg-gray-800 rounded-lg p-6 border border-gray-700">
-  <h2 class="text-xl font-semibold mb-6 text-balance">Find Your AI Model</h2>
-
-  <div class="mb-6">
-    <span class="block text-sm text-gray-400 mb-2">¿Para qué lo usarás?</span>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+<form id="recommender-form" class="space-y-6">
+  <div>
+    <p class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] font-medium mb-3">
+      Caso de uso
+    </p>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-px bg-[var(--color-rule)]">
       {categories.map(cat => (
-        <label class="cursor-pointer">
-          <input
-            type="radio"
-            name="use_case"
-            id={`use_case_${cat}`}
-            value={cat}
-            class="peer hidden"
-            required
-          />
-          <div class="bg-gray-700 border border-gray-600 rounded px-4 py-3 text-center text-sm peer-checked:border-teal-500 peer-checked:bg-teal-900/30 hover:bg-gray-650 transition-colors focus-ring">
+        <label class="cursor-pointer bg-[var(--color-paper)] has-[:checked]:bg-[var(--color-paper-2)] has-[:checked]:border-l-[var(--color-accent)] transition-colors focus-within:bg-[var(--color-paper-2)]">
+          <input type="radio" name="use_case" value={cat} class="sr-only peer" required />
+          <div class="px-4 py-3 text-center text-[13px] text-[var(--color-ink-2)] peer-checked:text-[var(--color-ink)]">
             {cat.charAt(0).toUpperCase() + cat.slice(1)}
           </div>
         </label>
@@ -36,79 +29,81 @@ const strategies = [
     </div>
   </div>
 
-  <div class="mb-6">
-    <span class="block text-sm text-gray-400 mb-2">Estrategia de recomendación</span>
-    <div class="grid grid-cols-1 gap-2">
+  <div>
+    <p class="text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] font-medium mb-3">
+      Estrategia
+    </p>
+    <div class="space-y-px bg-[var(--color-rule)]">
       {strategies.map(s => (
-        <label class="cursor-pointer">
-          <input
-            type="radio"
-            name="strategy"
-            id={`strategy_${s.value}`}
-            value={s.value}
-            class="peer hidden"
-            checked={s.value === 'balanced'}
-          />
-          <div class="bg-gray-700 border border-gray-600 rounded px-4 py-3 peer-checked:border-teal-500 peer-checked:bg-teal-900/30 hover:bg-gray-650 transition-colors focus-ring">
-            <div class="text-sm font-medium text-white">{s.label}</div>
-            <div class="text-xs text-gray-400 mt-1 text-pretty">{s.desc}</div>
+        <label class="cursor-pointer bg-[var(--color-paper)] block has-[:checked]:bg-[var(--color-paper-2)] transition-colors focus-within:bg-[var(--color-paper-2)]">
+          <input type="radio" name="strategy" value={s.value} class="sr-only peer" checked={s.value === 'balanced'} />
+          <div class="px-4 py-3">
+            <div class="text-[13px] text-[var(--color-ink-2)] peer-checked:text-[var(--color-ink)]">{s.label}</div>
+            <div class="text-[12px] text-[var(--color-ink-3)] mt-0.5">{s.desc}</div>
           </div>
         </label>
       ))}
     </div>
   </div>
 
-  <div class="mb-6">
-    <label for="max-context" class="block text-sm text-gray-400 mb-2">Contexto Máximo</label>
+  <div>
+    <label for="max_context" class="block text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-2">
+      Contexto máximo
+    </label>
     <select
-      id="max-context"
+      id="max_context"
       name="max_context"
-      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus-ring focus:border-teal-500"
+      autocomplete="off"
+      class="w-full bg-[var(--color-paper-2)] border rule text-[var(--color-ink)] rounded-sm px-3 py-2 text-[14px] focus-ring focus:border-[var(--color-ink-3)]"
     >
-      <option value="32768">32K tokens</option>
-      <option value="65536">64K tokens</option>
-      <option value="131072" selected>128K tokens</option>
-      <option value="200000">200K+ tokens</option>
+      <option value="32768">≤ 32K tokens</option>
+      <option value="65536">≤ 64K tokens</option>
+      <option value="131072" selected>≤ 128K tokens</option>
+      <option value="200000">≤ 200K tokens</option>
     </select>
   </div>
 
-  <div class="mb-6">
-    <label for="max-budget" class="block text-sm text-gray-400 mb-2">Presupuesto Mensual ($)</label>
+  <div>
+    <label for="max_budget" class="block text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-2">
+      Presupuesto mensual ($)
+    </label>
     <input
       type="number"
-      id="max-budget"
+      id="max_budget"
       name="max_budget"
       min="0"
       step="1"
+      value="50"
       inputmode="numeric"
       autocomplete="off"
-      value="50"
-      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus-ring focus:border-teal-500 tnum"
+      class="w-full bg-[var(--color-paper-2)] border rule text-[var(--color-ink)] rounded-sm px-3 py-2 text-[14px] tnum focus-ring focus:border-[var(--color-ink-3)]"
     />
   </div>
 
-  <div class="mb-6">
-    <label for="preferred-features" class="block text-sm text-gray-400 mb-2">Características Preferidas (separadas por coma)</label>
+  <div>
+    <label for="preferred_features" class="block text-[12px] uppercase tracking-wider text-[var(--color-ink-3)] mb-2">
+      Características preferidas
+    </label>
     <input
       type="text"
-      id="preferred-features"
+      id="preferred_features"
       name="preferred_features"
       placeholder="vision, function calling, json mode"
       autocomplete="off"
-      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus-ring focus:border-teal-500"
+      class="w-full bg-[var(--color-paper-2)] border rule text-[var(--color-ink)] placeholder-[var(--color-ink-4)] rounded-sm px-3 py-2 text-[14px] focus-ring focus:border-[var(--color-ink-3)]"
     />
   </div>
 
   <button
     type="submit"
-    class="w-full bg-teal-600 hover:bg-teal-500 text-white font-semibold py-3 rounded transition-colors focus-ring"
+    class="w-full bg-[var(--color-ink)] text-[var(--color-paper)] hover:bg-[var(--color-ink-2)] py-3 rounded-sm text-[14px] font-medium transition-colors focus-ring"
   >
-    Obtener Recomendaciones
+    Obtener recomendaciones
   </button>
 </form>
 
 <script>
-  const form = document.getElementById('recommender-form') as HTMLFormElement;
+  const form = document.getElementById('recommender-form') as HTMLFormElement | null;
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(form);
@@ -119,9 +114,7 @@ const strategies = [
     const strategy = formData.get('strategy') as string;
     if (strategy) params.set('strategy', strategy);
     const features = formData.get('preferred_features') as string;
-    if (features) {
-      params.set('features', features);
-    }
+    if (features) params.set('features', features);
     window.location.href = `/recommend?${params.toString()}`;
   });
 </script>
