@@ -120,6 +120,22 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
 
         <p class="text-gray-300 text-lg mb-8">{model.description}</p>
 
+        {model.strengths && model.strengths.length > 0 && (
+          <div class="mb-8 bg-gray-900/30 border border-gray-700 rounded-lg p-5">
+            <h3 class="text-sm font-semibold text-gray-300 mb-3">Puntos fuertes</h3>
+            <div class="flex flex-wrap gap-2">
+              {model.strengths.map((s: string) => (
+                <span class="inline-flex items-center gap-1.5 bg-teal-900/30 border border-teal-700 text-teal-300 px-3 py-1.5 rounded-full text-sm">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
         {useCases.length > 0 && (
           <div class="mb-8 bg-gradient-to-r from-teal-900/20 to-purple-900/20 border border-teal-800/50 rounded-lg p-5">
             <h3 class="text-sm font-semibold text-teal-300 mb-3">Casos de uso ideales para este modelo</h3>
@@ -332,6 +348,25 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
             Añadir a comparación
           </button>
         </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8 pt-8 border-t border-gray-700">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-white">{model.context_window >= 1000000 ? `${(model.context_window / 1000000).toFixed(1)}M` : `${(model.context_window / 1000).toFixed(0)}K`}</div>
+            <div class="text-xs text-gray-500 mt-1">Tokens contexto</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-white">${model.input_price.toFixed(2)}</div>
+            <div class="text-xs text-gray-500 mt-1">Input / 1M</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-white">${model.output_price.toFixed(2)}</div>
+            <div class="text-xs text-gray-500 mt-1">Output / 1M</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-teal-400">{model.supported_languages?.length || 1}</div>
+            <div class="text-xs text-gray-500 mt-1">Idiomas</div>
+          </div>
+        </div>
       </div>
 
       <div class="bg-gray-900/50 px-8 py-4 border-t border-gray-700">
@@ -346,7 +381,7 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
         <h2 class="text-xl font-bold text-white mb-6">Modelos similares</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {relatedModels.map((m: any) => (
-            <a href={`/models/${m.provider}/${encodeURIComponent(m.id.split('/')[1] || '')}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition">
+            <a href={`/models/${m.provider}/${m.id.split("/")[1] || ""}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition">
               <h3 class="font-semibold text-white mb-1 truncate">{m.name}</h3>
               <p class="text-gray-500 text-sm mb-2">{m.provider}</p>
               <p class="text-gray-400 text-xs">${(m.input_price + m.output_price).toFixed(2)}/1M</p>
@@ -361,7 +396,7 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
         <h2 class="text-xl font-bold text-white mb-6">Otros modelos de {model.provider}</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {sameProvider.map((m: any) => (
-            <a href={`/models/${m.provider}/${encodeURIComponent(m.id.split('/')[1] || '')}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition">
+            <a href={`/models/${m.provider}/${m.id.split("/")[1] || ""}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition">
               <h3 class="font-semibold text-white mb-1 truncate">{m.name}</h3>
               <p class="text-gray-500 text-sm mb-2 capitalize">{m.category}</p>
               <p class="text-gray-400 text-xs">${(m.input_price + m.output_price).toFixed(2)}/1M</p>

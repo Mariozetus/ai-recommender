@@ -81,7 +81,7 @@ const categories = [
     if (recentModels.length > 0) {
       section.classList.remove('hidden');
       list.innerHTML = recentModels.map(m => `
-        <a href="/models/${m.provider}/${encodeURIComponent(m.id.split("/")[1] || "")}" class="flex-shrink-0 w-48 bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition">
+        <a href="/models/${m.provider}/${m.id.split("/")[1] || ""}" class="flex-shrink-0 w-48 bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition">
           <h3 class="font-semibold text-white truncate">${m.name}</h3>
           <p class="text-gray-500 text-sm">${m.provider}</p>
           <p class="text-gray-400 text-xs mt-2">$${m.input_price + m.output_price}/1M</p>

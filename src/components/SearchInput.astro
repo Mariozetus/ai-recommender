@@ -94,7 +94,7 @@ const searchable = models.slice(0, 200).map(m => ({
 
       suggestions.innerHTML = matches.map((m, i) => `
         <a
-          href="/models/${m.provider}/${encodeURIComponent(m.id.split("/")[1] || "")}"
+          href="/models/${m.provider}/${m.id.split("/")[1] || ""}"
           role="option"
           data-index="${i}"
           class="flex items-center justify-between px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-0 transition cursor-pointer"
