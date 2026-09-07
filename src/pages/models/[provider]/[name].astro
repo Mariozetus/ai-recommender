@@ -15,6 +15,14 @@ const acceptLanguage = Astro.request.headers.get('accept-language');
 const locale = detectLocale(acceptLanguage || undefined);
 setLocale(locale);
 
+const numberFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US');
+const currencyFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US', { style: 'currency', currency: 'USD' });
+const dateFmt = new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
 if (!provider || !name) {
   return new Response('Not Found', { status: 404 });
 }
@@ -75,32 +83,28 @@ const useCaseMap: Record<string, { slug: string; title: string }[]> = {
 
 const useCases = useCaseMap[model.category] || [];
 
-const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const formattedDate = dateFmt.format(new Date(model.fetched_at));
 ---
 
 <Layout title={`${model.name} - AI Model`} description={model.description}>
   <div class="max-w-6xl mx-auto px-4 py-8">
-    <nav class="text-sm text-gray-500 mb-6">
-      <a href="/" class="hover:text-teal-400">Inicio</a>
-      <span class="mx-2">/</span>
-      <a href="/catalog" class="hover:text-teal-400">Catálogo</a>
-      <span class="mx-2">/</span>
-      <a href={`/provider/${model.provider}`} class="hover:text-teal-400">{model.provider}</a>
-      <span class="mx-2">/</span>
-      <span class="text-gray-400">{model.name}</span>
+    <nav class="text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-teal-400 focus-ring">Inicio</a>
+      <span class="mx-2" aria-hidden="true">/</span>
+      <a href="/catalog" class="hover:text-teal-400 focus-ring">Catálogo</a>
+      <span class="mx-2" aria-hidden="true">/</span>
+      <a href={`/provider/${model.provider}`} class="hover:text-teal-400 focus-ring">{model.provider}</a>
+      <span class="mx-2" aria-hidden="true">/</span>
+      <span class="text-gray-400" aria-current="page">{model.name}</span>
     </nav>
 
     <article class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
       <div class="p-8">
         <div class="flex flex-wrap justify-between items-start gap-4 mb-6">
           <div>
-            <h1 class="text-3xl font-bold text-white mb-2">{model.name}</h1>
+            <h1 class="text-3xl font-bold text-white mb-2 text-balance">{model.name}</h1>
             <p class="text-gray-400">
-              <a href={`/provider/${model.provider}`} class="hover:text-teal-400">{model.provider}</a>
+              <a href={`/provider/${model.provider}`} class="hover:text-teal-400 focus-ring">{model.provider}</a>
             </p>
           </div>
           <div class="flex gap-2">
@@ -112,21 +116,22 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
             <span
               class="px-3 py-1 rounded text-sm font-medium text-white"
               style={`background-color: ${categoryColors[model.category] || '#374151'}`}
+              aria-label={model.category}
             >
               {model.category}
             </span>
           </div>
         </div>
 
-        <p class="text-gray-300 text-lg mb-8">{model.description}</p>
+        <p class="text-gray-300 text-lg mb-8 text-pretty">{model.description}</p>
 
         {model.strengths && model.strengths.length > 0 && (
           <div class="mb-8 bg-gray-900/30 border border-gray-700 rounded-lg p-5">
-            <h3 class="text-sm font-semibold text-gray-300 mb-3">Puntos fuertes</h3>
+            <h3 class="text-sm font-semibold text-gray-300 mb-3 text-balance">Puntos fuertes</h3>
             <div class="flex flex-wrap gap-2">
               {model.strengths.map((s: string) => (
                 <span class="inline-flex items-center gap-1.5 bg-teal-900/30 border border-teal-700 text-teal-300 px-3 py-1.5 rounded-full text-sm">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                   {s}
@@ -138,14 +143,14 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
 
         {useCases.length > 0 && (
           <div class="mb-8 bg-gradient-to-r from-teal-900/20 to-purple-900/20 border border-teal-800/50 rounded-lg p-5">
-            <h3 class="text-sm font-semibold text-teal-300 mb-3">Casos de uso ideales para este modelo</h3>
+            <h3 class="text-sm font-semibold text-teal-300 mb-3 text-balance">Casos de uso ideales para este modelo</h3>
             <div class="flex flex-wrap gap-2">
               {useCases.map(uc => (
                 <a
                   href={`/use-cases/${uc.slug}`}
-                  class="inline-flex items-center gap-2 bg-gray-800/70 hover:bg-gray-700 border border-gray-700 hover:border-teal-600 px-4 py-2 rounded-lg text-sm text-white transition"
+                  class="inline-flex items-center gap-2 bg-gray-800/70 hover:bg-gray-700 border border-gray-700 hover:border-teal-600 px-4 py-2 rounded-lg text-sm text-white transition-colors focus-ring"
                 >
-                  <svg class="w-4 h-4 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                   </svg>
                   {uc.title}
@@ -157,42 +162,42 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
 
         <div class="grid md:grid-cols-2 gap-6 mb-8">
           <div class="bg-gray-700/50 rounded-lg p-6">
-            <h2 class="text-lg font-semibold mb-4 text-white">Precios</h2>
+            <h2 class="text-lg font-semibold mb-4 text-white text-balance">Precios</h2>
             <div class="space-y-3">
-              <div class="flex justify-between">
+              <div class="flex justify-between gap-2">
                 <span class="text-gray-400">Input</span>
-                <span class="text-white font-mono">${model.input_price.toFixed(2)}/1M tokens</span>
+                <span class="text-white font-mono tnum">{currencyFmt.format(model.input_price)}/1M tokens</span>
               </div>
-              <div class="flex justify-between">
+              <div class="flex justify-between gap-2">
                 <span class="text-gray-400">Output</span>
-                <span class="text-white font-mono">${model.output_price.toFixed(2)}/1M tokens</span>
+                <span class="text-white font-mono tnum">{currencyFmt.format(model.output_price)}/1M tokens</span>
               </div>
-              <div class="flex justify-between">
+              <div class="flex justify-between gap-2">
                 <span class="text-gray-400">Context Window</span>
-                <span class="text-white font-mono">{model.context_window.toLocaleString()} tokens</span>
+                <span class="text-white font-mono tnum">{numberFmt.format(model.context_window)} tokens</span>
               </div>
               {model.max_completion_tokens && (
-                <div class="flex justify-between">
+                <div class="flex justify-between gap-2">
                   <span class="text-gray-400">Max output</span>
-                  <span class="text-white font-mono">{model.max_completion_tokens.toLocaleString()} tokens</span>
+                  <span class="text-white font-mono tnum">{numberFmt.format(model.max_completion_tokens)} tokens</span>
                 </div>
               )}
               {model.pricing?.free && (
-                <div class="flex justify-between">
+                <div class="flex justify-between gap-2">
                   <span class="text-gray-400">Free Tier</span>
                   <span class="text-green-400 font-mono">Sí</span>
                 </div>
               )}
               {model.pricing?.batch && (
-                <div class="flex justify-between">
+                <div class="flex justify-between gap-2">
                   <span class="text-gray-400">Batch API</span>
                   <span class="text-teal-400 font-mono">Sí (50% descuento)</span>
                 </div>
               )}
               {model.tokenizer && (
-                <div class="flex justify-between">
+                <div class="flex justify-between gap-2 min-w-0">
                   <span class="text-gray-400">Tokenizer</span>
-                  <span class="text-white font-mono">{model.tokenizer}</span>
+                  <span class="text-white font-mono truncate">{model.tokenizer}</span>
                 </div>
               )}
             </div>
@@ -210,7 +215,7 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
           <div class="grid md:grid-cols-2 gap-6 mb-8">
             <BenchmarkRadar benchmarks={model.benchmark} size={280} />
             <div class="bg-gray-700/50 rounded-lg p-6">
-              <h2 class="text-lg font-semibold mb-4 text-white">Benchmarks</h2>
+              <h2 class="text-lg font-semibold mb-4 text-white text-balance">Benchmarks</h2>
               <div class="space-y-2 max-h-80 overflow-y-auto pr-2">
                 {Object.entries(model.benchmark).map(([key, value]) => {
                   if (value === null || value === undefined) return null;
@@ -239,11 +244,11 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
                   const isIndex = key.endsWith('_index') || key === 'arena_elo' || key === 'chatbot_arena_elo';
                   const isHf = ['hf_likes', 'hf_downloads'].includes(key);
                   return (
-                    <div class="flex justify-between items-center text-sm">
+                    <div class="flex justify-between items-center text-sm gap-2">
                       <span class="text-gray-400">{label}</span>
-                      <span class={`font-mono ${isIndex ? 'text-teal-400' : 'text-white'}`}>
+                      <span class={`font-mono tnum ${isIndex ? 'text-teal-400' : 'text-white'}`}>
                         {isHf && typeof value === 'number' && value > 1000
-                          ? value.toLocaleString()
+                          ? numberFmt.format(value)
                           : typeof value === 'number' && !isIndex
                           ? `${value.toFixed(1)}%`
                           : String(value)}
@@ -259,32 +264,33 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
         {(model.hf_likes || model.hf_downloads || model.hf_id) && (
           <div class="mb-8 bg-gradient-to-r from-yellow-900/20 to-orange-900/20 border border-yellow-700/50 rounded-lg p-5">
             <h3 class="text-sm font-semibold text-yellow-300 mb-3 flex items-center gap-2">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
               </svg>
               Datos de HuggingFace
             </h3>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
               {model.hf_likes !== undefined && (
-                <div>
+                <div class="min-w-0">
                   <div class="text-xs text-gray-500">Likes</div>
-                  <div class="text-lg font-semibold text-white">{model.hf_likes.toLocaleString()}</div>
+                  <div class="text-lg font-semibold text-white tnum">{numberFmt.format(model.hf_likes)}</div>
                 </div>
               )}
               {model.hf_downloads !== undefined && (
-                <div>
+                <div class="min-w-0">
                   <div class="text-xs text-gray-500">Descargas</div>
-                  <div class="text-lg font-semibold text-white">{model.hf_downloads.toLocaleString()}</div>
+                  <div class="text-lg font-semibold text-white tnum">{numberFmt.format(model.hf_downloads)}</div>
                 </div>
               )}
               {model.hf_id && (
-                <div>
+                <div class="min-w-0">
                   <div class="text-xs text-gray-500">HF ID</div>
                   <a
                     href={`https://huggingface.co/${model.hf_id}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-sm text-yellow-300 hover:text-yellow-200 truncate inline-block max-w-full"
+                    aria-label={`Ver ${model.hf_id} en HuggingFace`}
+                    class="text-sm text-yellow-300 hover:text-yellow-200 truncate inline-block max-w-full focus-ring"
                   >
                     {model.hf_id} ↗
                   </a>
@@ -296,7 +302,7 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
 
         {model.modalities && (
           <div class="mb-8">
-            <h2 class="text-lg font-semibold mb-4 text-white">Modalidades</h2>
+            <h2 class="text-lg font-semibold mb-4 text-white text-balance">Modalidades</h2>
             <div class="flex flex-wrap gap-2">
               {model.modalities.text && (
                 <span class="bg-blue-900 text-blue-300 px-3 py-1 rounded text-sm">Text Input/Output</span>
@@ -322,14 +328,14 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
 
         {model.supported_parameters && model.supported_parameters.length > 0 && (
           <div class="mb-8">
-            <h2 class="text-lg font-semibold mb-4 text-white">Capacidades técnicas</h2>
+            <h2 class="text-lg font-semibold mb-4 text-white text-balance">Capacidades técnicas</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
               {model.supported_parameters.map((param: string) => (
-                <span class="bg-gray-900/50 border border-gray-700 text-gray-300 px-3 py-2 rounded text-sm flex items-center gap-2">
-                  <svg class="w-4 h-4 text-teal-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <span class="bg-gray-900/50 border border-gray-700 text-gray-300 px-3 py-2 rounded text-sm flex items-center gap-2 min-w-0">
+                  <svg class="w-4 h-4 text-teal-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
-                  {param.replace(/_/g, ' ')}
+                  <span class="truncate">{param.replace(/_/g, ' ')}</span>
                 </span>
               ))}
             </div>
@@ -338,7 +344,7 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
 
         {model.supported_languages && model.supported_languages.length > 0 && (
           <div class="mb-8">
-            <h2 class="text-lg font-semibold mb-4 text-white">Idiomas soportados</h2>
+            <h2 class="text-lg font-semibold mb-4 text-white text-balance">Idiomas soportados</h2>
             <div class="flex flex-wrap gap-2">
               {model.supported_languages.map(lang => (
                 <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded text-sm">
@@ -351,7 +357,7 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
 
         {model.tags && model.tags.length > 0 && (
           <div class="mb-8">
-            <h2 class="text-lg font-semibold mb-4 text-white">Tags</h2>
+            <h2 class="text-lg font-semibold mb-4 text-white text-balance">Tags</h2>
             <div class="flex flex-wrap gap-2">
               {model.tags.map((tag: string) => (
                 <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded text-sm">{tag}</span>
@@ -365,14 +371,16 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
             href={model.url}
             target="_blank"
             rel="noopener noreferrer"
-            class="bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded font-medium transition"
+            aria-label={`Ver ${model.name} en ${model.provider}`}
+            class="bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded font-medium transition-colors focus-ring"
           >
             Ver en {model.provider} →
           </a>
           <button
+            type="button"
             id="compare-btn"
             data-model-id={model.id}
-            class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded font-medium transition"
+            class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded font-medium transition-colors focus-ring"
           >
             Añadir a comparación
           </button>
@@ -380,26 +388,26 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-8 pt-8 border-t border-gray-700">
           <div class="text-center">
-            <div class="text-2xl font-bold text-white">{model.context_window >= 1000000 ? `${(model.context_window / 1000000).toFixed(1)}M` : `${(model.context_window / 1000).toFixed(0)}K`}</div>
+            <div class="text-2xl font-bold text-white tnum">{model.context_window >= 1000000 ? `${(model.context_window / 1000000).toFixed(1)}M` : `${(model.context_window / 1000).toFixed(0)}K`}</div>
             <div class="text-xs text-gray-500 mt-1">Tokens contexto</div>
           </div>
           <div class="text-center">
-            <div class="text-2xl font-bold text-white">${model.input_price.toFixed(2)}</div>
+            <div class="text-2xl font-bold text-white tnum">{currencyFmt.format(model.input_price)}</div>
             <div class="text-xs text-gray-500 mt-1">Input / 1M</div>
           </div>
           <div class="text-center">
-            <div class="text-2xl font-bold text-white">${model.output_price.toFixed(2)}</div>
+            <div class="text-2xl font-bold text-white tnum">{currencyFmt.format(model.output_price)}</div>
             <div class="text-xs text-gray-500 mt-1">Output / 1M</div>
           </div>
           <div class="text-center">
-            <div class="text-2xl font-bold text-teal-400">{model.supported_languages?.length || 1}</div>
+            <div class="text-2xl font-bold text-teal-400 tnum">{numberFmt.format(model.supported_languages?.length || 1)}</div>
             <div class="text-xs text-gray-500 mt-1">Idiomas</div>
           </div>
         </div>
       </div>
 
       <div class="bg-gray-900/50 px-8 py-4 border-t border-gray-700">
-        <p class="text-gray-500 text-sm">
+        <p class="text-gray-500 text-sm text-pretty">
           Fuente: {model.source} · Actualizado: {formattedDate}
         </p>
       </div>
@@ -407,13 +415,13 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
 
     {relatedModels.length > 0 && (
       <section class="mt-12">
-        <h2 class="text-xl font-bold text-white mb-6">Modelos similares</h2>
+        <h2 class="text-xl font-bold text-white mb-6 text-balance">Modelos similares</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {relatedModels.map((m: any) => (
-            <a href={`/models/${m.provider}/${m.id.split("/")[1] || ""}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition">
+            <a href={`/models/${m.provider}/${m.id.split("/")[1] || ""}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition-colors focus-ring">
               <h3 class="font-semibold text-white mb-1 truncate">{m.name}</h3>
               <p class="text-gray-500 text-sm mb-2">{m.provider}</p>
-              <p class="text-gray-400 text-xs">${(m.input_price + m.output_price).toFixed(2)}/1M</p>
+              <p class="text-gray-400 text-xs tnum">{currencyFmt.format(m.input_price + m.output_price)}/1M</p>
             </a>
           ))}
         </div>
@@ -422,13 +430,13 @@ const formattedDate = new Date(model.fetched_at).toLocaleDateString('es-ES', {
 
     {sameProvider.length > 0 && (
       <section class="mt-12">
-        <h2 class="text-xl font-bold text-white mb-6">Otros modelos de {model.provider}</h2>
+        <h2 class="text-xl font-bold text-white mb-6 text-balance">Otros modelos de {model.provider}</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {sameProvider.map((m: any) => (
-            <a href={`/models/${m.provider}/${m.id.split("/")[1] || ""}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition">
+            <a href={`/models/${m.provider}/${m.id.split("/")[1] || ""}`} class="bg-gray-800 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition-colors focus-ring">
               <h3 class="font-semibold text-white mb-1 truncate">{m.name}</h3>
               <p class="text-gray-500 text-sm mb-2 capitalize">{m.category}</p>
-              <p class="text-gray-400 text-xs">${(m.input_price + m.output_price).toFixed(2)}/1M</p>
+              <p class="text-gray-400 text-xs tnum">{currencyFmt.format(m.input_price + m.output_price)}/1M</p>
             </a>
           ))}
         </div>

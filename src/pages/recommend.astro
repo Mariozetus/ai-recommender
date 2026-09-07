@@ -15,6 +15,11 @@ import {
   BALANCED_WEIGHTS,
 } from '../lib/scorer';
 
+const acceptLanguage = Astro.request.headers.get('accept-language');
+const locale = acceptLanguage?.includes('es') ? 'es' : 'en';
+const numberFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US');
+const currencyFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US', { style: 'currency', currency: 'USD' });
+
 const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
 const { models } = JSON.parse(rawData);
 
@@ -48,8 +53,8 @@ const recommended = hasQuery ? topRecommendations(models, prefs, 12, weights) : 
 <Layout title="AI Recommendations">
   <div class="max-w-6xl mx-auto px-4 py-8">
     <div class="text-center mb-12">
-      <h1 class="text-4xl font-bold mb-4">Recomendador de Modelos IA</h1>
-      <p class="text-gray-400 text-lg">Recomendaciones personalizadas según tus necesidades</p>
+      <h1 class="text-4xl font-bold mb-4 text-balance">Recomendador de Modelos IA</h1>
+      <p class="text-gray-400 text-lg text-pretty">Recomendaciones personalizadas según tus necesidades</p>
     </div>
 
     <div class="grid md:grid-cols-3 gap-8">
@@ -67,7 +72,7 @@ const recommended = hasQuery ? topRecommendations(models, prefs, 12, weights) : 
           />
         ) : (
           <div class="bg-gray-800 rounded-lg p-8 text-center border border-gray-700">
-            <p class="text-gray-400">Completa el formulario para obtener recomendaciones personalizadas.</p>
+            <p class="text-gray-400 text-pretty">Completa el formulario para obtener recomendaciones personalizadas.</p>
           </div>
         )}
       </div>

@@ -71,27 +71,29 @@ const labelPoints = activeMetrics.map((m, i) => {
 });
 
 const gridLevels = [0.25, 0.5, 0.75, 1];
+
+const numberFmt = new Intl.NumberFormat('en-US');
 ---
 
 <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
-  <h3 class="text-lg font-semibold text-white mb-4">Benchmark Performance</h3>
+  <h3 class="text-lg font-semibold text-white mb-4 text-balance">Benchmark Performance</h3>
 
   <div class="flex justify-center">
-    <svg width={size} height={size} class="overflow-visible">
+    <svg width={size} height={size} class="overflow-visible" role="img" aria-label="Gráfico de benchmarks">
       {gridLevels.map(level => {
         const r = radius * level;
         const levelPoints = activeMetrics.map((_, i) => {
           const angle = i * angleStep - Math.PI / 2;
           return `${center + r * Math.cos(angle)},${center + r * Math.sin(angle)}`;
         }).join(' ');
-        return `<polygon points="${levelPoints}" fill="none" stroke="rgb(75,85,99)" stroke-width="1" opacity="0.5" />`;
+        return `<polygon points="${levelPoints}" fill="none" stroke="rgb(75,85,99)" stroke-width="1" opacity="0.5" aria-hidden="true" />`;
       })}
 
       {activeMetrics.map((_, i) => {
         const angle = i * angleStep - Math.PI / 2;
         const x2 = center + radius * Math.cos(angle);
         const y2 = center + radius * Math.sin(angle);
-        return `<line x1="${center}" y1="${center}" x2="${x2}" y2="${y2}" stroke="rgb(75,85,99)" stroke-width="1" opacity="0.5" />`;
+        return `<line x1="${center}" y1="${center}" x2="${x2}" y2="${y2}" stroke="rgb(75,85,99)" stroke-width="1" opacity="0.5" aria-hidden="true" />`;
       })}
 
       <polygon
@@ -99,10 +101,11 @@ const gridLevels = [0.25, 0.5, 0.75, 1];
         fill="rgba(20,184,166,0.2)"
         stroke="rgb(20,184,166)"
         stroke-width="2"
+        aria-hidden="true"
       />
 
       {points.map((p) => (
-        <circle cx={p.x} cy={p.y} r="4" fill="rgb(20,184,166)" />
+        <circle cx={p.x} cy={p.y} r="4" fill="rgb(20,184,166)" aria-hidden="true" />
       ))}
 
       {labelPoints.map((lp) => (
@@ -113,6 +116,7 @@ const gridLevels = [0.25, 0.5, 0.75, 1];
           dominant-baseline="middle"
           fill="rgb(156,163,175)"
           font-size="11"
+          aria-hidden="true"
         >
           {lp.label}
         </text>
@@ -122,10 +126,10 @@ const gridLevels = [0.25, 0.5, 0.75, 1];
 
   <div class="grid grid-cols-2 gap-2 mt-4 text-sm">
     {points.map(p => (
-      <div class="flex justify-between">
+      <div class="flex justify-between gap-2">
         <span class="text-gray-400">{p.label}</span>
-        <span class="text-white font-mono">
-          {p.key === 'chatbot_arena_elo' ? p.value : `${p.value.toFixed(1)}${p.key.endsWith('index') || p.key === 'arena_elo' ? '' : '%'}`}
+        <span class="text-white font-mono tnum">
+          {p.key === 'chatbot_arena_elo' ? numberFmt.format(p.value) : `${p.value.toFixed(1)}${p.key.endsWith('index') || p.key === 'arena_elo' ? '' : '%'}`}
         </span>
       </div>
     ))}

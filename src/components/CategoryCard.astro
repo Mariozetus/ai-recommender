@@ -40,20 +40,20 @@ const iconColors: Record<string, string> = {
 <a
   href={`/catalog?category=${category}`}
   class:list={[
-    'group block p-6 rounded-xl border bg-gradient-to-br transition-all hover:scale-105 hover:shadow-lg',
+    'group block p-6 rounded-xl border bg-gradient-to-br transition-colors transition-transform hover:scale-105 hover:shadow-lg focus-ring',
     colors[category] || 'from-gray-600/20 to-gray-600/5 border-gray-800/50 hover:border-gray-600'
   ]}
 >
   <div class="flex items-start gap-4">
     <div class:list={['p-3 rounded-lg bg-gray-800/50', iconColors[category]]}>
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" set:html={icons[category] || icons.chat} />
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" set:html={icons[category] || icons.chat} />
     </div>
     <div class="flex-1">
-      <div class="flex items-center justify-between mb-1">
-        <h3 class="font-semibold text-white group-hover:text-teal-400 transition">{name}</h3>
-        <span class="text-xs text-gray-500">{count}</span>
+      <div class="flex items-center justify-between mb-1 gap-2">
+        <h3 class="font-semibold text-white group-hover:text-teal-400 transition-colors text-balance">{name}</h3>
+        <span class="text-xs text-gray-500 tnum">{count}</span>
       </div>
-      <p class="text-sm text-gray-400">{description}</p>
+      <p class="text-sm text-gray-400 text-pretty">{description}</p>
     </div>
   </div>
 </a>

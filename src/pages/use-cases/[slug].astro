@@ -15,6 +15,11 @@ if (!useCase) {
   return Astro.redirect('/');
 }
 
+const acceptLanguage = Astro.request.headers.get('accept-language');
+const locale = acceptLanguage?.includes('es') ? 'es' : 'en';
+const numberFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US');
+const currencyFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US', { style: 'currency', currency: 'USD' });
+
 const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
 const { models } = JSON.parse(rawData);
 
@@ -46,75 +51,76 @@ const categoryColors: Record<string, string> = {
 <Layout title={`${useCase.title} - AI Models`} description={useCase.description}>
   <div class="bg-gradient-to-b from-gray-900 to-gray-800 py-16">
     <div class="max-w-4xl mx-auto px-4">
-      <nav class="text-sm text-gray-500 mb-6">
-        <a href="/" class="hover:text-teal-400">Inicio</a>
-        <span class="mx-2">/</span>
-        <a href="/use-cases" class="hover:text-teal-400">Casos de uso</a>
-        <span class="mx-2">/</span>
-        <span class="text-gray-400">{useCase.title}</span>
+      <nav class="text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-teal-400 focus-ring">Inicio</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <a href="/use-cases" class="hover:text-teal-400 focus-ring">Casos de uso</a>
+        <span class="mx-2" aria-hidden="true">/</span>
+        <span class="text-gray-400" aria-current="page">{useCase.title}</span>
       </nav>
 
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">{useCase.title}</h1>
-      <p class="text-xl text-gray-300 mb-6">{useCase.tagline}</p>
-      <p class="text-gray-400 leading-relaxed max-w-3xl">{useCase.description}</p>
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 text-balance">{useCase.title}</h1>
+      <p class="text-xl text-gray-300 mb-6 text-pretty">{useCase.tagline}</p>
+      <p class="text-gray-400 leading-relaxed max-w-3xl text-pretty">{useCase.description}</p>
     </div>
   </div>
 
   <div class="max-w-6xl mx-auto px-4 py-12">
     <div class="grid md:grid-cols-3 gap-8 mb-12">
       <div class="md:col-span-2">
-        <h2 class="text-2xl font-bold text-white mb-6">Modelos recomendados</h2>
+        <h2 class="text-2xl font-bold text-white mb-6 text-balance">Modelos recomendados</h2>
         <div class="space-y-4">
           {ranked.map(({ model, score }, i) => (
-            <article class="bg-gray-800 rounded-lg border border-gray-700 p-6 hover:border-gray-600 transition">
+            <article class="bg-gray-800 rounded-lg border border-gray-700 p-6 hover:border-gray-600 transition-colors">
               <div class="flex items-start gap-4">
-                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-teal-900/50 border border-teal-700 flex items-center justify-center text-teal-300 font-bold">
+                <div class="flex-shrink-0 w-10 h-10 rounded-full bg-teal-900/50 border border-teal-700 flex items-center justify-center text-teal-300 font-bold" aria-hidden="true">
                   #{i + 1}
                 </div>
                 <div class="flex-1 min-w-0">
                   <div class="flex items-start justify-between gap-3 mb-2">
-                    <div>
-                      <a href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`} class="text-lg font-semibold text-white hover:text-teal-400">
+                    <div class="min-w-0">
+                      <a href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`} class="text-lg font-semibold text-white hover:text-teal-400 focus-ring text-balance">
                         {model.name}
                       </a>
-                      <p class="text-gray-500 text-sm">{model.provider}</p>
+                      <p class="text-gray-500 text-sm truncate">{model.provider}</p>
                     </div>
-                    <span class={`px-2 py-1 rounded text-xs font-medium ${categoryColors[model.category] || 'bg-gray-700 text-gray-300'}`}>
+                    <span class={`px-2 py-1 rounded text-xs font-medium whitespace-nowrap ${categoryColors[model.category] || 'bg-gray-700 text-gray-300'}`} aria-label={model.category}>
                       {model.category}
                     </span>
                   </div>
 
-                  <p class="text-gray-400 text-sm mb-3 line-clamp-2">{model.description}</p>
+                  <p class="text-gray-400 text-sm mb-3 line-clamp-2 text-pretty">{model.description}</p>
 
                   <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
                     <div>
                       <span class="text-gray-500">Contexto</span>
-                      <p class="text-gray-300 font-mono">{(model.context_window / 1000).toFixed(0)}K</p>
+                      <p class="text-gray-300 font-mono tnum">{(model.context_window / 1000).toFixed(0)}K</p>
                     </div>
                     <div>
                       <span class="text-gray-500">Input</span>
-                      <p class="text-gray-300 font-mono">${model.input_price}/1M</p>
+                      <p class="text-gray-300 font-mono tnum">{currencyFmt.format(model.input_price)}/1M</p>
                     </div>
                     <div>
                       <span class="text-gray-500">Output</span>
-                      <p class="text-gray-300 font-mono">${model.output_price}/1M</p>
+                      <p class="text-gray-300 font-mono tnum">{currencyFmt.format(model.output_price)}/1M</p>
                     </div>
                     <div>
                       <span class="text-gray-500">Score</span>
-                      <p class="text-teal-400 font-mono">{Math.round(score)}/100</p>
+                      <p class="text-teal-400 font-mono tnum">{Math.round(score)}/100</p>
                     </div>
                   </div>
 
                   <div class="flex gap-2 mt-4">
                     <a
                       href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`}
-                      class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition"
+                      class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition-colors focus-ring"
                     >
                       Ver detalles
                     </a>
                     <button
                       type="button"
-                      class="compare-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition"
+                      aria-label={`Añadir ${model.name} a comparación`}
+                      class="compare-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors focus-ring"
                       data-model-id={model.id}
                     >
                       Comparar
@@ -129,10 +135,10 @@ const categoryColors: Record<string, string> = {
         <div class="mt-8 text-center">
           <a
             href="/catalog"
-            class="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 transition"
+            class="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 transition-colors focus-ring"
           >
-            Ver todos los {matched.length} modelos en el catálogo
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            Ver todos los {numberFmt.format(matched.length)} modelos en el catálogo
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>
           </a>
@@ -141,39 +147,39 @@ const categoryColors: Record<string, string> = {
 
       <aside class="md:col-span-1 space-y-6">
         <div class="bg-gray-800 rounded-lg border border-gray-700 p-6 sticky top-24">
-          <h3 class="text-lg font-semibold text-white mb-4">Requisitos clave</h3>
+          <h3 class="text-lg font-semibold text-white mb-4 text-balance">Requisitos clave</h3>
           <ul class="space-y-3">
             {useCase.requirements.map(req => (
               <li class="flex items-start gap-2 text-sm">
-                <svg class="w-5 h-5 text-teal-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-teal-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
-                <span class="text-gray-300">{req}</span>
+                <span class="text-gray-300 text-pretty">{req}</span>
               </li>
             ))}
           </ul>
         </div>
 
         <div class="bg-gray-800 rounded-lg border border-gray-700 p-6">
-          <h3 class="text-lg font-semibold text-white mb-4">Tips prácticos</h3>
+          <h3 class="text-lg font-semibold text-white mb-4 text-balance">Tips prácticos</h3>
           <ol class="space-y-3 text-sm">
             {useCase.tips.map((tip, i) => (
               <li class="flex items-start gap-3">
-                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-teal-900/50 border border-teal-700 text-teal-300 text-xs flex items-center justify-center">
+                <span class="flex-shrink-0 w-6 h-6 rounded-full bg-teal-900/50 border border-teal-700 text-teal-300 text-xs flex items-center justify-center" aria-hidden="true">
                   {i + 1}
                 </span>
-                <span class="text-gray-300">{tip}</span>
+                <span class="text-gray-300 text-pretty">{tip}</span>
               </li>
             ))}
           </ol>
         </div>
 
         <div class="bg-gradient-to-br from-teal-900/30 to-purple-900/30 border border-teal-700 rounded-lg p-6">
-          <h3 class="text-lg font-semibold text-white mb-2">¿No encuentras el ideal?</h3>
-          <p class="text-gray-400 text-sm mb-4">Responde unas preguntas y obtén recomendaciones personalizadas</p>
+          <h3 class="text-lg font-semibold text-white mb-2 text-balance">¿No encuentras el ideal?</h3>
+          <p class="text-gray-400 text-sm mb-4 text-pretty">Responde unas preguntas y obtén recomendaciones personalizadas</p>
           <a
             href="/recommend"
-            class="block text-center bg-teal-600 hover:bg-teal-500 text-white py-2 rounded font-medium transition"
+            class="block text-center bg-teal-600 hover:bg-teal-500 text-white py-2 rounded font-medium transition-colors focus-ring"
           >
             Hacer el quiz
           </a>
@@ -182,15 +188,15 @@ const categoryColors: Record<string, string> = {
     </div>
 
     <section class="border-t border-gray-700 pt-12 mt-12">
-      <h2 class="text-2xl font-bold text-white mb-6">Otros casos de uso</h2>
+      <h2 class="text-2xl font-bold text-white mb-6 text-balance">Otros casos de uso</h2>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
         {USE_CASES.filter(u => u.slug !== useCase.slug).slice(0, 4).map(u => (
           <a
             href={`/use-cases/${u.slug}`}
-            class="block bg-gray-800 rounded-lg border border-gray-700 p-5 hover:border-teal-600 transition"
+            class="block bg-gray-800 rounded-lg border border-gray-700 p-5 hover:border-teal-600 transition-colors focus-ring"
           >
             <h3 class="font-semibold text-white mb-1">{u.title}</h3>
-            <p class="text-gray-400 text-sm line-clamp-2">{u.tagline}</p>
+            <p class="text-gray-400 text-sm line-clamp-2 text-pretty">{u.tagline}</p>
           </a>
         ))}
       </div>

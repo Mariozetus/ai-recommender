@@ -15,6 +15,9 @@ const acceptLanguage = Astro.request.headers.get('accept-language');
 const locale = detectLocale(acceptLanguage || undefined);
 setLocale(locale);
 
+const numberFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US');
+const currencyFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US', { style: 'currency', currency: 'USD' });
+
 const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
 const { models } = JSON.parse(rawData);
 
@@ -43,27 +46,29 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
 
 <Layout title={t('compare.title')}>
   <div class="max-w-7xl mx-auto px-4 py-8">
-    <div class="flex justify-between items-center mb-8">
+    <div class="flex justify-between items-center mb-8 gap-4 flex-wrap">
       <div>
-        <h1 class="text-3xl font-bold mb-2">{t('compare.title')}</h1>
-        <p class="text-gray-400">{t('compare.comparing', { count: compareModels.length.toString() })}</p>
+        <h1 class="text-3xl font-bold mb-2 text-balance">{t('compare.title')}</h1>
+        <p class="text-gray-400 text-pretty">{t('compare.comparing', { count: compareModels.length.toString() })}</p>
       </div>
-      <div class="flex gap-3">
+      <div class="flex gap-3 flex-wrap">
         <a
           href="/"
-          class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded font-medium transition"
+          class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded font-medium transition-colors focus-ring"
         >
           {t('compare.back').replace('← ', '')}
         </a>
         <button
+          type="button"
           id="save-comparison"
-          class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded font-medium transition"
+          class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded font-medium transition-colors focus-ring"
         >
           Save
         </button>
         <button
+          type="button"
           id="clear-all"
-          class="bg-red-900/50 hover:bg-red-800/50 text-red-300 px-4 py-2 rounded font-medium transition border border-red-800"
+          class="bg-red-900/50 hover:bg-red-800/50 text-red-300 px-4 py-2 rounded font-medium transition-colors border border-red-800 focus-ring"
         >
           {t('compare.clear_all')}
         </button>
@@ -71,10 +76,10 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
     </div>
 
     <div class="mb-6 border-b border-gray-700">
-      <nav class="flex gap-4" id="tab-nav">
-        <button class="tab-btn active px-4 py-2 text-teal-400 border-b-2 border-teal-400 font-medium" data-tab="overview">Overview</button>
-        <button class="tab-btn px-4 py-2 text-gray-400 hover:text-white border-b-2 border-transparent" data-tab="benchmarks">Benchmarks</button>
-        <button class="tab-btn px-4 py-2 text-gray-400 hover:text-white border-b-2 border-transparent" data-tab="pricing">Pricing</button>
+      <nav class="flex gap-4" id="tab-nav" aria-label="Secciones">
+        <button type="button" role="tab" aria-selected="true" class="tab-btn active px-4 py-2 text-teal-400 border-b-2 border-teal-400 font-medium focus-ring" data-tab="overview">Overview</button>
+        <button type="button" role="tab" aria-selected="false" class="tab-btn px-4 py-2 text-gray-400 hover:text-white border-b-2 border-transparent focus-ring" data-tab="benchmarks">Benchmarks</button>
+        <button type="button" role="tab" aria-selected="false" class="tab-btn px-4 py-2 text-gray-400 hover:text-white border-b-2 border-transparent focus-ring" data-tab="pricing">Pricing</button>
       </nav>
     </div>
 
@@ -93,12 +98,14 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
                       </a>
                       <p class="text-gray-500 text-sm">{model.provider}</p>
                     </div>
-                    <button
-                      class="remove-btn text-gray-500 hover:text-red-400 ml-2 p-1"
+<button
+                      type="button"
+                      class="remove-btn text-gray-500 hover:text-red-400 ml-2 p-1 focus-ring"
                       data-model-id={model.id}
+                      aria-label={`Quitar ${model.name} de la comparación`}
                       title="Remove"
                     >
-                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                       </svg>
                     </button>
@@ -106,6 +113,7 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
                   <span
                     class="inline-block mt-2 px-2 py-1 rounded text-xs font-medium text-white"
                     style={`background-color: ${categoryColors[model.category] || '#374151'}`}
+                    aria-label={model.category}
                   >
                     {model.category}
                   </span>
@@ -114,12 +122,12 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
             </tr>
           </thead>
           <tbody>
-            <tr class="border-b border-gray-700">
+<tr class="border-b border-gray-700">
               <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.context')}</td>
               {compareModels.map((model: any) => (
                 <td class="p-4">
-                  <span class={`font-mono ${model.context_window === highestContext ? 'text-green-400' : 'text-white'}`}>
-                    {model.context_window.toLocaleString()}
+                  <span class={`font-mono tnum ${model.context_window === highestContext ? 'text-green-400' : 'text-white'}`}>
+                    {numberFmt.format(model.context_window)}
                   </span>
                   {model.context_window === highestContext && (
                     <span class="ml-2 text-xs text-green-400">★ {t('compare.best')}</span>
@@ -130,7 +138,7 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
             <tr class="border-b border-gray-700">
               <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.description')}</td>
               {compareModels.map((model: any) => (
-                <td class="p-4 text-gray-300 text-sm max-w-xs">{model.description}</td>
+                <td class="p-4 text-gray-300 text-sm max-w-xs text-pretty">{model.description}</td>
               ))}
             </tr>
             <tr class="border-b border-gray-700">
@@ -157,7 +165,8 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
                     href={model.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-teal-400 hover:text-teal-300 text-sm"
+                    aria-label={`Ver ${model.name} en ${model.provider}`}
+                    class="text-teal-400 hover:text-teal-300 text-sm focus-ring"
                   >
                     {t('model.view_on', { provider: model.provider })} →
                   </a>
@@ -199,13 +208,13 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
             </tr>
           </thead>
           <tbody>
-            {compareModels.some((m: any) => m.benchmark?.mmlu) && (
+{compareModels.some((m: any) => m.benchmark?.mmlu) && (
               <tr class="border-b border-gray-700">
                 <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">MMLU</td>
                 {compareModels.map((model: any) => (
                   <td class="p-4">
                     {model.benchmark?.mmlu ? (
-                      <span class={`font-mono ${model.benchmark.mmlu === highestMMLU ? 'text-green-400' : 'text-white'}`}>
+                      <span class={`font-mono tnum ${model.benchmark.mmlu === highestMMLU ? 'text-green-400' : 'text-white'}`}>
                         {model.benchmark.mmlu}%
                       </span>
                     ) : <span class="text-gray-500">—</span>}
@@ -219,7 +228,7 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
                 {compareModels.map((model: any) => (
                   <td class="p-4">
                     {model.benchmark?.humaneval ? (
-                      <span class="font-mono text-white">{model.benchmark.humaneval}%</span>
+                      <span class="font-mono tnum text-white">{model.benchmark.humaneval}%</span>
                     ) : <span class="text-gray-500">—</span>}
                   </td>
                 ))}
@@ -231,7 +240,7 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
                 {compareModels.map((model: any) => (
                   <td class="p-4">
                     {model.benchmark?.math ? (
-                      <span class="font-mono text-white">{model.benchmark.math}%</span>
+                      <span class="font-mono tnum text-white">{model.benchmark.math}%</span>
                     ) : <span class="text-gray-500">—</span>}
                   </td>
                 ))}
@@ -243,8 +252,8 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
                 {compareModels.map((model: any) => (
                   <td class="p-4">
                     {model.benchmark?.arena_elo ? (
-                      <span class={`font-mono ${model.benchmark.arena_elo === highestArenaElo ? 'text-green-400' : 'text-white'}`}>
-                        {model.benchmark.arena_elo}
+                      <span class={`font-mono tnum ${model.benchmark.arena_elo === highestArenaElo ? 'text-green-400' : 'text-white'}`}>
+                        {numberFmt.format(model.benchmark.arena_elo)}
                       </span>
                     ) : <span class="text-gray-500">—</span>}
                   </td>
@@ -270,12 +279,12 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
             </tr>
           </thead>
           <tbody>
-            <tr class="border-b border-gray-700">
+<tr class="border-b border-gray-700">
               <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.context')}</td>
               {compareModels.map((model: any) => (
                 <td class="p-4">
-                  <span class={`font-mono ${model.context_window === highestContext ? 'text-green-400' : 'text-white'}`}>
-                    {model.context_window.toLocaleString()} {t('common.tokens')}
+                  <span class={`font-mono tnum ${model.context_window === highestContext ? 'text-green-400' : 'text-white'}`}>
+                    {numberFmt.format(model.context_window)} {t('common.tokens')}
                   </span>
                 </td>
               ))}
@@ -284,8 +293,8 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
               <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.input_price')}</td>
               {compareModels.map((model: any) => (
                 <td class="p-4">
-                  <span class={`font-mono ${model.input_price === lowestPrice && model.input_price > 0 ? 'text-green-400' : 'text-white'}`}>
-                    ${model.input_price}{t('common.per_1m')}
+                  <span class={`font-mono tnum ${model.input_price === lowestPrice && model.input_price > 0 ? 'text-green-400' : 'text-white'}`}>
+                    {currencyFmt.format(model.input_price)}{t('common.per_1m')}
                   </span>
                 </td>
               ))}
@@ -294,8 +303,8 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
               <td class="p-4 text-gray-400 font-medium sticky left-0 bg-gray-800">{t('compare.output_price')}</td>
               {compareModels.map((model: any) => (
                 <td class="p-4">
-                  <span class={`font-mono ${model.output_price === lowestPrice && model.output_price > 0 ? 'text-green-400' : 'text-white'}`}>
-                    ${model.output_price}{t('common.per_1m')}
+                  <span class={`font-mono tnum ${model.output_price === lowestPrice && model.output_price > 0 ? 'text-green-400' : 'text-white'}`}>
+                    {currencyFmt.format(model.output_price)}{t('common.per_1m')}
                   </span>
                 </td>
               ))}
@@ -306,8 +315,8 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
                 const total = model.input_price + model.output_price;
                 return (
                   <td class="p-4">
-                    <span class={`font-mono ${total === lowestPrice && total > 0 ? 'text-green-400' : 'text-white'}`}>
-                      ${total.toFixed(2)}{t('common.per_1m')}
+                    <span class={`font-mono tnum ${total === lowestPrice && total > 0 ? 'text-green-400' : 'text-white'}`}>
+                      {currencyFmt.format(total)}{t('common.per_1m')}
                     </span>
                   </td>
                 );
@@ -333,35 +342,37 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
     </div>
   </div>
 
-  <div id="save-modal" class="fixed inset-0 z-50 hidden">
+<div id="save-modal" class="fixed inset-0 z-50 hidden">
     <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="save-modal-overlay"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-gray-800 rounded-lg border border-gray-700 p-6">
       <div class="flex justify-between items-center mb-4">
-        <h3 class="text-lg font-semibold text-white">Save Comparison</h3>
-        <button id="close-save-modal" class="text-gray-400 hover:text-white">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <h3 class="text-lg font-semibold text-white text-balance">Save Comparison</h3>
+        <button id="close-save-modal" type="button" aria-label="Cerrar" class="text-gray-400 hover:text-white p-1 focus-ring">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
       <div class="mb-4">
-        <label class="block text-sm text-gray-400 mb-2">Name your comparison</label>
+        <label for="comparison-name" class="block text-sm text-gray-400 mb-2">Name your comparison</label>
         <input
           type="text"
           id="comparison-name"
+          name="comparison-name"
           placeholder="My best models"
-          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white placeholder-gray-500 focus:outline-none focus:border-teal-500"
+          autocomplete="off"
+          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white placeholder-gray-500 focus-ring focus:border-teal-500"
         />
       </div>
       <div class="flex gap-3">
-        <button id="confirm-save" class="flex-1 bg-teal-600 hover:bg-teal-500 text-white py-2 rounded font-medium transition">Save</button>
-        <button id="cancel-save" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded font-medium transition">Cancel</button>
+        <button id="confirm-save" type="button" class="flex-1 bg-teal-600 hover:bg-teal-500 text-white py-2 rounded font-medium transition-colors focus-ring">Save</button>
+        <button id="cancel-save" type="button" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2 rounded font-medium transition-colors focus-ring">Cancel</button>
       </div>
     </div>
   </div>
 
   <div id="saved-section" class="max-w-6xl mx-auto px-4 pb-8">
-    <h2 class="text-xl font-bold text-white mb-4">Saved Comparisons</h2>
+    <h2 class="text-xl font-bold text-white mb-4 text-balance">Saved Comparisons</h2>
     <div id="saved-list" class="grid md:grid-cols-3 gap-4">
     </div>
   </div>
@@ -381,17 +392,17 @@ const highestArenaElo = Math.max(...compareModels.filter((m: any) => m.benchmark
     }
 
     container.innerHTML = saved.map((s: any, i: number) => `
-      <div class="bg-gray-800 rounded-lg border border-gray-700 p-4">
-        <div class="flex justify-between items-start mb-3">
-          <h3 class="font-semibold text-white">${s.name}</h3>
-          <button class="delete-saved text-gray-500 hover:text-red-400" data-index="${i}">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<div class="bg-gray-800 rounded-lg border border-gray-700 p-4">
+        <div class="flex justify-between items-start mb-3 gap-2">
+          <h3 class="font-semibold text-white min-w-0">${s.name}</h3>
+          <button type="button" aria-label="Eliminar" class="delete-saved text-gray-500 hover:text-red-400 focus-ring" data-index="${i}">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
             </svg>
           </button>
         </div>
         <p class="text-gray-400 text-sm mb-3">${s.ids.length} models</p>
-        <a href="/compare?ids=${s.ids.map(encodeURIComponent).join(',')}" class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition inline-block">Load</a>
+        <a href="/compare?ids=${s.ids.map(encodeURIComponent).join(',')}" class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition-colors inline-block focus-ring">Load</a>
       </div>
     `).join('');
 

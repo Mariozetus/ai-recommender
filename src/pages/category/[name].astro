@@ -12,6 +12,9 @@ const acceptLanguage = Astro.request.headers.get('accept-language');
 const locale = detectLocale(acceptLanguage || undefined);
 setLocale(locale);
 
+const numberFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US');
+const currencyFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US', { style: 'currency', currency: 'USD' });
+
 const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
 const { models } = JSON.parse(rawData);
 
@@ -59,11 +62,12 @@ const bestContext = Math.max(...categoryModels.map((m: any) => m.context_window)
 <Layout title={`${categoryName} - AI Models`}>
   <div class="bg-gray-900 py-12">
     <div class="max-w-6xl mx-auto px-4">
-      <a href="/" class="text-teal-400 hover:text-teal-300 mb-4 inline-block">← {t('catalog.filters.all')} {t('home.categories.title').toLowerCase()}</a>
+      <a href="/" class="text-teal-400 hover:text-teal-300 mb-4 inline-block focus-ring">← {t('catalog.filters.all')} {t('home.categories.title').toLowerCase()}</a>
 
       <div class="flex items-start gap-6">
         <div
-          class="hidden md:block w-20 h-20 rounded-xl flex items-center justify-center text-3xl"
+          class="hidden md:flex w-20 h-20 rounded-xl items-center justify-center text-3xl"
+          aria-hidden="true"
           style={`background-color: ${categoryColors[category as string] || '#374151'}`}
         >
           {category === 'chat' && '💬'}
@@ -73,14 +77,14 @@ const bestContext = Math.max(...categoryModels.map((m: any) => m.context_window)
           {category === 'embedding' && '📊'}
           {category === 'multimodal' && '🔮'}
         </div>
-        <div>
-          <h1 class="text-4xl font-bold text-white mb-2">{categoryName}</h1>
-          <p class="text-gray-400 mb-4">{categoryDesc}</p>
-          <div class="flex gap-6 text-sm text-gray-500">
-            <span>{categoryModels.length} {t('home.stats.models')}</span>
-            <span>{providers.length} {t('home.stats.providers')}</span>
-            <span>Avg: ${avgPrice}/1M</span>
-            <span>Max: {bestContext.toLocaleString()} tokens</span>
+        <div class="min-w-0">
+          <h1 class="text-4xl font-bold text-white mb-2 text-balance">{categoryName}</h1>
+          <p class="text-gray-400 mb-4 text-pretty">{categoryDesc}</p>
+          <div class="flex gap-6 text-sm text-gray-500 flex-wrap">
+            <span class="tnum">{numberFmt.format(categoryModels.length)} {t('home.stats.models')}</span>
+            <span class="tnum">{numberFmt.format(providers.length)} {t('home.stats.providers')}</span>
+            <span class="tnum">Avg: {currencyFmt.format(parseFloat(avgPrice))}/1M</span>
+            <span class="tnum">Max: {numberFmt.format(bestContext)} tokens</span>
           </div>
         </div>
       </div>
@@ -91,12 +95,12 @@ const bestContext = Math.max(...categoryModels.map((m: any) => m.context_window)
     <div class="grid md:grid-cols-4 gap-8">
       <aside class="md:col-span-1">
         <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 sticky top-24">
-          <h3 class="font-semibold text-white mb-4">{t('catalog.filters.provider')}</h3>
+          <h3 class="font-semibold text-white mb-4 text-balance">{t('catalog.filters.provider')}</h3>
           <div class="space-y-2">
             {providers.slice(0, 10).map(prov => (
               <a
                 href={`/provider/${prov}?category=${category}`}
-                class="block text-gray-400 hover:text-teal-400 text-sm py-1"
+                class="block text-gray-400 hover:text-teal-400 text-sm py-1 focus-ring"
               >
                 {prov}
               </a>
@@ -108,33 +112,35 @@ const bestContext = Math.max(...categoryModels.map((m: any) => m.context_window)
       <div class="md:col-span-3">
         <div class="grid gap-4 md:grid-cols-2">
           {categoryModels.slice(0, 24).map((model: any) => (
-            <article class="bg-gray-800 rounded-lg p-6 border border-gray-700 transition hover:border-gray-600">
-              <div class="flex justify-between items-start mb-3">
-                <a href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`} class="hover:text-teal-400">
-                  <h3 class="text-lg font-semibold text-white">{model.name}</h3>
-                  <p class="text-gray-500 text-sm">{model.provider}</p>
+            <article class="bg-gray-800 rounded-lg p-6 border border-gray-700 transition-colors hover:border-gray-600">
+              <div class="flex justify-between items-start mb-3 min-w-0">
+                <a href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`} class="hover:text-teal-400 focus-ring min-w-0">
+                  <h3 class="text-lg font-semibold text-white truncate">{model.name}</h3>
+                  <p class="text-gray-500 text-sm truncate">{model.provider}</p>
                 </a>
               </div>
-              <p class="text-gray-400 text-sm mb-4 line-clamp-2">{model.description}</p>
+              <p class="text-gray-400 text-sm mb-4 line-clamp-2 text-pretty">{model.description}</p>
               <div class="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <span class="text-gray-500">{t('catalog.filters.context')}</span>
-                  <p class="text-gray-300">{model.context_window.toLocaleString()}</p>
+                  <p class="text-gray-300 tnum">{numberFmt.format(model.context_window)}</p>
                 </div>
                 <div>
                   <span class="text-gray-500">{t('catalog.sort.price_low').replace('Price: ', '')}</span>
-                  <p class="text-gray-300">${model.input_price + model.output_price}/1M</p>
+                  <p class="text-gray-300 tnum">{currencyFmt.format(model.input_price + model.output_price)}/1M</p>
                 </div>
               </div>
               <div class="flex gap-2 mt-4">
                 <a
                   href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`}
-                  class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition"
+                  class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition-colors focus-ring"
                 >
                   {t('model.back').replace('← ', '')}
                 </a>
                 <button
-                  class="compare-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition"
+                  type="button"
+                  aria-label={t('catalog.compare.compare')}
+                  class="compare-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors focus-ring"
                   data-model-id={model.id}
                 >
                   {t('catalog.compare.compare').replace('Compare', 'Add')}

@@ -12,6 +12,9 @@ const acceptLanguage = Astro.request.headers.get('accept-language');
 const locale = detectLocale(acceptLanguage || undefined);
 setLocale(locale);
 
+const numberFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US');
+const currencyFmt = new Intl.NumberFormat(locale === 'es' ? 'es-ES' : 'en-US', { style: 'currency', currency: 'USD' });
+
 const ITEMS_PER_PAGE = 24;
 
 const rawData = await readFile(join(process.cwd(), 'data', 'ais.json'), 'utf-8');
@@ -102,8 +105,8 @@ function buildPageUrl(p: number) {
 <Layout title={t('catalog.title')}>
   <div class="max-w-6xl mx-auto px-4 py-8">
     <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold mb-4">AI Model Catalog</h1>
-      <p class="text-gray-400 text-lg">Discover and compare AI models from OpenRouter</p>
+      <h1 class="text-4xl font-bold mb-4 text-balance">AI Model Catalog</h1>
+      <p class="text-gray-400 text-lg text-pretty">Discover and compare AI models from OpenRouter</p>
     </div>
 
     <div class="mb-6">
@@ -114,14 +117,14 @@ function buildPageUrl(p: number) {
           </div>
           <button
             type="submit"
-            class="bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded-lg font-medium transition"
+            class="bg-teal-600 hover:bg-teal-500 text-white px-6 py-3 rounded-lg font-medium transition-colors focus-ring"
           >
             Search
           </button>
           {searchQuery && (
             <a
               href="/catalog"
-              class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition"
+              class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-medium transition-colors focus-ring"
             >
               Clear
             </a>
@@ -153,13 +156,14 @@ function buildPageUrl(p: number) {
               <a
                 id="compare-link"
                 href="/compare"
-                class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition"
+                class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition-colors focus-ring"
               >
                 Compare
               </a>
               <button
                 id="clear-compare"
-                class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition"
+                type="button"
+                class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors focus-ring"
               >
                 Clear
               </button>
@@ -168,15 +172,16 @@ function buildPageUrl(p: number) {
         </div>
 
         <div class="flex justify-between items-center mb-4">
-          <p class="text-gray-400">
+          <p class="text-gray-400 text-pretty">
             Showing {startIndex + 1}-{Math.min(startIndex + ITEMS_PER_PAGE, filtered.length)} of {filtered.length} models
           </p>
           <form method="get" action="/" class="flex gap-2 items-center">
-            <label class="text-gray-400 text-sm">Sort:</label>
+            <label for="sort-select" class="text-gray-400 text-sm">Sort:</label>
             <select
+              id="sort-select"
               name="sort"
               onchange="this.form.submit()"
-              class="bg-gray-800 border border-gray-700 rounded px-3 py-1 text-white text-sm focus:outline-none focus:border-teal-500"
+              class="bg-gray-800 border border-gray-700 rounded px-3 py-1 text-white text-sm focus-ring focus:border-teal-500"
             >
               <option value="name" selected={sortBy === 'name'}>Name</option>
               <option value="price-low" selected={sortBy === 'price-low'}>Price: Low to High</option>
@@ -194,9 +199,9 @@ function buildPageUrl(p: number) {
 
         <div id="results-list" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {paginatedModels.map((model: any) => (
-            <article class="bg-gray-800 rounded-lg p-6 border border-gray-700 transition hover:border-gray-600">
+            <article class="bg-gray-800 rounded-lg p-6 border border-gray-700 transition-colors hover:border-gray-600">
               <div class="flex justify-between items-start mb-3">
-                <a href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`} class="hover:text-teal-400">
+                <a href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`} class="hover:text-teal-400 focus-ring">
                   <h3 class="text-lg font-semibold text-white">{model.name}</h3>
                 </a>
                 <div class="flex gap-1">
@@ -208,12 +213,13 @@ function buildPageUrl(p: number) {
                   <span
                     class="px-2 py-1 rounded text-xs font-medium text-white"
                     style={`background-color: ${categoryColors[model.category] || '#374151'}`}
+                    aria-label={model.category}
                   >
                     {model.category}
                   </span>
                 </div>
               </div>
-              <p class="text-gray-400 text-sm mb-4 line-clamp-2">{model.description}</p>
+              <p class="text-gray-400 text-sm mb-4 line-clamp-2 text-pretty">{model.description}</p>
               <div class="grid grid-cols-2 gap-4 text-sm mb-4">
                 <div>
                   <span class="text-gray-500">Provider</span>
@@ -221,15 +227,15 @@ function buildPageUrl(p: number) {
                 </div>
                 <div>
                   <span class="text-gray-500">Context</span>
-                  <p class="text-gray-300">{model.context_window.toLocaleString()}</p>
+                  <p class="text-gray-300 tnum">{numberFmt.format(model.context_window)}</p>
                 </div>
                 <div>
                   <span class="text-gray-500">Input</span>
-                  <p class="text-gray-300">${model.input_price}/1M</p>
+                  <p class="text-gray-300 tnum">{currencyFmt.format(model.input_price)}/1M</p>
                 </div>
                 <div>
                   <span class="text-gray-500">Output</span>
-                  <p class="text-gray-300">${model.output_price}/1M</p>
+                  <p class="text-gray-300 tnum">{currencyFmt.format(model.output_price)}/1M</p>
                 </div>
               </div>
               {model.tags && model.tags.length > 0 && (
@@ -242,16 +248,16 @@ function buildPageUrl(p: number) {
               <div class="flex gap-2">
                 <a
                   href={`/models/${model.provider}/${model.id.split("/")[1] || ""}`}
-                  class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  class="bg-teal-600 hover:bg-teal-500 text-white px-4 py-2 rounded text-sm font-medium transition-colors focus-ring"
                   aria-label={`Ver detalles de ${model.name}`}
                 >
                   Details
                 </a>
                 <button
                   type="button"
-                  class="compare-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  class="compare-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm font-medium transition-colors focus-ring"
                   data-model-id={model.id}
-                  aria-label={`A├▒adir ${model.name} a comparaci├│n`}
+                  aria-label={`Añadir ${model.name} a comparación`}
                 >
                   Compare
                 </button>
@@ -267,11 +273,12 @@ function buildPageUrl(p: number) {
         )}
 
         {totalPages > 1 && (
-          <nav class="flex justify-center gap-2 mt-8" aria-label="Pagination">
+          <nav class="flex justify-center gap-2 mt-8" aria-label="Paginación">
             {page > 1 && (
               <a
                 href={buildPageUrl(page - 1)}
-                class="px-4 py-2 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 text-white"
+                rel="prev"
+                class="px-4 py-2 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 text-white transition-colors focus-ring"
               >
                 Previous
               </a>
@@ -291,7 +298,10 @@ function buildPageUrl(p: number) {
               return (
                 <a
                   href={buildPageUrl(pageNum)}
-                  class={`px-4 py-2 border rounded ${isCurrent ? 'bg-teal-600 border-teal-600 text-white' : 'bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700'}`}
+                  rel={isCurrent ? 'canonical' : undefined}
+                  aria-current={isCurrent ? 'page' : undefined}
+                  class={`px-4 py-2 border rounded transition-colors focus-ring ${isCurrent ? 'bg-teal-600 border-teal-600 text-white' : 'bg-gray-800 border-gray-700 text-gray-300 hover:bg-gray-700'}`}
+                  aria-label={`Ir a la página ${pageNum}`}
                 >
                   {pageNum}
                 </a>
@@ -300,7 +310,8 @@ function buildPageUrl(p: number) {
             {page < totalPages && (
               <a
                 href={buildPageUrl(page + 1)}
-                class="px-4 py-2 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 text-white"
+                rel="next"
+                class="px-4 py-2 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700 text-white transition-colors focus-ring"
               >
                 Next
               </a>
@@ -360,7 +371,7 @@ function buildPageUrl(p: number) {
     if (!modelId || compareIds.includes(modelId)) return;
 
     if (compareIds.length >= MAX_COMPARE) {
-      showToast(`M├íximo ${MAX_COMPARE} modelos para comparar`, 'warning');
+      showToast(`Máximo ${MAX_COMPARE} modelos para comparar`, 'warning');
       return;
     }
 
@@ -368,7 +379,7 @@ function buildPageUrl(p: number) {
     localStorage.setItem('compareIds', JSON.stringify(compareIds));
     btn.textContent = 'Added';
     btn.disabled = true;
-    showToast('Modelo a├▒adido a comparaci├│n', 'success');
+    showToast('Modelo añadido a comparación', 'success');
     updateCompareBar();
   }
 

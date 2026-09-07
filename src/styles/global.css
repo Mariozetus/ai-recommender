@@ -2,10 +2,18 @@
 
 @theme {
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --color-canvas: oklch(0.18 0.005 250);
+}
+
+html {
+  color-scheme: dark;
+  scroll-padding-top: 6rem;
 }
 
 body {
   font-family: var(--font-sans);
+  background-color: oklch(0.18 0.005 250);
+  color: oklch(0.92 0.005 250);
 }
 
 .line-clamp-2 {
@@ -13,4 +21,66 @@ body {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+button:not(:disabled),
+a {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:not(:disabled):active,
+a:active {
+  transform: scale(0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  button:not(:disabled):active,
+  a:active {
+    transform: none;
+  }
+}
+
+.focus-ring {
+  outline: none;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid rgb(20 184 166);
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+
+@media (prefers-color-scheme: dark) {
+  select {
+    color-scheme: dark;
+  }
 }

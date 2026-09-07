@@ -35,8 +35,8 @@ const dimensionLabels: Record<keyof ScoreBreakdown, string> = {
 ---
 
 <section>
-  <div class="flex items-center justify-between mb-4">
-    <h2 class="text-xl font-semibold">{title}</h2>
+  <div class="flex items-center justify-between mb-4 gap-2 flex-wrap">
+    <h2 class="text-xl font-semibold text-balance">{title}</h2>
     <span class="text-xs px-3 py-1 rounded-full bg-teal-900/30 border border-teal-700 text-teal-300">
       Estrategia: {strategyLabels[strategy] || strategy}
     </span>
@@ -44,7 +44,7 @@ const dimensionLabels: Record<keyof ScoreBreakdown, string> = {
 
   {models.length === 0 ? (
     <div class="bg-gray-800 rounded-lg p-8 text-center border border-gray-700">
-      <p class="text-gray-400">No hay modelos que coincidan. Ajusta los filtros.</p>
+      <p class="text-gray-400 text-pretty">No hay modelos que coincidan. Ajusta los filtros.</p>
     </div>
   ) : (
     <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -53,7 +53,7 @@ const dimensionLabels: Record<keyof ScoreBreakdown, string> = {
         return (
           <div class="relative">
             {scoreInfo && (
-              <div class="absolute top-2 right-2 z-10 bg-gray-900/90 border border-teal-600 rounded-full px-3 py-1 text-xs font-semibold text-teal-300" title={Object.entries(scoreInfo.breakdown).map(([k, v]) => `${dimensionLabels[k as keyof ScoreBreakdown]}: ${Math.round(v)}/100`).join('\n')}>
+              <div class="absolute top-2 right-2 z-10 bg-gray-900/90 border border-teal-600 rounded-full px-3 py-1 text-xs font-semibold text-teal-300 tnum" title={Object.entries(scoreInfo.breakdown).map(([k, v]) => `${dimensionLabels[k as keyof ScoreBreakdown]}: ${Math.round(v)}/100`).join('\n')}>
                 {Math.round(scoreInfo.score)}/100
               </div>
             )}
@@ -69,7 +69,7 @@ const dimensionLabels: Record<keyof ScoreBreakdown, string> = {
                         <div class="w-24 bg-gray-700 rounded h-1.5">
                           <div class="bg-teal-500 h-1.5 rounded" style={`width: ${value}%`}></div>
                         </div>
-                        <span class="text-gray-300 w-8 text-right">{Math.round(value)}</span>
+                        <span class="text-gray-300 w-8 text-right tnum">{Math.round(value)}</span>
                       </div>
                     </div>
                   ))}

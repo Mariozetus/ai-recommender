@@ -13,21 +13,22 @@ const strategies = [
 ---
 
 <form id="recommender-form" class="bg-gray-800 rounded-lg p-6 border border-gray-700">
-  <h2 class="text-xl font-semibold mb-6">Find Your AI Model</h2>
+  <h2 class="text-xl font-semibold mb-6 text-balance">Find Your AI Model</h2>
 
   <div class="mb-6">
-    <label class="block text-sm text-gray-400 mb-2">¿Para qué lo usarás?</label>
+    <span class="block text-sm text-gray-400 mb-2">¿Para qué lo usarás?</span>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
       {categories.map(cat => (
         <label class="cursor-pointer">
           <input
             type="radio"
             name="use_case"
+            id={`use_case_${cat}`}
             value={cat}
             class="peer hidden"
             required
           />
-          <div class="bg-gray-700 border border-gray-600 rounded px-4 py-3 text-center text-sm peer-checked:border-teal-500 peer-checked:bg-teal-900/30 hover:bg-gray-650 transition">
+          <div class="bg-gray-700 border border-gray-600 rounded px-4 py-3 text-center text-sm peer-checked:border-teal-500 peer-checked:bg-teal-900/30 hover:bg-gray-650 transition-colors focus-ring">
             {cat.charAt(0).toUpperCase() + cat.slice(1)}
           </div>
         </label>
@@ -36,20 +37,21 @@ const strategies = [
   </div>
 
   <div class="mb-6">
-    <label class="block text-sm text-gray-400 mb-2">Estrategia de recomendación</label>
+    <span class="block text-sm text-gray-400 mb-2">Estrategia de recomendación</span>
     <div class="grid grid-cols-1 gap-2">
       {strategies.map(s => (
         <label class="cursor-pointer">
           <input
             type="radio"
             name="strategy"
+            id={`strategy_${s.value}`}
             value={s.value}
             class="peer hidden"
             checked={s.value === 'balanced'}
           />
-          <div class="bg-gray-700 border border-gray-600 rounded px-4 py-3 peer-checked:border-teal-500 peer-checked:bg-teal-900/30 hover:bg-gray-650 transition">
+          <div class="bg-gray-700 border border-gray-600 rounded px-4 py-3 peer-checked:border-teal-500 peer-checked:bg-teal-900/30 hover:bg-gray-650 transition-colors focus-ring">
             <div class="text-sm font-medium text-white">{s.label}</div>
-            <div class="text-xs text-gray-400 mt-1">{s.desc}</div>
+            <div class="text-xs text-gray-400 mt-1 text-pretty">{s.desc}</div>
           </div>
         </label>
       ))}
@@ -57,10 +59,11 @@ const strategies = [
   </div>
 
   <div class="mb-6">
-    <label class="block text-sm text-gray-400 mb-2">Contexto Máximo</label>
+    <label for="max-context" class="block text-sm text-gray-400 mb-2">Contexto Máximo</label>
     <select
+      id="max-context"
       name="max_context"
-      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-teal-500"
+      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus-ring focus:border-teal-500"
     >
       <option value="32768">32K tokens</option>
       <option value="65536">64K tokens</option>
@@ -70,30 +73,35 @@ const strategies = [
   </div>
 
   <div class="mb-6">
-    <label class="block text-sm text-gray-400 mb-2">Presupuesto Mensual ($)</label>
+    <label for="max-budget" class="block text-sm text-gray-400 mb-2">Presupuesto Mensual ($)</label>
     <input
       type="number"
+      id="max-budget"
       name="max_budget"
       min="0"
       step="1"
+      inputmode="numeric"
+      autocomplete="off"
       value="50"
-      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-teal-500"
+      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus-ring focus:border-teal-500 tnum"
     />
   </div>
 
   <div class="mb-6">
-    <label class="block text-sm text-gray-400 mb-2">Características Preferidas (separadas por coma)</label>
+    <label for="preferred-features" class="block text-sm text-gray-400 mb-2">Características Preferidas (separadas por coma)</label>
     <input
       type="text"
+      id="preferred-features"
       name="preferred_features"
       placeholder="vision, function calling, json mode"
-      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus:outline-none focus:border-teal-500"
+      autocomplete="off"
+      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white focus-ring focus:border-teal-500"
     />
   </div>
 
   <button
     type="submit"
-    class="w-full bg-teal-600 hover:bg-teal-500 text-white font-semibold py-3 rounded transition"
+    class="w-full bg-teal-600 hover:bg-teal-500 text-white font-semibold py-3 rounded transition-colors focus-ring"
   >
     Obtener Recomendaciones
   </button>

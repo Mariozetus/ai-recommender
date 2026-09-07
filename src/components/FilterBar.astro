@@ -24,7 +24,9 @@ const features = [
     <label for="category-filter" class="block text-sm text-gray-400 mb-2">Categoría</label>
     <select
       id="category-filter"
-      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+      name="category"
+      autocomplete="off"
+      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
     >
       <option value="">Todas las categorías</option>
       {categories.map(cat => (
@@ -39,7 +41,9 @@ const features = [
     <label for="provider-filter" class="block text-sm text-gray-400 mb-2">Proveedor</label>
     <select
       id="provider-filter"
-      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+      name="provider"
+      autocomplete="off"
+      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
     >
       <option value="">Todos los proveedores</option>
       {providers.map(prov => (
@@ -54,7 +58,9 @@ const features = [
     <label for="context-filter" class="block text-sm text-gray-400 mb-2">Contexto máximo (tokens)</label>
     <select
       id="context-filter"
-      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+      name="context"
+      autocomplete="off"
+      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
     >
       <option value="0">Cualquiera</option>
       <option value="32768">32K</option>
@@ -68,7 +74,9 @@ const features = [
     <label for="price-filter" class="block text-sm text-gray-400 mb-2">Precio máximo ($/1M tokens)</label>
     <select
       id="price-filter"
-      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+      name="price"
+      autocomplete="off"
+      class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
     >
       <option value="0">Cualquiera</option>
       <option value="1">$1</option>
@@ -79,49 +87,52 @@ const features = [
   </div>
 
   <div class="mt-6">
-    <label class="block text-sm text-gray-400 mb-2">Solo gratis</label>
-    <label class="flex items-center gap-2 cursor-pointer">
+    <label for="free-filter" class="flex items-center gap-2 cursor-pointer text-sm text-gray-300">
       <input
         type="checkbox"
         id="free-filter"
-        class="w-4 h-4 bg-gray-700 border-gray-600 rounded text-teal-500 focus:ring-teal-500 focus:ring-offset-gray-800"
+        name="free"
+        class="w-4 h-4 bg-gray-700 border-gray-600 rounded text-teal-500 focus-ring"
       />
-      <span class="text-sm text-gray-300">Mostrar solo modelos gratuitos</span>
+      <span>Mostrar solo modelos gratuitos</span>
     </label>
   </div>
 
   <button
     type="button"
     id="clear-all-filters"
-    class="mt-6 w-full bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-teal-500"
+    class="mt-6 w-full bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg text-sm font-medium transition-colors focus-ring"
   >
     Limpiar filtros
   </button>
 </aside>
 
-<div id="filter-drawer" class="fixed inset-0 z-50 hidden">
+<div id="filter-drawer" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" aria-label="Filtros">
   <div id="filter-drawer-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-  <div id="filter-drawer-content" class="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-gray-800 border-l border-gray-700 overflow-y-auto transform translate-x-full transition-transform duration-300">
+  <div id="filter-drawer-content" class="absolute right-0 top-0 bottom-0 w-full max-w-sm bg-gray-800 border-l border-gray-700 overflow-y-auto overscroll-contain transform translate-x-full transition-transform duration-300">
     <div class="p-6">
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-lg font-semibold text-white">Filters</h2>
+        <h2 class="text-lg font-semibold text-white">Filtros</h2>
         <button
           id="close-drawer"
-          class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition"
+          type="button"
+          aria-label="Cerrar filtros"
+          class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition-colors focus-ring"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
 
       <div class="mb-6">
-        <label class="block text-sm text-gray-400 mb-2">Category</label>
+        <label for="category-filter-mobile" class="block text-sm text-gray-400 mb-2">Categoría</label>
         <select
           id="category-filter-mobile"
-          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+          autocomplete="off"
+          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
         >
-          <option value="">All Categories</option>
+          <option value="">Todas</option>
           {categories.map(cat => (
             <option value={cat} selected={selectedCategory === cat}>
               {cat.charAt(0).toUpperCase() + cat.slice(1)}
@@ -131,12 +142,13 @@ const features = [
       </div>
 
       <div class="mb-6">
-        <label class="block text-sm text-gray-400 mb-2">Provider</label>
+        <label for="provider-filter-mobile" class="block text-sm text-gray-400 mb-2">Proveedor</label>
         <select
           id="provider-filter-mobile"
-          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+          autocomplete="off"
+          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
         >
-          <option value="">All Providers</option>
+          <option value="">Todos</option>
           {providers.map(prov => (
             <option value={prov} selected={selectedProvider === prov}>
               {prov}
@@ -146,12 +158,13 @@ const features = [
       </div>
 
       <div class="mb-6">
-        <label class="block text-sm text-gray-400 mb-2">Max Context (tokens)</label>
+        <label for="context-filter-mobile" class="block text-sm text-gray-400 mb-2">Contexto máximo (tokens)</label>
         <select
           id="context-filter-mobile"
-          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+          autocomplete="off"
+          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
         >
-          <option value="0">Any</option>
+          <option value="0">Cualquiera</option>
           <option value="32768">32K</option>
           <option value="65536">64K</option>
           <option value="131072">128K</option>
@@ -160,12 +173,13 @@ const features = [
       </div>
 
       <div class="mb-6">
-        <label class="block text-sm text-gray-400 mb-2">Max Price ($/1M tokens)</label>
+        <label for="price-filter-mobile" class="block text-sm text-gray-400 mb-2">Precio máximo ($/1M tokens)</label>
         <select
           id="price-filter-mobile"
-          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus:outline-none focus:border-teal-500"
+          autocomplete="off"
+          class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white text-sm focus-ring focus:border-teal-500"
         >
-          <option value="0">Any</option>
+          <option value="0">Cualquiera</option>
           <option value="1">$1</option>
           <option value="5">$5</option>
           <option value="10">$10</option>
@@ -174,28 +188,30 @@ const features = [
       </div>
 
       <div class="mb-6">
-        <label class="flex items-center gap-2 cursor-pointer">
+        <label for="free-filter-mobile" class="flex items-center gap-2 cursor-pointer text-sm text-gray-300">
           <input
             type="checkbox"
             id="free-filter-mobile"
-            class="w-4 h-4 bg-gray-700 border-gray-600 rounded text-teal-500"
+            class="w-4 h-4 bg-gray-700 border-gray-600 rounded text-teal-500 focus-ring"
           />
-          <span class="text-sm text-gray-300">Solo modelos gratuitos</span>
+          <span>Solo modelos gratuitos</span>
         </label>
       </div>
 
       <div class="flex gap-3">
         <button
           id="apply-filters"
-          class="flex-1 bg-teal-600 hover:bg-teal-500 text-white py-3 rounded-lg font-medium transition"
+          type="button"
+          class="flex-1 bg-teal-600 hover:bg-teal-500 text-white py-3 rounded-lg font-medium transition-colors focus-ring"
         >
-          Apply Filters
+          Aplicar filtros
         </button>
         <button
           id="clear-filters"
-          class="px-4 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition"
+          type="button"
+          class="px-4 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition-colors focus-ring"
         >
-          Clear
+          Limpiar
         </button>
       </div>
     </div>
@@ -206,9 +222,9 @@ const features = [
   id="open-filter-drawer"
   type="button"
   aria-label="Abrir filtros"
-  class="md:hidden fixed bottom-24 left-4 z-40 bg-teal-600 hover:bg-teal-500 text-white p-4 rounded-full shadow-lg transition focus:outline-none focus:ring-2 focus:ring-teal-500"
+  class="md:hidden fixed bottom-24 left-4 z-40 bg-teal-600 hover:bg-teal-500 text-white p-4 rounded-full shadow-lg transition-colors focus-ring touch-manipulation"
 >
-  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
   </svg>
 </button>

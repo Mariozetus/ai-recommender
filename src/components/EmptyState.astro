@@ -27,19 +27,20 @@ const icons = {
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
+      aria-hidden="true"
       set:html={icons[icon]}
     />
   </div>
-  <h3 class="text-lg font-semibold text-white mb-2">{title}</h3>
+  <h3 class="text-lg font-semibold text-white mb-2 text-balance">{title}</h3>
   {description && (
-    <p class="text-gray-400 text-sm mb-6 max-w-md mx-auto">{description}</p>
+    <p class="text-gray-400 text-sm mb-6 max-w-md mx-auto text-pretty">{description}</p>
   )}
   {action && (
     action.href ? (
       <a
         href={action.href}
         class:list={[
-          'inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition',
+          'inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-colors focus-ring',
           'bg-teal-600 hover:bg-teal-500 text-white'
         ]}
       >
@@ -47,8 +48,9 @@ const icons = {
       </a>
     ) : (
       <button
+        type="button"
         onclick={action.onClick}
-        class="inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition bg-teal-600 hover:bg-teal-500 text-white"
+        class="inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-colors focus-ring bg-teal-600 hover:bg-teal-500 text-white"
       >
         {action.label}
       </button>

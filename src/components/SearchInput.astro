@@ -22,14 +22,15 @@ const searchable = models.slice(0, 200).map(m => ({
       type="search"
       name="q"
       value={initialQuery}
-      placeholder="Buscar modelos... (ej: gpt, claude, vision)"
+      placeholder="Buscar modelos… (ej: gpt, claude, vision)"
       autocomplete="off"
       aria-label="Buscar modelos"
       aria-autocomplete="list"
       aria-expanded="false"
       aria-controls="search-suggestions"
+      aria-activedescendant=""
       data-search-input
-      class="w-full bg-gray-800 border border-gray-700 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500"
+      class="w-full bg-gray-800 border border-gray-700 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-500 focus-ring focus:border-teal-500"
     />
     <svg
       class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none"
@@ -47,7 +48,7 @@ const searchable = models.slice(0, 200).map(m => ({
     role="listbox"
     aria-label="Sugerencias de búsqueda"
     data-search-suggestions
-    class="hidden absolute z-30 mt-1 w-full bg-gray-800 border border-gray-700 rounded-lg shadow-xl max-h-80 overflow-y-auto"
+    class="hidden absolute z-30 mt-1 w-full bg-gray-800 border border-gray-700 rounded-lg shadow-xl max-h-80 overflow-y-auto overscroll-contain"
   >
   </div>
 </div>
@@ -59,6 +60,7 @@ const searchable = models.slice(0, 200).map(m => ({
 
   if (root && input && suggestions) {
     let activeIndex = -1;
+    let lastMatches = [];
 
     function score(query, target) {
       const q = query.toLowerCase();
@@ -96,8 +98,10 @@ const searchable = models.slice(0, 200).map(m => ({
         <a
           href="/models/${m.provider}/${m.id.split("/")[1] || ""}"
           role="option"
+          id="search-opt-${i}"
           data-index="${i}"
-          class="flex items-center justify-between px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-0 transition cursor-pointer"
+          aria-selected="${i === activeIndex}"
+          class="flex items-center justify-between px-4 py-3 hover:bg-gray-700 border-b border-gray-700 last:border-0 transition-colors cursor-pointer ${i === activeIndex ? 'bg-gray-700' : ''}"
         >
           <div class="flex-1 min-w-0">
             <div class="font-medium text-white truncate">${escape(m.name)}</div>
@@ -106,42 +110,36 @@ const searchable = models.slice(0, 200).map(m => ({
           <span class="ml-3 text-xs text-gray-400 bg-gray-900 px-2 py-1 rounded">${escape(m.category)}</span>
         </a>
       `).join('');
-
-      const links = suggestions.querySelectorAll('[data-index]');
-      links.forEach((link) => {
-        link.addEventListener('mouseenter', () => {
-          activeIndex = parseInt(link.dataset.index);
-          updateActive();
-        });
-      });
     }
 
     function updateActive() {
       const links = suggestions.querySelectorAll('[data-index]');
+      input.setAttribute('aria-activedescendant', activeIndex >= 0 ? `search-opt-${activeIndex}` : '');
       links.forEach((link, i) => {
         if (i === activeIndex) {
           link.classList.add('bg-gray-700');
+          link.setAttribute('aria-selected', 'true');
+          link.scrollIntoView({ block: 'nearest' });
         } else {
           link.classList.remove('bg-gray-700');
+          link.setAttribute('aria-selected', 'false');
         }
       });
     }
 
-    let lastQuery = '';
-
     input.addEventListener('input', (e) => {
       const q = e.target.value.trim();
-      lastQuery = q;
       activeIndex = -1;
 
       if (q.length < 2) {
         suggestions.classList.add('hidden');
         input.setAttribute('aria-expanded', 'false');
+        input.setAttribute('aria-activedescendant', '');
         return;
       }
 
-      const matches = bestMatch(q);
-      render(matches, q);
+      lastMatches = bestMatch(q);
+      render(lastMatches, q);
       suggestions.classList.remove('hidden');
       input.setAttribute('aria-expanded', 'true');
     });
@@ -156,13 +154,29 @@ const searchable = models.slice(0, 200).map(m => ({
         e.preventDefault();
         activeIndex = Math.max(0, activeIndex - 1);
         updateActive();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        activeIndex = 0;
+        updateActive();
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        activeIndex = links.length - 1;
+        updateActive();
       } else if (e.key === 'Enter' && activeIndex >= 0 && links[activeIndex]) {
         e.preventDefault();
         window.location.href = links[activeIndex].href;
       } else if (e.key === 'Escape') {
         suggestions.classList.add('hidden');
         input.setAttribute('aria-expanded', 'false');
+        input.setAttribute('aria-activedescendant', '');
       }
+    });
+
+    input.addEventListener('blur', () => {
+      setTimeout(() => {
+        suggestions.classList.add('hidden');
+        input.setAttribute('aria-expanded', 'false');
+      }, 200);
     });
 
     document.addEventListener('click', (e) => {
