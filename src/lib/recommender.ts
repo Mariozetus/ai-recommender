@@ -297,7 +297,7 @@ function scoreCandidate(
     region: c.region,
     total: totalRaw,
     breakdown: { calidad, costo, capabilities: cap_adjust, despliegue: deploy_adjust, idioma: lang_adjust },
-    weights,
+    weights: { q: weights.w_q, p: weights.w_p, c: weights.w_c, d: weights.w_d, r: weights.w_r },
     confidence,
     notes,
     benchmarks_used: benchmarksUsed,

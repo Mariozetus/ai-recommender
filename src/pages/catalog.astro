@@ -8,23 +8,25 @@ const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
 const dict = (key: string) => t(locale, key);
 
 // Read URL params
-const u = Astro.url;
+const reqUrl = new URL(Astro.request.url);
+const sp = reqUrl.searchParams;
 const filters: CatalogFilters = {
-  q: u.searchParams.get('q') ?? undefined,
-  providerId: u.searchParams.get('provider') ?? undefined,
-  license: u.searchParams.get('license') ?? undefined,
-  hasFunctionCalling: u.searchParams.get('cap_fc') === '1',
-  hasReasoning: u.searchParams.get('cap_reasoning') === '1',
-  hasVision: u.searchParams.get('cap_vision') === '1',
-  hasLongContext: u.searchParams.get('cap_longctx') === '1',
-  isOpenSource: u.searchParams.get('cap_open') === '1',
-  minContext: u.searchParams.get('min_ctx') ? Number(u.searchParams.get('min_ctx')) : undefined,
-  maxInputCost: u.searchParams.get('max_in') ? Number(u.searchParams.get('max_in')) : undefined,
-  page: u.searchParams.get('page') ? Number(u.searchParams.get('page')) : 1,
+  q: sp.get('q') ?? undefined,
+  providerId: sp.get('provider') ?? undefined,
+  license: sp.get('license') ?? undefined,
+  hasFunctionCalling: sp.get('cap_fc') === '1',
+  hasReasoning: sp.get('cap_reasoning') === '1',
+  hasVision: sp.get('cap_vision') === '1',
+  hasLongContext: sp.get('cap_longctx') === '1',
+  isOpenSource: sp.get('cap_open') === '1',
+  minContext: sp.get('min_ctx') ? Number(sp.get('min_ctx')) : undefined,
+  maxInputCost: sp.get('max_in') ? Number(sp.get('max_in')) : undefined,
+  page: sp.get('page') ? Number(sp.get('page')) : 1,
   pageSize: 50,
-  sortBy: (u.searchParams.get('sort') as CatalogFilters['sortBy']) ?? 'name',
-  sortDir: (u.searchParams.get('dir') as CatalogFilters['sortDir']) ?? 'asc',
+  sortBy: (sp.get('sort') as CatalogFilters['sortBy']) ?? 'name',
+  sortDir: (sp.get('dir') as CatalogFilters['sortDir']) ?? 'asc',
 };
+const u = reqUrl;
 
 const { rows, total, page, pageCount } = queryCatalog(filters);
 const providers = listProviders().slice(0, 30); // top 30 by name

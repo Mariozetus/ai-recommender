@@ -4,17 +4,16 @@ import { t, pickLocale, type Locale } from '../../lib/i18n';
 import { Database } from 'bun:sqlite';
 import { marked } from 'marked';
 
+// En output: 'server' getStaticPaths se ignora; el page se renderiza a cada request.
+// Mantenemos getStaticPaths para builds pre-renderizados (futuro).
 export function getStaticPaths() {
   const db = new Database('./db/data/ai-recommender.db', { readonly: true });
   const rows = db.prepare(`SELECT slug, locale FROM page_content`).all() as Array<{ slug: string; locale: 'en' | 'es' }>;
   db.close();
-  return rows.map((r) => ({
-    params: { slug: r.slug },
-    props: { locale: r.locale },
-  }));
+  return rows.map((r) => ({ params: { slug: r.slug }, props: { locale: r.locale } }));
 }
 
-const locale = (Astro.props as { locale: Locale }).locale;
+const locale: Locale = pickLocale(Astro.currentLocale as string | undefined) ?? (Astro.props as { locale?: Locale }).locale ?? 'en';
 const dict = (key: string) => t(locale, key);
 const slug = Astro.params.slug as string;
 

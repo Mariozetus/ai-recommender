@@ -26,6 +26,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/cloudflare": "12.6.0",
+    "@astrojs/node": "^11.1.8",
     "@astrojs/react": "^4.2.0",
     "@tailwindcss/vite": "^4.0.0",
     "ajv": "^8.17.1",

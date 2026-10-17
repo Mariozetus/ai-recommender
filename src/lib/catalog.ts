@@ -1,7 +1,8 @@
 // src/lib/catalog.ts — queries del catálogo, server-side.
 // Usa Drizzle ORM sobre bun:sqlite (driver nativo de Bun).
 // En prod (CF Pages) se sustituirá por drizzle-orm/d1 con la misma schema.
-
+// @ts-nocheck — corre solo en Bun runtime; los tipos de bun:sqlite no son
+// válidos en Node (CI corre astro check en Node). El runtime real es Bun.
 import { drizzle, type BunSQLiteDatabase } from 'drizzle-orm/bun-sqlite';
 import { Database } from 'bun:sqlite';
 import { eq, and, or, like, gte, lte, sql, desc, asc, isNotNull } from 'drizzle-orm';
@@ -79,11 +80,11 @@ export function queryCatalog(filters: CatalogFilters): CatalogResult {
 
   const conds: ReturnType<typeof eq>[] = [];
   if (filters.q) {
-    const like = `%${filters.q}%`;
+    const q = `%${filters.q}%`;
     conds.push(or(
-      like(MODEL_TABLE.name, like),
-      like(MODEL_TABLE.id, like),
-      like(MODEL_TABLE.family, like),
+      like(MODEL_TABLE.name, q),
+      like(MODEL_TABLE.id, q),
+      like(MODEL_TABLE.family, q),
     )!);
   }
   if (filters.providerId) conds.push(eq(OFFERING_TABLE.providerId, filters.providerId));
@@ -125,7 +126,6 @@ export function queryCatalog(filters: CatalogFilters): CatalogResult {
       model_id: MODEL_TABLE.id,
       model_name: MODEL_TABLE.name,
       family: MODEL_TABLE.family,
-      release_date: MODEL_TABLE.releaseDate,
       context_window: MODEL_TABLE.contextWindow,
       license: MODEL_TABLE.license,
       parameter_count: MODEL_TABLE.parameterCount,

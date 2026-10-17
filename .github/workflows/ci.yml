@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -15,4 +18,13 @@ jobs:
         with: { bun-version: '1.4' }
       - run: bun install --frozen-lockfile
       - run: bun test
-      - run: bunx astro check
+      - name: Reset DB
+        run: |
+          rm -f db/data/ai-recommender.db
+          bun run db:migrate
+          bun run db:seed
+          bun run db/seed-pages.ts
+      - name: Sync models.dev
+        run: bun run sync/modelsdev.ts
+      - name: Smoke E2E
+        run: bun run smoke

@@ -1,5 +1,6 @@
 // src/lib/recommender-data.ts — carga candidatos del recomendador desde la DB.
-
+// @ts-nocheck — corre solo en Bun runtime; los tipos de bun:sqlite no son
+// válidos en Node (CI corre astro check en Node). El runtime real es Bun.
 import { Database } from 'bun:sqlite';
 import type { Candidate } from './recommender';
 
@@ -69,7 +70,7 @@ export function loadCandidates(opts: { providerTypes?: string[]; limit?: number 
       ORDER BY m.id, p.name
       LIMIT ? OFFSET 0
     `)
-    .all(...args, limit) as CandidateRow[];
+    .all(...[...args, limit]) as CandidateRow[];
 
   // Carga scores en bloque
   const scores = db
