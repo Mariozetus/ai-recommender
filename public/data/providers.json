@@ -1,0 +1,1172 @@
+[
+  {
+    "id": "302ai",
+    "name": "302.AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "ai-router",
+    "name": "AI-ROUTER",
+    "type": "cloud-api"
+  },
+  {
+    "id": "aimlapi",
+    "name": "AI/ML API",
+    "type": "cloud-api"
+  },
+  {
+    "id": "ai21",
+    "name": "AI21 Labs",
+    "type": "cloud-api"
+  },
+  {
+    "id": "aihubmix",
+    "name": "AIHubMix",
+    "type": "cloud-api"
+  },
+  {
+    "id": "aki-io",
+    "name": "AKI.IO",
+    "type": "cloud-api"
+  },
+  {
+    "id": "amd",
+    "name": "AMD",
+    "type": "cloud-api"
+  },
+  {
+    "id": "aws-bedrock",
+    "name": "AWS Bedrock",
+    "type": "cloud-api"
+  },
+  {
+    "id": "abacus",
+    "name": "Abacus",
+    "type": "cloud-api"
+  },
+  {
+    "id": "agentrouter",
+    "name": "AgentRouter",
+    "type": "cloud-api"
+  },
+  {
+    "id": "agnes",
+    "name": "Agnes AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "aixy",
+    "name": "Aixy",
+    "type": "cloud-api"
+  },
+  {
+    "id": "alibaba",
+    "name": "Alibaba",
+    "type": "cloud-api"
+  },
+  {
+    "id": "alibaba-cn",
+    "name": "Alibaba (China)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "alibaba-coding-plan",
+    "name": "Alibaba Coding Plan",
+    "type": "cloud-api"
+  },
+  {
+    "id": "alibaba-coding-plan-cn",
+    "name": "Alibaba Coding Plan (China)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "alibaba-token-plan",
+    "name": "Alibaba Token Plan",
+    "type": "cloud-api"
+  },
+  {
+    "id": "alibaba-token-plan-cn",
+    "name": "Alibaba Token Plan (China)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "amazon-bedrock",
+    "name": "Amazon Bedrock",
+    "type": "cloud-api"
+  },
+  {
+    "id": "ambient",
+    "name": "Ambient",
+    "type": "cloud-api"
+  },
+  {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "type": "cloud-api"
+  },
+  {
+    "id": "anyapi",
+    "name": "AnyAPI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "arcee",
+    "name": "Arcee",
+    "type": "cloud-api"
+  },
+  {
+    "id": "atomic-chat",
+    "name": "Atomic Chat",
+    "type": "cloud-api"
+  },
+  {
+    "id": "auriko",
+    "name": "Auriko",
+    "type": "cloud-api"
+  },
+  {
+    "id": "azure",
+    "name": "Azure",
+    "type": "cloud-api"
+  },
+  {
+    "id": "azure-cognitive-services",
+    "name": "Azure Cognitive Services",
+    "type": "cloud-api"
+  },
+  {
+    "id": "bailing",
+    "name": "Bailing",
+    "type": "cloud-api"
+  },
+  {
+    "id": "baseten",
+    "name": "Baseten",
+    "type": "cloud-api"
+  },
+  {
+    "id": "bee",
+    "name": "Bee by HEOSSI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "berget",
+    "name": "Berget.AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "blueclaw",
+    "name": "Blue Claw",
+    "type": "cloud-api"
+  },
+  {
+    "id": "bothub",
+    "name": "Bothub",
+    "type": "cloud-api"
+  },
+  {
+    "id": "boundless",
+    "name": "Boundless",
+    "type": "cloud-api"
+  },
+  {
+    "id": "cerebras",
+    "name": "Cerebras",
+    "type": "cloud-api"
+  },
+  {
+    "id": "hyper",
+    "name": "Charm Hyper",
+    "type": "cloud-api"
+  },
+  {
+    "id": "chutes",
+    "name": "Chutes",
+    "type": "cloud-api"
+  },
+  {
+    "id": "clarifai",
+    "name": "Clarifai",
+    "type": "cloud-api"
+  },
+  {
+    "id": "claudinio",
+    "name": "Claudinio",
+    "type": "cloud-api"
+  },
+  {
+    "id": "cline-pass",
+    "name": "ClinePass",
+    "type": "cloud-api"
+  },
+  {
+    "id": "cloudferro-sherlock",
+    "name": "CloudFerro Sherlock",
+    "type": "cloud-api"
+  },
+  {
+    "id": "cloudflare-ai-gateway",
+    "name": "Cloudflare AI Gateway",
+    "type": "cloud-api"
+  },
+  {
+    "id": "cloudflare-workers-ai",
+    "name": "Cloudflare Workers AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "cohere",
+    "name": "Cohere",
+    "type": "cloud-api"
+  },
+  {
+    "id": "commandcode",
+    "name": "CommandCode",
+    "type": "cloud-api"
+  },
+  {
+    "id": "coralbricks",
+    "name": "CoralBricks",
+    "type": "cloud-api"
+  },
+  {
+    "id": "wandb",
+    "name": "CoreWeave",
+    "type": "cloud-api"
+  },
+  {
+    "id": "cortecs",
+    "name": "Cortecs",
+    "type": "cloud-api"
+  },
+  {
+    "id": "crof",
+    "name": "CrofAI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "crossmodel",
+    "name": "CrossModel",
+    "type": "cloud-api"
+  },
+  {
+    "id": "crusoe",
+    "name": "Crusoe",
+    "type": "cloud-api"
+  },
+  {
+    "id": "drun",
+    "name": "D.Run (China)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "dinference",
+    "name": "DInference",
+    "type": "cloud-api"
+  },
+  {
+    "id": "daoxe",
+    "name": "DaoXE",
+    "type": "cloud-api"
+  },
+  {
+    "id": "databricks",
+    "name": "Databricks",
+    "type": "cloud-api"
+  },
+  {
+    "id": "deepinfra",
+    "name": "Deep Infra",
+    "type": "cloud-api"
+  },
+  {
+    "id": "deepseek",
+    "name": "DeepSeek",
+    "type": "cloud-api"
+  },
+  {
+    "id": "llmgateway",
+    "name": "DevPass (LLM Gateway)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "digitalocean",
+    "name": "DigitalOcean",
+    "type": "cloud-api"
+  },
+  {
+    "id": "ebcloud",
+    "name": "EBCloud",
+    "type": "cloud-api"
+  },
+  {
+    "id": "echo",
+    "name": "Echo",
+    "type": "cloud-api"
+  },
+  {
+    "id": "edenai",
+    "name": "Eden AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "empiriolabs",
+    "name": "EmpirioLabs AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "fastrouter",
+    "name": "FastRouter",
+    "type": "cloud-api"
+  },
+  {
+    "id": "fireworks-ai",
+    "name": "Fireworks AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "freemodel",
+    "name": "FreeModel",
+    "type": "cloud-api"
+  },
+  {
+    "id": "friendli",
+    "name": "Friendli",
+    "type": "cloud-api"
+  },
+  {
+    "id": "frogbot",
+    "name": "FrogBot",
+    "type": "cloud-api"
+  },
+  {
+    "id": "gmicloud",
+    "name": "GMI Cloud",
+    "type": "cloud-api"
+  },
+  {
+    "id": "github-copilot",
+    "name": "GitHub Copilot",
+    "type": "cloud-api"
+  },
+  {
+    "id": "gitlab",
+    "name": "GitLab Duo",
+    "type": "cloud-api"
+  },
+  {
+    "id": "google",
+    "name": "Google",
+    "type": "cloud-api"
+  },
+  {
+    "id": "greenpt",
+    "name": "GreenPT",
+    "type": "cloud-api"
+  },
+  {
+    "id": "groq",
+    "name": "Groq",
+    "type": "cloud-api"
+  },
+  {
+    "id": "hpc-ai",
+    "name": "HPC-AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "helicone",
+    "name": "Helicone",
+    "type": "cloud-api"
+  },
+  {
+    "id": "hetzner",
+    "name": "Hetzner",
+    "type": "cloud-api"
+  },
+  {
+    "id": "huggingface",
+    "name": "Hugging Face",
+    "type": "self-hosted"
+  },
+  {
+    "id": "io-net",
+    "name": "IO.NET",
+    "type": "cloud-api"
+  },
+  {
+    "id": "impossibl",
+    "name": "Impossibl",
+    "type": "cloud-api"
+  },
+  {
+    "id": "inception",
+    "name": "Inception",
+    "type": "cloud-api"
+  },
+  {
+    "id": "inceptron",
+    "name": "Inceptron",
+    "type": "cloud-api"
+  },
+  {
+    "id": "inco",
+    "name": "Inco",
+    "type": "cloud-api"
+  },
+  {
+    "id": "infer",
+    "name": "Infer by Flow7",
+    "type": "cloud-api"
+  },
+  {
+    "id": "inferx",
+    "name": "InferX",
+    "type": "cloud-api"
+  },
+  {
+    "id": "inference",
+    "name": "Inference",
+    "type": "cloud-api"
+  },
+  {
+    "id": "infomaniak",
+    "name": "Infomaniak",
+    "type": "cloud-api"
+  },
+  {
+    "id": "iteracompute",
+    "name": "IteraCompute",
+    "type": "cloud-api"
+  },
+  {
+    "id": "jalapeno",
+    "name": "Jalapeno Cloud",
+    "type": "cloud-api"
+  },
+  {
+    "id": "jiekou",
+    "name": "Jiekou.AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "kuae-cloud-coding-plan",
+    "name": "KUAE Cloud Coding Plan",
+    "type": "cloud-api"
+  },
+  {
+    "id": "kenari",
+    "name": "Kenari",
+    "type": "cloud-api"
+  },
+  {
+    "id": "kilo",
+    "name": "Kilo Gateway",
+    "type": "cloud-api"
+  },
+  {
+    "id": "kimi-code-plan-global",
+    "name": "Kimi For Coding (kimi.ai)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "kimi-code-plan-cn",
+    "name": "Kimi For Coding (kimi.com)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "kosmik",
+    "name": "Kosmik Compute",
+    "type": "cloud-api"
+  },
+  {
+    "id": "llmgateway-providers",
+    "name": "LLM Gateway",
+    "type": "cloud-api"
+  },
+  {
+    "id": "llmtech",
+    "name": "LLM Tech",
+    "type": "cloud-api"
+  },
+  {
+    "id": "llmtr",
+    "name": "LLMTR",
+    "type": "cloud-api"
+  },
+  {
+    "id": "lmstudio",
+    "name": "LMStudio",
+    "type": "cloud-api"
+  },
+  {
+    "id": "lilac",
+    "name": "Lilac",
+    "type": "cloud-api"
+  },
+  {
+    "id": "llama",
+    "name": "Llama",
+    "type": "cloud-api"
+  },
+  {
+    "id": "longcat",
+    "name": "LongCat",
+    "type": "cloud-api"
+  },
+  {
+    "id": "lowrouter",
+    "name": "LowRouter",
+    "type": "cloud-api"
+  },
+  {
+    "id": "lucidquery",
+    "name": "LucidQuery",
+    "type": "cloud-api"
+  },
+  {
+    "id": "lynkr",
+    "name": "Lynkr",
+    "type": "cloud-api"
+  },
+  {
+    "id": "meganova",
+    "name": "Meganova",
+    "type": "cloud-api"
+  },
+  {
+    "id": "melious",
+    "name": "Melious",
+    "type": "cloud-api"
+  },
+  {
+    "id": "merge-gateway",
+    "name": "Merge Gateway",
+    "type": "cloud-api"
+  },
+  {
+    "id": "meta",
+    "name": "Meta",
+    "type": "cloud-api"
+  },
+  {
+    "id": "minimax-cn",
+    "name": "MiniMax (minimax.cn)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "minimax",
+    "name": "MiniMax (minimax.io)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "minimax-cn-coding-plan",
+    "name": "MiniMax Token Plan (minimax.cn)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "minimax-coding-plan",
+    "name": "MiniMax Token Plan (minimax.io)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "mistral",
+    "name": "Mistral",
+    "type": "hybrid"
+  },
+  {
+    "id": "mixlayer",
+    "name": "Mixlayer",
+    "type": "cloud-api"
+  },
+  {
+    "id": "moark",
+    "name": "Moark",
+    "type": "cloud-api"
+  },
+  {
+    "id": "modal",
+    "name": "Modal",
+    "type": "cloud-api"
+  },
+  {
+    "id": "model-oracle-ai",
+    "name": "Model Oracle AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "modelscope",
+    "name": "ModelScope",
+    "type": "cloud-api"
+  },
+  {
+    "id": "modelis",
+    "name": "Modelis",
+    "type": "cloud-api"
+  },
+  {
+    "id": "moonshotai",
+    "name": "Moonshot AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "moonshotai-cn",
+    "name": "Moonshot AI (China)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "morph",
+    "name": "Morph",
+    "type": "cloud-api"
+  },
+  {
+    "id": "nearai",
+    "name": "NEAR AI Cloud",
+    "type": "cloud-api"
+  },
+  {
+    "id": "nan",
+    "name": "NaN",
+    "type": "cloud-api"
+  },
+  {
+    "id": "nano-gpt",
+    "name": "NanoGPT",
+    "type": "cloud-api"
+  },
+  {
+    "id": "nebius",
+    "name": "Nebius Token Factory",
+    "type": "cloud-api"
+  },
+  {
+    "id": "neosmith",
+    "name": "NeoSmith",
+    "type": "cloud-api"
+  },
+  {
+    "id": "neon",
+    "name": "Neon",
+    "type": "cloud-api"
+  },
+  {
+    "id": "neuralwatt",
+    "name": "Neuralwatt",
+    "type": "cloud-api"
+  },
+  {
+    "id": "nova",
+    "name": "Nova",
+    "type": "cloud-api"
+  },
+  {
+    "id": "novita-ai",
+    "name": "Novita AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "nvidia",
+    "name": "Nvidia",
+    "type": "cloud-api"
+  },
+  {
+    "id": "oci",
+    "name": "OCI Generative AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "ovhcloud",
+    "name": "OVHcloud AI Endpoints",
+    "type": "cloud-api"
+  },
+  {
+    "id": "ofox",
+    "name": "Ofox",
+    "type": "cloud-api"
+  },
+  {
+    "id": "ollama",
+    "name": "Ollama",
+    "type": "self-hosted"
+  },
+  {
+    "id": "ollama-cloud",
+    "name": "Ollama Cloud",
+    "type": "cloud-api"
+  },
+  {
+    "id": "openai",
+    "name": "OpenAI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "opencode",
+    "name": "OpenCode",
+    "type": "cloud-api"
+  },
+  {
+    "id": "opencode-go",
+    "name": "OpenCode Go",
+    "type": "cloud-api"
+  },
+  {
+    "id": "openreason",
+    "name": "OpenReason",
+    "type": "cloud-api"
+  },
+  {
+    "id": "openrouter",
+    "name": "OpenRouter",
+    "type": "cloud-api"
+  },
+  {
+    "id": "opper",
+    "name": "Opper",
+    "type": "cloud-api"
+  },
+  {
+    "id": "orcarouter",
+    "name": "OrcaRouter",
+    "type": "cloud-api"
+  },
+  {
+    "id": "pareto",
+    "name": "Pareto Inference",
+    "type": "cloud-api"
+  },
+  {
+    "id": "pendra",
+    "name": "Pendra",
+    "type": "cloud-api"
+  },
+  {
+    "id": "perplexity",
+    "name": "Perplexity",
+    "type": "cloud-api"
+  },
+  {
+    "id": "perplexity-agent",
+    "name": "Perplexity Agent",
+    "type": "cloud-api"
+  },
+  {
+    "id": "pioneer",
+    "name": "Pioneer",
+    "type": "cloud-api"
+  },
+  {
+    "id": "poe",
+    "name": "Poe",
+    "type": "cloud-api"
+  },
+  {
+    "id": "poolside",
+    "name": "Poolside",
+    "type": "cloud-api"
+  },
+  {
+    "id": "prime",
+    "name": "Prime Inference",
+    "type": "cloud-api"
+  },
+  {
+    "id": "privatemode-ai",
+    "name": "Privatemode AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "qvac",
+    "name": "QVAC",
+    "type": "cloud-api"
+  },
+  {
+    "id": "qihang-ai",
+    "name": "QiHang",
+    "type": "cloud-api"
+  },
+  {
+    "id": "qiniu-ai",
+    "name": "Qiniu",
+    "type": "cloud-api"
+  },
+  {
+    "id": "reflection",
+    "name": "Reflection",
+    "type": "cloud-api"
+  },
+  {
+    "id": "regolo-ai",
+    "name": "Regolo AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "requesty",
+    "name": "Requesty",
+    "type": "cloud-api"
+  },
+  {
+    "id": "runinfra",
+    "name": "RunInfra",
+    "type": "cloud-api"
+  },
+  {
+    "id": "sap-ai-core",
+    "name": "SAP AI Core",
+    "type": "cloud-api"
+  },
+  {
+    "id": "scnet-token-plan",
+    "name": "SCNet Token Plan",
+    "type": "cloud-api"
+  },
+  {
+    "id": "scx-ai",
+    "name": "SCX.ai",
+    "type": "cloud-api"
+  },
+  {
+    "id": "stackit",
+    "name": "STACKIT",
+    "type": "cloud-api"
+  },
+  {
+    "id": "sakana",
+    "name": "Sakana AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "salad-cloud",
+    "name": "SaladCloud AI Gateway",
+    "type": "cloud-api"
+  },
+  {
+    "id": "sambanova",
+    "name": "SambaNova",
+    "type": "cloud-api"
+  },
+  {
+    "id": "sarvam",
+    "name": "Sarvam AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "scaleway",
+    "name": "Scaleway",
+    "type": "cloud-api"
+  },
+  {
+    "id": "sensenova",
+    "name": "SenseNova (China)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "siliconflow",
+    "name": "SiliconFlow",
+    "type": "cloud-api"
+  },
+  {
+    "id": "siliconflow-cn",
+    "name": "SiliconFlow (China)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "snowflake-cortex",
+    "name": "Snowflake Cortex",
+    "type": "cloud-api"
+  },
+  {
+    "id": "standardcompute",
+    "name": "Standard Compute",
+    "type": "cloud-api"
+  },
+  {
+    "id": "stepfun",
+    "name": "StepFun (China)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "stepfun-ai",
+    "name": "StepFun (Global)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "stepfun-step-plan",
+    "name": "StepFun Step Plan (China)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "stepfun-ai-step-plan",
+    "name": "StepFun Step Plan (Global)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "subconscious",
+    "name": "Subconscious",
+    "type": "cloud-api"
+  },
+  {
+    "id": "synthetic",
+    "name": "Synthetic",
+    "type": "cloud-api"
+  },
+  {
+    "id": "tempr",
+    "name": "Tempr Gateway",
+    "type": "cloud-api"
+  },
+  {
+    "id": "tencent-coding-plan",
+    "name": "Tencent Coding Plan (China)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "tencent-token-plan",
+    "name": "Tencent Token Plan",
+    "type": "cloud-api"
+  },
+  {
+    "id": "tencent-tokenhub",
+    "name": "Tencent TokenHub",
+    "type": "cloud-api"
+  },
+  {
+    "id": "tensorx",
+    "name": "TensorX",
+    "type": "cloud-api"
+  },
+  {
+    "id": "the-grid-ai",
+    "name": "The Grid AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "thinkingmachines",
+    "name": "Thinking Machines",
+    "type": "cloud-api"
+  },
+  {
+    "id": "tinfoil",
+    "name": "Tinfoil",
+    "type": "cloud-api"
+  },
+  {
+    "id": "togetherai",
+    "name": "Together AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "tokengo",
+    "name": "TokenGo",
+    "type": "cloud-api"
+  },
+  {
+    "id": "tokenrouter",
+    "name": "TokenRouter",
+    "type": "cloud-api"
+  },
+  {
+    "id": "trustedrouter",
+    "name": "TrustedRouter",
+    "type": "cloud-api"
+  },
+  {
+    "id": "umans-ai",
+    "name": "Umans AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "umans-ai-coding-plan",
+    "name": "Umans AI Coding Plan",
+    "type": "cloud-api"
+  },
+  {
+    "id": "unorouter",
+    "name": "UnoRouter",
+    "type": "cloud-api"
+  },
+  {
+    "id": "upstage",
+    "name": "Upstage",
+    "type": "cloud-api"
+  },
+  {
+    "id": "vancine",
+    "name": "Vancine",
+    "type": "cloud-api"
+  },
+  {
+    "id": "venice",
+    "name": "Venice AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "vercel",
+    "name": "Vercel AI Gateway",
+    "type": "cloud-api"
+  },
+  {
+    "id": "google-vertex",
+    "name": "Vertex",
+    "type": "cloud-api"
+  },
+  {
+    "id": "google-vertex-anthropic",
+    "name": "Vertex (Anthropic)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "vispark",
+    "name": "Vispark",
+    "type": "cloud-api"
+  },
+  {
+    "id": "vivgrid",
+    "name": "Vivgrid",
+    "type": "cloud-api"
+  },
+  {
+    "id": "volcengine",
+    "name": "Volcengine Ark",
+    "type": "cloud-api"
+  },
+  {
+    "id": "volcengine-coding-plan",
+    "name": "Volcengine Ark Coding Plan",
+    "type": "cloud-api"
+  },
+  {
+    "id": "vultr",
+    "name": "Vultr",
+    "type": "cloud-api"
+  },
+  {
+    "id": "wafer.ai",
+    "name": "Wafer",
+    "type": "cloud-api"
+  },
+  {
+    "id": "wallaby",
+    "name": "Wallaby",
+    "type": "cloud-api"
+  },
+  {
+    "id": "xiaomi",
+    "name": "Xiaomi",
+    "type": "cloud-api"
+  },
+  {
+    "id": "xiaomi-token-plan-cn",
+    "name": "Xiaomi Token Plan (China)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "xiaomi-token-plan-ams",
+    "name": "Xiaomi Token Plan (Europe)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "xiaomi-token-plan-sgp",
+    "name": "Xiaomi Token Plan (Singapore)",
+    "type": "cloud-api"
+  },
+  {
+    "id": "xpersona",
+    "name": "Xpersona",
+    "type": "cloud-api"
+  },
+  {
+    "id": "zai",
+    "name": "Z.AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "zai-coding-plan",
+    "name": "Z.AI Coding Plan",
+    "type": "cloud-api"
+  },
+  {
+    "id": "zeldoc",
+    "name": "Zeldoc",
+    "type": "cloud-api"
+  },
+  {
+    "id": "zenmux",
+    "name": "ZenMux",
+    "type": "cloud-api"
+  },
+  {
+    "id": "zenifra",
+    "name": "Zenifra",
+    "type": "cloud-api"
+  },
+  {
+    "id": "zhipuai",
+    "name": "Zhipu AI",
+    "type": "cloud-api"
+  },
+  {
+    "id": "zhipuai-coding-plan",
+    "name": "Zhipu AI Coding Plan",
+    "type": "cloud-api"
+  },
+  {
+    "id": "abliteration-ai",
+    "name": "abliteration.ai",
+    "type": "cloud-api"
+  },
+  {
+    "id": "above",
+    "name": "above.dev",
+    "type": "cloud-api"
+  },
+  {
+    "id": "aiand",
+    "name": "ai&",
+    "type": "cloud-api"
+  },
+  {
+    "id": "ainetcafe",
+    "name": "ainetcafe",
+    "type": "cloud-api"
+  },
+  {
+    "id": "engy",
+    "name": "engy",
+    "type": "cloud-api"
+  },
+  {
+    "id": "evroc",
+    "name": "evroc",
+    "type": "cloud-api"
+  },
+  {
+    "id": "iflowcn",
+    "name": "iFlow",
+    "type": "cloud-api"
+  },
+  {
+    "id": "klokintegration",
+    "name": "klokintegration.se",
+    "type": "cloud-api"
+  },
+  {
+    "id": "routing-run",
+    "name": "routing.run",
+    "type": "cloud-api"
+  },
+  {
+    "id": "submodel",
+    "name": "submodel",
+    "type": "cloud-api"
+  },
+  {
+    "id": "watsonx",
+    "name": "watsonx.ai",
+    "type": "cloud-api"
+  },
+  {
+    "id": "xai",
+    "name": "xAI",
+    "type": "cloud-api"
+  }
+]

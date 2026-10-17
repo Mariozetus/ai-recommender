@@ -1,0 +1,22 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "types": ["@cloudflare/workers-types", "@types/bun"],
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": false,
+    "moduleResolution": "bundler",
+    "module": "ESNext",
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": false
+  },
+  "include": ["src", "db", "sync", "seed", "drizzle.config.ts", "astro.config.mjs"],
+  "exclude": ["node_modules", "dist", ".astro", "db/data"]
+}

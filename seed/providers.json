@@ -1,0 +1,102 @@
+[
+  {
+    "id": "openai",
+    "name": "OpenAI",
+    "type": "cloud-api",
+    "homepage_url": "https://openai.com",
+    "docs_url": "https://platform.openai.com/docs",
+    "api_docs_url": "https://platform.openai.com/docs/api-reference",
+    "icon_url": null,
+    "status": "active"
+  },
+  {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "type": "cloud-api",
+    "homepage_url": "https://anthropic.com",
+    "docs_url": "https://docs.anthropic.com",
+    "api_docs_url": "https://docs.anthropic.com/en/api",
+    "icon_url": null,
+    "status": "active"
+  },
+  {
+    "id": "xai",
+    "name": "xAI",
+    "type": "cloud-api",
+    "homepage_url": "https://x.ai",
+    "docs_url": "https://docs.x.ai",
+    "api_docs_url": "https://docs.x.ai/docs",
+    "icon_url": null,
+    "status": "active"
+  },
+  {
+    "id": "deepseek",
+    "name": "DeepSeek",
+    "type": "cloud-api",
+    "homepage_url": "https://deepseek.com",
+    "docs_url": "https://api-docs.deepseek.com",
+    "api_docs_url": "https://platform.deepseek.com/api-docs",
+    "icon_url": null,
+    "status": "active"
+  },
+  {
+    "id": "mistral",
+    "name": "Mistral AI",
+    "type": "hybrid",
+    "homepage_url": "https://mistral.ai",
+    "docs_url": "https://docs.mistral.ai",
+    "api_docs_url": "https://docs.mistral.ai/category/api-endpoints",
+    "icon_url": null,
+    "status": "active"
+  },
+  {
+    "id": "groq",
+    "name": "Groq",
+    "type": "cloud-api",
+    "homepage_url": "https://groq.com",
+    "docs_url": "https://console.groq.com/docs",
+    "api_docs_url": "https://console.groq.com/docs/api",
+    "icon_url": null,
+    "status": "active"
+  },
+  {
+    "id": "openrouter",
+    "name": "OpenRouter",
+    "type": "cloud-api",
+    "homepage_url": "https://openrouter.ai",
+    "docs_url": "https://openrouter.ai/docs",
+    "api_docs_url": "https://openrouter.ai/docs/api-reference",
+    "icon_url": null,
+    "status": "active"
+  },
+  {
+    "id": "ollama",
+    "name": "Ollama",
+    "type": "self-hosted",
+    "homepage_url": "https://ollama.com",
+    "docs_url": "https://github.com/ollama/ollama/blob/main/docs",
+    "api_docs_url": "https://github.com/ollama/ollama/blob/main/docs/api.md",
+    "icon_url": null,
+    "status": "active"
+  },
+  {
+    "id": "huggingface",
+    "name": "Hugging Face",
+    "type": "self-hosted",
+    "homepage_url": "https://huggingface.co",
+    "docs_url": "https://huggingface.co/docs",
+    "api_docs_url": "https://huggingface.co/docs/api-inference",
+    "icon_url": null,
+    "status": "active"
+  },
+  {
+    "id": "aws-bedrock",
+    "name": "AWS Bedrock",
+    "type": "cloud-api",
+    "homepage_url": "https://aws.amazon.com/bedrock",
+    "docs_url": "https://docs.aws.amazon.com/bedrock",
+    "api_docs_url": "https://docs.aws.amazon.com/bedrock/latest/APIReference",
+    "icon_url": null,
+    "status": "active"
+  }
+]

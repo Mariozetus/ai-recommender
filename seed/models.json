@@ -1,0 +1,272 @@
+[
+  {
+    "id": "gpt-5",
+    "family": "gpt-5",
+    "name": "GPT-5",
+    "description": "Modelo insignia de OpenAI con razonamiento nativo, visión y tool use.",
+    "homepage_url": "https://openai.com/index/gpt-5",
+    "hf_repo": null,
+    "license": "proprietary",
+    "parameter_count": null,
+    "context_window": 400000,
+    "max_output": 16384,
+    "release_date": "2025-08-07",
+    "deprecation_date": null,
+    "modalities": { "text_in": 1, "text_out": 1, "image_in": 1, "image_out": 0, "audio_in": 0, "audio_out": 0, "embedding": 0 },
+    "capabilities": { "function_calling": 1, "json_mode": 1, "system_messages": 1, "prompt_caching": 1, "reasoning": 1, "tool_browse": 1, "tool_code_exec": 0, "tool_file_search": 1, "long_horizon": 1 },
+    "offerings": [
+      { "provider_id": "openai",      "region": "global", "input_cost_per_million_usd": 1.25, "output_cost_per_million_usd": 10.00, "cache_read_cost_per_million_usd": 0.13, "context_window": 400000, "max_output": 16384, "rate_limit": "10000 rpm", "status": "active", "deprecation_date": null, "source_url": "https://openai.com/api/pricing", "fetched_at": "2026-10-15T10:00:00Z" },
+      { "provider_id": "openrouter",  "region": "global", "input_cost_per_million_usd": 1.20, "output_cost_per_million_usd":  9.50, "cache_read_cost_per_million_usd": 0.12, "context_window": 400000, "max_output": 16384, "rate_limit": null,        "status": "active", "deprecation_date": null, "source_url": "https://openrouter.ai/models",     "fetched_at": "2026-10-15T10:00:00Z" }
+    ],
+    "scores": [
+      { "benchmark_id": "mmlu-pro",          "score": 87.2 },
+      { "benchmark_id": "gpqa-diamond",      "score": 81.4 },
+      { "benchmark_id": "hle",               "score": 32.1 },
+      { "benchmark_id": "swe-bench-verified","score": 72.3 },
+      { "benchmark_id": "tau-bench",         "score": 68.0 },
+      { "benchmark_id": "gaia",              "score": 71.0 },
+      { "benchmark_id": "mmmu",              "score": 81.0 },
+      { "benchmark_id": "ruler-128k",        "score": 92.4 }
+    ]
+  },
+  {
+    "id": "claude-4-sonnet",
+    "family": "claude-4",
+    "name": "Claude 4 Sonnet",
+    "description": "Equilibrio rendimiento/coste de Anthropic, excelente en coding y agente.",
+    "homepage_url": "https://anthropic.com",
+    "hf_repo": null,
+    "license": "proprietary",
+    "parameter_count": null,
+    "context_window": 200000,
+    "max_output": 8192,
+    "release_date": "2025-05-22",
+    "deprecation_date": null,
+    "modalities": { "text_in": 1, "text_out": 1, "image_in": 1, "image_out": 0, "audio_in": 0, "audio_out": 0, "embedding": 0 },
+    "capabilities": { "function_calling": 1, "json_mode": 0, "system_messages": 1, "prompt_caching": 1, "reasoning": 1, "tool_browse": 1, "tool_code_exec": 1, "tool_file_search": 1, "long_horizon": 1 },
+    "offerings": [
+      { "provider_id": "anthropic",   "region": "global", "input_cost_per_million_usd": 3.00, "output_cost_per_million_usd": 15.00, "cache_read_cost_per_million_usd": 0.30, "context_window": 200000, "max_output": 8192, "rate_limit": "4000 rpm",   "status": "active", "deprecation_date": null, "source_url": "https://docs.anthropic.com/en/docs/pricing", "fetched_at": "2026-10-15T10:00:00Z" },
+      { "provider_id": "aws-bedrock", "region": "global", "input_cost_per_million_usd": 3.00, "output_cost_per_million_usd": 15.00, "cache_read_cost_per_million_usd": 0.30, "context_window": 200000, "max_output": 8192, "rate_limit": null,         "status": "active", "deprecation_date": null, "source_url": "https://aws.amazon.com/bedrock/pricing",     "fetched_at": "2026-10-15T10:00:00Z" }
+    ],
+    "scores": [
+      { "benchmark_id": "mmlu-pro",          "score": 86.5 },
+      { "benchmark_id": "gpqa-diamond",      "score": 79.8 },
+      { "benchmark_id": "hle",               "score": 28.5 },
+      { "benchmark_id": "swe-bench-verified","score": 75.4 },
+      { "benchmark_id": "tau-bench",         "score": 73.0 },
+      { "benchmark_id": "gaia",              "score": 68.0 },
+      { "benchmark_id": "mmmu",              "score": 79.0 },
+      { "benchmark_id": "ruler-128k",        "score": 95.0 }
+    ]
+  },
+  {
+    "id": "claude-4-haiku",
+    "family": "claude-4",
+    "name": "Claude 4 Haiku",
+    "description": "Variante rápida y económica de Claude 4 para chat y tareas cortas.",
+    "homepage_url": "https://anthropic.com",
+    "hf_repo": null,
+    "license": "proprietary",
+    "parameter_count": null,
+    "context_window": 200000,
+    "max_output": 8192,
+    "release_date": "2025-05-22",
+    "deprecation_date": null,
+    "modalities": { "text_in": 1, "text_out": 1, "image_in": 1, "image_out": 0, "audio_in": 0, "audio_out": 0, "embedding": 0 },
+    "capabilities": { "function_calling": 1, "json_mode": 0, "system_messages": 1, "prompt_caching": 1, "reasoning": 0, "tool_browse": 1, "tool_code_exec": 0, "tool_file_search": 1, "long_horizon": 0 },
+    "offerings": [
+      { "provider_id": "anthropic",   "region": "global", "input_cost_per_million_usd": 0.80, "output_cost_per_million_usd": 4.00, "cache_read_cost_per_million_usd": 0.08, "context_window": 200000, "max_output": 8192, "rate_limit": "8000 rpm", "status": "active", "deprecation_date": null, "source_url": "https://docs.anthropic.com/en/docs/pricing", "fetched_at": "2026-10-15T10:00:00Z" }
+    ],
+    "scores": [
+      { "benchmark_id": "mmlu-pro",     "score": 75.0 },
+      { "benchmark_id": "gpqa-diamond", "score": 58.0 },
+      { "benchmark_id": "livecodebench","score": 38.0 },
+      { "benchmark_id": "ruler-128k",   "score": 88.0 }
+    ]
+  },
+  {
+    "id": "llama-3.3-70b",
+    "family": "llama-3",
+    "name": "Llama 3.3 70B",
+    "description": "Open source de Meta. Buen rendimiento general; corre en una sola GPU de 80 GB.",
+    "homepage_url": "https://llama.meta.com",
+    "hf_repo": "meta-llama/Llama-3.3-70B-Instruct",
+    "license": "llama-3.3-community",
+    "parameter_count": "70B",
+    "context_window": 128000,
+    "max_output": 8192,
+    "release_date": "2024-12-06",
+    "deprecation_date": null,
+    "modalities": { "text_in": 1, "text_out": 1, "image_in": 0, "image_out": 0, "audio_in": 0, "audio_out": 0, "embedding": 0 },
+    "capabilities": { "function_calling": 1, "json_mode": 1, "system_messages": 1, "prompt_caching": 0, "reasoning": 0, "tool_browse": 0, "tool_code_exec": 0, "tool_file_search": 0, "long_horizon": 0 },
+    "offerings": [
+      { "provider_id": "ollama",      "region": "global", "input_cost_per_million_usd": 0,    "output_cost_per_million_usd": 0,    "cache_read_cost_per_million_usd": null, "context_window": 128000, "max_output": 8192, "rate_limit": null, "status": "active", "deprecation_date": null, "source_url": "https://ollama.com/library/llama3.3",   "fetched_at": "2026-10-15T10:00:00Z" },
+      { "provider_id": "groq",        "region": "global", "input_cost_per_million_usd": 0.59, "output_cost_per_million_usd": 0.79, "cache_read_cost_per_million_usd": null, "context_window": 128000, "max_output": 8192, "rate_limit": null, "status": "active", "deprecation_date": null, "source_url": "https://groq.com/pricing",              "fetched_at": "2026-10-15T10:00:00Z" },
+      { "provider_id": "openrouter",  "region": "global", "input_cost_per_million_usd": 0.40, "output_cost_per_million_usd": 0.40, "cache_read_cost_per_million_usd": null, "context_window": 128000, "max_output": 8192, "rate_limit": null, "status": "active", "deprecation_date": null, "source_url": "https://openrouter.ai/models",        "fetched_at": "2026-10-15T10:00:00Z" }
+    ],
+    "scores": [
+      { "benchmark_id": "mmlu-pro",     "score": 72.0 },
+      { "benchmark_id": "gpqa-diamond", "score": 50.0 },
+      { "benchmark_id": "livecodebench","score": 28.0 },
+      { "benchmark_id": "ruler-128k",   "score": 85.0 }
+    ]
+  },
+  {
+    "id": "qwen-2.5-72b",
+    "family": "qwen-2.5",
+    "name": "Qwen 2.5 72B",
+    "description": "Open source de Alibaba con buen multilingüe (incluye español).",
+    "homepage_url": "https://qwen.alibaba.com",
+    "hf_repo": "Qwen/Qwen2.5-72B-Instruct",
+    "license": "apache-2.0",
+    "parameter_count": "72B",
+    "context_window": 131072,
+    "max_output": 8192,
+    "release_date": "2024-09-19",
+    "deprecation_date": null,
+    "modalities": { "text_in": 1, "text_out": 1, "image_in": 0, "image_out": 0, "audio_in": 0, "audio_out": 0, "embedding": 0 },
+    "capabilities": { "function_calling": 1, "json_mode": 1, "system_messages": 1, "prompt_caching": 0, "reasoning": 0, "tool_browse": 0, "tool_code_exec": 0, "tool_file_search": 0, "long_horizon": 0 },
+    "offerings": [
+      { "provider_id": "ollama",      "region": "global", "input_cost_per_million_usd": 0,    "output_cost_per_million_usd": 0,    "cache_read_cost_per_million_usd": null, "context_window": 131072, "max_output": 8192, "rate_limit": null, "status": "active", "deprecation_date": null, "source_url": "https://ollama.com/library/qwen2.5",     "fetched_at": "2026-10-15T10:00:00Z" },
+      { "provider_id": "openrouter",  "region": "global", "input_cost_per_million_usd": 0.40, "output_cost_per_million_usd": 0.40, "cache_read_cost_per_million_usd": null, "context_window": 131072, "max_output": 8192, "rate_limit": null, "status": "active", "deprecation_date": null, "source_url": "https://openrouter.ai/models",          "fetched_at": "2026-10-15T10:00:00Z" }
+    ],
+    "scores": [
+      { "benchmark_id": "mmlu-pro",     "score": 71.5 },
+      { "benchmark_id": "gpqa-diamond", "score": 49.0 },
+      { "benchmark_id": "livecodebench","score": 30.0 },
+      { "benchmark_id": "ruler-128k",   "score": 86.0 }
+    ]
+  },
+  {
+    "id": "deepseek-v3",
+    "family": "deepseek-v3",
+    "name": "DeepSeek V3",
+    "description": "Open source grande de DeepSeek. Buen razonamiento; precios muy bajos.",
+    "homepage_url": "https://deepseek.com",
+    "hf_repo": "deepseek-ai/DeepSeek-V3",
+    "license": "deepseek",
+    "parameter_count": "671B",
+    "context_window": 64000,
+    "max_output": 8192,
+    "release_date": "2024-12-26",
+    "deprecation_date": null,
+    "modalities": { "text_in": 1, "text_out": 1, "image_in": 0, "image_out": 0, "audio_in": 0, "audio_out": 0, "embedding": 0 },
+    "capabilities": { "function_calling": 1, "json_mode": 1, "system_messages": 1, "prompt_caching": 0, "reasoning": 1, "tool_browse": 0, "tool_code_exec": 0, "tool_file_search": 0, "long_horizon": 1 },
+    "offerings": [
+      { "provider_id": "deepseek",     "region": "global", "input_cost_per_million_usd": 0.27, "output_cost_per_million_usd": 1.10, "cache_read_cost_per_million_usd": 0.07, "context_window": 64000, "max_output": 8192, "rate_limit": null, "status": "active", "deprecation_date": null, "source_url": "https://api-docs.deepseek.com/quick_start/pricing", "fetched_at": "2026-10-15T10:00:00Z" },
+      { "provider_id": "openrouter",   "region": "global", "input_cost_per_million_usd": 0.27, "output_cost_per_million_usd": 1.10, "cache_read_cost_per_million_usd": null, "context_window": 64000, "max_output": 8192, "rate_limit": null, "status": "active", "deprecation_date": null, "source_url": "https://openrouter.ai/models",                     "fetched_at": "2026-10-15T10:00:00Z" }
+    ],
+    "scores": [
+      { "benchmark_id": "mmlu-pro",          "score": 78.5 },
+      { "benchmark_id": "gpqa-diamond",      "score": 65.0 },
+      { "benchmark_id": "swe-bench-verified","score": 42.0 },
+      { "benchmark_id": "tau-bench",         "score": 48.0 },
+      { "benchmark_id": "gaia",              "score": 50.0 }
+    ]
+  },
+  {
+    "id": "mistral-large-2",
+    "family": "mistral-large",
+    "name": "Mistral Large 2",
+    "description": "Modelo europeo (MISTRAL AI SAS, FR) con buen razonamiento y multilingüe.",
+    "homepage_url": "https://mistral.ai",
+    "hf_repo": null,
+    "license": "mrl",
+    "parameter_count": null,
+    "context_window": 128000,
+    "max_output": 8192,
+    "release_date": "2024-07-24",
+    "deprecation_date": null,
+    "modalities": { "text_in": 1, "text_out": 1, "image_in": 1, "image_out": 0, "audio_in": 0, "audio_out": 0, "embedding": 0 },
+    "capabilities": { "function_calling": 1, "json_mode": 1, "system_messages": 1, "prompt_caching": 0, "reasoning": 1, "tool_browse": 0, "tool_code_exec": 0, "tool_file_search": 0, "long_horizon": 0 },
+    "offerings": [
+      { "provider_id": "mistral",      "region": "EU",    "input_cost_per_million_usd": 2.00, "output_cost_per_million_usd": 6.00, "cache_read_cost_per_million_usd": null, "context_window": 128000, "max_output": 8192, "rate_limit": null, "status": "active", "deprecation_date": null, "source_url": "https://docs.mistral.ai/platform/pricing", "fetched_at": "2026-10-15T10:00:00Z" },
+      { "provider_id": "openrouter",   "region": "EU",    "input_cost_per_million_usd": 2.00, "output_cost_per_million_usd": 6.00, "cache_read_cost_per_million_usd": null, "context_window": 128000, "max_output": 8192, "rate_limit": null, "status": "active", "deprecation_date": null, "source_url": "https://openrouter.ai/models",           "fetched_at": "2026-10-15T10:00:00Z" }
+    ],
+    "scores": [
+      { "benchmark_id": "mmlu-pro",     "score": 76.0 },
+      { "benchmark_id": "gpqa-diamond", "score": 60.0 },
+      { "benchmark_id": "livecodebench","score": 32.0 }
+    ]
+  },
+  {
+    "id": "gpt-oss-120b",
+    "family": "gpt-oss",
+    "name": "GPT-OSS 120B",
+    "description": "Open source de OpenAI (Apache-2.0). Modelos en Hugging Face.",
+    "homepage_url": "https://openai.com/index/introducing-gpt-oss",
+    "hf_repo": "openai/gpt-oss-120b",
+    "license": "apache-2.0",
+    "parameter_count": "120B",
+    "context_window": 131072,
+    "max_output": 8192,
+    "release_date": "2025-08-19",
+    "deprecation_date": null,
+    "modalities": { "text_in": 1, "text_out": 1, "image_in": 0, "image_out": 0, "audio_in": 0, "audio_out": 0, "embedding": 0 },
+    "capabilities": { "function_calling": 1, "json_mode": 1, "system_messages": 1, "prompt_caching": 0, "reasoning": 1, "tool_browse": 0, "tool_code_exec": 0, "tool_file_search": 0, "long_horizon": 0 },
+    "offerings": [
+      { "provider_id": "huggingface",  "region": "global", "input_cost_per_million_usd": 0,    "output_cost_per_million_usd": 0,    "cache_read_cost_per_million_usd": null, "context_window": 131072, "max_output": 8192, "rate_limit": null, "status": "active", "deprecation_date": null, "source_url": "https://huggingface.co/openai/gpt-oss-120b", "fetched_at": "2026-10-15T10:00:00Z" },
+      { "provider_id": "groq",         "region": "global", "input_cost_per_million_usd": 0.50, "output_cost_per_million_usd": 1.20, "cache_read_cost_per_million_usd": null, "context_window": 131072, "max_output": 8192, "rate_limit": null, "status": "active", "deprecation_date": null, "source_url": "https://groq.com/pricing",                  "fetched_at": "2026-10-15T10:00:00Z" }
+    ],
+    "scores": [
+      { "benchmark_id": "mmlu-pro",     "score": 80.0 },
+      { "benchmark_id": "gpqa-diamond", "score": 67.0 },
+      { "benchmark_id": "livecodebench","score": 50.0 }
+    ]
+  },
+  {
+    "id": "o3-pro",
+    "family": "o3",
+    "name": "o3-pro",
+    "description": "Modelo de razonamiento profundo de OpenAI. Tarifa alta, tareas difíciles.",
+    "homepage_url": "https://openai.com/index/introducing-o3",
+    "hf_repo": null,
+    "license": "proprietary",
+    "parameter_count": null,
+    "context_window": 200000,
+    "max_output": 100000,
+    "release_date": "2025-06-10",
+    "deprecation_date": null,
+    "modalities": { "text_in": 1, "text_out": 1, "image_in": 1, "image_out": 0, "audio_in": 0, "audio_out": 0, "embedding": 0 },
+    "capabilities": { "function_calling": 1, "json_mode": 1, "system_messages": 1, "prompt_caching": 1, "reasoning": 1, "tool_browse": 1, "tool_code_exec": 1, "tool_file_search": 1, "long_horizon": 1 },
+    "offerings": [
+      { "provider_id": "openai",     "region": "global", "input_cost_per_million_usd": 20.00, "output_cost_per_million_usd": 80.00, "cache_read_cost_per_million_usd": null, "context_window": 200000, "max_output": 100000, "rate_limit": "200 rpm", "status": "active", "deprecation_date": null, "source_url": "https://openai.com/api/pricing", "fetched_at": "2026-10-15T10:00:00Z" }
+    ],
+    "scores": [
+      { "benchmark_id": "mmlu-pro",          "score": 90.1 },
+      { "benchmark_id": "gpqa-diamond",      "score": 87.7 },
+      { "benchmark_id": "hle",               "score": 41.0 },
+      { "benchmark_id": "swe-bench-verified","score": 78.0 },
+      { "benchmark_id": "tau-bench",         "score": 80.0 },
+      { "benchmark_id": "gaia",              "score": 78.0 }
+    ]
+  },
+  {
+    "id": "grok-3",
+    "family": "grok-3",
+    "name": "Grok 3",
+    "description": "Modelo flagship de xAI, con búsqueda en tiempo real.",
+    "homepage_url": "https://x.ai",
+    "hf_repo": null,
+    "license": "proprietary",
+    "parameter_count": null,
+    "context_window": 131072,
+    "max_output": 8192,
+    "release_date": "2025-02-17",
+    "deprecation_date": null,
+    "modalities": { "text_in": 1, "text_out": 1, "image_in": 1, "image_out": 0, "audio_in": 0, "audio_out": 0, "embedding": 0 },
+    "capabilities": { "function_calling": 1, "json_mode": 1, "system_messages": 1, "prompt_caching": 0, "reasoning": 1, "tool_browse": 1, "tool_code_exec": 0, "tool_file_search": 0, "long_horizon": 0 },
+    "offerings": [
+      { "provider_id": "xai",         "region": "global", "input_cost_per_million_usd": 3.00, "output_cost_per_million_usd": 15.00, "cache_read_cost_per_million_usd": null, "context_window": 131072, "max_output": 8192, "rate_limit": null, "status": "active", "deprecation_date": null, "source_url": "https://docs.x.ai/docs/models", "fetched_at": "2026-10-15T10:00:00Z" },
+      { "provider_id": "openrouter",  "region": "global", "input_cost_per_million_usd": 3.00, "output_cost_per_million_usd": 15.00, "cache_read_cost_per_million_usd": null, "context_window": 131072, "max_output": 8192, "rate_limit": null, "status": "active", "deprecation_date": null, "source_url": "https://openrouter.ai/models", "fetched_at": "2026-10-15T10:00:00Z" }
+    ],
+    "scores": [
+      { "benchmark_id": "mmlu-pro",          "score": 85.5 },
+      { "benchmark_id": "gpqa-diamond",      "score": 78.0 },
+      { "benchmark_id": "swe-bench-verified","score": 60.0 },
+      { "benchmark_id": "tau-bench",         "score": 55.0 },
+      { "benchmark_id": "gaia",              "score": 56.0 },
+      { "benchmark_id": "mmmu",              "score": 78.5 }
+    ]
+  }
+]

@@ -1,0 +1,39 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { t, pickLocale, type Locale } from '../../lib/i18n';
+
+const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
+const dict = (key: string) => t(locale, key);
+---
+<Layout>
+  <section class="max-w-3xl mx-auto px-6 py-20 text-center">
+    <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">{dict('home.hero.title')}</h1>
+    <p class="mt-6 text-lg text-[color:var(--color-muted)]">{dict('home.hero.lede')}</p>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+      <a href={`${locale === 'es' ? '/es' : '/en'}/recommender`}
+         class="inline-flex items-center gap-2 px-5 py-3 rounded-lg font-medium"
+         style="background: var(--color-accent); color: var(--color-surface);">
+        {dict('home.hero.cta_recommender')} →
+      </a>
+      <a href={`${locale === 'es' ? '/es' : '/en'}/catalog`}
+         class="inline-flex items-center gap-2 px-5 py-3 rounded-lg font-medium border border-[color:var(--color-border)]">
+        {dict('home.hero.cta_catalog')}
+      </a>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-6 pb-16 grid gap-6 sm:grid-cols-3">
+    <div class="rounded-lg border border-[color:var(--color-border)] p-6">
+      <h2 class="text-lg font-semibold">{dict('home.section.learn.title')}</h2>
+      <p class="mt-2 text-sm text-[color:var(--color-muted)]">{dict('home.section.learn.body')}</p>
+    </div>
+    <div class="rounded-lg border border-[color:var(--color-border)] p-6">
+      <h2 class="text-lg font-semibold">{dict('home.section.track.title')}</h2>
+      <p class="mt-2 text-sm text-[color:var(--color-muted)]">{dict('home.section.track.body')}</p>
+    </div>
+    <div class="rounded-lg border border-[color:var(--color-border)] p-6">
+      <h2 class="text-lg font-semibold">{dict('home.section.compare.title')}</h2>
+      <p class="mt-2 text-sm text-[color:var(--color-muted)]">{dict('home.section.compare.body')}</p>
+    </div>
+  </section>
+</Layout>

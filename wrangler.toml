@@ -1,0 +1,19 @@
+name = "ai-recommender"
+compatibility_date = "2025-01-01"
+pages_build_output_dir = "./dist"
+
+# D1 binding
+[[d1_databases]]
+binding = "DB"
+database_name = "ai-recommender-db"
+database_id = "REPLACE_WITH_D1_ID_AFTER_CREATION"
+migrations_dir = "drizzle"
+
+# R2 binding for raw artifacts + logs (PIPELINE.md step 1 + 7)
+# [[r2_buckets]]
+# binding = "ARTIFACTS"
+# bucket_name = "ai-recommender-artifacts"
+
+# Secrets:
+#   wrangler secret put AA_API_KEY
+#   wrangler secret put R2_TOKEN (only if external bucket; usually not needed)

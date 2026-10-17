@@ -1,0 +1,49 @@
+{
+  "status": "ok",
+  "db": true,
+  "sources": {
+    "models.dev": {
+      "last_success": "2026-10-17T19:37:52.800Z",
+      "last_status": "succeeded",
+      "lag_hours": 0,
+      "errors": null
+    },
+    "litellm": {
+      "last_success": null,
+      "last_status": null,
+      "lag_hours": null,
+      "errors": null
+    },
+    "aa": {
+      "last_success": null,
+      "last_status": null,
+      "lag_hours": null,
+      "errors": null
+    },
+    "livebench": {
+      "last_success": null,
+      "last_status": null,
+      "lag_hours": null,
+      "errors": null
+    },
+    "replicate": {
+      "last_success": null,
+      "last_status": null,
+      "lag_hours": null,
+      "errors": null
+    },
+    "seed": {
+      "last_success": "2026-10-16T00:00:00Z",
+      "last_status": "succeeded",
+      "lag_hours": 44,
+      "errors": null
+    }
+  },
+  "totals": {
+    "models": 5922,
+    "benchmarks": 9,
+    "active_offerings": 9058,
+    "providers": 234
+  },
+  "generated_at": "2026-10-17T19:43:51.044Z"
+}

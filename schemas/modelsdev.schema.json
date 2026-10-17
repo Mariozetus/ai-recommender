@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "models.dev/api.json · shape-only",
+  "description": "Schema tolerante: valida shape de provider y model pero no enumera campos exactos de limit/cost (que varían upstream).",
+  "type": "object",
+  "additionalProperties": {
+    "type": "object",
+    "required": ["id", "name", "models"],
+    "properties": {
+      "id":    { "type": "string", "minLength": 1 },
+      "name":  { "type": "string" },
+      "env":   { "type": "array", "items": { "type": "string" } },
+      "npm":   { "type": ["string", "null"] },
+      "doc":   { "type": ["string", "null"] },
+      "models": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "required": ["id", "name"],
+          "properties": {
+            "id":                 { "type": "string", "minLength": 1 },
+            "name":               { "type": "string" },
+            "canonical_model_id": { "type": ["string", "null"] },
+            "family":             { "type": ["string", "null"] },
+            "description":        { "type": ["string", "null"] },
+            "attachment":         { "type": "boolean" },
+            "reasoning":          { "type": "boolean" },
+            "tool_call":          { "type": "boolean" },
+            "structured_output":  { "type": "boolean" },
+            "temperature":        { "type": "boolean" },
+            "open_weights":       { "type": "boolean" },
+            "release_date":       { "type": ["string", "null"] },
+            "last_updated":       { "type": ["string", "null"] },
+            "knowledge":          { "type": ["string", "null"] },
+            "modalities": {
+              "type": "object",
+              "properties": {
+                "input":  { "type": "array", "items": { "type": "string" } },
+                "output": { "type": "array", "items": { "type": "string" } }
+              },
+              "additionalProperties": true
+            },
+            "limit":   { "type": "object" },
+            "cost":    { "type": "object" }
+          },
+          "additionalProperties": true
+        }
+      }
+    },
+    "additionalProperties": true
+  }
+}

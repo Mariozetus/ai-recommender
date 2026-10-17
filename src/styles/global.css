@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@theme {
+  --color-fg: oklch(0.21 0 0);
+  --color-muted: oklch(0.55 0 0);
+  --color-border: oklch(0.88 0 0);
+  --color-surface: oklch(0.985 0 0);
+  --color-accent: oklch(0.62 0.18 264);
+  --color-success: oklch(0.66 0.16 145);
+  --color-warning: oklch(0.78 0.16 75);
+  --color-error: oklch(0.62 0.22 27);
+  --color-c1: oklch(0.62 0.18 264);
+  --color-c2: oklch(0.66 0.16 145);
+  --color-c3: oklch(0.78 0.16 75);
+  --color-c4: oklch(0.62 0.22 27);
+  --color-c5: oklch(0.55 0.18 320);
+  --color-c6: oklch(0.55 0.14 200);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, sans-serif;
+  --font-mono: ui-monospace, "JetBrains Mono", SFMono-Regular, Consolas, monospace;
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-fg: oklch(0.94 0 0);
+    --color-muted: oklch(0.65 0 0);
+    --color-border: oklch(0.30 0 0);
+    --color-surface: oklch(0.18 0 0);
+    --color-accent: oklch(0.72 0.18 264);
+  }
+}
+
+html { font-family: var(--font-sans); }
+body { color: var(--color-fg); background: var(--color-surface); }
+a { color: var(--color-accent); text-underline-offset: 2px; }
+code, pre, kbd, samp { font-family: var(--font-mono); }

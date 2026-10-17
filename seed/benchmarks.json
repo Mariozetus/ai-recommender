@@ -1,0 +1,11 @@
+[
+  { "id": "mmlu-pro",         "name": "MMLU-Pro",            "category": "general",      "source_url": "https://github.com/TIGER-Lab/MMLU-Pro",  "unit": "%",     "higher_is_better": 1, "cost_dimension": null },
+  { "id": "gpqa-diamond",     "name": "GPQA Diamond",        "category": "reasoning",    "source_url": "https://github.com/idavidrein/gpqa",         "unit": "%",     "higher_is_better": 1, "cost_dimension": null },
+  { "id": "hle",              "name": "Humanity's Last Exam","category": "reasoning",    "source_url": "https://agi.safe.ai/HLE",                    "unit": "%",     "higher_is_better": 1, "cost_dimension": null },
+  { "id": "swe-bench-verified","name": "SWE-bench Verified",  "category": "coding",       "source_url": "https://www.swebench.com",                  "unit": "%",     "higher_is_better": 1, "cost_dimension": "task" },
+  { "id": "livecodebench",    "name": "LiveCodeBench",       "category": "live",         "source_url": "https://livecodebench.github.io",            "unit": "%",     "higher_is_better": 1, "cost_dimension": "task" },
+  { "id": "tau-bench",        "name": "τ-bench",             "category": "agent",        "source_url": "https://github.com/sierra-research/tau-bench","unit": "%",     "higher_is_better": 1, "cost_dimension": "task" },
+  { "id": "gaia",             "name": "GAIA",                "category": "agent",        "source_url": "https://gaia-bench.github.io",                "unit": "%",     "higher_is_better": 1, "cost_dimension": "task" },
+  { "id": "mmmu",             "name": "MMMU",                "category": "vision",       "source_url": "https://mmmu-benchmark.github.io",           "unit": "%",     "higher_is_better": 1, "cost_dimension": null },
+  { "id": "ruler-128k",       "name": "RULER 128k",          "category": "long-context", "source_url": "https://github.com/NVIDIA/RULER",             "unit": "%",     "higher_is_better": 1, "cost_dimension": null }
+]

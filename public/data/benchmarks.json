@@ -1,0 +1,47 @@
+[
+  {
+    "id": "gaia",
+    "name": "GAIA",
+    "category": "agent"
+  },
+  {
+    "id": "tau-bench",
+    "name": "τ-bench",
+    "category": "agent"
+  },
+  {
+    "id": "swe-bench-verified",
+    "name": "SWE-bench Verified",
+    "category": "coding"
+  },
+  {
+    "id": "mmlu-pro",
+    "name": "MMLU-Pro",
+    "category": "general"
+  },
+  {
+    "id": "livecodebench",
+    "name": "LiveCodeBench",
+    "category": "live"
+  },
+  {
+    "id": "ruler-128k",
+    "name": "RULER 128k",
+    "category": "long-context"
+  },
+  {
+    "id": "gpqa-diamond",
+    "name": "GPQA Diamond",
+    "category": "reasoning"
+  },
+  {
+    "id": "hle",
+    "name": "Humanity's Last Exam",
+    "category": "reasoning"
+  },
+  {
+    "id": "mmmu",
+    "name": "MMMU",
+    "category": "vision"
+  }
+]

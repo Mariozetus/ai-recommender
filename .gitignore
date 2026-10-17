@@ -1,0 +1,25 @@
+# deps
+node_modules/
+.bun/
+
+# build output
+dist/
+.astro/
+
+# db
+db/data/
+*.db
+*.db-shm
+*.db-wal
+
+# editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.log
+.env
+.env.local
+
+# wrangler
+.wrangler/
+.dev.vars

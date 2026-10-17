@@ -1,0 +1,191 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { t, pickLocale, type Locale } from '../lib/i18n';
+import { queryCatalog, listProviders, listLicenses, type CatalogFilters } from '../lib/catalog';
+import { monthlyCostUsd, costLabel } from '../lib/cost';
+
+const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
+const dict = (key: string) => t(locale, key);
+
+// Read URL params
+const u = Astro.url;
+const filters: CatalogFilters = {
+  q: u.searchParams.get('q') ?? undefined,
+  providerId: u.searchParams.get('provider') ?? undefined,
+  license: u.searchParams.get('license') ?? undefined,
+  hasFunctionCalling: u.searchParams.get('cap_fc') === '1',
+  hasReasoning: u.searchParams.get('cap_reasoning') === '1',
+  hasVision: u.searchParams.get('cap_vision') === '1',
+  hasLongContext: u.searchParams.get('cap_longctx') === '1',
+  isOpenSource: u.searchParams.get('cap_open') === '1',
+  minContext: u.searchParams.get('min_ctx') ? Number(u.searchParams.get('min_ctx')) : undefined,
+  maxInputCost: u.searchParams.get('max_in') ? Number(u.searchParams.get('max_in')) : undefined,
+  page: u.searchParams.get('page') ? Number(u.searchParams.get('page')) : 1,
+  pageSize: 50,
+  sortBy: (u.searchParams.get('sort') as CatalogFilters['sortBy']) ?? 'name',
+  sortDir: (u.searchParams.get('dir') as CatalogFilters['sortDir']) ?? 'asc',
+};
+
+const { rows, total, page, pageCount } = queryCatalog(filters);
+const providers = listProviders().slice(0, 30); // top 30 by name
+const licenses = listLicenses().slice(0, 12);
+
+function buildHref(overrides: Record<string, string | undefined>): string {
+  const params = new URLSearchParams(u.searchParams);
+  for (const [k, v] of Object.entries(overrides)) {
+    if (v == null || v === '') params.delete(k);
+    else params.set(k, v);
+  }
+  return `/catalog?${params.toString()}`;
+}
+
+function isChecked(key: string): boolean {
+  return u.searchParams.get(key) === '1';
+}
+---
+<Layout title={dict('catalog.title')}>
+  <section class="max-w-7xl mx-auto px-6 py-10">
+    <h1 class="text-3xl font-bold">{dict('catalog.title')}</h1>
+    <p class="mt-2 text-sm text-[color:var(--color-muted)]">{dict('catalog.lede')}</p>
+    <p class="mt-1 text-xs text-[color:var(--color-muted)]">
+      {total} {dict('catalog.results')} · {dict('catalog.budget_assumption')}
+    </p>
+
+    <div class="mt-8 grid gap-6 lg:grid-cols-[240px_1fr]">
+      <aside>
+        <form method="get" class="rounded-lg border border-[color:var(--color-border)] p-4 space-y-4 sticky top-4">
+          <label class="block">
+            <span class="text-xs font-medium">{dict('catalog.filter.search')}</span>
+            <input name="q" value={filters.q ?? ''} class="mt-1 w-full px-2 py-1.5 rounded border border-[color:var(--color-border)] bg-transparent text-sm" />
+          </label>
+
+          <label class="block">
+            <span class="text-xs font-medium">{dict('catalog.filter.provider')}</span>
+            <select name="provider" class="mt-1 w-full px-2 py-1.5 rounded border border-[color:var(--color-border)] bg-transparent text-sm">
+              <option value="">{dict('catalog.filter.any')}</option>
+              {providers.map((p) => (
+                <option value={p.id} selected={filters.providerId === p.id}>{p.name}</option>
+              ))}
+            </select>
+          </label>
+
+          <label class="block">
+            <span class="text-xs font-medium">{dict('catalog.filter.license')}</span>
+            <select name="license" class="mt-1 w-full px-2 py-1.5 rounded border border-[color:var(--color-border)] bg-transparent text-sm">
+              <option value="">{dict('catalog.filter.any')}</option>
+              {licenses.map((l) => (
+                <option value={l.license} selected={filters.license === l.license}>{l.license} ({l.count})</option>
+              ))}
+            </select>
+          </label>
+
+          <fieldset class="block">
+            <legend class="text-xs font-medium">{dict('catalog.filter.caps')}</legend>
+            <div class="mt-1 space-y-1 text-sm">
+              <label class="flex items-center gap-2">
+                <input type="checkbox" name="cap_fc" value="1" checked={isChecked('cap_fc')} />
+                <span>{dict('catalog.filter.caps.function_calling')}</span>
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="checkbox" name="cap_reasoning" value="1" checked={isChecked('cap_reasoning')} />
+                <span>{dict('catalog.filter.caps.reasoning')}</span>
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="checkbox" name="cap_vision" value="1" checked={isChecked('cap_vision')} />
+                <span>{dict('catalog.filter.caps.vision')}</span>
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="checkbox" name="cap_longctx" value="1" checked={isChecked('cap_longctx')} />
+                <span>{dict('catalog.filter.caps.long_context')}</span>
+              </label>
+              <label class="flex items-center gap-2">
+                <input type="checkbox" name="cap_open" value="1" checked={isChecked('cap_open')} />
+                <span>{dict('catalog.filter.caps.open_source')}</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <label class="block">
+            <span class="text-xs font-medium">{dict('catalog.filter.caps.max_price')}</span>
+            <input type="number" name="max_in" step="0.1" min="0" value={filters.maxInputCost ?? ''} class="mt-1 w-full px-2 py-1.5 rounded border border-[color:var(--color-border)] bg-transparent text-sm" />
+          </label>
+
+          <label class="block">
+            <span class="text-xs font-medium">{dict('catalog.filter.caps.min_context')}</span>
+            <input type="number" name="min_ctx" step="1000" min="0" value={filters.minContext ?? ''} class="mt-1 w-full px-2 py-1.5 rounded border border-[color:var(--color-border)] bg-transparent text-sm" />
+          </label>
+
+          <div class="flex gap-2">
+            <button type="submit" class="flex-1 px-3 py-1.5 rounded text-sm font-medium" style="background: var(--color-accent); color: var(--color-surface);">
+              {dict('catalog.filter.apply')}
+            </button>
+            <a href="/catalog" class="px-3 py-1.5 rounded text-sm border border-[color:var(--color-border)]">
+              {dict('catalog.filter.reset')}
+            </a>
+          </div>
+        </form>
+      </aside>
+
+      <div>
+        <div class="rounded-lg border border-[color:var(--color-border)] overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="text-left bg-[color:var(--color-surface)]">
+              <tr>
+                <th class="px-3 py-2 font-medium">{dict('catalog.col.model')}</th>
+                <th class="px-3 py-2 font-medium">{dict('catalog.col.provider')}</th>
+                <th class="px-3 py-2 font-medium text-right">{dict('catalog.col.cost_in')}</th>
+                <th class="px-3 py-2 font-medium text-right">{dict('catalog.col.cost_out')}</th>
+                <th class="px-3 py-2 font-medium text-right">{dict('catalog.col.monthly')}</th>
+                <th class="px-3 py-2 font-medium text-right">{dict('catalog.col.context')}</th>
+                <th class="px-3 py-2 font-medium">{dict('catalog.col.license')}</th>
+                <th class="px-3 py-2 font-medium">{dict('catalog.col.caps')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.length === 0 && (
+                <tr><td colspan="8" class="px-3 py-6 text-center text-[color:var(--color-muted)]">{dict('catalog.empty')}</td></tr>
+              )}
+              {rows.map((r) => {
+                const monthly = monthlyCostUsd(r.input_cost, r.output_cost, 'middle');
+                return (
+                  <tr class="border-t border-[color:var(--color-border)]">
+                    <td class="px-3 py-2">
+                      <div class="font-medium">{r.model_name}</div>
+                      <div class="text-xs text-[color:var(--color-muted)] font-mono">{r.model_id}</div>
+                    </td>
+                    <td class="px-3 py-2">
+                      <div>{r.provider_name}</div>
+                      <div class="text-xs text-[color:var(--color-muted)]">{r.provider_type} · {r.region}</div>
+                    </td>
+                    <td class="px-3 py-2 text-right font-mono text-xs">{r.input_cost != null ? `$${r.input_cost.toFixed(2)}` : '—'}</td>
+                    <td class="px-3 py-2 text-right font-mono text-xs">{r.output_cost != null ? `$${r.output_cost.toFixed(2)}` : '—'}</td>
+                    <td class="px-3 py-2 text-right font-mono text-xs">{costLabel(monthly)}</td>
+                    <td class="px-3 py-2 text-right font-mono text-xs">{r.context_window ? `${(r.context_window / 1000).toFixed(0)}k` : '—'}</td>
+                    <td class="px-3 py-2 text-xs">{r.license ?? '—'}</td>
+                    <td class="px-3 py-2 text-xs">
+                      {r.cap_function_calling ? '🔧 ' : ''}
+                      {r.cap_reasoning ? '🧠 ' : ''}
+                      {r.mod_image_in ? '👁 ' : ''}
+                      {r.cap_long_horizon ? '📏 ' : ''}
+                      {r.mod_embedding ? '🔢' : ''}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        {pageCount > 1 && (
+          <div class="mt-4 flex items-center justify-between text-sm">
+            <span class="text-[color:var(--color-muted)]">{dict('catalog.pagination.page')} {page} {dict('catalog.pagination.of')} {pageCount}</span>
+            <div class="flex gap-2">
+              {page > 1 && <a href={buildHref({ page: String(page - 1) })} class="px-3 py-1.5 rounded border border-[color:var(--color-border)]">{dict('catalog.pagination.prev')}</a>}
+              {page < pageCount && <a href={buildHref({ page: String(page + 1) })} class="px-3 py-1.5 rounded border border-[color:var(--color-border)]">{dict('catalog.pagination.next')}</a>}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,60 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { t, pickLocale, type Locale } from '../../../lib/i18n';
+import { Database } from 'bun:sqlite';
+import { marked } from 'marked';
+
+export function getStaticPaths() {
+  const db = new Database('./db/data/ai-recommender.db', { readonly: true });
+  const rows = db.prepare(`SELECT slug, locale FROM page_content`).all() as Array<{ slug: string; locale: 'en' | 'es' }>;
+  db.close();
+  return rows.map((r) => ({
+    params: { slug: r.slug },
+    props: { locale: r.locale },
+  }));
+}
+
+const locale = (Astro.props as { locale: Locale }).locale;
+const dict = (key: string) => t(locale, key);
+const slug = Astro.params.slug as string;
+
+const db = new Database('./db/data/ai-recommender.db', { readonly: true });
+const row = db
+  .prepare(`SELECT slug, title, body_md, locale, updated_at FROM page_content WHERE slug = ? AND locale = ?`)
+  .get(slug, locale) as { slug: string; title: string; body_md: string; locale: string; updated_at: string } | undefined;
+db.close();
+
+if (!row) Astro.response.status = 404;
+
+const html = row ? marked.parse(row.body_md, { async: false }) as string : '';
+---
+<Layout title={row?.title ?? dict('concepts.notfound.title')}>
+  {!row ? (
+    <section class="max-w-3xl mx-auto px-6 py-10">
+      <h1 class="text-3xl font-bold">{dict('concepts.notfound.title')}</h1>
+      <p class="mt-2 text-sm text-[color:var(--color-muted)]">{dict('concepts.notfound.body')}</p>
+      <a href={`/${locale}/concepts`} class="mt-6 inline-block text-sm underline">← {dict('concepts.back')}</a>
+    </section>
+  ) : (
+    <article class="max-w-3xl mx-auto px-6 py-10 prose-style">
+      <a href={`/${locale}/concepts`} class="text-xs text-[color:var(--color-muted)] hover:underline">← {dict('concepts.back')}</a>
+      <div class="mt-2 text-xs text-[color:var(--color-muted)] font-mono">/concepts/{row.slug} · {row.updated_at.slice(0, 10)}</div>
+      <div class="mt-6 markdown-body" set:html={html}></div>
+    </article>
+  )}
+</Layout>
+
+<style is:global>
+  .markdown-body h1 { font-size: 1.875rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; }
+  .markdown-body h2 { font-size: 1.5rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .markdown-body h3 { font-size: 1.25rem; font-weight: 600; margin-top: 1.25rem; margin-bottom: 0.5rem; }
+  .markdown-body p { margin-top: 0.75rem; margin-bottom: 0.75rem; line-height: 1.6; }
+  .markdown-body ul, .markdown-body ol { margin-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 0.75rem; }
+  .markdown-body li { margin-top: 0.25rem; }
+  .markdown-body code { background: var(--color-surface); padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-size: 0.85em; }
+  .markdown-body table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+  .markdown-body th, .markdown-body td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--color-border); text-align: left; font-size: 0.875rem; }
+  .markdown-body th { font-weight: 600; background: var(--color-surface); }
+  .markdown-body a { color: var(--color-accent); text-underline-offset: 2px; }
+  .markdown-body strong { font-weight: 600; }
+</style>

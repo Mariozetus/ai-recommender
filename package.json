@@ -1,0 +1,50 @@
+{
+  "name": "ai-recommender",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "description": "AI model catalog + recommender + educational content. MIT code, CC0 data.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "db:migrate": "bun run db/migrate.ts",
+    "db:seed": "bun run db/seed.ts",
+    "db:reset": "rm -f db/data/ai-recommender.db && bun run db/migrate.ts && bun run db/seed.ts",
+    "db:studio": "drizzle-kit studio",
+    "sync": "bun run sync/index.ts",
+    "test": "bun test",
+    "smoke": "bun run scripts/smoke.ts",
+    "build:data": "bun run scripts/build-data.ts",
+    "build:static": "bun run build:data && bun run build"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/cloudflare": "12.6.0",
+    "@astrojs/react": "^4.2.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "astro": "^5.1.0",
+    "drizzle-orm": "^0.38.0",
+    "marked": "^18.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^4.0.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "@types/bun": "^1.1.14",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "drizzle-kit": "^0.30.0",
+    "eslint": "^9.16.0",
+    "typescript": "^5.7.0",
+    "wrangler": "^3.95.0"
+  }
+}

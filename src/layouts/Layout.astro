@@ -1,0 +1,60 @@
+---
+import '../styles/global.css';
+import { t, pickLocale, type Locale } from '../lib/i18n';
+
+interface Props {
+  title?: string;
+  description?: string;
+  locale?: Locale;
+}
+
+const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
+const dict = (key: string) => t(locale, key);
+
+const pathLocale = locale === 'en' ? '/en' : '/es';
+const altLocale = locale === 'en' ? 'es' : 'en';
+const altPath = altLocale === 'en' ? '/en' : '/es';
+const currentPath = Astro.url.pathname.replace(/^\/(en|es)/, '') || '/';
+const fullTitle = `${Astro.props.title ? Astro.props.title + ' · ' : ''}${dict('site.title')}`;
+const description = Astro.props.description ?? dict('site.tagline');
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={locale === 'es' ? 'es_ES' : 'en_US'} />
+    <link rel="alternate" hreflang="en" href={`https://ai-recommender.example.com${altPath}${currentPath}`} />
+    <link rel="alternate" hreflang="es" href={`https://ai-recommender.example.com${altPath}${currentPath}`} />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <header class="border-b border-[color:var(--color-border)]">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
+        <a href={pathLocale} class="font-semibold text-lg">{dict('site.title')}</a>
+        <nav class="hidden sm:flex items-center gap-6 text-sm">
+          <a href={`${pathLocale}`}>{dict('nav.home')}</a>
+          <a href={`${pathLocale}/status`}>{dict('nav.status')}</a>
+        </nav>
+        <div class="flex items-center gap-2 text-sm">
+          <a href={`${pathLocale}${currentPath}`} class={locale === 'en' ? 'font-semibold' : 'opacity-60'}>EN</a>
+          <span aria-hidden="true">·</span>
+          <a href={`${altPath}${currentPath}`} class={locale === 'es' ? 'font-semibold' : 'opacity-60'}>ES</a>
+        </div>
+      </div>
+    </header>
+    <main class="flex-1">
+      <slot />
+    </main>
+    <footer class="border-t border-[color:var(--color-border)] mt-12">
+      <div class="max-w-6xl mx-auto px-6 py-6 text-sm text-[color:var(--color-muted)] flex flex-wrap items-center justify-between gap-2">
+        <span>{dict('footer.license')}</span>
+        <span>{dict('footer.attribution')}</span>
+      </div>
+    </footer>
+  </body>
+</html>

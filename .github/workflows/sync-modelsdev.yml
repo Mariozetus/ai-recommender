@@ -1,0 +1,65 @@
+name: sync · models.dev
+
+on:
+  schedule:
+    - cron: '0 6 * * *'      # diario 06:00 UTC
+  workflow_dispatch:           # manual desde Actions tab
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: sync-modelsdev
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4'
+
+      - run: bun install --frozen-lockfile
+
+      - name: Run sync
+        run: bun run sync/modelsdev.ts
+        env:
+          DB_PATH: ./db/data/ai-recommender.db
+
+      - name: Self-test · health endpoint
+        run: |
+          bun run dev &
+          sleep 3
+          HEALTH=$(curl -sS http://localhost:4321/api/health)
+          STATUS=$(echo "$HEALTH" | bun -e 'const x = await Bun.stdin.json(); console.log(x.status)')
+          if [ "$STATUS" != "ok" ]; then
+            echo "::error::Health degraded: $HEALTH"
+            exit 1
+          fi
+          echo "$HEALTH" | bun -e 'const x = await Bun.stdin.json(); console.log(JSON.stringify(x.totals, null, 2))'
+
+      - name: Commit snapshot meta
+        run: |
+          git config user.email "actions@example.com"
+          git config user.name "github-actions"
+          SNAP=$(date -u +%Y-%m-%d-models.dev)
+          git add db/data/raw/ docs/STATUS.md 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "sync: models.dev ${SNAP}"
+            git push
+          fi
+
+      - name: Notify Discord on failure
+        if: failure()
+        uses: discord/actions-send-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: |
+            ❌ Sync models.dev failed
+            Run: ${{ github.run_id }}
+            See: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
