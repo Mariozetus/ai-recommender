@@ -37,7 +37,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build static
-        run: bun run build:static
+        run: bun --bun run build:static
         env:
           BASE_PATH: /${{ github.event.repository.name }}
 
