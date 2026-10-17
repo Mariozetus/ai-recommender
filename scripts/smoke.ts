@@ -39,7 +39,7 @@ runStep('seed pages (glosario)', ['bun', 'run', 'db/seed-pages.ts']);
 
 console.log('\n→ starting astro dev server');
 const server = spawn(['bun', 'run', 'dev'], {
-  stdio: ['ignore', 'pipe', 'pipe'],
+  stdio: ['ignore', 'inherit', 'inherit'],
 });
 
 let ready = false;
