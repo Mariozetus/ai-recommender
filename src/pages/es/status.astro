@@ -1,69 +1,44 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { t, pickLocale, type Locale } from '../../lib/i18n';
-import { Database } from 'bun:sqlite';
+import healthData from '../../../public/api/health.json';
+import snapshotsData from '../../../public/data/snapshots.json';
 
-interface Props {}
 const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
 const dict = (key: string) => t(locale, key);
 
-let snapshotInfo: { id: string; taken_at: string; source: string } | null = null;
-let counts: { models: number; benchmarks: number; offerings: number; providers: number } = {
-  models: 0, benchmarks: 0, offerings: 0, providers: 0,
+const health = healthData as {
+  status: string;
+  db: boolean;
+  totals: { models: number; benchmarks: number; active_offerings: number };
+  sources: Record<string, { last_success: string | null; last_status: string | null; lag_hours: number | null }>;
 };
-let recentRuns: Array<{ source: string; status: string; started_at: string; finished_at: string|null; models_added: number }> = [];
-let dbError: string | null = null;
-
-try {
-  const db = new Database('./db/data/ai-recommender.db', { readonly: true });
-  const snap = db.query<{ id: string; taken_at: string; source: string }, []>(
-    `SELECT id, taken_at, source FROM snapshot WHERE status='applied' ORDER BY taken_at DESC LIMIT 1`
-  ).get();
-  if (snap) snapshotInfo = snap;
-
-  counts.models = db.query<{ n: number }, []>(`SELECT COUNT(*) as n FROM model`).get()?.n ?? 0;
-  counts.benchmarks = db.query<{ n: number }, []>(`SELECT COUNT(*) as n FROM benchmark`).get()?.n ?? 0;
-  counts.providers = db.query<{ n: number }, []>(`SELECT COUNT(*) as n FROM provider`).get()?.n ?? 0;
-  counts.offerings = db.query<{ n: number }, []>(`SELECT COUNT(*) as n FROM model_provider_offering`).get()?.n ?? 0;
-
-  recentRuns = db.query<{ source: string; status: string; started_at: string; finished_at: string|null; models_added: number }, []>(
-    `SELECT source, status, started_at, finished_at, models_added FROM sync_run ORDER BY started_at DESC LIMIT 10`
-  ).all();
-
-  db.close();
-} catch (e) {
-  dbError = String(e);
-}
+const snapshots = snapshotsData as Array<{ id: string; taken_at: string; source: string; status: string }>;
 ---
 <Layout title={dict('status.title')}>
-  <section class="max-w-5xl mx-auto px-6 py-12">
+  <section class="max-w-5xl mx-auto px-6 py-10">
     <h1 class="text-3xl font-bold">{dict('status.title')}</h1>
-    <p class="mt-2 text-[color:var(--color-muted)] text-sm">
-      {snapshotInfo ? `${snapshotInfo.source} · ${snapshotInfo.taken_at}` : 'No snapshot applied yet'}
+    <p class="mt-2 text-sm text-[color:var(--color-muted)]">{dict('status.lede')}</p>
+    <p class="mt-1 text-xs text-[color:var(--color-muted)]">
+      {health.sources.modelsdev?.last_status === 'succeeded' ? `${health.sources.modelsdev.last_success} · ${health.totals.models} modelos` : 'Sin snapshot aplicada aún'}
     </p>
-
-    {dbError && (
-      <div class="mt-6 p-4 rounded border border-[color:var(--color-error)] text-sm">
-        <strong>DB error:</strong> {dbError}
-      </div>
-    )}
 
     <div class="mt-8 grid gap-4 sm:grid-cols-4">
       <div class="rounded-lg border border-[color:var(--color-border)] p-4">
         <div class="text-sm text-[color:var(--color-muted)]">{dict('status.model_count')}</div>
-        <div class="mt-1 text-2xl font-semibold">{counts.models}</div>
+        <div class="mt-1 text-2xl font-semibold">{health.totals.models}</div>
       </div>
       <div class="rounded-lg border border-[color:var(--color-border)] p-4">
         <div class="text-sm text-[color:var(--color-muted)]">{dict('status.benchmark_count')}</div>
-        <div class="mt-1 text-2xl font-semibold">{counts.benchmarks}</div>
+        <div class="mt-1 text-2xl font-semibold">{health.totals.benchmarks}</div>
       </div>
       <div class="rounded-lg border border-[color:var(--color-border)] p-4">
         <div class="text-sm text-[color:var(--color-muted)]">Providers</div>
-        <div class="mt-1 text-2xl font-semibold">{counts.providers}</div>
+        <div class="mt-1 text-2xl font-semibold">{Object.keys(health.sources).length}</div>
       </div>
       <div class="rounded-lg border border-[color:var(--color-border)] p-4">
         <div class="text-sm text-[color:var(--color-muted)]">Offerings</div>
-        <div class="mt-1 text-2xl font-semibold">{counts.offerings}</div>
+        <div class="mt-1 text-2xl font-semibold">{health.totals.active_offerings}</div>
       </div>
     </div>
 
@@ -75,36 +50,19 @@ try {
             <th class="px-4 py-2 font-medium">{dict('status.source.label')}</th>
             <th class="px-4 py-2 font-medium">{dict('status.source.status')}</th>
             <th class="px-4 py-2 font-medium">Started</th>
-            <th class="px-4 py-2 font-medium">Finished</th>
-            <th class="px-4 py-2 font-medium">Added</th>
+            <th class="px-4 py-2 font-medium">Snapshot</th>
           </tr>
         </thead>
         <tbody>
-          {recentRuns.length === 0 && (
-            <tr><td class="px-4 py-3 text-[color:var(--color-muted)]" colspan="5">No sync runs yet.</td></tr>
+          {snapshots.length === 0 && (
+            <tr><td class="px-4 py-3 text-[color:var(--color-muted)]" colspan="4">No sync runs yet.</td></tr>
           )}
-          {recentRuns.map((r) => (
+          {snapshots.map((s) => (
             <tr class="border-t border-[color:var(--color-border)]">
-              <td class="px-4 py-2 font-mono text-xs">{r.source}</td>
-              <td class="px-4 py-2">
-                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs"
-                  style={`background: ${
-                    r.status === 'succeeded' ? 'color-mix(in oklch, var(--color-success) 20%, var(--color-surface))'
-                    : r.status === 'failed'    ? 'color-mix(in oklch, var(--color-error) 20%, var(--color-surface))'
-                    : r.status === 'partial'   ? 'color-mix(in oklch, var(--color-warning) 20%, var(--color-surface))'
-                    : 'color-mix(in oklch, var(--color-muted) 20%, var(--color-surface))'
-                  }; color: ${
-                    r.status === 'succeeded' ? 'var(--color-success)'
-                    : r.status === 'failed'   ? 'var(--color-error)'
-                    : r.status === 'partial'  ? 'var(--color-warning)'
-                    : 'var(--color-muted)'
-                  };`}>
-                  {r.status}
-                </span>
-              </td>
-              <td class="px-4 py-2 font-mono text-xs">{r.started_at}</td>
-              <td class="px-4 py-2 font-mono text-xs">{r.finished_at ?? '—'}</td>
-              <td class="px-4 py-2 font-mono text-xs">{r.models_added ?? 0}</td>
+              <td class="px-4 py-2 font-mono text-xs">{s.source}</td>
+              <td class="px-4 py-2">{s.status}</td>
+              <td class="px-4 py-2 font-mono text-xs">{s.taken_at}</td>
+              <td class="px-4 py-2 font-mono text-xs">{s.id}</td>
             </tr>
           ))}
         </tbody>

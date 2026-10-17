@@ -3,7 +3,7 @@
   "db": true,
   "sources": {
     "models.dev": {
-      "last_success": "2026-10-17T19:37:52.800Z",
+      "last_success": "2026-10-17T20:16:48.095Z",
       "last_status": "succeeded",
       "lag_hours": 0,
       "errors": null
@@ -45,5 +45,5 @@
     "active_offerings": 9058,
     "providers": 234
   },
-  "generated_at": "2026-10-17T19:43:51.044Z"
+  "generated_at": "2026-10-17T20:22:37.022Z"
 }

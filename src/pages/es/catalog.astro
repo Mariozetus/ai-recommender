@@ -1,47 +1,101 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { t, pickLocale, type Locale } from '../../lib/i18n';
-import { queryCatalog, listProviders, listLicenses, type CatalogFilters } from '../../lib/catalog';
 import { monthlyCostUsd, costLabel } from '../../lib/cost';
+import modelsData from '../../../public/data/models.json';
+import providersData from '../../../public/data/providers.json';
+import benchmarksData from '../../../public/data/benchmarks.json';
 
 const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
 const dict = (key: string) => t(locale, key);
 
-// Read URL params
+interface ModelRow {
+  id: string; name: string; family: string | null; license: string | null; parameter_count: string | null;
+  context_window: number | null; max_output: number | null;
+  flags: {
+    mod_text_in: number; mod_text_out: number; mod_image_in: number; mod_image_out: number;
+    mod_audio_in: number; mod_audio_out: number; mod_embedding: number;
+    cap_function_calling: number; cap_json_mode: number; cap_system_messages: number;
+    cap_prompt_caching: number; cap_reasoning: number; cap_tool_browse: number;
+    cap_tool_code_exec: number; cap_tool_file_search: number; cap_long_horizon: number;
+  };
+  benchmark_scores: Record<string, number>;
+  offerings: Array<{ provider_id: string; provider_name: string; provider_type: string; region: string; input_cost: number | null; output_cost: number | null; cache_read: number | null; context_window: number | null }>;
+}
+interface Provider { id: string; name: string; type: string }
+interface LicenseCount { license: string; count: number }
+
+const allModels = modelsData as ModelRow[];
+const allProviders = providersData as Provider[];
+
 const u = Astro.url;
-const filters: CatalogFilters = {
-  q: u.searchParams.get('q') ?? undefined,
-  providerId: u.searchParams.get('provider') ?? undefined,
-  license: u.searchParams.get('license') ?? undefined,
-  hasFunctionCalling: u.searchParams.get('cap_fc') === '1',
-  hasReasoning: u.searchParams.get('cap_reasoning') === '1',
-  hasVision: u.searchParams.get('cap_vision') === '1',
-  hasLongContext: u.searchParams.get('cap_longctx') === '1',
-  isOpenSource: u.searchParams.get('cap_open') === '1',
-  minContext: u.searchParams.get('min_ctx') ? Number(u.searchParams.get('min_ctx')) : undefined,
-  maxInputCost: u.searchParams.get('max_in') ? Number(u.searchParams.get('max_in')) : undefined,
-  page: u.searchParams.get('page') ? Number(u.searchParams.get('page')) : 1,
-  pageSize: 50,
-  sortBy: (u.searchParams.get('sort') as CatalogFilters['sortBy']) ?? 'name',
-  sortDir: (u.searchParams.get('dir') as CatalogFilters['sortDir']) ?? 'asc',
-};
+const sp = u.searchParams;
+const q = sp.get('q')?.toLowerCase() ?? '';
+const providerId = sp.get('provider') ?? '';
+const license = sp.get('license') ?? '';
+const capFc = sp.get('cap_fc') === '1';
+const capReasoning = sp.get('cap_reasoning') === '1';
+const capVision = sp.get('cap_vision') === '1';
+const capLongCtx = sp.get('cap_longctx') === '1';
+const capOpen = sp.get('cap_open') === '1';
+const minCtx = sp.get('min_ctx') ? Number(sp.get('min_ctx')) : 0;
+const maxIn = sp.get('max_in') ? Number(sp.get('max_in')) : Infinity;
+const page = sp.get('page') ? Number(sp.get('page')) : 1;
+const pageSize = 50;
 
-const { rows, total, page, pageCount } = queryCatalog(filters);
-const providers = listProviders().slice(0, 30); // top 30 by name
-const licenses = listLicenses().slice(0, 12);
+function matchesFilters(m: ModelRow, offering: { provider_id: string; provider_name: string; provider_type: string; region: string; input_cost: number | null; output_cost: number | null; cache_read: number | null; context_window: number | null }): boolean {
+  if (providerId && offering.provider_id !== providerId) return false;
+  if (license && m.license !== license) return false;
+  if (capFc && !m.flags.cap_function_calling) return false;
+  if (capReasoning && !m.flags.cap_reasoning) return false;
+  if (capVision && !m.flags.mod_image_in) return false;
+  if (capLongCtx && (m.context_window ?? 0) < 100000) return false;
+  if (minCtx && (m.context_window ?? 0) < minCtx) return false;
+  if (maxIn !== Infinity && offering.input_cost != null && offering.input_cost > maxIn) return false;
+  if (capOpen && !/apache|mit|open|community|llama|mrl|deepseek/i.test(m.license ?? '')) return false;
+  if (q && !(`${m.name} ${m.id} ${m.family ?? ''}`.toLowerCase().includes(q))) return false;
+  return true;
+}
 
-function buildHref(overrides: Record<string, string | undefined>): string {
-  const params = new URLSearchParams(u.searchParams);
-  for (const [k, v] of Object.entries(overrides)) {
-    if (v == null || v === '') params.delete(k);
-    else params.set(k, v);
+interface FlatRow {
+  model_id: string; model_name: string; model_family: string | null; model_license: string | null;
+  flags: ModelRow['flags'];
+  context_window: number | null;
+  provider_id: string; provider_name: string; provider_type: string; region: string;
+  input_cost: number | null; output_cost: number | null; cache_read: number | null;
+  benchmark_scores: Record<string, number>;
+}
+
+const flatRows: FlatRow[] = [];
+for (const m of allModels) {
+  for (const o of m.offerings) {
+    if (!matchesFilters(m, o)) continue;
+    flatRows.push({
+      model_id: m.id, model_name: m.name, model_family: m.family, model_license: m.license,
+      flags: m.flags, context_window: m.context_window ?? o.context_window,
+      provider_id: o.provider_id, provider_name: o.provider_name, provider_type: o.provider_type, region: o.region,
+      input_cost: o.input_cost, output_cost: o.output_cost, cache_read: o.cache_read,
+      benchmark_scores: m.benchmark_scores,
+    });
   }
-  return `/catalog?${params.toString()}`;
 }
+flatRows.sort((a, b) => a.model_name.localeCompare(b.model_name) || a.provider_name.localeCompare(b.provider_name));
+const total = flatRows.length;
+const pageCount = Math.ceil(total / pageSize);
+const rows = flatRows.slice((page - 1) * pageSize, page * pageSize);
 
-function isChecked(key: string): boolean {
-  return u.searchParams.get(key) === '1';
+const topProviders = allProviders.slice(0, 30);
+const licenseCounts = new Map<string, number>();
+for (const m of allModels) {
+  if (!m.license) continue;
+  licenseCounts.set(m.license, (licenseCounts.get(m.license) ?? 0) + 1);
 }
+const topLicenses: LicenseCount[] = Array.from(licenseCounts.entries())
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 12)
+  .map(([license, count]) => ({ license, count }));
+
+function isChecked(key: string): boolean { return sp.get(key) === '1'; }
 ---
 <Layout title={dict('catalog.title')}>
   <section class="max-w-7xl mx-auto px-6 py-10">
@@ -54,33 +108,33 @@ function isChecked(key: string): boolean {
     <div class="mt-8 grid gap-6 lg:grid-cols-[240px_1fr]">
       <aside>
         <form method="get" class="rounded-lg border border-[color:var(--color-border)] p-4 space-y-4 sticky top-4">
-          <div>
-            <label class="text-xs font-medium">{dict('catalog.filter.search')}</label>
-            <input name="q" value={filters.q ?? ''} class="mt-1 w-full px-2 py-1.5 rounded border border-[color:var(--color-border)] bg-transparent text-sm" />
-          </div>
+          <label class="block">
+            <span class="text-xs font-medium">{dict('catalog.filter.search')}</span>
+            <input name="q" value={q} class="mt-1 w-full px-2 py-1.5 rounded border border-[color:var(--color-border)] bg-transparent text-sm" />
+          </label>
 
-          <div>
-            <label class="text-xs font-medium">{dict('catalog.filter.provider')}</label>
+          <label class="block">
+            <span class="text-xs font-medium">{dict('catalog.filter.provider')}</span>
             <select name="provider" class="mt-1 w-full px-2 py-1.5 rounded border border-[color:var(--color-border)] bg-transparent text-sm">
               <option value="">{dict('catalog.filter.any')}</option>
-              {providers.map((p) => (
-                <option value={p.id} selected={filters.providerId === p.id}>{p.name}</option>
+              {topProviders.map((p) => (
+                <option value={p.id} selected={providerId === p.id}>{p.name}</option>
               ))}
             </select>
-          </div>
+          </label>
 
-          <div>
-            <label class="text-xs font-medium">{dict('catalog.filter.license')}</label>
+          <label class="block">
+            <span class="text-xs font-medium">{dict('catalog.filter.license')}</span>
             <select name="license" class="mt-1 w-full px-2 py-1.5 rounded border border-[color:var(--color-border)] bg-transparent text-sm">
               <option value="">{dict('catalog.filter.any')}</option>
-              {licenses.map((l) => (
-                <option value={l.license} selected={filters.license === l.license}>{l.license} ({l.count})</option>
+              {topLicenses.map((l) => (
+                <option value={l.license} selected={license === l.license}>{l.license} ({l.count})</option>
               ))}
             </select>
-          </div>
+          </label>
 
-          <div>
-            <label class="text-xs font-medium">{dict('catalog.filter.caps')}</label>
+          <fieldset class="block">
+            <legend class="text-xs font-medium">{dict('catalog.filter.caps')}</legend>
             <div class="mt-1 space-y-1 text-sm">
               <label class="flex items-center gap-2">
                 <input type="checkbox" name="cap_fc" value="1" checked={isChecked('cap_fc')} />
@@ -103,17 +157,17 @@ function isChecked(key: string): boolean {
                 <span>{dict('catalog.filter.caps.open_source')}</span>
               </label>
             </div>
-          </div>
+          </fieldset>
 
-          <div>
-            <label class="text-xs font-medium">{dict('catalog.filter.caps.max_price')}</label>
-            <input type="number" name="max_in" step="0.1" min="0" value={filters.maxInputCost ?? ''} class="mt-1 w-full px-2 py-1.5 rounded border border-[color:var(--color-border)] bg-transparent text-sm" />
-          </div>
+          <label class="block">
+            <span class="text-xs font-medium">{dict('catalog.filter.caps.max_price')}</span>
+            <input type="number" name="max_in" step="0.1" min="0" value={sp.get('max_in') ?? ''} class="mt-1 w-full px-2 py-1.5 rounded border border-[color:var(--color-border)] bg-transparent text-sm" />
+          </label>
 
-          <div>
-            <label class="text-xs font-medium">{dict('catalog.filter.caps.min_context')}</label>
-            <input type="number" name="min_ctx" step="1000" min="0" value={filters.minContext ?? ''} class="mt-1 w-full px-2 py-1.5 rounded border border-[color:var(--color-border)] bg-transparent text-sm" />
-          </div>
+          <label class="block">
+            <span class="text-xs font-medium">{dict('catalog.filter.caps.min_context')}</span>
+            <input type="number" name="min_ctx" step="1000" min="0" value={sp.get('min_ctx') ?? ''} class="mt-1 w-full px-2 py-1.5 rounded border border-[color:var(--color-border)] bg-transparent text-sm" />
+          </label>
 
           <div class="flex gap-2">
             <button type="submit" class="flex-1 px-3 py-1.5 rounded text-sm font-medium" style="background: var(--color-accent); color: var(--color-surface);">
@@ -161,13 +215,13 @@ function isChecked(key: string): boolean {
                     <td class="px-3 py-2 text-right font-mono text-xs">{r.output_cost != null ? `$${r.output_cost.toFixed(2)}` : '—'}</td>
                     <td class="px-3 py-2 text-right font-mono text-xs">{costLabel(monthly)}</td>
                     <td class="px-3 py-2 text-right font-mono text-xs">{r.context_window ? `${(r.context_window / 1000).toFixed(0)}k` : '—'}</td>
-                    <td class="px-3 py-2 text-xs">{r.license ?? '—'}</td>
+                    <td class="px-3 py-2 text-xs">{r.model_license ?? '—'}</td>
                     <td class="px-3 py-2 text-xs">
-                      {r.cap_function_calling ? '🔧 ' : ''}
-                      {r.cap_reasoning ? '🧠 ' : ''}
-                      {r.mod_image_in ? '👁 ' : ''}
-                      {r.cap_long_horizon ? '📏 ' : ''}
-                      {r.mod_embedding ? '🔢' : ''}
+                      {r.flags.cap_function_calling ? '🔧 ' : ''}
+                      {r.flags.cap_reasoning ? '🧠 ' : ''}
+                      {r.flags.mod_image_in ? '👁 ' : ''}
+                      {r.flags.cap_long_horizon ? '📏 ' : ''}
+                      {r.flags.mod_embedding ? '🔢' : ''}
                     </td>
                   </tr>
                 );
@@ -180,8 +234,8 @@ function isChecked(key: string): boolean {
           <div class="mt-4 flex items-center justify-between text-sm">
             <span class="text-[color:var(--color-muted)]">{dict('catalog.pagination.page')} {page} {dict('catalog.pagination.of')} {pageCount}</span>
             <div class="flex gap-2">
-              {page > 1 && <a href={buildHref({ page: String(page - 1) })} class="px-3 py-1.5 rounded border border-[color:var(--color-border)]">{dict('catalog.pagination.prev')}</a>}
-              {page < pageCount && <a href={buildHref({ page: String(page + 1) })} class="px-3 py-1.5 rounded border border-[color:var(--color-border)]">{dict('catalog.pagination.next')}</a>}
+              {page > 1 && <a href={`/catalog?${(() => { const np = new URLSearchParams(u.searchParams); np.set('page', String(page - 1)); return np.toString(); })()}`} class="px-3 py-1.5 rounded border border-[color:var(--color-border)]">{dict('catalog.pagination.prev')}</a>}
+              {page < pageCount && <a href={`/catalog?${(() => { const np = new URLSearchParams(u.searchParams); np.set('page', String(page + 1)); return np.toString(); })()}`} class="px-3 py-1.5 rounded border border-[color:var(--color-border)]">{dict('catalog.pagination.next')}</a>}
             </div>
           </div>
         )}

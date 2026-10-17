@@ -1,16 +1,14 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import { t, pickLocale, type Locale } from '../../../lib/i18n';
-import { Database } from 'bun:sqlite';
+import conceptsData from '../../../../public/data/concepts.json';
 
 const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
 const dict = (key: string) => t(locale, key);
 
-const db = new Database('./db/data/ai-recommender.db', { readonly: true });
-const rows = db
-  .prepare(`SELECT slug, title, locale FROM page_content WHERE locale = ? ORDER BY title`)
-  .all(locale) as Array<{ slug: string; title: string; locale: string }>;
-db.close();
+const concepts = (conceptsData as Array<{ slug: string; locale: string; title: string }>)
+  .filter((c) => c.locale === locale)
+  .sort((a, b) => a.title.localeCompare(b.title));
 ---
 <Layout title={dict('concepts.title')}>
   <section class="max-w-3xl mx-auto px-6 py-10">
@@ -18,14 +16,14 @@ db.close();
     <p class="mt-2 text-sm text-[color:var(--color-muted)]">{dict('concepts.lede')}</p>
 
     <ul class="mt-8 grid gap-3 sm:grid-cols-2">
-      {rows.map((r) => (
+      {concepts.map((c) => (
         <li>
           <a
-            href={`/${locale}/concepts/${r.slug}`}
+            href={`/${locale}/concepts/${c.slug}`}
             class="block p-4 rounded-lg border border-[color:var(--color-border)] hover:border-[color:var(--color-accent)] transition-colors"
           >
-            <div class="font-medium">{r.title}</div>
-            <div class="text-xs text-[color:var(--color-muted)] font-mono mt-1">/concepts/{r.slug}</div>
+            <div class="font-medium">{c.title}</div>
+            <div class="text-xs text-[color:var(--color-muted)] font-mono mt-1">/concepts/{c.slug}</div>
           </a>
         </li>
       ))}

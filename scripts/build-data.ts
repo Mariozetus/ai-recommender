@@ -65,6 +65,14 @@ const snaps = db.query<{ id: string; taken_at: string; source: string; status: s
 writeFileSync(join(OUT, 'data/snapshots.json'), JSON.stringify(snaps, null, 2));
 console.log(`✓ snapshots.json: ${snaps.length}`);
 
+// concepts (todos los slugs × locales, con body completo)
+const conceptRows = db.query<{ slug: string; locale: string; title: string; body_md: string; updated_at: string }, []>(
+  `SELECT slug, locale, title, body_md, updated_at FROM page_content`
+).all();
+const concepts = conceptRows.map((c) => ({ slug: c.slug, locale: c.locale, title: c.title, body_md: c.body_md, updated_at: c.updated_at }));
+writeFileSync(join(OUT, 'data/concepts.json'), JSON.stringify(concepts));
+console.log(`✓ concepts.json: ${concepts.length} (${concepts.length} filas)`);
+
 // models (formato compacto para el recomendador client-side)
 const modelsRaw = db.query<{
   id: string; name: string; family: string | null; license: string | null; parameter_count: string | null;
