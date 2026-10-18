@@ -2,7 +2,7 @@ name: sync · models.dev
 
 on:
   schedule:
-    - cron: '0 6 * * *'      # diario 06:00 UTC
+    - cron: '0 12 * * *'     # diario 12:00 UTC (para no confllictar con daily-sync a las 03:00)
   workflow_dispatch:           # manual desde Actions tab
 
 permissions:

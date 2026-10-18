@@ -51,8 +51,9 @@ Un sitio que ayuda a la gente a entender los modelos de IA y elegir uno adecuado
 | # | Feature | Por qué ahora |
 |---|---|---|
 | 1 | **Comparador side-by-side** `/compare` | Cierra la feature anunciada en el home ("Side by side"). Comparteable, sin login, baja fricción. |
-| 2 | **release_date en UI** | ✅ Hecho este sprint. Usuarios necesitan saber qué modelos son recientes. |
+| 2 | **release_date en UI** | ✅ Hecho S1. Usuarios necesitan saber qué modelos son recientes. |
 | 3 | **Model detail page** `/models/[id]` | ✅ Hecho S1. SEO + shareability, 9k+ páginas generadas. |
+| 4 | **Cron diario GH Actions** | ✅ Hecho S1. `daily-sync.yml` 03:00 UTC · sync + build + deploy automático. |
 
 ### 📅 Next (1-2 sprints, 1-2 semanas)
 
@@ -60,7 +61,7 @@ Un sitio que ayuda a la gente a entender los modelos de IA y elegir uno adecuado
 |---|---|---|---|---|
 | 3 | **Más fuentes de sync** (LiteLLM pricing, AA benchmarks, LiveBench) | Alto | 1-2 días | Enriquece pricing + benchmarks. Sin esto, dependemos solo de models.dev. |
 | 4 | **Model detail page** `/models/[id]` | Medio | 2-3h | ✅ Hecho S1. SEO + shareability, URL propia por modelo con capacidades, benchmarks y proveedores. |
-| 5 | **Cron job diario fuera de CI** | Medio | 4h | Ahora el sync corre solo en push. Quieren sync diario sin depender de PRs. GitHub Actions cron `0 3 * * *`. |
+| 5 | **Cron job diario fuera de CI** | Medio | 4h | ✅ Hecho S1. Workflow `daily-sync.yml` corre a las 03:00 UTC, sync + build + deploy. |
 | 6 | **Glosario 11 → 30 conceptos** | Medio | 1 día | Attention, MoE, fine-tuning, RLHF, distillation, quantization, RAG, embeddings, tool use, agents, multimodality, etc. |
 | 7 | **URL-state para recommender** | Bajo | 2h | El form ya es URL-shareable, pero el ranking post-submit se pierde al refrescar. Persistir `?use=coding&budget=middle` en ranking client-side. |
 
@@ -113,7 +114,7 @@ Un sitio que ayuda a la gente a entender los modelos de IA y elegir uno adecuado
 | 4 | URL-state recommender | M | S | pending | S1 |
 | 5 | Más fuentes sync (litellm, AA, livebench) | H | L | pending | S1 |
 | 6 | Model detail page | M | S | ✅ done | S1 |
-| 7 | Cron diario GH Actions | M | S | pending | S1 |
+| 7 | Cron diario GH Actions | M | S | ✅ done | S1 |
 | 8 | Glosario 11 → 30 | M | M | pending | S2 |
 | 9 | Snapshot changelog auto | M | S | pending | S2 |
 | 10 | RSS feed "cambios de la semana" | M | S | pending | S2 |
