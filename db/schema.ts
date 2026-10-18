@@ -74,7 +74,7 @@ export const benchmark = sqliteTable('benchmark', {
 export const snapshot = sqliteTable('snapshot', {
   id: text('id').primaryKey(),
   takenAt: text('taken_at').notNull(),
-  source: text('source', { enum: ['models.dev', 'litellm', 'aa', 'livebench', 'replicate', 'seed', 'manual'] }).notNull(),
+  source: text('source', { enum: ['models.dev', 'litellm', 'aa', 'livebench', 'replicate', 'seed', 'manual', 'hf-benchmarks'] }).notNull(),
   sourceVersion: text('source_version'),
   parentSnapshot: text('parent_snapshot'),
   rawArtifactUrl: text('raw_artifact_url'),

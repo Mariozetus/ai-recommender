@@ -50,6 +50,9 @@ jobs:
         env:
           AA_API_KEY: ${{ secrets.AA_API_KEY }}
 
+      - name: Sync HuggingFace benchmarks (HLE, SWE-bench Verified)
+        run: bun run sync/hf-benchmarks.ts
+
       - name: Generate data for build
         run: bun run build:data
 

@@ -20,6 +20,7 @@
     "sync:modelsdev": "bun run sync/modelsdev.ts",
     "sync:litellm": "bun run sync/litellm.ts",
     "sync:aa": "bun run sync/aa.ts",
+    "sync:hf-benchmarks": "bun run sync/hf-benchmarks.ts",
     "test": "bun test",
     "smoke": "bun run scripts/smoke.ts",
     "build:data": "bun run scripts/build-data.ts",
