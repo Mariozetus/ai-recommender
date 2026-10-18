@@ -1,12 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { t, pickLocale, type Locale } from '../../lib/i18n';
-import conceptsData from '../../../public/data/concepts.json';
+import { concepts as allConcepts } from '../../lib/data';
 
 const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
 const dict = (key: string) => t(locale, key);
 
-const concepts = (conceptsData as Array<{ slug: string; locale: string; title: string }>)
+const concepts = (allConcepts as Array<{ slug: string; locale: string; title: string }>)
   .filter((c) => c.locale === locale)
   .sort((a, b) => a.title.localeCompare(b.title));
 ---

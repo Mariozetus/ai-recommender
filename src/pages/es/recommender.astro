@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { t, pickLocale, type Locale } from '../../lib/i18n';
 import { parseQuizFromUrl, recommend, type UseCase, type QuizState, type Candidate, type Deployment, type LanguagePref } from '../../lib/recommender';
 import type { BudgetBin } from '../../lib/cost';
-import modelsData from '../../../public/data/models.json';
+import { models as allModels } from '../../lib/data';
 
 const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
 const dict = (key: string) => t(locale, key);
@@ -26,13 +26,7 @@ const hasQuiz = sp.toString().length > 0;
 interface RawModel {
   id: string; name: string; family: string | null; license: string | null;
   context_window: number | null;
-  flags: {
-    mod_text_in: number; mod_text_out: number; mod_image_in: number; mod_image_out: number;
-    mod_audio_in: number; mod_audio_out: number; mod_embedding: number;
-    cap_function_calling: number; cap_json_mode: number; cap_system_messages: number;
-    cap_prompt_caching: number; cap_reasoning: number; cap_tool_browse: number;
-    cap_tool_code_exec: number; cap_tool_file_search: number; cap_long_horizon: number;
-  };
+  flags: Record<string, number>;
   benchmark_scores: Record<string, number>;
   offerings: Array<{ provider_id: string; provider_name: string; provider_type: string; region: string; input_cost: number | null; output_cost: number | null; cache_read: number | null; context_window: number | null }>;
 }
@@ -40,13 +34,13 @@ interface RawModel {
 function toCandidates(raws: RawModel[]): Candidate[] {
   const out: Candidate[] = [];
   for (const m of raws) {
-    for (const o of m.offerings) {
+    for (const o of m.offerings ?? []) {
       out.push({
         model_id: m.id, model_name: m.name, family: m.family, license: m.license,
         provider_id: o.provider_id, provider_name: o.provider_name, provider_type: o.provider_type, region: o.region,
         input_cost: o.input_cost, output_cost: o.output_cost, cache_read: o.cache_read,
         context_window: o.context_window ?? m.context_window,
-        flags: m.flags,
+        flags: m.flags as unknown as Candidate['flags'],
         benchmark_scores: m.benchmark_scores,
       });
     }
@@ -54,7 +48,7 @@ function toCandidates(raws: RawModel[]): Candidate[] {
   return out;
 }
 
-const recommendations = hasQuiz ? recommend(quiz, toCandidates(modelsData as RawModel[])) : [];
+const recommendations = hasQuiz ? recommend(quiz, toCandidates(allModels as unknown as RawModel[])) : [];
 
 const useCases: UseCase[] = ['chat-general', 'coding', 'agent', 'vision', 'embedding', 'long-context-rag'];
 const shareUrl = u.toString();

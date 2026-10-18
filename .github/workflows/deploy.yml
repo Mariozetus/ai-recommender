@@ -7,6 +7,12 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -25,6 +31,8 @@ jobs:
           bun run db/seed-pages.ts
       - name: Sync models.dev
         run: bun run sync/modelsdev.ts
+      - name: Generate data for build
+        run: bun run build:data
       - name: Smoke E2E
         run: bun run smoke
 
@@ -37,9 +45,24 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with: { bun-version: '1.4' }
       - run: bun install --frozen-lockfile
+      - name: Generate data
+        run: bun run build:data
       - name: Build static
-        # NOTA: este build actualmente falla porque output='server' requiere adapter.
-        # TODO: refactorizar páginas a JSON imports o instalar @astrojs/cloudflare.
-        # Mientras tanto, este job se marca como continue-on-error para no bloquear el pipeline.
-        run: bun run build || echo "BUILD_DEFERRED"
-        continue-on-error: true
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}
+        run: bun run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    needs: build
+    if: success()
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

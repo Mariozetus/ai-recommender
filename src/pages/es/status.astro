@@ -1,19 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { t, pickLocale, type Locale } from '../../lib/i18n';
-import healthData from '../../../public/api/health.json';
-import snapshotsData from '../../../public/data/snapshots.json';
+import { health, snapshots } from '../../lib/data';
 
 const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
 const dict = (key: string) => t(locale, key);
-
-const health = healthData as {
-  status: string;
-  db: boolean;
-  totals: { models: number; benchmarks: number; active_offerings: number };
-  sources: Record<string, { last_success: string | null; last_status: string | null; lag_hours: number | null }>;
-};
-const snapshots = snapshotsData as Array<{ id: string; taken_at: string; source: string; status: string }>;
 ---
 <Layout title={dict('status.title')}>
   <section class="max-w-5xl mx-auto px-6 py-10">

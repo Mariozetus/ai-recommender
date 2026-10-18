@@ -2,14 +2,20 @@
 import Layout from '../../layouts/Layout.astro';
 import { t, pickLocale, type Locale } from '../../lib/i18n';
 import { marked } from 'marked';
-import conceptsData from '../../../public/data/concepts.json';
+import { concepts as allConcepts } from '../../lib/data';
 
-const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
+export function getStaticPaths() {
+  const all = allConcepts as Array<{ slug: string; locale: 'en' | 'es' }>;
+  const slugs = Array.from(new Set(all.map((c) => c.slug)));
+  return slugs.map((slug) => ({ params: { slug } }));
+}
+
+const locale: Locale = pickLocale(Astro.currentLocale as string | undefined) ?? 'en';
 const dict = (key: string) => t(locale, key);
 const slug = Astro.params.slug as string;
 
-const allConcepts = conceptsData as Array<{ slug: string; locale: string; title: string; body_md: string; updated_at: string }>;
-const row = allConcepts.find((c) => c.slug === slug && c.locale === locale);
+const row = (allConcepts as Array<{ slug: string; locale: string; title: string; body_md: string; updated_at: string }>)
+  .find((c) => c.slug === slug && c.locale === locale);
 
 if (!row) Astro.response.status = 404;
 

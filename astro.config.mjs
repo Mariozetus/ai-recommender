@@ -4,17 +4,26 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
-// output: 'server' → todas las páginas server-rendered por defecto. Dev respeta query params (catalog, recommender).
-// Build requiere adapter (no incluido en MVP: deploy a Node host externo o Cloudflare con adapter swap).
-// El smoke CI solo corre dev/tests, no el build.
+// output: 'static' → todas las páginas pre-renderizadas en build time, output a dist/.
+// Pages son 100% Node-compatibles (JSON imports), no requieren adapter.
+// Para dev/smoke CI: el dev server respeta query params (catalog/recommender).
+// Para GH Pages: `BASE_PATH=/ai-recommender bun run build` produce dist/ con base path.
 export default defineConfig({
-  output: 'server',
+  output: 'static',
   // Base path para GitHub Pages user/repo → https://<user>.github.io/<repo>
   // Default '' (sin prefijo) para dev. En CI, BASE_PATH=/ai-recommender.
   base: process.env.BASE_PATH ?? '',
   integrations: [react()],
   vite: {
     plugins: [/** @type {any} */ (tailwindcss())],
+    resolve: {
+      alias: {
+        '~data': /** @type {any} */ (new URL('./src/lib/data', import.meta.url).pathname),
+      },
+    },
+    optimizeDeps: {
+      exclude: ['src/lib/recommender.ts', 'src/lib/cost.ts', 'src/lib/i18n.ts'],
+    },
   },
   i18n: {
     defaultLocale: 'en',

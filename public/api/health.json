@@ -3,7 +3,7 @@
   "db": true,
   "sources": {
     "models.dev": {
-      "last_success": "2026-10-17T20:16:48.095Z",
+      "last_success": "2026-10-17T21:54:38.305Z",
       "last_status": "succeeded",
       "lag_hours": 0,
       "errors": null
@@ -35,15 +35,15 @@
     "seed": {
       "last_success": "2026-10-16T00:00:00Z",
       "last_status": "succeeded",
-      "lag_hours": 44,
+      "lag_hours": 46,
       "errors": null
     }
   },
   "totals": {
-    "models": 5922,
+    "models": 5923,
     "benchmarks": 9,
-    "active_offerings": 9058,
+    "active_offerings": 9060,
     "providers": 234
   },
-  "generated_at": "2026-10-17T20:22:37.022Z"
+  "generated_at": "2026-10-17T21:57:54.650Z"
 }

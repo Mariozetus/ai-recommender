@@ -2,36 +2,20 @@
 import Layout from '../layouts/Layout.astro';
 import { t, pickLocale, type Locale } from '../lib/i18n';
 import { monthlyCostUsd, costLabel } from '../lib/cost';
-import modelsData from '../../public/data/models.json';
-import providersData from '../../public/data/providers.json';
-import benchmarksData from '../../public/data/benchmarks.json';
+import { models as allModels, providers as allProviders, benchmarks as allBenchmarks } from '../lib/data';
 
 const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
 const dict = (key: string) => t(locale, key);
 
 interface ModelRow {
-  id: string; name: string; family: string | null; license: string | null; parameter_count: string | null;
+  id: string; name: string; family: string | null; license: string | null;
   context_window: number | null; max_output: number | null;
-  flags: {
-    mod_text_in: number; mod_text_out: number; mod_image_in: number; mod_image_out: number;
-    mod_audio_in: number; mod_audio_out: number; mod_embedding: number;
-    cap_function_calling: number; cap_json_mode: number; cap_system_messages: number;
-    cap_prompt_caching: number; cap_reasoning: number; cap_tool_browse: number;
-    cap_tool_code_exec: number; cap_tool_file_search: number; cap_long_horizon: number;
-  };
+  flags: Record<string, number>;
   benchmark_scores: Record<string, number>;
   offerings: Array<{ provider_id: string; provider_name: string; provider_type: string; region: string; input_cost: number | null; output_cost: number | null; cache_read: number | null; context_window: number | null }>;
 }
-interface CatalogRow extends ModelRow {
-  provider_id: string; provider_name: string; provider_type: string; region: string;
-  input_cost: number | null; output_cost: number | null; cache_read: number | null;
-}
 interface Provider { id: string; name: string; type: string }
 interface LicenseCount { license: string; count: number }
-
-const allModels = modelsData as ModelRow[];
-const allProviders = providersData as Provider[];
-const allBenchmarks = benchmarksData as Array<{ id: string; name: string; category: string }>;
 
 const u = Astro.url;
 const sp = u.searchParams;
@@ -48,7 +32,7 @@ const maxIn = sp.get('max_in') ? Number(sp.get('max_in')) : Infinity;
 const page = sp.get('page') ? Number(sp.get('page')) : 1;
 const pageSize = 50;
 
-function matchesFilters(m: ModelRow, offering: { provider_id: string; provider_name: string; provider_type: string; region: string; input_cost: number | null; output_cost: number | null; cache_read: number | null; context_window: number | null }): boolean {
+function matchesFilters(m: ModelRow, offering: ModelRow['offerings'][number]): boolean {
   if (providerId && offering.provider_id !== providerId) return false;
   if (license && m.license !== license) return false;
   if (capFc && !m.flags.cap_function_calling) return false;
@@ -64,7 +48,7 @@ function matchesFilters(m: ModelRow, offering: { provider_id: string; provider_n
 
 interface FlatRow {
   model_id: string; model_name: string; model_family: string | null; model_license: string | null;
-  flags: ModelRow['flags'];
+  flags: Record<string, number>;
   context_window: number | null;
   provider_id: string; provider_name: string; provider_type: string; region: string;
   input_cost: number | null; output_cost: number | null; cache_read: number | null;
@@ -72,8 +56,8 @@ interface FlatRow {
 }
 
 const flatRows: FlatRow[] = [];
-for (const m of allModels) {
-  for (const o of m.offerings) {
+for (const m of allModels as unknown as ModelRow[]) {
+  for (const o of m.offerings ?? []) {
     if (!matchesFilters(m, o)) continue;
     flatRows.push({
       model_id: m.id, model_name: m.name, model_family: m.family, model_license: m.license,
@@ -89,9 +73,9 @@ const total = flatRows.length;
 const pageCount = Math.ceil(total / pageSize);
 const rows = flatRows.slice((page - 1) * pageSize, page * pageSize);
 
-const topProviders = allProviders.slice(0, 30);
+const topProviders = (allProviders as unknown as Provider[]).slice(0, 30);
 const licenseCounts = new Map<string, number>();
-for (const m of allModels) {
+for (const m of allModels as unknown as ModelRow[]) {
   if (!m.license) continue;
   licenseCounts.set(m.license, (licenseCounts.get(m.license) ?? 0) + 1);
 }
