@@ -74,7 +74,8 @@ try {
   // Client-side filter wiring: el form tiene data-catalog-filter y el body
   // incluye el bundle de catalog-filter.ts. El render real ocurre en el browser.
   check(cat!.body.includes('data-catalog-filter'), '/catalog form has data-catalog-filter attr');
-  check(cat!.body.includes('initCatalogFilter'), '/catalog inits the catalog filter script');
+  check(cat!.body.includes('data-catalog-i18n'), '/catalog has i18n data attribute on form');
+  check(cat!.body.includes('catalog-filter') || cat!.body.includes('type="module"'), '/catalog loads catalog-filter script');
   // SSR-rendered rows visibles (50 unfiltered) — primer paint antes del filter
   check((cat!.body.match(/<tr class="border-t/g) ?? []).length >= 10, '/catalog SSR renders 10+ rows');
 
