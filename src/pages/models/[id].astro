@@ -15,7 +15,7 @@ export function getStaticPaths() {
       cache_read: number | null; context_window: number | null;
     }>;
   }>;
-  return models.map((m) => ({ params: { id: encodeURIComponent(m.id) } }));
+  return models.map((m) => ({ params: { id: encodeURIComponent(encodeURIComponent(m.id)) } }));
 }
 
 const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
