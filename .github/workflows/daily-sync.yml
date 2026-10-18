@@ -44,6 +44,12 @@ jobs:
       - name: Sync LiteLLM pricing
         run: bun run sync/litellm.ts
 
+      - name: Sync Artificial Analysis benchmarks
+        run: bun run sync/aa.ts
+        continue-on-error: true
+        env:
+          AA_API_KEY: ${{ secrets.AA_API_KEY }}
+
       - name: Generate data for build
         run: bun run build:data
 

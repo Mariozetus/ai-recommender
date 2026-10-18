@@ -59,35 +59,35 @@ Un sitio que ayuda a la gente a entender los modelos de IA y elegir uno adecuado
 
 | # | Feature | Valor | Esfuerzo | Por qué |
 |---|---|---|---|---|
-| 5 | **Más fuentes de sync** (LiteLLM pricing ✅, AA benchmarks, LiveBench) | Alto | 1-2 días | ✅ LiteLLM syncs cache_creation_cost + providers. AA + LiveBench pendientes. |
 | 4 | **Model detail page** `/models/[id]` | Medio | 2-3h | ✅ Hecho S1. SEO + shareability, URL propia por modelo con capacidades, benchmarks y proveedores. |
-| 5 | **Cron job diario fuera de CI** | Medio | 4h | ✅ Hecho S1. Workflow `daily-sync.yml` corre a las 03:00 UTC, sync + build + deploy. |
-| 6 | **Glosario 11 → 30 conceptos** | Medio | 1 día | Attention, MoE, fine-tuning, RLHF, distillation, quantization, RAG, embeddings, tool use, agents, multimodality, etc. |
-| 7 | **URL-state para recommender** | Bajo | 2h | El form ya es URL-shareable, pero el ranking post-submit se pierde al refrescar. Persistir `?use=coding&budget=middle` en ranking client-side. |
+| 5 | **Más fuentes de sync** (LiteLLM ✅, AA benchmarks ✅, LiveBench) | Alto | 1-2 días | ✅ LiteLLM syncs cache_creation_cost. AA sync ingiere Intelligence Index scores + pricing (requiere AA_API_KEY). |
+| 6 | **Cron job diario fuera de CI** | Medio | 4h | ✅ Hecho S1. Workflow `daily-sync.yml` corre a las 03:00 UTC, sync + build + deploy. |
+| 7 | **Glosario 11 → 30 conceptos** | Medio | 1 día | Attention, MoE, fine-tuning, RLHF, distillation, quantization, RAG, embeddings, tool use, agents, multimodality, etc. |
+| 8 | **URL-state para recommender** | Bajo | 2h | El form ya es URL-shareable, pero el ranking post-submit se pierde al refrescar. Persistir `?use=coding&budget=middle` en ranking client-side. |
 
 ### 🔭 Later (1-3 meses)
 
 | # | Feature | Valor | Notas |
 |---|---|---|---|
-| 8 | **API pública** (REST o GraphQL) | Alto | Permite a terceros consumir nuestro catálogo. Auth opcional. Limit por IP. |
-| 9 | **Embed widget** | Medio | "Compare GPT-5 vs Claude 4" en otros sitios (blog, doc). 1 script tag. |
-| 10 | **RSS / Atom feed** "AI model changes this week" | Medio | Suscriptores reciben diffs. Marketing orgánico. |
-| 11 | **Snapshot changelog** automático | Medio | Cada sync con `+5 modelos`, `+12 offerings`, `−3 deprecated`. Página `/changelog`. |
-| 12 | **Newsletter semanal** | Bajo | Derivado del RSS. Sin email server: Buttondown o Substack free tier. |
-| 13 | **PWA / installable** | Bajo | Mobile-first. Add to home screen. |
-| 14 | **Más idiomas** (PT, FR) | Bajo | i18n ya está; solo añadir diccionarios. Bajo coste. |
-| 15 | **Multi-currency** (EUR, USD, MXN) | Bajo | Tabla de conversión + selector. Hoy asumimos USD. |
-| 16 | **Bug del recommender en dev** | Bajo | Vite con arrays grandes devuelve 0. No afecta prod. Documentar o fix. |
+| 9 | **API pública** (REST o GraphQL) | Alto | Permite a terceros consumir nuestro catálogo. Auth opcional. Limit por IP. |
+| 10 | **Embed widget** | Medio | "Compare GPT-5 vs Claude 4" en otros sitios (blog, doc). 1 script tag. |
+| 11 | **RSS / Atom feed** "AI model changes this week" | Medio | Suscriptores reciben diffs. Marketing orgánico. |
+| 12 | **Snapshot changelog** automático | Medio | Cada sync con `+5 modelos`, `+12 offerings`, `−3 deprecated`. Página `/changelog`. |
+| 13 | **Newsletter semanal** | Bajo | Derivado del RSS. Sin email server: Buttondown o Substack free tier. |
+| 14 | **PWA / installable** | Bajo | Mobile-first. Add to home screen. |
+| 15 | **Más idiomas** (PT, FR) | Bajo | i18n ya está; solo añadir diccionarios. Bajo coste. |
+| 16 | **Multi-currency** (EUR, USD, MXN) | Bajo | Tabla de conversión + selector. Hoy asumimos USD. |
+| 17 | **Bug del recommender en dev** | Bajo | Vite con arrays grandes devuelve 0. No afecta prod. Documentar o fix. |
 
 ### 🌱 Future (3+ meses, requiere infra)
 
 | # | Feature | Notas |
 |---|---|---|
-| 17 | **Reviews de usuarios** (sin login, con captcha) | Alto valor social, alto riesgo de moderación. Out hasta tener moderación clara. |
-| 18 | **Comparador con Diff** "modelo A vs A.1" | Muestra qué cambió entre versiones del mismo modelo. Interesante pero niche. |
-| 19 | **Playground** (probar el modelo inline) | Requiere API keys de providers. Caro. Out. |
-| 20 | **Agentes / workflows** (benchmarks agentic) | Diferente vertical. Out. |
-| 21 | **Self-host / Docker** | Para empresas que quieren el sitio on-prem. Docker compose + GHCR. |
+| 18 | **Reviews de usuarios** (sin login, con captcha) | Alto valor social, alto riesgo de moderación. Out hasta tener moderación clara. |
+| 19 | **Comparador con Diff** "modelo A vs A.1" | Muestra qué cambió entre versiones del mismo modelo. Interesante pero niche. |
+| 20 | **Playground** (probar el modelo inline) | Requiere API keys de providers. Caro. Out. |
+| 21 | **Agentes / workflows** (benchmarks agentic) | Diferente vertical. Out. |
+| 22 | **Self-host / Docker** | Para empresas que quieren el sitio on-prem. Docker compose + GHCR. |
 
 ---
 
@@ -112,7 +112,7 @@ Un sitio que ayuda a la gente a entender los modelos de IA y elegir uno adecuado
 | 2 | Filter client-side del catalog | H | M | ✅ done | S0 |
 | 3 | Comparador side-by-side | H | M | 🔜 WIP | S0 |
 | 4 | URL-state recommender | M | S | pending | S1 |
-| 5 | Más fuentes sync (litellm ✅, AA, livebench) | H | L | 🔄 in-progress | S1 |
+| 5 | Más fuentes sync (litellm ✅, AA ✅, livebench) | H | L | 🔄 in-progress | S1 |
 | 6 | Model detail page | M | S | ✅ done | S1 |
 | 7 | Cron diario GH Actions | M | S | ✅ done | S1 |
 | 8 | Glosario 11 → 30 | M | M | pending | S2 |
