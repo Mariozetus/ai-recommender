@@ -45,7 +45,15 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with: { bun-version: '1.4' }
       - run: bun install --frozen-lockfile
-      - name: Generate data
+      - name: Reset DB
+        run: |
+          rm -f db/data/ai-recommender.db
+          bun run db:migrate
+          bun run db:seed
+          bun run db/seed-pages.ts
+      - name: Sync models.dev
+        run: bun run sync/modelsdev.ts
+      - name: Generate data for build
         run: bun run build:data
       - name: Build static
         env:
