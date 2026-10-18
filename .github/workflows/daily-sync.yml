@@ -41,6 +41,9 @@ jobs:
       - name: Sync models.dev
         run: bun run sync/modelsdev.ts
 
+      - name: Sync LiteLLM pricing
+        run: bun run sync/litellm.ts
+
       - name: Generate data for build
         run: bun run build:data
 

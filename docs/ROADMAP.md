@@ -59,7 +59,7 @@ Un sitio que ayuda a la gente a entender los modelos de IA y elegir uno adecuado
 
 | # | Feature | Valor | Esfuerzo | Por qué |
 |---|---|---|---|---|
-| 3 | **Más fuentes de sync** (LiteLLM pricing, AA benchmarks, LiveBench) | Alto | 1-2 días | Enriquece pricing + benchmarks. Sin esto, dependemos solo de models.dev. |
+| 5 | **Más fuentes de sync** (LiteLLM pricing ✅, AA benchmarks, LiveBench) | Alto | 1-2 días | ✅ LiteLLM syncs cache_creation_cost + providers. AA + LiveBench pendientes. |
 | 4 | **Model detail page** `/models/[id]` | Medio | 2-3h | ✅ Hecho S1. SEO + shareability, URL propia por modelo con capacidades, benchmarks y proveedores. |
 | 5 | **Cron job diario fuera de CI** | Medio | 4h | ✅ Hecho S1. Workflow `daily-sync.yml` corre a las 03:00 UTC, sync + build + deploy. |
 | 6 | **Glosario 11 → 30 conceptos** | Medio | 1 día | Attention, MoE, fine-tuning, RLHF, distillation, quantization, RAG, embeddings, tool use, agents, multimodality, etc. |
@@ -112,7 +112,7 @@ Un sitio que ayuda a la gente a entender los modelos de IA y elegir uno adecuado
 | 2 | Filter client-side del catalog | H | M | ✅ done | S0 |
 | 3 | Comparador side-by-side | H | M | 🔜 WIP | S0 |
 | 4 | URL-state recommender | M | S | pending | S1 |
-| 5 | Más fuentes sync (litellm, AA, livebench) | H | L | pending | S1 |
+| 5 | Más fuentes sync (litellm ✅, AA, livebench) | H | L | 🔄 in-progress | S1 |
 | 6 | Model detail page | M | S | ✅ done | S1 |
 | 7 | Cron diario GH Actions | M | S | ✅ done | S1 |
 | 8 | Glosario 11 → 30 | M | M | pending | S2 |

@@ -93,6 +93,7 @@ export const modelProviderOffering = sqliteTable('model_provider_offering', {
   inputCostPerMillionUsd: real('input_cost_per_million_usd'),
   outputCostPerMillionUsd: real('output_cost_per_million_usd'),
   cacheReadCostPerMillionUsd: real('cache_read_cost_per_million_usd'),
+  cacheCreationCostPerMillionUsd: real('cache_creation_cost_per_million_usd'),
   contextWindow: integer('context_window'),
   maxOutput: integer('max_output'),
   rateLimit: text('rate_limit'),
