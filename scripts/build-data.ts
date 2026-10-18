@@ -84,13 +84,19 @@ console.log(`✓ concepts.json: ${concepts.length} (${concepts.length} filas)`);
 // models (formato compacto para el recomendador client-side)
 const modelsRaw = db.query<{
   id: string; name: string; family: string | null; license: string | null; parameter_count: string | null;
-  context_window: number | null; max_output: number | null;
+  context_window: number | null; max_output: number | null; release_date: string | null;
   mod_text_in: number; mod_text_out: number; mod_image_in: number; mod_image_out: number;
   mod_audio_in: number; mod_audio_out: number; mod_embedding: number;
   cap_function_calling: number; cap_json_mode: number; cap_system_messages: number;
   cap_prompt_caching: number; cap_reasoning: number; cap_tool_browse: number;
   cap_tool_code_exec: number; cap_tool_file_search: number; cap_long_horizon: number;
 }, []>(`SELECT * FROM model`).all();
+
+// models.dev usa 1970-01-01 como placeholder para fechas desconocidas. Lo
+// normalizamos a null para que la UI pueda mostrar "—" sin más.
+const UNKNOWN_DATE = '1970-01-01';
+const normalizeDate = (d: string | null): string | null =>
+  d && d !== UNKNOWN_DATE ? d.slice(0, 10) : null;
 
 const offeringsRaw = db.query<{
   model_id: string; provider_id: string; provider_name: string; provider_type: string;
@@ -119,7 +125,7 @@ for (const o of offeringsRaw) {
 
 const models = modelsRaw.map((m) => ({
   id: m.id, name: m.name, family: m.family, license: m.license, parameter_count: m.parameter_count,
-  context_window: m.context_window, max_output: m.max_output,
+  context_window: m.context_window, max_output: m.max_output, release_date: normalizeDate(m.release_date),
   flags: {
     mod_text_in: m.mod_text_in, mod_text_out: m.mod_text_out, mod_image_in: m.mod_image_in, mod_image_out: m.mod_image_out,
     mod_audio_in: m.mod_audio_in, mod_audio_out: m.mod_audio_out, mod_embedding: m.mod_embedding,

@@ -35,6 +35,7 @@
   "catalog.col.model": "Modelo",
   "catalog.col.provider": "Proveedor",
   "catalog.col.context": "Contexto",
+  "catalog.col.released": "Lanzamiento",
   "catalog.col.cost_in": "$/M in",
   "catalog.col.cost_out": "$/M out",
   "catalog.col.monthly": "≈ al mes",

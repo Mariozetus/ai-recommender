@@ -10,7 +10,7 @@ import snapshotsData from './snapshots';
 
 export const models = modelsData as unknown as Array<{
   id: string; name: string; family: string | null; license: string | null; parameter_count: string | null;
-  context_window: number | null; max_output: number | null;
+  context_window: number | null; max_output: number | null; release_date: string | null;
   flags: Record<string, number>;
   benchmark_scores: Record<string, number>;
   offerings: Array<{ provider_id: string; provider_name: string; provider_type: string; region: string; input_cost: number | null; output_cost: number | null; cache_read: number | null; context_window: number | null }>;

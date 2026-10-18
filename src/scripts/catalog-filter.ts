@@ -7,6 +7,7 @@ interface LiteRow {
   fc: 0 | 1; cr: 0 | 1; vi: 0 | 1;
   p: string; pn: string; pt: string;
   ic: number | null; oc: number | null;
+  rd: string | null;
 }
 
 export interface CatalogI18n {
@@ -136,6 +137,7 @@ export function initCatalogFilter(i18n: CatalogI18n): void {
           <td class="px-3 py-2 text-right font-mono text-xs">${r.oc != null ? `$${r.oc.toFixed(2)}` : '—'}</td>
           <td class="px-3 py-2 text-right font-mono text-xs">${esc(month)}</td>
           <td class="px-3 py-2 text-right font-mono text-xs">${r.c ? `${(r.c / 1000).toFixed(0)}k` : '—'}</td>
+          <td class="px-3 py-2 text-right font-mono text-xs">${r.rd ?? '—'}</td>
           <td class="px-3 py-2 text-xs">${esc(r.l ?? '—')}</td>
           <td class="px-3 py-2 text-xs">${r.fc ? '🔧 ' : ''}${r.cr ? '🧠 ' : ''}${r.vi ? '👁 ' : ''}</td>
         </tr>`;

@@ -9,7 +9,7 @@ const dict = (key: string) => t(locale, key);
 
 interface ModelRow {
   id: string; name: string; family: string | null; license: string | null;
-  context_window: number | null; max_output: number | null;
+  context_window: number | null; max_output: number | null; release_date: string | null;
   flags: Record<string, number>;
   benchmark_scores: Record<string, number>;
   offerings: Array<{ provider_id: string; provider_name: string; provider_type: string; region: string; input_cost: number | null; output_cost: number | null; cache_read: number | null; context_window: number | null }>;
@@ -50,6 +50,7 @@ interface FlatRow {
   model_id: string; model_name: string; model_family: string | null; model_license: string | null;
   flags: Record<string, number>;
   context_window: number | null;
+  release_date: string | null;
   provider_id: string; provider_name: string; provider_type: string; region: string;
   input_cost: number | null; output_cost: number | null; cache_read: number | null;
   benchmark_scores: Record<string, number>;
@@ -62,6 +63,7 @@ for (const m of allModels as unknown as ModelRow[]) {
     flatRows.push({
       model_id: m.id, model_name: m.name, model_family: m.family, model_license: m.license,
       flags: m.flags, context_window: m.context_window ?? o.context_window,
+      release_date: m.release_date,
       provider_id: o.provider_id, provider_name: o.provider_name, provider_type: o.provider_type, region: o.region,
       input_cost: o.input_cost, output_cost: o.output_cost, cache_read: o.cache_read,
       benchmark_scores: m.benchmark_scores,
@@ -184,13 +186,14 @@ function isChecked(key: string): boolean { return sp.get(key) === '1'; }
                 <th class="px-3 py-2 font-medium text-right">{dict('catalog.col.cost_out')}</th>
                 <th class="px-3 py-2 font-medium text-right">{dict('catalog.col.monthly')}</th>
                 <th class="px-3 py-2 font-medium text-right">{dict('catalog.col.context')}</th>
+                <th class="px-3 py-2 font-medium text-right">{dict('catalog.col.released')}</th>
                 <th class="px-3 py-2 font-medium">{dict('catalog.col.license')}</th>
                 <th class="px-3 py-2 font-medium">{dict('catalog.col.caps')}</th>
               </tr>
             </thead>
             <tbody data-catalog-tbody>
               {rows.length === 0 && (
-                <tr><td colspan="8" class="px-3 py-6 text-center text-[color:var(--color-muted)]">{dict('catalog.empty')}</td></tr>
+                <tr><td colspan="9" class="px-3 py-6 text-center text-[color:var(--color-muted)]">{dict('catalog.empty')}</td></tr>
               )}
               {rows.map((r) => {
                 const monthly = monthlyCostUsd(r.input_cost, r.output_cost, 'middle');
@@ -208,6 +211,7 @@ function isChecked(key: string): boolean { return sp.get(key) === '1'; }
                     <td class="px-3 py-2 text-right font-mono text-xs">{r.output_cost != null ? `$${r.output_cost.toFixed(2)}` : '—'}</td>
                     <td class="px-3 py-2 text-right font-mono text-xs">{costLabel(monthly)}</td>
                     <td class="px-3 py-2 text-right font-mono text-xs">{r.context_window ? `${(r.context_window / 1000).toFixed(0)}k` : '—'}</td>
+                    <td class="px-3 py-2 text-right font-mono text-xs">{r.release_date ?? '—'}</td>
                     <td class="px-3 py-2 text-xs">{r.model_license ?? '—'}</td>
                     <td class="px-3 py-2 text-xs">
                       {r.flags.cap_function_calling ? '🔧 ' : ''}

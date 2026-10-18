@@ -32,6 +32,7 @@ interface LiteRow {
   pt: string;
   ic: number | null;
   oc: number | null;
+  rd: string | null;  // release_date YYYY-MM-DD o null
 }
 
 const OUT = './public/data/catalog-lite.json';
@@ -59,6 +60,7 @@ export function buildDataLite(): void {
         pt: o.provider_type,
         ic: o.input_cost,
         oc: o.output_cost,
+        rd: m.release_date,
       });
     }
   }
