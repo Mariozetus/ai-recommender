@@ -169,7 +169,7 @@ async function main() {
         // Fallback: match by extracting model name from org/name
         if (!matchedId) {
           const parts = entry.modelId.split('/');
-          const modelPart = parts[parts.length - 1];
+          const modelPart = parts.at(-1) ?? entry.modelId;
           matchedId = modelById.get(normId(modelPart));
         }
 

@@ -27,7 +27,7 @@ Un sitio que ayuda a la gente a entender los modelos de IA y elegir uno adecuado
 |---|---|---|
 | Catálogo de modelos | ✅ shipped | 5.925 modelos · 9.067 offerings · 232 providers · filter client-side (10 filtros) |
 | Recommender | ✅ shipped | 6 use cases × 5 deployments × 4 budgets · 22 unit tests · ranking por scoring |
-| Glosario | 🟡 parcial | 11 conceptos en EN+ES, 22 páginas |
+| Glosario | ✅ shipped | 30 conceptos en EN+ES, 60 páginas |
 | Pipeline de sync | 🟡 parcial | Solo `models.dev` (daily vía CI). 4 fuentes más planificadas en F3.2+ |
 | i18n | ✅ shipped | EN/ES · hreflang + canonical + og:url correctos |
 | CI/CD | ✅ shipped | Tests + smoke + GH Pages deploy automático |
@@ -62,7 +62,7 @@ Un sitio que ayuda a la gente a entender los modelos de IA y elegir uno adecuado
 | 4 | **Model detail page** `/models/[id]` | Medio | 2-3h | ✅ Hecho S1. SEO + shareability, URL propia por modelo con capacidades, benchmarks y proveedores. |
 | 5 | **Más fuentes de sync** (LiteLLM ✅, HF benchmarks ✅, AA, LiveBench) | Alto | 1-2 días | ✅ LiteLLM (cache_creation_cost). ✅ HF leaderboards (HLE, SWE-bench Verified). AA + LiveBench requieren API auth. |
 | 6 | **Cron job diario fuera de CI** | Medio | 4h | ✅ Hecho S1. Workflow `daily-sync.yml` corre a las 03:00 UTC, sync + build + deploy. |
-| 7 | **Glosario 11 → 30 conceptos** | Medio | 1 día | Attention, MoE, fine-tuning, RLHF, distillation, quantization, RAG, embeddings, tool use, agents, multimodality, etc. |
+| 7 | **Glosario 11 → 30 conceptos** | Medio | 1 día | ✅ Hecho S2. Attention, MoE, fine-tuning, RLHF, distillation, quantization, RAG, embeddings, tool use, agents, multimodality, etc. |
 | 8 | **URL-state para recommender** | Bajo | 2h | El form ya es URL-shareable, pero el ranking post-submit se pierde al refrescar. Persistir `?use=coding&budget=middle` en ranking client-side. |
 
 ### 🔭 Later (1-3 meses)
@@ -115,7 +115,7 @@ Un sitio que ayuda a la gente a entender los modelos de IA y elegir uno adecuado
 | 5 | Más fuentes sync (litellm ✅, HF-benchmarks ✅, AA, livebench) | H | L | 🔄 in-progress | S1 |
 | 6 | Model detail page | M | S | ✅ done | S1 |
 | 7 | Cron diario GH Actions | M | S | ✅ done | S1 |
-| 8 | Glosario 11 → 30 | M | M | pending | S2 |
+| 8 | Glosario 11 → 30 | M | M | ✅ done | S2 |
 | 9 | Snapshot changelog auto | M | S | pending | S2 |
 | 10 | RSS feed "cambios de la semana" | M | S | pending | S2 |
 | 11 | API pública REST | H | L | pending | S3 |
