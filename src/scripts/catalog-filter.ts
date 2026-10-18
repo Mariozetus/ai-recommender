@@ -124,7 +124,7 @@ export function initCatalogFilter(i18n: CatalogI18n): void {
     } else {
       tableBody!.innerHTML = slice.map((r) => {
         const month = monthlyLabel(monthlyUsd(r.ic, r.oc));
-        const modelHref = `${location.pathname.replace(/\/catalog(\/|\?.*)?$/, '')}/models/${encodeURIComponent(encodeURIComponent(r.i))}/`;
+        const modelHref = `${location.pathname.replace(/\/catalog(\/|\?.*)?$/, '')}/models/${(r.i).replace(/\//g, '~')}/`;
         return `<tr class="border-t border-[color:var(--color-border)]">
           <td class="px-3 py-2">
             <a href="${esc(modelHref)}" class="font-medium hover:underline">${esc(r.n)}</a>

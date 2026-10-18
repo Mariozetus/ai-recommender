@@ -2,6 +2,7 @@
 import Layout from '../../../layouts/Layout.astro';
 import { t, pickLocale, path, type Locale } from '../../../lib/i18n';
 import { models as allModels } from '../../../lib/data';
+import { modelSlug, modelIdFromSlug } from '../../../lib/model-slug';
 
 export function getStaticPaths() {
   const models = allModels as unknown as Array<{
@@ -14,12 +15,12 @@ export function getStaticPaths() {
       cache_read: number | null; context_window: number | null;
     }>;
   }>;
-  return models.map((m) => ({ params: { id: encodeURIComponent(encodeURIComponent(m.id)) } }));
+  return models.map((m) => ({ params: { id: modelSlug(m.id) } }));
 }
 
 const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
 const dict = (key: string) => t(locale, key);
-const modelId = decodeURIComponent(Astro.params.id as string);
+const modelId = modelIdFromSlug(Astro.params.id as string);
 
 const raw = (allModels as unknown as Array<{
   id: string; name: string; family: string | null; license: string | null;
