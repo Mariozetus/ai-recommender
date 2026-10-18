@@ -136,6 +136,7 @@
   "rec.results.despliegue": "Despliegue",
   "rec.results.idioma": "Idioma",
   "rec.share": "Comparte este resultado",
+  "rec.copied": "✓ ¡Copiado!",
   "rec.advanced.title": "Filtros avanzados",
   "rec.advanced.open": "Solo open source",
   "rec.advanced.req_fc": "Requiere function calling",

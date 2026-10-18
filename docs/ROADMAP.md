@@ -111,7 +111,7 @@ Un sitio que ayuda a la gente a entender los modelos de IA y elegir uno adecuado
 | 1 | release_date en datos + UI | M | XS | ✅ done | S0 |
 | 2 | Filter client-side del catalog | H | M | ✅ done | S0 |
 | 3 | Comparador side-by-side | H | M | 🔜 WIP | S0 |
-| 4 | URL-state recommender | M | S | pending | S1 |
+| 4 | URL-state recommender | M | S | ✅ done | S1 |
 | 5 | Más fuentes sync (litellm ✅, HF-benchmarks ✅, AA, livebench) | H | L | 🔄 in-progress | S1 |
 | 6 | Model detail page | M | S | ✅ done | S1 |
 | 7 | Cron diario GH Actions | M | S | ✅ done | S1 |
