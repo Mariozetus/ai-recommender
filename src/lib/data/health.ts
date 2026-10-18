@@ -4,7 +4,7 @@ export default {
   "db": true,
   "sources": {
     "models.dev": {
-      "last_success": "2026-10-18T10:03:41.281Z",
+      "last_success": "2026-10-18T10:36:07.450Z",
       "last_status": "succeeded",
       "lag_hours": 0,
       "errors": null
@@ -36,15 +36,15 @@ export default {
     "seed": {
       "last_success": "2026-10-16T00:00:00Z",
       "last_status": "succeeded",
-      "lag_hours": 58,
+      "lag_hours": 59,
       "errors": null
     }
   },
   "totals": {
-    "models": 5930,
+    "models": 5925,
     "benchmarks": 9,
-    "active_offerings": 9073,
+    "active_offerings": 9067,
     "providers": 234
   },
-  "generated_at": "2026-10-18T10:03:52.707Z"
+  "generated_at": "2026-10-18T10:45:57.216Z"
 };

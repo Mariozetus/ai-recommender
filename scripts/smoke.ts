@@ -71,13 +71,29 @@ try {
   const cat = await get(`${BASE}/catalog`);
   check(cat!.status === 200, '/catalog returns 200');
   check(cat!.body.includes('Model catalog'), '/catalog contains "Model catalog"');
+  // Client-side filter wiring: el form tiene data-catalog-filter y el body
+  // incluye el bundle de catalog-filter.ts. El render real ocurre en el browser.
+  check(cat!.body.includes('data-catalog-filter'), '/catalog form has data-catalog-filter attr');
+  check(cat!.body.includes('initCatalogFilter'), '/catalog inits the catalog filter script');
+  // SSR-rendered rows visibles (50 unfiltered) — primer paint antes del filter
+  check((cat!.body.match(/<tr class="border-t/g) ?? []).length >= 10, '/catalog SSR renders 10+ rows');
 
-  // /catalog con filtros (en static output los filters no se aplican en runtime;
-  // la página se pre-renderiza una vez. Para el MVP live, /catalog muestra el primer
-  // page (50 modelos) sin filtros. Los filtros completos requieren ouput: 'server'
-  // o client-side filtering — fuera de scope MVP.)
+  // /catalog con filtros en URL: el cliente re-renderiza tras el load
+  // (no podemos testear el render real desde fetch, solo que la página sirve 200
+  // y el script está listo)
   const catF = await get(`${BASE}/catalog?cap_fc=1&provider=openai`);
   check(catF!.status === 200, '/catalog?cap_fc=1&provider=openai returns 200');
+
+  // /data/catalog-lite.json (dataset slim para el filter client-side)
+  const lite = await get(`${BASE}/data/catalog-lite.json`);
+  check(lite!.status === 200, '/data/catalog-lite.json returns 200');
+  const liteJson = JSON.parse(lite!.body);
+  check(Array.isArray(liteJson) && liteJson.length >= 1000, `catalog-lite has 1000+ rows (got ${liteJson.length})`);
+  const liteSize = lite!.body.length;
+  check(liteSize < 2_000_000, `catalog-lite size < 2MB (got ${(liteSize / 1024).toFixed(0)} KB)`);
+  // Verificar que el schema slim es el esperado
+  const firstRow = liteJson[0];
+  check('i' in firstRow && 'n' in firstRow && 'p' in firstRow, 'catalog-lite row has short keys i/n/p');
 
   // /recommender sin params (muestra form)
   const recBase = await get(`${BASE}/recommender`);

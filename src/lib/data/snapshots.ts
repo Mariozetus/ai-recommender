@@ -2,7 +2,7 @@
 export default [
   {
     "id": "2026-10-18-models.dev",
-    "taken_at": "2026-10-18T10:03:41.281Z",
+    "taken_at": "2026-10-18T10:36:07.450Z",
     "source": "models.dev",
     "status": "applied",
     "diff_summary": null

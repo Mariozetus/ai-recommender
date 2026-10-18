@@ -58,6 +58,8 @@
   "catalog.filter.caps.min_context": "Mín contexto",
   "catalog.filter.apply": "Aplicar",
   "catalog.filter.reset": "Reset",
+  "catalog.filter.loading": "Cargando catálogo…",
+  "catalog.filter.error_load": "No se pudo cargar el catálogo. Recarga la página e inténtalo de nuevo.",
   "catalog.empty": "Ningún modelo encaja con estos filtros.",
   "catalog.pagination.prev": "Anterior",
   "catalog.pagination.next": "Siguiente",

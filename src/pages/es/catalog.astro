@@ -91,12 +91,16 @@ function isChecked(key: string): boolean { return sp.get(key) === '1'; }
     <h1 class="text-3xl font-bold">{dict('catalog.title')}</h1>
     <p class="mt-2 text-sm text-[color:var(--color-muted)]">{dict('catalog.lede')}</p>
     <p class="mt-1 text-xs text-[color:var(--color-muted)]">
-      {total} {dict('catalog.results')} · {dict('catalog.budget_assumption')}
+      <span data-catalog-count>{total} {dict('catalog.results')}</span> · {dict('catalog.budget_assumption')}
     </p>
+
+    <div data-catalog-loading hidden class="mt-4 px-3 py-2 rounded border border-[color:var(--color-border)] text-sm text-[color:var(--color-muted)]">
+      {dict('catalog.filter.loading')}
+    </div>
 
     <div class="mt-8 grid gap-6 lg:grid-cols-[240px_1fr]">
       <aside>
-        <form method="get" class="rounded-lg border border-[color:var(--color-border)] p-4 space-y-4 sticky top-4">
+        <form data-catalog-filter method="get" action={path(locale, '/catalog')} class="rounded-lg border border-[color:var(--color-border)] p-4 space-y-4 sticky top-4">
           <label class="block">
             <span class="text-xs font-medium">{dict('catalog.filter.search')}</span>
             <input name="q" value={q} class="mt-1 w-full px-2 py-1.5 rounded border border-[color:var(--color-border)] bg-transparent text-sm" />
@@ -162,7 +166,7 @@ function isChecked(key: string): boolean { return sp.get(key) === '1'; }
             <button type="submit" class="flex-1 px-3 py-1.5 rounded text-sm font-medium" style="background: var(--color-accent); color: var(--color-surface);">
               {dict('catalog.filter.apply')}
             </button>
-            <a href={path(locale, '/catalog')} class="px-3 py-1.5 rounded text-sm border border-[color:var(--color-border)]">
+            <a href={path(locale, '/catalog')} class="px-3 py-1.5 rounded text-sm border border-[color:var(--color-border)]" data-catalog-reset>
               {dict('catalog.filter.reset')}
             </a>
           </div>
@@ -184,7 +188,7 @@ function isChecked(key: string): boolean { return sp.get(key) === '1'; }
                 <th class="px-3 py-2 font-medium">{dict('catalog.col.caps')}</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody data-catalog-tbody>
               {rows.length === 0 && (
                 <tr><td colspan="8" class="px-3 py-6 text-center text-[color:var(--color-muted)]">{dict('catalog.empty')}</td></tr>
               )}
@@ -220,7 +224,7 @@ function isChecked(key: string): boolean { return sp.get(key) === '1'; }
         </div>
 
         {pageCount > 1 && (
-          <div class="mt-4 flex items-center justify-between text-sm">
+          <div data-catalog-pagination class="mt-4 flex items-center justify-between text-sm">
             <span class="text-[color:var(--color-muted)]">{dict('catalog.pagination.page')} {page} {dict('catalog.pagination.of')} {pageCount}</span>
             <div class="flex gap-2">
               {page > 1 && <a href={path(locale, `/catalog?${(() => { const np = new URLSearchParams(u.searchParams); np.set('page', String(page - 1)); return np.toString(); })()}`)} class="px-3 py-1.5 rounded border border-[color:var(--color-border)]">{dict('catalog.pagination.prev')}</a>}
@@ -232,3 +236,19 @@ function isChecked(key: string): boolean { return sp.get(key) === '1'; }
     </div>
   </section>
 </Layout>
+
+<script define:vars={{
+  catalogI18n: {
+    results: dict('catalog.results'),
+    empty: dict('catalog.empty'),
+    page: dict('catalog.pagination.page'),
+    of: dict('catalog.pagination.of'),
+    prev: dict('catalog.pagination.prev'),
+    next: dict('catalog.pagination.next'),
+    loading: dict('catalog.filter.loading'),
+    errorLoad: dict('catalog.filter.error_load'),
+  },
+}}>
+  import { initCatalogFilter } from '../../scripts/catalog-filter';
+  initCatalogFilter(catalogI18n);
+</script>

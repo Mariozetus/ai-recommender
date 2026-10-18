@@ -135,4 +135,11 @@ writeData('data/models.json', JSON.stringify(models));
 console.log(`✓ models.json: ${models.length} modelos, ${(JSON.stringify(models).length / 1024 / 1024).toFixed(2)} MB`);
 
 db.close();
+
+// Genera también el dataset slim para el filtro client-side de /catalog.
+// Lo hacemos aquí (no en build:data:lite separado) para que un solo `bun run
+// build:data` produzca todo lo que el sitio necesita en runtime.
+const { buildDataLite } = await import('./build-data-lite');
+buildDataLite();
+
 console.log('✓ build-data: done');
