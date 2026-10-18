@@ -103,7 +103,7 @@ function isChecked(key: string): boolean { return sp.get(key) === '1'; }
 
     <div class="mt-8 grid gap-6 lg:grid-cols-[240px_1fr]">
       <aside>
-        <form data-catalog-filter method="get" action={path(locale, '/catalog')} class="rounded-lg border border-[color:var(--color-border)] p-4 space-y-4 sticky top-4">
+        <form data-catalog-filter data-catalog-i18n={JSON.stringify({ results: dict('catalog.results'), empty: dict('catalog.empty'), page: dict('catalog.pagination.page'), of: dict('catalog.pagination.of'), prev: dict('catalog.pagination.prev'), next: dict('catalog.pagination.next'), loading: dict('catalog.filter.loading'), errorLoad: dict('catalog.filter.error_load') })} method="get" action={path(locale, '/catalog')} class="rounded-lg border border-[color:var(--color-border)] p-4 space-y-4 sticky top-4">
           <label class="block">
             <span class="text-xs font-medium">{dict('catalog.filter.search')}</span>
             <input name="q" value={q} class="mt-1 w-full px-2 py-1.5 rounded border border-[color:var(--color-border)] bg-transparent text-sm" />
@@ -242,18 +242,8 @@ function isChecked(key: string): boolean { return sp.get(key) === '1'; }
   </section>
 </Layout>
 
-<script define:vars={{
-  catalogI18n: {
-    results: dict('catalog.results'),
-    empty: dict('catalog.empty'),
-    page: dict('catalog.pagination.page'),
-    of: dict('catalog.pagination.of'),
-    prev: dict('catalog.pagination.prev'),
-    next: dict('catalog.pagination.next'),
-    loading: dict('catalog.filter.loading'),
-    errorLoad: dict('catalog.filter.error_load'),
-  },
-}}>
+<script>
   import { initCatalogFilter } from '../../scripts/catalog-filter';
-  initCatalogFilter(catalogI18n);
+  const form = document.querySelector<HTMLFormElement>('form[data-catalog-filter]')!;
+  initCatalogFilter(JSON.parse(form.dataset.catalogI18n!));
 </script>
