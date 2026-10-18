@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { t, pickLocale, type Locale } from '../lib/i18n';
+import { t, pickLocale, path, type Locale } from '../lib/i18n';
 import { parseQuizFromUrl, recommend, type UseCase, type QuizState, type Candidate, type Deployment, type LanguagePref } from '../lib/recommender';
 import type { BudgetBin } from '../lib/cost';
 import { models as allModels } from '../lib/data';
@@ -55,7 +55,7 @@ const shareUrl = u.toString();
     <h1 class="text-3xl font-bold">{dict('rec.title')}</h1>
     <p class="mt-2 text-sm text-[color:var(--color-muted)]">{dict('rec.lede')}</p>
 
-    <form method="get" action="/recommender" class="mt-8 space-y-8">
+    <form method="get" action={path(locale, '/recommender')} class="mt-8 space-y-8">
       <fieldset>
         <legend class="text-lg font-semibold">{dict('rec.step1.title')}</legend>
         <div class="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
@@ -129,7 +129,7 @@ const shareUrl = u.toString();
         <button type="submit" class="px-5 py-2.5 rounded-lg font-medium" style="background: var(--color-accent); color: var(--color-surface);">
           {dict('rec.submit')}
         </button>
-        <a href="/recommender" class="text-sm text-[color:var(--color-muted)]">Reset</a>
+        <a href={path(locale, '/recommender')} class="text-sm text-[color:var(--color-muted)]">Reset</a>
       </div>
     </form>
 

@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { t, pickLocale, type Locale } from '../../lib/i18n';
+import { t, pickLocale, path, type Locale } from '../../lib/i18n';
 import { marked } from 'marked';
 import { concepts as allConcepts } from '../../lib/data';
 
@@ -26,11 +26,11 @@ const html = row ? marked.parse(row.body_md, { async: false }) as string : '';
     <section class="max-w-3xl mx-auto px-6 py-10">
       <h1 class="text-3xl font-bold">{dict('concepts.notfound.title')}</h1>
       <p class="mt-2 text-sm text-[color:var(--color-muted)]">{dict('concepts.notfound.body')}</p>
-      <a href={`/${locale}/concepts`} class="mt-6 inline-block text-sm underline">← {dict('concepts.back')}</a>
+      <a href={path(locale, '/concepts')} class="mt-6 inline-block text-sm underline">← {dict('concepts.back')}</a>
     </section>
   ) : (
     <article class="max-w-3xl mx-auto px-6 py-10 prose-style">
-      <a href={`/${locale}/concepts`} class="text-xs text-[color:var(--color-muted)] hover:underline">← {dict('concepts.back')}</a>
+      <a href={path(locale, '/concepts')} class="text-xs text-[color:var(--color-muted)] hover:underline">← {dict('concepts.back')}</a>
       <div class="mt-2 text-xs text-[color:var(--color-muted)] font-mono">/concepts/{row.slug} · {row.updated_at.slice(0, 10)}</div>
       <div class="mt-6 markdown-body" set:html={html}></div>
     </article>

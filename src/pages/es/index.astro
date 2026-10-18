@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { t, pickLocale, type Locale } from '../../lib/i18n';
+import { t, pickLocale, path, type Locale } from '../../lib/i18n';
 
 const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
 const dict = (key: string) => t(locale, key);
@@ -10,12 +10,12 @@ const dict = (key: string) => t(locale, key);
     <h1 class="text-4xl sm:text-5xl font-bold tracking-tight">{dict('home.hero.title')}</h1>
     <p class="mt-6 text-lg text-[color:var(--color-muted)]">{dict('home.hero.lede')}</p>
     <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
-      <a href={`${locale === 'es' ? '/es' : '/en'}/recommender`}
+      <a href={path(locale, '/recommender')}
          class="inline-flex items-center gap-2 px-5 py-3 rounded-lg font-medium"
          style="background: var(--color-accent); color: var(--color-surface);">
         {dict('home.hero.cta_recommender')} →
       </a>
-      <a href={`${locale === 'es' ? '/es' : '/en'}/catalog`}
+      <a href={path(locale, '/catalog')}
          class="inline-flex items-center gap-2 px-5 py-3 rounded-lg font-medium border border-[color:var(--color-border)]">
         {dict('home.hero.cta_catalog')}
       </a>

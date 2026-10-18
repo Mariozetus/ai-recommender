@@ -1,6 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { t, pickLocale, type Locale } from '../../../lib/i18n';
+import { t, pickLocale, path, type Locale } from '../../../lib/i18n';
 import { concepts as allConcepts } from '../../../lib/data';
 
 const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
@@ -19,7 +19,7 @@ const concepts = (allConcepts as Array<{ slug: string; locale: string; title: st
       {concepts.map((c) => (
         <li>
           <a
-            href={`/${locale}/concepts/${c.slug}`}
+            href={path(locale, `/concepts/${c.slug}`)}
             class="block p-4 rounded-lg border border-[color:var(--color-border)] hover:border-[color:var(--color-accent)] transition-colors"
           >
             <div class="font-medium">{c.title}</div>

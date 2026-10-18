@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { t, pickLocale, type Locale } from '../lib/i18n';
+import { t, pickLocale, path, type Locale } from '../lib/i18n';
 
 interface Props {
   title?: string;
@@ -11,39 +11,47 @@ interface Props {
 const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
 const dict = (key: string) => t(locale, key);
 
-const pathLocale = locale === 'en' ? '/en' : '/es';
-const altLocale = locale === 'en' ? 'es' : 'en';
-const altPath = altLocale === 'en' ? '/en' : '/es';
-const currentPath = Astro.url.pathname.replace(/^\/(en|es)/, '') || '/';
+// Astro.url.pathname includes the base path; strip both base + /es to recover
+// the route within this site, then re-prefix per locale via path().
+const base = (import.meta.env.BASE_URL ?? '/').replace(/\/$/, '');
+const currentPath =
+  Astro.url.pathname
+    .replace(new RegExp(`^${base}(/es)?`), '')
+    .replace(/^\/$/, '') || '/';
 const fullTitle = `${Astro.props.title ? Astro.props.title + ' · ' : ''}${dict('site.title')}`;
 const description = Astro.props.description ?? dict('site.tagline');
+const enHref = path('en', currentPath);
+const esHref = path('es', currentPath);
+const siteOrigin = Astro.site?.origin ?? Astro.url.origin;
 ---
 <!doctype html>
 <html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={path(locale, '/favicon.svg')} type="image/svg+xml" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
+    <meta property="og:url" content={`${siteOrigin}${Astro.url.pathname}`} />
     <meta property="og:locale" content={locale === 'es' ? 'es_ES' : 'en_US'} />
-    <link rel="alternate" hreflang="en" href={`https://ai-recommender.example.com${altPath}${currentPath}`} />
-    <link rel="alternate" hreflang="es" href={`https://ai-recommender.example.com${altPath}${currentPath}`} />
+    <link rel="canonical" href={`${siteOrigin}${Astro.url.pathname}`} />
+    <link rel="alternate" hreflang="en" href={`${siteOrigin}${enHref}`} />
+    <link rel="alternate" hreflang="es" href={`${siteOrigin}${esHref}`} />
   </head>
   <body class="min-h-screen flex flex-col">
     <header class="border-b border-[color:var(--color-border)]">
       <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
-        <a href={pathLocale} class="font-semibold text-lg">{dict('site.title')}</a>
+        <a href={path(locale, '/')} class="font-semibold text-lg">{dict('site.title')}</a>
         <nav class="hidden sm:flex items-center gap-6 text-sm">
-          <a href={`${pathLocale}`}>{dict('nav.home')}</a>
-          <a href={`${pathLocale}/status`}>{dict('nav.status')}</a>
+          <a href={path(locale, '/')}>{dict('nav.home')}</a>
+          <a href={path(locale, '/status')}>{dict('nav.status')}</a>
         </nav>
         <div class="flex items-center gap-2 text-sm">
-          <a href={`${pathLocale}${currentPath}`} class={locale === 'en' ? 'font-semibold' : 'opacity-60'}>EN</a>
+          <a href={enHref} class={locale === 'en' ? 'font-semibold' : 'opacity-60'}>EN</a>
           <span aria-hidden="true">·</span>
-          <a href={`${altPath}${currentPath}`} class={locale === 'es' ? 'font-semibold' : 'opacity-60'}>ES</a>
+          <a href={esHref} class={locale === 'es' ? 'font-semibold' : 'opacity-60'}>ES</a>
         </div>
       </div>
     </header>

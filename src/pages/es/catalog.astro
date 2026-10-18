@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { t, pickLocale, type Locale } from '../../lib/i18n';
+import { t, pickLocale, path, type Locale } from '../../lib/i18n';
 import { monthlyCostUsd, costLabel } from '../../lib/cost';
 import { models as allModels, providers as allProviders, benchmarks as allBenchmarks } from '../../lib/data';
 
@@ -162,7 +162,7 @@ function isChecked(key: string): boolean { return sp.get(key) === '1'; }
             <button type="submit" class="flex-1 px-3 py-1.5 rounded text-sm font-medium" style="background: var(--color-accent); color: var(--color-surface);">
               {dict('catalog.filter.apply')}
             </button>
-            <a href="/catalog" class="px-3 py-1.5 rounded text-sm border border-[color:var(--color-border)]">
+            <a href={path(locale, '/catalog')} class="px-3 py-1.5 rounded text-sm border border-[color:var(--color-border)]">
               {dict('catalog.filter.reset')}
             </a>
           </div>
@@ -223,8 +223,8 @@ function isChecked(key: string): boolean { return sp.get(key) === '1'; }
           <div class="mt-4 flex items-center justify-between text-sm">
             <span class="text-[color:var(--color-muted)]">{dict('catalog.pagination.page')} {page} {dict('catalog.pagination.of')} {pageCount}</span>
             <div class="flex gap-2">
-              {page > 1 && <a href={`/catalog?${(() => { const np = new URLSearchParams(u.searchParams); np.set('page', String(page - 1)); return np.toString(); })()}`} class="px-3 py-1.5 rounded border border-[color:var(--color-border)]">{dict('catalog.pagination.prev')}</a>}
-              {page < pageCount && <a href={`/catalog?${(() => { const np = new URLSearchParams(u.searchParams); np.set('page', String(page + 1)); return np.toString(); })()}`} class="px-3 py-1.5 rounded border border-[color:var(--color-border)]">{dict('catalog.pagination.next')}</a>}
+              {page > 1 && <a href={path(locale, `/catalog?${(() => { const np = new URLSearchParams(u.searchParams); np.set('page', String(page - 1)); return np.toString(); })()}`)} class="px-3 py-1.5 rounded border border-[color:var(--color-border)]">{dict('catalog.pagination.prev')}</a>}
+              {page < pageCount && <a href={path(locale, `/catalog?${(() => { const np = new URLSearchParams(u.searchParams); np.set('page', String(page + 1)); return np.toString(); })()}`)} class="px-3 py-1.5 rounded border border-[color:var(--color-border)]">{dict('catalog.pagination.next')}</a>}
             </div>
           </div>
         )}

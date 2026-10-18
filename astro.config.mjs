@@ -13,6 +13,8 @@ export default defineConfig({
   // Base path para GitHub Pages user/repo → https://<user>.github.io/<repo>
   // Default '' (sin prefijo) para dev. En CI, BASE_PATH=/ai-recommender.
   base: process.env.BASE_PATH ?? '',
+  // Site URL (usado por hreflang/canonical/og:url absolutos). Override con SITE env.
+  site: process.env.SITE ?? 'https://mariozetus.github.io/ai-recommender',
   integrations: [react()],
   vite: {
     plugins: [/** @type {any} */ (tailwindcss())],
