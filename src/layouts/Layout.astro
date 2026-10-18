@@ -46,6 +46,8 @@ const siteOrigin = Astro.site?.origin ?? Astro.url.origin;
         <a href={path(locale, '/')} class="font-semibold text-lg">{dict('site.title')}</a>
         <nav class="hidden sm:flex items-center gap-6 text-sm">
           <a href={path(locale, '/')}>{dict('nav.home')}</a>
+          <a href={path(locale, '/catalog')}>{dict('nav.catalog')}</a>
+          <a href={path(locale, '/compare')}>{dict('nav.compare')}</a>
           <a href={path(locale, '/status')}>{dict('nav.status')}</a>
         </nav>
         <div class="flex items-center gap-2 text-sm">

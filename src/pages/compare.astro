@@ -1,0 +1,100 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { t, pickLocale, path, type Locale } from '../lib/i18n';
+
+const locale: Locale = pickLocale(Astro.currentLocale as string | undefined);
+const dict = (key: string) => t(locale, key);
+---
+<Layout title={dict('compare.title')}>
+  <section class="max-w-6xl mx-auto px-6 py-10" data-compare-root>
+    <h1 class="text-3xl font-bold">{dict('compare.title')}</h1>
+    <p class="mt-2 text-sm text-[color:var(--color-muted)]">{dict('compare.lede')}</p>
+
+    <div class="mt-6 flex flex-wrap items-center gap-3">
+      <div class="relative flex-1 min-w-[200px]">
+        <input
+          type="text"
+          data-compare-search
+          placeholder={dict('compare.search_ph')}
+          autocomplete="off"
+          class="w-full px-3 py-2 rounded border border-[color:var(--color-border)] bg-transparent text-sm"
+        />
+        <div
+          data-compare-results
+          hidden
+          class="absolute z-10 mt-1 w-full max-h-72 overflow-y-auto rounded border border-[color:var(--color-border)] bg-[color:var(--color-surface)] shadow-lg"
+        ></div>
+      </div>
+      <button
+        type="button"
+        data-compare-share
+        class="px-3 py-2 rounded text-sm border border-[color:var(--color-border)]"
+      >{dict('compare.share')}</button>
+      <button
+        type="button"
+        data-compare-clear
+        class="px-3 py-2 rounded text-sm border border-[color:var(--color-border)] text-[color:var(--color-muted)]"
+      >{dict('compare.clear')}</button>
+    </div>
+
+    <div data-compare-loading hidden class="mt-6 px-3 py-2 rounded border border-[color:var(--color-border)] text-sm text-[color:var(--color-muted)]">
+      {dict('catalog.filter.loading')}
+    </div>
+
+    <div data-compare-grid class="mt-6"></div>
+
+    <div data-compare-empty hidden class="mt-12 text-center max-w-md mx-auto">
+      <h2 class="text-xl font-semibold">{dict('compare.empty_title')}</h2>
+      <p class="mt-2 text-sm text-[color:var(--color-muted)]">{dict('compare.empty_body')}</p>
+      <a
+        href={path(locale, '/catalog')}
+        class="mt-6 inline-block px-5 py-2.5 rounded-lg font-medium"
+        style="background: var(--color-accent); color: var(--color-surface);"
+      >{dict('compare.empty_cta')} →</a>
+    </div>
+  </section>
+</Layout>
+
+<script define:vars={{
+  compareI18n: {
+    title: dict('compare.title'),
+    lede: dict('compare.lede'),
+    searchPh: dict('compare.search_ph'),
+    noResults: dict('compare.no_results'),
+    add: dict('compare.add'),
+    share: dict('compare.share'),
+    copied: dict('compare.copied'),
+    clear: dict('compare.clear'),
+    remove: dict('compare.remove'),
+    emptyTitle: dict('compare.empty_title'),
+    emptyBody: dict('compare.empty_body'),
+    emptyCta: dict('compare.empty_cta'),
+    max4: dict('compare.max_4'),
+    headers: {
+      family: dict('compare.headers.family'),
+      license: dict('compare.headers.license'),
+      context: dict('compare.headers.context'),
+      released: dict('compare.headers.released'),
+      cheapest: dict('compare.headers.cheapest'),
+      providers: dict('compare.headers.providers'),
+      capabilities: dict('compare.headers.capabilities'),
+      benchmarks: dict('compare.headers.benchmarks'),
+    },
+    capLabels: {
+      fc: dict('compare.cap.fc'),
+      cr: dict('compare.cap.cr'),
+      vi: dict('compare.cap.vi'),
+      lo: dict('compare.cap.lo'),
+      em: dict('compare.cap.em'),
+      jm: dict('compare.cap.jm'),
+      sm: dict('compare.cap.sm'),
+      pc: dict('compare.cap.pc'),
+      tb: dict('compare.cap.tb'),
+      tc: dict('compare.cap.tc'),
+      tf: dict('compare.cap.tf'),
+    },
+  },
+}}>
+  import { initCompare } from '../scripts/compare';
+  initCompare(compareI18n);
+</script>

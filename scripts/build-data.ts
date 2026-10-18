@@ -9,10 +9,14 @@
 //   public/data/snapshots.json → mini-changelog de los últimos 5 syncs
 //   public/data/providers.json → lista de providers
 //   public/data/benchmarks.json → lista de benchmarks
+//   public/data/catalog-lite.json → dataset slim para /catalog filter (client-side)
+//   public/data/compare.json   → dataset per-model para /compare (client-side)
 
 import { Database } from 'bun:sqlite';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { buildDataLite } from './build-data-lite';
+import { buildDataCompare } from './build-data-compare';
 
 const DB_FILE = './db/data/ai-recommender.db';
 const OUT_SRC = './src/lib/data';
@@ -145,7 +149,9 @@ db.close();
 // Genera también el dataset slim para el filtro client-side de /catalog.
 // Lo hacemos aquí (no en build:data:lite separado) para que un solo `bun run
 // build:data` produzca todo lo que el sitio necesita en runtime.
-const { buildDataLite } = await import('./build-data-lite');
 buildDataLite();
+
+// Y el dataset para el comparador side-by-side de /compare.
+buildDataCompare();
 
 console.log('✓ build-data: done');

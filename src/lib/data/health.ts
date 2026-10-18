@@ -4,9 +4,9 @@ export default {
   "db": true,
   "sources": {
     "models.dev": {
-      "last_success": "2026-10-18T10:48:18.079Z",
+      "last_success": "2026-10-18T16:00:52.016Z",
       "last_status": "succeeded",
-      "lag_hours": 5,
+      "lag_hours": 0,
       "errors": null
     },
     "litellm": {
@@ -46,5 +46,5 @@ export default {
     "active_offerings": 9067,
     "providers": 234
   },
-  "generated_at": "2026-10-18T16:00:31.209Z"
+  "generated_at": "2026-10-18T16:03:14.750Z"
 };

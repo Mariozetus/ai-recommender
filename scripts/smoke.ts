@@ -95,6 +95,27 @@ try {
   const firstRow = liteJson[0];
   check('i' in firstRow && 'n' in firstRow && 'p' in firstRow, 'catalog-lite row has short keys i/n/p');
 
+  // /compare
+  const cmp = await get(`${BASE}/compare`);
+  check(cmp!.status === 200, '/compare returns 200');
+  check(cmp!.body.includes('data-compare-root'), '/compare has data-compare-root');
+  check(cmp!.body.includes('initCompare'), '/compare inits the compare script');
+
+  // /compare?m=gpt-5,claude-4-sonnet
+  const cmpSel = await get(`${BASE}/compare?m=gpt-5,claude-4-sonnet`);
+  check(cmpSel!.status === 200, '/compare?m=gpt-5,claude-4-sonnet returns 200');
+
+  // /data/compare.json (dataset per-model para el comparador)
+  const cmpJson = await get(`${BASE}/data/compare.json`);
+  check(cmpJson!.status === 200, '/data/compare.json returns 200');
+  const cmpRows = JSON.parse(cmpJson!.body);
+  check(Array.isArray(cmpRows) && cmpRows.length >= 5000, `compare has 5000+ models (got ${cmpRows.length})`);
+  const cmpFirst = cmpRows[0];
+  check('i' in cmpFirst && 'n' in cmpFirst && 'bs' in cmpFirst && 'bp' in cmpFirst && 'fl' in cmpFirst, 'compare row has i/n/bs/bp/fl');
+  // benchmarks sparse: al menos un modelo con benchmarks
+  const withBench = cmpRows.filter((m: { bs: Record<string, number> }) => Object.keys(m.bs).length > 0).length;
+  check(withBench > 0, `compare has ${withBench} models with benchmark scores`);
+
   // /recommender sin params (muestra form)
   const recBase = await get(`${BASE}/recommender`);
   check(recBase!.status === 200, '/recommender returns 200');
