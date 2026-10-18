@@ -1,0 +1,61 @@
+name: daily · sync + deploy
+
+# Runs at 03:00 UTC every day — independent of CI pushes.
+# Syncs models.dev → rebuilds static data → deploys to GH Pages.
+# Does NOT run tests (they run separately in ci.yml on push).
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:           # manual trigger from Actions tab
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily-sync
+  cancel-in-progress: true
+
+jobs:
+  sync-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with: { bun-version: '1.4' }
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Reset DB
+        run: |
+          rm -f db/data/ai-recommender.db
+          bun run db:migrate
+          bun run db:seed
+          bun run db/seed-pages.ts
+
+      - name: Sync models.dev
+        run: bun run sync/modelsdev.ts
+
+      - name: Generate data for build
+        run: bun run build:data
+
+      - name: Build static site
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}
+        run: bun run build
+
+      - name: Deploy to GitHub Pages
+        uses: actions/configure-pages@v5
+        id: pages
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
